@@ -3,13 +3,13 @@
   }
   
   .title {
-  font-size: 24px !important;
-  /*font-weight: bold;*/
+  font-size: 20px !important;
+  font-weight: bold;
   background: #3C3C3C;
-  color: black;
+  color: rgb(255, 255, 255);
   }
   .ch-0{
-  background-color: rgb(65, 118, 168);
+  background-color: rgb(199, 155, 89);
   }
   
   .ch-1{
@@ -17,7 +17,7 @@
   }
   
   .ch-3{
-  background-color:  rgb(65, 118, 168);
+  background-color:  rgb(96, 107, 117);
   }
   
   .ch-2{
@@ -25,5 +25,5 @@
   }
   
   .ch-4{
-  background-color:  rgb(65, 118, 168);
+  background-color:  rgb(180, 80, 80);
   }

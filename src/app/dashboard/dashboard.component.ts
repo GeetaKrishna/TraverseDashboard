@@ -16,7 +16,10 @@ import * as Chart from 'chart.js';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  weightInfo: String = 'Weight is Normal'
+  bloodPressureInfo: String = 'Blood Pressure is Normal'
+  glucoseInfo: String = 'Glucose Levels are fine'
+  cholesterolInfo: String = 'Cholestrol Levels are fine'
   weight = true;
   glucose = true;
   bloodpressure = true;

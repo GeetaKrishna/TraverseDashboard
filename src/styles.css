@@ -2,7 +2,8 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 body{
-  font-family: "Montserrat", monospace !important;
+  /* font-family: "Montserrat", monospace !important; */
+  font-family: 'Montserrat', sans-serif;
 }
 
 .cursor-pointer {
