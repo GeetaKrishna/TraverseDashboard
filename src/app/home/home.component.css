@@ -1,0 +1,35 @@
+ .card1 {
+   height: 90%;
+   width: 90%;
+ }
+
+ .header1 {
+   height: 90%;
+   width: 70%;
+ }
+
+ .card-header1 {
+  height: 90px;
+  width: 100%;
+  padding: 10% 0%;
+
+  text-align: center
+ }
+
+ .button1{
+   margin: 12px;
+ }
+
+ img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+ }
+ .container{
+   font-size: 12px;
+   text-align: center;
+   vertical-align: 15%
+   
+ }
+
+ 

@@ -1,0 +1,29 @@
+.data {
+  font-size: 65px !important;
+  }
+  
+  .title {
+  font-size: 24px !important;
+  /*font-weight: bold;*/
+  background: #3C3C3C;
+  color: black;
+  }
+  .ch-0{
+  background-color: rgb(65, 118, 168);
+  }
+  
+  .ch-1{
+  background-color: lightslategrey;
+  }
+  
+  .ch-3{
+  background-color:  rgb(65, 118, 168);
+  }
+  
+  .ch-2{
+  background-color: rgb(65, 118, 168);
+  }
+  
+  .ch-4{
+  background-color:  rgb(65, 118, 168);
+  }

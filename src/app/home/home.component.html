@@ -1,0 +1,75 @@
+
+    
+  
+    <!-- <div class="input-group mb-3">
+      <select class="select-date form-control" required>
+  
+        <option value="" selected disabled>Please select</option>
+        <option value='0'>Consumers</option>
+        <option value='1'>Producers</option>
+      </select>
+    </div> -->
+    <div class="animated fadeIn mt-5">
+      <!--Recommended apps Begin-->
+  
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header font-weight-bold" style="font-size: 120%">
+            Recommended Apps
+          </div>
+  
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-2" *ngFor="let app of apps">
+                <div (click)="navigate(app.appId)" class="card card1">
+                  <div class="card-header card-header1  mx-auto">
+                    {{ app.appName }} 
+                  </div>
+                  <div class="card-body">
+                    <img src='{{app.url}}' alt="Health" height="80" width="80" class="center">
+                    <button type="button" class="btn btn-secondary btn-sm "><span
+                        class="glyphicon glyphicon-plus-sign"></span></button>
+                    <button type="button" class="btn btn-secondary btn-sm " disabled><span
+                        class="glyphicon glyphicon-minus-sign"></span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+    <!-- <div class="animated fadeIn">
+      Recommended apps Begin
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            More Apps
+          </div>
+  
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-2" *ngFor="let mapp of mapps">
+                <div class="card card1">
+                  <div class="card-header card-header1">
+                    {{ mapp.appName }}
+                  </div>
+                  <div class="card-body">
+                    <img src="assets/img/icons/motion01.png" alt="Health" height="80" width="80" class="center">
+                    <button type="button" class="btn btn-secondary btn-sm "><span
+                        class="glyphicon glyphicon-plus-sign"></span></button>
+                    <button type="button" class="btn btn-secondary btn-sm " disabled><span
+                        class="glyphicon glyphicon-minus-sign"></span></button>
+                  </div>
+                </div>
+              </div>
+
+  
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+   -->
