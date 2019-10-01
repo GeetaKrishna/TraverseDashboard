@@ -13,7 +13,7 @@
           <div class="card-body">
             <div class="row" *ngIf="weight">
               <div [attr.contenteditable]="contenteditable1" class="col-md-4 font-weight-bold data"
-              [textContent]="currentWeight" (input)="currentWeight=$event.target.textContent">{{currentWeight}}
+                [textContent]="currentWeight" (input)="currentWeight=$event.target.textContent">{{currentWeight}}
               </div>
               <div class="col-md-4 font-weight-bold data">lbs</div>
 
@@ -28,11 +28,15 @@
           </div>
           <div class="card-footer">
             <div class="float-right">
+              <span class="fa fa-info-circle text-muted" data-toggle="tooltip" data-html="true"
+                title={{weightInfo}}></span>
+              &nbsp;
+              <span class="fa fa-share-alt text-muted"></span>
+              &nbsp;
               <span class="fa fa-plus-square text-muted" (click)="toggleContenteditableWeight()"></span>
               &nbsp;
               <span class="fa fa-arrow-right text-muted" (click)="toggleSubmitWeight()"></span>
-              &nbsp;
-              <span class="fa fa-share-alt text-muted"></span>
+
 
             </div>
           </div>
@@ -47,11 +51,11 @@
           <div class="card-body">
             <div class="row" *ngIf="bloodpressure">
               <div [attr.contenteditable]="contenteditable3" class="col-md-3 font-weight-bold data"
-              [textContent]="currentHBP" (input)="currentHBP=$event.target.textContent">{{currentHBP}}
+                [textContent]="currentHBP" (input)="currentHBP=$event.target.textContent">{{currentHBP}}
               </div>
               <div class="col-md-2 font-weight-bold data">/</div>
               <div [attr.contenteditable]="contenteditable3" class="col-md-3 font-weight-bold data"
-              [textContent]="currentLBP" (input)="currentLBP=$event.target.textContent">{{currentLBP}}
+                [textContent]="currentLBP" (input)="currentLBP=$event.target.textContent">{{currentLBP}}
               </div>
 
               <div class="col-md-4 font-weight-bold data"><span class="fa fa-arrow-down"></span></div>
@@ -66,11 +70,15 @@
           </div>
           <div class="card-footer">
             <div class="float-right">
+              <span class="fa fa-info-circle text-muted" data-toggle="tooltip" data-html="true"
+                title={{bloodPressureInfo}}></span>
+              &nbsp;
+              <span class="fa fa-share-alt text-muted"></span>
+              &nbsp;
               <span class="fa fa-plus-square text-muted" (click)="toggleContenteditableBlood()"></span>
               &nbsp;
               <span class="fa fa-arrow-right text-muted" (click)="toggleSubmitBlood()"></span>
-              &nbsp;
-              <span class="fa fa-share-alt text-muted"></span>
+
             </div>
           </div>
         </div>
@@ -87,8 +95,8 @@
           <div class="card-body">
 
             <div class="row" *ngIf="glucose">
-              <div [attr.contenteditable]="contenteditable2"class="col-md-4 font-weight-bold data"
-              [textContent]="currentGlucose" (input)="currentGlucose=$event.target.textContent">{{currentGlucose}}
+              <div [attr.contenteditable]="contenteditable2" class="col-md-4 font-weight-bold data"
+                [textContent]="currentGlucose" (input)="currentGlucose=$event.target.textContent">{{currentGlucose}}
               </div>
               <div class="col-md-4 font-weight-bold data">mg</div>
               <div class="col-md-4 font-weight-bold data"><span class="fa fa-arrow-up"></span></div>
@@ -103,12 +111,16 @@
           </div>
           <div class="card-footer">
             <div class="float-right">
+              <span class="fa fa-info-circle text-muted" data-toggle="tooltip" data-html="true"
+                title={{glucoseInfo}}></span>
+              &nbsp;
+              <span class="fa fa-share-alt text-muted"></span>
+              &nbsp;
               <span class="fa fa-plus-square text-muted" (click)="toggleContenteditableGlucose()"></span>
               &nbsp;
               <span class="fa fa-arrow-right text-muted" (click)="toggleSubmitGlucose()"></span>
-              &nbsp;
-              <span class="fa fa-share-alt text-muted"></span>
-           </div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -142,11 +154,14 @@
           </div>
           <div class="card-footer">
             <div class="float-right">
+                <span class="fa fa-info-circle text-muted" data-toggle="tooltip" data-html="true"
+                title={{cholestrolInfo}}></span>
+              &nbsp;
+              <span class="fa fa-share-alt text-muted"></span>
+              &nbsp;
               <span class="fa fa-plus-square text-muted" (click)="toggleContenteditableCholestrol()"></span>
               &nbsp;
               <span class="fa fa-arrow-right text-muted" (click)="toggleSubmitCholestrol()"></span>
-              &nbsp;
-              <span class="fa fa-share-alt text-muted"></span>
 
             </div>
           </div>
