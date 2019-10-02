@@ -1,11 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-
-body{
-  /* font-family: "Montserrat", monospace !important; */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+/* body{
+  /* font-family: "Montserrat", monospace !important; 
   font-family: 'Montserrat', sans-serif;
-}
+} */
 
 .cursor-pointer {
   cursor: pointer;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Montserrat', sans-serif; }

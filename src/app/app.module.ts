@@ -15,7 +15,9 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
-
+import { RegisterComponent } from './register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule,MatFormFieldModule, MatInputModule, MatButtonModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
     DashboardComponent,
     HomeComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,11 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
- 
+    BrowserAnimationsModule,
+    MatCardModule, 
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
 
   ],
   providers: [ 
