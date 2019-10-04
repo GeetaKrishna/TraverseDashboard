@@ -1,53 +1,92 @@
-
-    
-  
-    <!-- <div class="input-group mb-3">
-      <select class="select-date form-control" required>
-  
+<!-- <div class="input-group mb-3">
+      <select class="select-date form-control" required>  
         <option value="" selected disabled>Please select</option>
         <option value='0'>Consumers</option>
         <option value='1'>Producers</option>
       </select>
     </div> -->
-    <div class="animated fadeIn mt-5">
-      <!--Recommended apps Begin-->
-  
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header font-weight-bold" style="font-size: 120%">
-            Recommended Apps
-          </div>
-  
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-2" *ngFor="let app of apps">
-                <div (click)="navigate(app.appId)" class="card card1">
-                  <div class="card-header card-header1  mx-auto">
-                    {{ app.appName }} 
-                  </div>
-                  <div class="card-body">
-                    <img src='{{app.url}}' alt="Health" height="80" width="80" class="center">
-                    <button type="button" class="btn btn-secondary btn-sm "><span
-                        class="glyphicon glyphicon-plus-sign"></span></button>
-                    <button type="button" class="btn btn-secondary btn-sm " disabled><span
-                        class="glyphicon glyphicon-minus-sign"></span></button>
-                  </div>
-                </div>
+<div class="animated fadeIn mt-5">
+  <!--Recommended apps Begin-->
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header font-weight-bold ch-1" style="font-size: 120%">
+        Motion App Store
+      </div>
+      <div class="card-body col-md-12">
+        <div class="category">
+          <mat-form-field class="example-full-width" style="font-family: 'Montserrat', sans-serif; ">
+            <mat-label>Category</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option value="Consumers">Consumers</mat-option>
+              <mat-option value="Providers">Providers</mat-option>
+              <mat-option value="StakeHolders">StakeHolders</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div style="display: flex; margin-top: 8px;">
+          <div *ngFor="let app of apps">
+            <!-- (click)="navigate(app.appId) -->
+            <mat-card class="example-card" (click)="openBottomSheet(app)" style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
+              <div style="text-align: center;">
+                <img mat-card-md-image src="{{app.url}}" alt="Image Not Available">
               </div>
-            </div>
+              <mat-card-content style="width: 200px; font-size: 14px; margin-top: 8px;">
+                <p>
+                  {{app.appName}}
+                </p>
+              </mat-card-content>
+              <!-- <ngx-star-rating formControlName="rating" [id]="'rating'"></ngx-star-rating> -->
+              <mat-card-actions>
+                <div *ngFor="let item of [1]; let index = index" style="font-size: 15px;">
+                  <rating [(ngModel)]=app.rating [readonly]="true" [float]="true">
+                  </rating>
+                </div>
+              </mat-card-actions>
+            </mat-card>
           </div>
-  
         </div>
       </div>
     </div>
-    <!-- <div class="animated fadeIn">
+  </div>
+</div>
+<!-- <div *ngFor="let app of apps" (click)="navigate(app.appId)">
+            <mat-card class="example-card">
+              <img mat-card-md-image src='../../assets/icons-home/motion01.png' >
+              <mat-card-content style="  word-wrap: break-word;">
+                <p>
+                  {{ app.appName }}
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button><span class="fa fa-plus"></span></button>
+              </mat-card-actions>
+            </mat-card>
+          </div> -->
+<!-- <div class="card-body">
+        <div class="row">
+          <div class="col-md-2" *ngFor="let app of apps">
+            <div (click)="navigate(app.appId)" class="card card1">
+              <div class="card-header card-header1  mx-auto">
+                {{ app.appName }}
+              </div>
+              <div class="card-body">
+                <img src='{{app.url}}' alt="Health" height="80" width="80" class="center">
+                <button type="button" class="btn btn-secondary btn-sm "><span class="fa fa-plus"></span></button>
+                <button type="button" class="btn btn-secondary btn-sm " disabled><span
+                    class="glyphicon glyphicon-minus-sign"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+<!-- <div class="animated fadeIn">
       Recommended apps Begin
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
             More Apps
-          </div>
-  
+          </div>  
           <div class="card-body">
             <div class="row">
               <div class="col-md-2" *ngFor="let mapp of mapps">
@@ -63,12 +102,9 @@
                         class="glyphicon glyphicon-minus-sign"></span></button>
                   </div>
                 </div>
-              </div>
-
-  
+              </div>  
             </div>
-          </div>
-  
+          </div>  
         </div>
       </div>
     </div>
