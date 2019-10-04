@@ -23,6 +23,7 @@ export class DashboardService {
   getweight(){
 
     return this.http.get(this.url + '/Weight/AverageWeight/2/2019');
+    // return this.http.get('http://0efb223a.ngrok.io/testAPI');
     // return this.http.get(this.avgurl);
     }
   getDashboard() {

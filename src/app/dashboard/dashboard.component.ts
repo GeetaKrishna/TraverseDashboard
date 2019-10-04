@@ -27,6 +27,9 @@ export class DashboardComponent implements OnInit {
   currentWeight;
   currentGlucose;
   currentCholesterol;
+
+  presentedInfo: string = 'fa-check-circle' //icon of 3rd point in req sheet.
+  mesurementProvider: string = 'fa-user-md' //icon of 4th point in req sheet.
   
   currentHBP;
   currentLBP;
@@ -156,30 +159,33 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+  
   weightToggle() {
-
     this.weight = !this.weight;
     console.log("Success");
     // console.log(this.httpClient.get(this.url));
     this.avgMonth = [];
-    this.avgWeight = [];
+    this.avgWeight = [];    
     this.dashboardService.getweight().subscribe((result: Graph[]) => {
       console.log(result);
       result.forEach(x => {
+        console.log(x,'xxxxxx');
+        
         this.avgMonth.push(x.avgMonth);
         this.avgWeight.push(x.avgWeight);
         // console.log(this.httpClient.get(this.url));
       });
+      console.log(this.avgMonth, 'moooo');
+      console.log(this.avgWeight, 'weeeee');      
       this.weightChart = new Chart('canvas', {
         type: 'line',
         data: {
           labels: this.avgMonth,
-
           datasets: [
             {
               data: this.avgWeight,
               borderColor: '#3cba9f',
-              // backgroundColor: "#0000FF",
+              backgroundColor: "#0000FF",
             }
           ]
         },
@@ -198,6 +204,39 @@ export class DashboardComponent implements OnInit {
         }
       });
     });
+   
+    // this.weightChart = new Chart('canvas', {
+    //   type: 'line',
+    //   data: {
+    //     labels: ["124", "4"],//this.avgMonth,
+
+    //     datasets: [
+    //       {
+    //         data: [1,2,3,4],//this.avgWeight,
+    //         borderColor: '#3cba9f',
+    //         // backgroundColor: "#0000FF",
+    //       }
+    //     ]
+    //   },
+    //   options: {
+    //     legend: {
+    //       display: false
+    //     },
+    //     scales: {
+    //       xAxes: [{
+    //         display: true
+    //       }],
+    //       yAxes: [{
+    //         display: true
+    //       }],
+    //     }
+    //   }
+    // });
+
+  }
+
+  ngAfterViewChecked(){
+    
   }
   // weightToggle() {
   //   this.weight = !this.weight;
@@ -250,8 +289,6 @@ export class DashboardComponent implements OnInit {
 
   public lineChartData3: ChartDataSets[] = [
     { data: [65, 159, 200, 85, 156, 140], label: 'cholesterol' },
-
-
 
   ];
 
