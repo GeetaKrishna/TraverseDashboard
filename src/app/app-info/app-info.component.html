@@ -11,7 +11,7 @@
             Lorem Ipsum.
         </p>
         <button mat-flat-button (click)="updateApp(id)">Update</button> &nbsp;
-        <button mat-flat-button (click)="installApp(id)" *ngIf="!install">Install</button>
+        <button mat-flat-button (click)="installApp(app.appId)" *ngIf="!install">Install</button>
         <button mat-flat-button (click)="uninstallApp(id)" *ngIf="install">Uninstall</button>
     </mat-nav-list>
 </div>
