@@ -75,35 +75,46 @@ export class HomeComponent implements OnInit {
       "appDetails": "SAYS ABOUT THE MEDICATION DETAILS",
       "version": "1.0v",
       "appName": "MY MEDICATIONS",
-      "userTable": []
+      "url": "assets/icons-home/motion07.png",
+      "userTable": [],
+      "rating": 3.5
+
     },
     {
       "appId": 8,
       "appDetails": "SAYS ABOUT THE HEALTHprivate _bottomSheet: MatBottomSheet DOCUMENT DETAILS",
       "version": "1.0v",
       "appName": "MY HEALTH DOCUMENTS",
-      "userTable": []
+      "url": "assets/icons-home/motion08.png",
+      "userTable": [],
+      "rating": 5
     },
     {
       "appId": 9,
       "appDetails": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
       "version": "1.0v",
       "appName": "HEALTH CONNECT",
-      "userTable": []
+      "url": "assets/icons-home/motion09.jpeg",
+      "userTable": [],
+      "rating": 3
     },
     {
       "appId": 10,
       "appDetails": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
       "version": "1.0v",
       "appName": "INSURANCE CENTRAL",
-      "userTable": []
+      "url": "assets/icons-home/motion10.png",
+      "userTable": [],
+      "rating": 4
     },
     {
       "appId": 11,
       "appDetails": "MAINTAINS ALL MEDICAL RECORDS",
       "version": "1.0v",
       "appName": "EMR MANAGER",
-      "userTable": []
+      "url": "assets/icons-home/motion13.jpeg",
+      "userTable": [],
+      "rating": 4
     }
   ]
 

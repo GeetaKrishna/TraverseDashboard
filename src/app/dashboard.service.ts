@@ -21,10 +21,9 @@ export class DashboardService {
   url= 'http://localhost:8082'
   constructor(private http: HttpClient) { }
   getweight(){
+    // return this.http.get(this.url + '/Weight/AverageWeight/2/2019');
+    return this.http.get(this.url + '/Weight/AverageWeight/6/2019');
 
-    return this.http.get(this.url + '/Weight/AverageWeight/2/2019');
-    // return this.http.get('http://0efb223a.ngrok.io/testAPI');
-    // return this.http.get(this.avgurl);
     }
   getDashboard() {
     return this.http.get(this.url + '/Weight/CurrentWeight/6');

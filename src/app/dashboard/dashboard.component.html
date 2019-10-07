@@ -7,22 +7,22 @@
       <div class="col-md-6">
         <div class="card shadow-sm">
           <div class="card-header title ch-0">
-            Weight <span class="float-right"><span class="fa {{presentedInfo}} cursor-pointer"></span></span>
+            Weight <span class="float-right"><span class="fa {{weightpresentedInfo}} cursor-pointer"></span></span>
           </div>
           <div class="card-body">
             <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
             <!-- <div class="row" [hidden]="!weight"> -->
             <div class="row" [style.display]="!weight? 'none' : ''">
-              <div [attr.contenteditable]="contenteditable1" class="col-md-4 font-weight-bold data"
+              <div [attr.contenteditable]="contenteditable1" class="col-md-4 font-weight-bold data text-right"
                 [textContent]="currentWeight" (input)="currentWeight=$event.target.textContent">{{currentWeight}}
               </div>
-              <div class="col-md-4 font-weight-normal data">lbs</div>
+              <div class="col-md-4 font-weight-normal data text-left">lbs</div>
 
-              <div class="col-md-4 font-weight-bold data"><span class="fa fa-arrow-up"></span></div>
+              <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-up"></span></div>
             </div>
             <!-- <div style="display: block" [hidden]="weight"> -->
-            <div [style.display]="weight? 'none' : 'block'">
-              <canvas id="canvas" height="60vh">{{ weightChart }}</canvas>
+            <div [style.display]="weight ? 'none' : 'block'">
+              <canvas id="canvas" height="80vh">{{ weightChart }}</canvas>
             </div>
             <!-- <div class="row" *ngIf="weight">
               <div [attr.contenteditable]="contenteditable1" class="col-md-4 font-weight-bold data"
@@ -51,8 +51,6 @@
               &nbsp;
               <span class="fa fa-undo text-muted cursor-pointer" (click)="weightToggle()"></span>
               <!-- <span class="fa fa-arrow-right text-muted cursor-pointer" (click)="toggleSubmitWeight()"></span> -->
-
-
             </div>
           </div>
         </div>
@@ -60,23 +58,25 @@
       <div class="col-md-6">
         <div class="card shadow-sm">
           <div class="card-header title ch-2">
-            Blood Pressure <span class="float-right"><span class="fa {{presentedInfo}} cursor-pointer"></span></span>
+            Blood Pressure <span class="float-right"><span class="fa {{presentedInfo}} {{colorPresentedInfo}} cursor-pointer"></span></span>
           </div>
           <div class="card-body">
             <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
             <div class="row" *ngIf="bloodpressure">
-              <div [attr.contenteditable]="contenteditable3" class="col-md-3 font-weight-normal data"
-                [textContent]="currentHBP" (input)="currentHBP=$event.target.textContent">{{currentHBP}}
+              <div [attr.contenteditable]="contenteditable3" class="col-md-3 font-weight-bold data {{colorClassForBP}} text-right" 
+                [textContent]="currentHBP"  (input)="currentHBP=$event.target.textContent">{{currentHBP}}
               </div>
-              <div class="col-md-2 font-weight-normal data">/</div>
-              <div [attr.contenteditable]="contenteditable3" class="col-md-3 font-weight-normal data"
+              <div class="col-md-1 font-weight-bold data {{colorClassForBP}} text-center">/</div>
+              <div [attr.contenteditable]="contenteditable3" class="col-md-3 font-weight-bold data {{colorClassForBP}} text-left"
                 [textContent]="currentLBP" (input)="currentLBP=$event.target.textContent">{{currentLBP}}
               </div>
-              <div class="col-md-4 font-weight-bold data"><span class="fa fa-arrow-down"></span></div>
+              <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-down text-center"></span></div>
             </div>
             <div style="display: block" *ngIf="!bloodpressure">
-              <canvas height="60vh" baseChart [datasets]="lineChartData2" [labels]="lineChartLabels" [legend]="false"
+              <canvas height="80vh" baseChart [datasets]="lineChartData2" [labels]="lineChartLabels" [legend]="false"
                 [options]="lineChartOptions" [colors]="lineChartColors2" [chartType]="lineChartType"></canvas>
+
+              <!-- <canvas id="canvas" height="60vh">{{ BPChart }}</canvas> -->
             </div>
             <div class="medium text-muted">Over 1 month ago</div>
           </div>
@@ -101,20 +101,23 @@
       <div class="col-md-6">
         <div class="card shadow-sm">
           <div class="card-header title ch-3">
-            Glucose Level <span class="float-right"><span class="fa {{presentedInfo}} cursor-pointer"></span></span>
+            Glucose Level <span class="float-right"><span class="fa {{glucoseweightpresentedInfo}} cursor-pointer"></span></span>
           </div>
           <div class="card-body">
             <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
             <div class="row" *ngIf="glucose">
-              <div [attr.contenteditable]="contenteditable2" class="col-md-4 font-weight-bold data"
+              <div [attr.contenteditable]="contenteditable2" class="col-md-4 font-weight-bold data text-right"
                 [textContent]="currentGlucose" (input)="currentGlucose=$event.target.textContent">{{currentGlucose}}
               </div>
-              <div class="col-md-4 font-weight-normal data">mg</div>
-              <div class="col-md-4 font-weight-bold data"><span class="fa fa-arrow-up"></span></div>
+              <div class="col-md-4 font-weight-normal data text-left">mg</div>
+              <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-up"></span></div>
             </div>
             <div style="display: block" *ngIf="!glucose">
-              <canvas height="60vh" baseChart [datasets]="lineChartData1" [labels]="lineChartLabels" [legend]="false"
+              <canvas height="80vh" baseChart [datasets]="lineChartData1" [labels]="lineChartLabels" [legend]="false"
                 [options]="lineChartOptions" [colors]="lineChartColors1" [chartType]="lineChartType"></canvas>
+
+              <!-- <canvas id="canvas" height="60vh">{{ glucoseChart }}</canvas> -->
+
             </div>
 
             <div class="medium text-muted">Today</div>
@@ -139,22 +142,24 @@
       <div class="col-md-6">
         <div class="card shadow-sm">
           <div class="card-header title ch-4">
-            Cholesterol <span class="float-right"><span class="fa {{presentedInfo}} cursor-pointer"></span></span>
+            Cholesterol <span class="float-right"><span class="fa {{cholesterolpresentedInfo}} cursor-pointer"></span></span>
           </div>
           <div class="card-body">
             <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
             <div class="row" *ngIf="cholesterol">
-              <div [attr.contenteditable]="contenteditable4" class="col-md-4 font-weight-bold data"
+              <div [attr.contenteditable]="contenteditable4" class="col-md-4 font-weight-bold data text-right"
                 [textContent]="currentCholesterol" (input)="currentCholesterol=$event.target.textContent">
                 {{currentCholesterol}}
               </div>
-              <div class="col-md-4 font-weight-normal data">mg</div>
-              <div class="col-md-4 font-weight-bold data"><span class="fa fa-arrow-up"></span></div>
+              <div class="col-md-4 font-weight-normal data text-left">mg</div>
+              <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-up"></span></div>
             </div>
             <div style="display: block" *ngIf="!cholesterol">
-              <canvas height="60vh" baseChart [datasets]="lineChartData3" [labels]="lineChartLabels" [legend]="false"
+              <canvas height="80vh" baseChart [datasets]="lineChartData3" [labels]="lineChartLabels" [legend]="false"
                 [options]="lineChartOptions" [colors]="lineChartColors3" [chartType]="lineChartType"></canvas>
-            </div>
+                <!-- <canvas id="canvas" height="60vh">{{ cholesterolChart }}</canvas> -->
+
+              </div>
             <div class="medium text-muted">Over 1 month ago</div>
             <!-- <button (click)="toggleContenteditable()">Edit Text Content</button> -->
           </div>

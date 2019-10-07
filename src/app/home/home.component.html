@@ -46,6 +46,28 @@
             </mat-card>
           </div>
         </div>
+        <div style="display: flex; margin-top: 8px;">
+          <div *ngFor="let app of mapps">
+            <!-- (click)="navigate(app.appId) -->
+            <mat-card class="example-card" (click)="openBottomSheet(app)" style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
+              <div style="text-align: center;">
+                <img mat-card-md-image src="{{app.url}}" alt="Image Not Available">
+              </div>
+              <mat-card-content style="width: 200px; font-size: 14px; margin-top: 8px;">
+                <p>
+                  {{app.appName}}
+                </p>
+              </mat-card-content>
+              <!-- <ngx-star-rating formControlName="rating" [id]="'rating'"></ngx-star-rating> -->
+              <mat-card-actions>
+                <div *ngFor="let item of [1]; let index = index" style="font-size: 15px;">
+                  <rating [(ngModel)]=app.rating [readonly]="true" [float]="true">
+                  </rating>
+                </div>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
       </div>
     </div>
   </div>

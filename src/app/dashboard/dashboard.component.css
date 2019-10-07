@@ -1,31 +1,50 @@
 .data {
   font-size: 50px !important;
-  }
-  
-  .title {
+}
+
+.title {
   font-size: 20px !important;
   font-weight: bold;
   background: #3C3C3C;
   color: rgb(255, 255, 255);
-  }
-  .ch-0{
-  background-color: rgb(199, 155, 89);
-  }
-  
-  .ch-1{
-  background-color: lightslategrey;
-  }
-  
-  .ch-3{
-  background-color:  rgb(96, 107, 117);
-  }
-  
-  .ch-2{
-  background-color: rgb(65, 118, 168);
-  }
-  
-  .ch-4{
-  background-color:  rgb(180, 80, 80);
-  }
+}
 
-  
+.ch-0 {
+  background-color: rgb(199, 155, 89);
+}
+
+.ch-1 {
+  background-color: lightslategrey;
+}
+
+.ch-3 {
+  background-color: rgb(96, 107, 117);
+}
+
+.ch-2 {
+  background-color: rgb(65, 118, 168);
+}
+
+.ch-4 {
+  background-color: rgb(180, 80, 80);
+}
+
+.green{
+  color: green;
+}
+
+.yellow{
+  color: rgb(206, 206, 75);
+  }
+.darkYellow{
+  color: rgb(156, 156, 45);
+  }
+  .red{
+    color: rgb(173, 24, 24)
+  }
+  .darkRed{
+    color: rgb(255, 0, 0)
+  }
+  .grey{
+    color: lightgray
+  }

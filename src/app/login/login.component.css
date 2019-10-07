@@ -4,7 +4,9 @@
 }
 
 .bgCard {
-    background-image: url(../../assets/565.jpg) !important;
+    /* background-image: url(../../assets/bg.jpg) !important; */
+    /* background-color: black; */
+    /* color: white; */
     height: 300px !important;
 }
 
