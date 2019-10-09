@@ -68,6 +68,16 @@ export class LandingPageComponent implements OnInit {
       "rating": 5,
       "routeScreen": '/myHeart'
     },
+    {
+      "appId": 7,
+      "appDetails": "For Medication details",
+      "version": "1.0v",
+      "appName": "Medications",
+      "url": "assets/icons-home/motion07.png",
+      "userTable": [],
+      "rating": 5,
+      "routeScreen": '/medication'
+    },
   ]
   
   constructor() { }

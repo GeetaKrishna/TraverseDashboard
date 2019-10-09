@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { MedicationsComponent } from './medications/medications.component';
 
 const routes: Routes = [
  
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'home', component: HomeComponent },
   {path:'dashboard', component: DashboardComponent },
   {path:'calendar', component: CalendarComponent },
+  {path:'medication', component: MedicationsComponent },
 
   // { path: '/:id', component: CustomerFormComponent }
 ];
