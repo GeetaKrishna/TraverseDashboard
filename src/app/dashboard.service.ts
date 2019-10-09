@@ -18,7 +18,7 @@ const httpOptions = {
 })
 export class DashboardService {
 
-  url= 'http://localhost:8082'
+  url= 'http://172.17.5.45:8082'
   constructor(private http: HttpClient) { }
   getweight(){
     // return this.http.get(this.url + '/Weight/AverageWeight/2/2019');

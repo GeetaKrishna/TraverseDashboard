@@ -25,7 +25,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 // import { CalendarModule, DateAdapter } from 'angular-calendar';
 // import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
-import { CalendarComponent } from './calendar/calendar.component'; // for FullCalendar!
+import { CalendarComponent } from './calendar/calendar.component';
+import { MobileFitnessComponent } from './mobile-fitness/mobile-fitness.component';
+import { TestComponent } from './test/test.component'; // for FullCalendar!
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { CalendarComponent } from './calendar/calendar.component'; // for FullCa
     AppInfoComponent,
     LandingPageComponent,
     CalendarComponent,
+    MobileFitnessComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,

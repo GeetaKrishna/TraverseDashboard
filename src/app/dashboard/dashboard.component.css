@@ -10,41 +10,57 @@
 }
 
 .ch-0 {
-  background-color: rgb(199, 155, 89);
+  background-color: rgb(233, 206, 57);
+  color: black;
 }
 
 .ch-1 {
-  background-color: lightslategrey;
+  background-color: #d7dce2;
+  color: black
 }
 
 .ch-3 {
   background-color: rgb(96, 107, 117);
+  color: black;
+
 }
 
 .ch-2 {
   background-color: rgb(65, 118, 168);
+  color: black;
+
 }
 
 .ch-4 {
   background-color: rgb(180, 80, 80);
+  color: black;
+
 }
 
-.green{
+.green {
   color: green;
 }
 
-.yellow{
+.yellow {
   color: rgb(206, 206, 75);
-  }
-.darkYellow{
+}
+
+.darkYellow {
   color: rgb(156, 156, 45);
-  }
-  .red{
-    color: rgb(173, 24, 24)
-  }
-  .darkRed{
-    color: rgb(255, 0, 0)
-  }
-  .grey{
-    color: lightgray
-  }
+}
+
+.red {
+  color: rgb(173, 24, 24)
+}
+
+.darkRed {
+  color: rgb(255, 0, 0)
+}
+
+.grey {
+  color: lightgray
+}
+
+.cardWidth {
+  width: 465px;
+}
