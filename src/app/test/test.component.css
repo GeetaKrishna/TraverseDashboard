@@ -1,0 +1,21 @@
+.example-card {
+  width: 400px;
+  height: 250px;
+  margin-left: 7px;
+
+}
+
+.example-card-base {
+  max-width: 400px;
+  margin-left: 7px;
+
+}
+p{
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+td{
+  width: 134px;
+}

@@ -26,7 +26,7 @@ export class LandingPageComponent implements OnInit {
       "url": "assets/icons-home/motion02.png",
       "userTable": [],
       "rating": 2.5,
-      "routeScreen": '/fitnessTracker'
+      "routeScreen": '/fitnessTracker/fitbit'
     },
     {
       "appId": 3,
