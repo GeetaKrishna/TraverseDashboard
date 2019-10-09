@@ -7,9 +7,6 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Graph } from '../graph';
 import * as Chart from 'chart.js';
 
-
-// import { ChartType } from 'chart.js';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

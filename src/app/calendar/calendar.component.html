@@ -1,0 +1,19 @@
+<div class="animated fadeIn mt-5">
+    <!--Recommended apps Begin-->
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header font-weight-bold ch-1" style="font-size: 120%">
+                Calendar
+            </div>
+            <div class="card-body col-md-12">
+                <full-calendar defaultView="dayGridMonth"  [weekends]="false"
+                        [events]="[
+                          { title: 'event 1', date: '2019-04-01' },
+                          { title: 'event 2', date: '2019-04-02' }
+                        ]" [plugins]="calendarPlugins"></full-calendar>
+                <!-- <mwl-calendar-month-view [viewDate]="viewDate" [events]="events"> -->
+                <!-- </mwl-calendar-month-view> -->
+            </div>
+        </div>
+    </div>
+</div>

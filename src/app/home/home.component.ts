@@ -138,4 +138,5 @@ export class HomeComponent implements OnInit {
     this._bottomSheet.open(AppInfoComponent, { data: app });
 
   }
+
 }

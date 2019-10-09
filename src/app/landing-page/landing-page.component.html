@@ -1,0 +1,20 @@
+  <div class="row">
+    <div class="col-md-3 col-sm-6 pt-4" *ngFor="let app of apps">
+      <a href="{{app.routeScreen}}">
+        <img mat-card-md-image src="{{app.url}}" height="80px" alt="Image Not Available">
+      </a>
+      <div class="row pt-2" style="justify-content: justify">
+        {{app.appName}}
+      </div>
+    </div>
+    <div class="row">
+      <!-- <div class="col-md-3 col-sm-6 pt-4">
+        <a href="/home">
+          <img mat-card-md-image src="assets/storeLogo.png" height="80px" alt="Image Not Available">
+        </a>
+        <div class="row pt-2" style="justify-content: justify">
+            Store
+          </div>
+      </div> -->
+    </div>
+  </div>

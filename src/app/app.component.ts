@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,20 +9,22 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'dashboard';
   show: boolean;
-  constructor(private route: Router) {
-
-    console.log(this.route.url,window.location, 'route');
-    if (window.location.pathname == '/' || window.location.pathname == '/signUp') {
-      console.log('yooooooo');
-      this.show = true;
-
-    } else{
-      this.show = false
-    }
-
+  constructor(public router: Router, public route: ActivatedRoute) {
+    // router.events
+    //   .filter(e => e instanceof NavigationEnd)
+    //   .forEach(e => {
+    //     this.title = route.root.firstChild.snapshot.data['PageName'];
+    // });
   }
-  ngOnInit(){
-    
+  ngOnInit() {
+    // if (this.router.url == '/') {
+    //   console.log('yooooooo');
+    //   this.show = true;
+
+    // } else {
+    //   this.show = false
+    // }
   }
+
 
 }

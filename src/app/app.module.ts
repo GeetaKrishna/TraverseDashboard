@@ -16,9 +16,16 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatListModule, MatBottomSheetModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatListModule, MatBottomSheetModule, MatMenuModule } from '@angular/material';
 import { RatingModule } from 'ngx-rating';
 import { AppInfoComponent } from './app-info/app-info.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+
+import { FullCalendarModule } from '@fullcalendar/angular';
+// import { CalendarModule, DateAdapter } from 'angular-calendar';
+// import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
+import { CalendarComponent } from './calendar/calendar.component'; // for FullCalendar!
 
 @NgModule({
   declarations: [
@@ -30,6 +37,8 @@ import { AppInfoComponent } from './app-info/app-info.component';
     LoginComponent,
     RegisterComponent,
     AppInfoComponent,
+    LandingPageComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +56,13 @@ import { AppInfoComponent } from './app-info/app-info.component';
     MatSelectModule,
     RatingModule,
     MatBottomSheetModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule,
+    // CalendarModule.forRoot({
+    //   provide: DateAdapter,
+    //   useFactory: adapterFactory
+    // }),
+    FullCalendarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

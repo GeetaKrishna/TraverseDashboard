@@ -1,0 +1,22 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "TestDB",
+            "dialect": "MSSQL",
+            "name": "tet",
+            "password": "Miracle@123",
+            "port": 1433,
+            "server": "localhost",
+            "username": "SA"
+        },
+        {
+            "database": "TEST_DB",
+            "dialect": "MSSQL",
+            "name": "test",
+            "password": "user",
+            "port": 1433,
+            "server": "172.17.0.141",
+            "username": "TestDB_USER"
+        }
+    ]
+}
