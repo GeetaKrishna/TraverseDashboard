@@ -3,70 +3,18 @@
     <div class="col-md-12">
         <div class="card h-100">
             <div class="card-header ch-0">
-                
-                <div class="">
-                    Medication
-                </div>
-                <div class="">
 
+                <div class="row">
+                    <div class="col">
+                        Medication
+                    </div>
+                    <div class="col">
+                        <img mat-card-md-image src="assets/icons-home/motion07.png" height="45px" width="45px" style="float: right"
+                            alt="Image Not Available">
+                    </div>
                 </div>
-                
             </div>
             <div class="row justify-content-center">
-                <!-- py-2 for bottom and top padding -->
-                <!-- <div class="col-md-3 col-sm-6 m-2" *ngFor="let app of apps; let i = index">
-                        <div class="card h-100" [style.background-color]="app.color">
-                            <div class="card-header font-weight-bold ch-1" style="background-color:whitesmoke">
-                                {{app.medication}} <i style=" position: absolute; right: 14px;"
-                                    class="fa fa-exclamation-triangle"></i>
-                            </div>
-                            <div *ngIf="i != 0; else addMedication">
-                                    <div class="row" >
-                                        <div class="col-md-6 col-sm-6"
-                                            style="bottom: 43px; right: 40px; position: relative; padding-left: 58px; padding-top: 50px">
-                                            <img mat-card-md-image src="{{app.medicationImage}}" height="80px"
-                                                alt="Image Not Available">
-                                        </div>
-                                        <div class="col-md-6 col-sm-6"
-                                            style="bottom: 43px; left: 40px; position: relative; padding-top: 54px;">
-                                            <i class="fa fa-clock-o" style="font-size: 50px; color: red; "
-                                                aria-hidden="true"></i>
-                                            <span
-                                                style="font-size: 10px; display: table-caption">{{app.medicationSchedule}}</span>
-                                        </div>                                      
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 ">
-                                            {{app.medicationDetails}}
-                                        </div>
-                                        <div class="col-md-12" style="bottom: 0px; position: relative;">
-                                            <i class="fas fa-spider-web"></i> <a href="http://www.google.com"
-                                                style="font-size: 12px"><i class="fa fa-external-link" aria-hidden="true"></i>
-                                                Learn
-                                                More </a>
-                                        </div>
-                                    </div>
-                                <div class="row">
-                                        <div >
-                                            <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
-                                            <i class="fa fa-refresh mr-2" aria-hidden="true"></i>
-                                            <i class="fa fa-calendar-plus-o mr-2" aria-hidden="true"></i>
-                                            <i class="fa fa-trash mr-2" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                            </div>
-
-                            <ng-template #addMedication>
-                                    <div class="row justify-content-center align-items-center" style="color: gray; height: 100%;"  >
-                                        <div class=" align-items-center">
-                                            <i class="fa fa-plus-circle" aria-hidden="true"
-                                                style=" font-size: -webkit-xxx-large; position: relative;"></i>
-                                        </div>
-                                    </div>
-                            </ng-template>
-                        </div>
-                    </div> -->
-
 
                 <div class="col-md-3 m-4" *ngFor="let app of apps; let i = index">
                     <div class="card h-100" [style.background-color]="app.color">
@@ -74,7 +22,8 @@
                             style="background-color:whitesmoke; display:flex;">
                             <div style="width: 100%">
                                 {{app.medication}}
-                                <span style="float: right;" *ngIf="app.medicationIndication === 'warn'"><i class="fa fa-exclamation-triangle" style="color: darkgoldenrod"></i></span>
+                                <span style="float: right;" *ngIf="app.medicationIndication === 'warn'"><i
+                                        class="fa fa-exclamation-triangle" style="color: darkgoldenrod"></i></span>
                             </div>
                         </div>
                         <div *ngIf="i != 0; else addMedication" class="card-body">
@@ -106,26 +55,27 @@
                                         More </a>
                                 </div>
                             </div>
-                            
+
                         </div>
-                        <div class="row"  *ngIf="i != 0; ">
-                                <div class="col">
-                                    <div style="float: right;">
-                                        <span>
-                                            <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
-                                        </span>
-                                        <span>
-                                            <i class="fa fa-refresh mr-2" aria-hidden="true"></i>
-                                        </span>
-                                        <span>
-                                            <i class="fa fa-calendar-plus-o mr-2" aria-hidden="true"></i>
-                                        </span>
-                                        <span>
-                                            <i class="fa fa-trash mr-2" (click)="removeMedication(i)" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
+                        <div class="row" *ngIf="i != 0; ">
+                            <div class="col">
+                                <div style="float: right;">
+                                    <span>
+                                        <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-refresh mr-2" aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-calendar-plus-o mr-2" aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-trash mr-2" (click)="removeMedication(i)"
+                                            aria-hidden="true"></i>
+                                    </span>
                                 </div>
                             </div>
+                        </div>
                         <ng-template #addMedication>
                             <div class="row justify-content-center align-items-center"
                                 style="color: gray; height: 100%;">
