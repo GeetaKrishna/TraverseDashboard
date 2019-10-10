@@ -16,7 +16,7 @@ export class LandingPageComponent implements OnInit {
       "url": "assets/storeLogo.png",
       "userTable": [],
       "rating": 2.5,
-      "routeScreen": '/home'
+      "routeScreen": 'admin/home'
     },
     {
       "appId": 2,
@@ -26,7 +26,7 @@ export class LandingPageComponent implements OnInit {
       "url": "assets/icons-home/motion02.png",
       "userTable": [],
       "rating": 2.5,
-      "routeScreen": '/fitnessTracker/fitbit'
+      "routeScreen": 'admin/fitnessTracker/fitbit'
     },
     {
       "appId": 3,
@@ -36,7 +36,7 @@ export class LandingPageComponent implements OnInit {
       "url": "assets/icons-home/motion01.png",
       "userTable": [],
       "rating": 3.5,
-      "routeScreen": '/dashboard'
+      "routeScreen": 'admin/dashboard'
     },
     {
       "appId": 4,
@@ -46,7 +46,7 @@ export class LandingPageComponent implements OnInit {
       "url": "assets/icons-home/kb.jpg",
       "userTable": [],
       "rating": 1.5,
-      "routeScreen": '/knowledgebase'
+      "routeScreen": 'admin/knowledgebase'
     },
     {
       "appId": 5,
@@ -56,7 +56,7 @@ export class LandingPageComponent implements OnInit {
       "url": "assets/icons-home/calendar.jpg",
       "userTable": [],
       "rating": 4.5,
-      "routeScreen": '/calendar'
+      "routeScreen": 'admin/calendar'
     },
     {
       "appId": 6,
@@ -66,7 +66,7 @@ export class LandingPageComponent implements OnInit {
       "url": "assets/icons-home/motion13.jpeg",
       "userTable": [],
       "rating": 5,
-      "routeScreen": '/myHeart'
+      "routeScreen": 'admin/myHeart'
     },
     {
       "appId": 7,
@@ -76,7 +76,17 @@ export class LandingPageComponent implements OnInit {
       "url": "assets/icons-home/motion07.png",
       "userTable": [],
       "rating": 5,
-      "routeScreen": '/medication'
+      "routeScreen": 'admin/medication'
+    },
+    {
+      "appId": 8,
+      "appDetails": "Connect to people",
+      "version": "1.0v",
+      "appName": "Connect",
+      "url": "assets/icons-home/motion11.png",
+      "userTable": [],
+      "rating": 5,
+      "routeScreen": 'admin/connect'
     },
   ]
   

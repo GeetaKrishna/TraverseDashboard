@@ -28,7 +28,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarComponent } from './calendar/calendar.component';
 import { MedicationsComponent } from './medications/medications.component'; // for FullCalendar!
 import { MobileFitnessComponent } from './mobile-fitness/mobile-fitness.component';
-import { TestComponent } from './test/test.component'; // for FullCalendar!
+import { TestComponent } from './test/test.component';
+import { AdminComponent } from './admin/admin.component'; // for FullCalendar!
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { TestComponent } from './test/test.component'; // for FullCalendar!
     MedicationsComponent,
     MobileFitnessComponent,
     TestComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
