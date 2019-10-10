@@ -57,9 +57,8 @@ export class MobileFitnessComponent implements OnInit {
 
   openAppInfo(app){
     console.log('app', app);
-    this.route.navigateByUrl('fitnessTracker/' + app.routeScreen)
-    console.log('openAppInfo() clicked', app["appId"]);    
-
+    this.route.navigateByUrl('admin/fitnessTracker/' + app.routeScreen)
+    console.log('openAppInfo() clicked', app["appId"]);   
   }
 
 }
