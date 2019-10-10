@@ -29,7 +29,7 @@ export class MedicationsComponent implements OnInit {
       "medicationImage": "assets/medications/candestron.jpg",
       "medicationIndication": "warn",// alerts user for potential contraindications
       "medicationSchedule": "thrice",
-      "color": "lightorange"
+      "color": "lightpink"
     },
     {
       "appId": 5,
@@ -56,7 +56,7 @@ export class MedicationsComponent implements OnInit {
       "medicationImage": "assets/medications/vicodin.jpg",
       "medicationIndication": "warns",// alerts user for potential contraindications
       "medicationSchedule": "four times",
-      "color": "lightyellow"
+      "color": "lightgreen"
     },
   ]
 
@@ -65,5 +65,7 @@ export class MedicationsComponent implements OnInit {
   ngOnInit() {
 
   }
-
+  removeMedication(k){
+    this.apps.splice(k, 1)
+  }
 }

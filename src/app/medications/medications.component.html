@@ -3,7 +3,14 @@
     <div class="col-md-12">
         <div class="card h-100">
             <div class="card-header ch-0">
-                Medication
+                
+                <div class="">
+                    Medication
+                </div>
+                <div class="">
+
+                </div>
+                
             </div>
             <div class="row justify-content-center">
                 <!-- py-2 for bottom and top padding -->
@@ -67,7 +74,7 @@
                             style="background-color:whitesmoke; display:flex;">
                             <div style="width: 100%">
                                 {{app.medication}}
-                                <span style="float: right;"><i class="fa fa-exclamation-triangle"></i></span>
+                                <span style="float: right;" *ngIf="app.medicationIndication === 'warn'"><i class="fa fa-exclamation-triangle" style="color: darkgoldenrod"></i></span>
                             </div>
                         </div>
                         <div *ngIf="i != 0; else addMedication" class="card-body">
@@ -114,7 +121,7 @@
                                             <i class="fa fa-calendar-plus-o mr-2" aria-hidden="true"></i>
                                         </span>
                                         <span>
-                                            <i class="fa fa-trash mr-2" aria-hidden="true"></i>
+                                            <i class="fa fa-trash mr-2" (click)="removeMedication(i)" aria-hidden="true"></i>
                                         </span>
                                     </div>
                                 </div>
