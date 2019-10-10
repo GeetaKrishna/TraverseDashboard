@@ -32,7 +32,7 @@ app;
     if(id == 3){
       this._bottomSheetRef.dismiss();
 
-    this.route.navigateByUrl('/dashboard')
+    this.route.navigateByUrl('admin/dashboard')
     }
     this.install = !this.install
   }

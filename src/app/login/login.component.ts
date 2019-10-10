@@ -6,9 +6,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({ 
     templateUrl: 'login.component.html',
-
-    selector: 'app-login',
-   
+    selector: 'app-login',   
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
@@ -51,7 +49,7 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        this.router.navigate(['home'])
+        this.router.navigate(['admin/landing'])
 
         // stop here if form is invalid
 

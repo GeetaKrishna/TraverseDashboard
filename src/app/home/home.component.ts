@@ -129,7 +129,7 @@ export class HomeComponent implements OnInit {
   }
   navigate(id) {
     if (id == 3) {
-      this.roter.navigate(['dashboard']);
+      this.roter.navigate(['admin/dashboard']);
     }
   }
 

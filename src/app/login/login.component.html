@@ -1,9 +1,5 @@
-<div class="col-md-12 mt-5" style="font-family: 'Montserrat' !important">
-    <!-- <div class=" alert alert-info text-center">
-        <strong> Admin</strong><br />
-    </div> -->
-
-    <div class="row" style="    margin-top: 200px;">
+<div class="mt-5 container" style="font-family: 'Montserrat' !important">
+    <div class="row" style="margin-top: 200px;">
         <div class="col">
             <mat-card class="bgCard">
                 <mat-card-content>
@@ -40,7 +36,7 @@
                                 Email is <strong>required</strong>
                             </mat-error>
                         </mat-form-field>
-<br>
+                        <br>
                         <mat-form-field class="example-full-width">
                             <input matInput placeholder="Password" type="password" [formControl]="passwordFormControl">
                             <mat-error *ngIf="passwordFormControl.hasError('required')">
@@ -49,7 +45,8 @@
                         </mat-form-field>
 
                         <div style="float: right; margin-top: 114px;">
-                            <button mat-raised-button class="btn-primary" [routerLink]="['/landing']">Login</button>
+                            <button mat-raised-button class="btn-primary" (click)="onSubmit()">Login</button>
+                            <!--  [routerLink]="['/landing']" -->
                         </div>
 
                     </form>
