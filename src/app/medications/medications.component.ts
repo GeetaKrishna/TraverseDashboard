@@ -49,6 +49,15 @@ export class MedicationsComponent implements OnInit {
       "medicationSchedule": "four times",
       "color": "lightyellow"
     },
+    {
+      "appId": 7,
+      "medicationDetails": "This is Lizodine",
+      "medication": "Vicodin",
+      "medicationImage": "assets/medications/vicodin.jpg",
+      "medicationIndication": "warns",// alerts user for potential contraindications
+      "medicationSchedule": "four times",
+      "color": "lightyellow"
+    },
   ]
 
   constructor() { }
