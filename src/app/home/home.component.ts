@@ -127,11 +127,11 @@ export class HomeComponent implements OnInit {
   goTo(apps) {
     console.log(apps);
   }
-  navigate(id) {
-    if (id == 3) {
-      this.roter.navigate(['admin/dashboard']);
-    }
-  }
+  // navigate(id) {
+  //   if (id == 3) {
+  //     this.roter.navigate(['admin/dashboard']);
+  //   }
+  // }
 
   openBottomSheet(app) {
     // console.log(id, 'id');

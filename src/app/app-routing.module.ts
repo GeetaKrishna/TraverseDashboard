@@ -12,6 +12,7 @@ import { MobileFitnessComponent } from './mobile-fitness/mobile-fitness.componen
 import { TestComponent } from './test/test.component';
 import { MedicationsComponent } from './medications/medications.component';
 import { AdminComponent } from './admin/admin.component';
+import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component';
 
 const routes: Routes = [
 
@@ -26,6 +27,14 @@ const routes: Routes = [
       { path: 'calendar', component: CalendarComponent },
       { path: 'medication', component: MedicationsComponent },
       {
+        path: 'healthKnowledgeBase', component: HealthKnowledgeBaseComponent,
+        children: [
+          {
+            path: 'fitbit', component: TestComponent
+          }
+        ]
+      },
+      {
         path: 'fitnessTracker', component: MobileFitnessComponent,
         children: [
           { path: 'fitbit', component: TestComponent }
@@ -33,7 +42,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '**', redirectTo: 'admin/landing' }
+  // { path: '**', redirectTo: 'admin/landing' }
   // { path: '/:id', component: CustomerFormComponent }
 ];
 

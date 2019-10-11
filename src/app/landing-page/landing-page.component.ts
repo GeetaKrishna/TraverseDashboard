@@ -43,10 +43,10 @@ export class LandingPageComponent implements OnInit {
       "appDetails": "YOU CAN SEARCH FOR ARTICLES FROM ONLINE",
       "version": "1.0v",
       "appName": "Health Knowledge Base",
-      "url": "assets/icons-home/kb.jpg",
+      "url": "assets/icons-home/motion03.png",
       "userTable": [],
       "rating": 1.5,
-      "routeScreen": 'admin/knowledgebase'
+      "routeScreen": 'admin/healthKnowledgeBase'
     },
     {
       "appId": 5,

@@ -1,0 +1,33 @@
+.ch-1 {
+    background-color: #d7dce2;
+    color: black;
+}
+
+.fitLogo {
+    height: 45px;
+    width: 45px;
+}
+
+.topic {
+    background-color: #62b3e2;
+    color: white;
+    padding: 4px;
+    width: 154px;
+    height: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.cardHead {
+    font-size: 24px;
+    margin-bottom: 0 !important;
+}
+
+.appName {
+    font-size: 14px;
+    font-weight: bold;
+}
+.vertical{
+    border-right: 4px solid grey;
+    height: 500px;
+}

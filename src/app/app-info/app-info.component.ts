@@ -34,6 +34,9 @@ export class AppInfoComponent implements OnInit {
     } else if (id == 3) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/dashboard')
+    } else if (id == 4) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/healthKnowledgeBase')
     } else if (id == 5) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/calendar')

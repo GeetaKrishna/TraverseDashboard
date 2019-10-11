@@ -1,0 +1,44 @@
+<div class="card mt-5">
+    <div class="card-header ch-1">
+        <div class="row ">
+            <div class="col justify-content-start">
+                <p class="cardHead">
+                    Health Knowledge Base
+                </p>
+            </div>
+            <div class="col justify-content-end">
+                <img src="../../assets/icons-home/motion03.png" style="height: 45px; width: 45px; float: right;" />
+            </div>
+        </div>
+    </div>
+    <!-- <div class="card-body">
+        <div style="width:130px;" class=" vertical">
+            <div class="topic">Topics</div>
+            <div *ngFor=" let app of apps">
+                <div class="ml-2 cursor-pointer" style="width: 120px" (click)="openAppInfo(app)">
+                    <img src="{{app.url}}" alt="Image not available" class="fitLogo" />
+                    <p class="appName">{{app.appName}}</p>
+                </div>
+            </div>
+        </div>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </div> -->
+    <div class="card-body ">
+        <div class="row no-gutters">
+            <div class="col-md-2 vertical">
+                <div class="topic">Topics</div>
+                <div *ngFor=" let app of apps">
+                    <div class="ml-2 mb-4 cursor-pointer" style="width: 120px" (click)="openAppInfo(app)">
+                        <img src="{{app.url}}" alt="Image not available" class="fitLogo" />
+                        <p class="appName">{{app.appName}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

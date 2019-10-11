@@ -29,7 +29,8 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { MedicationsComponent } from './medications/medications.component'; // for FullCalendar!
 import { MobileFitnessComponent } from './mobile-fitness/mobile-fitness.component';
 import { TestComponent } from './test/test.component';
-import { AdminComponent } from './admin/admin.component'; // for FullCalendar!
+import { AdminComponent } from './admin/admin.component';
+import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component'; // for FullCalendar!
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AdminComponent } from './admin/admin.component'; // for FullCalendar!
     MobileFitnessComponent,
     TestComponent,
     AdminComponent,
+    HealthKnowledgeBaseComponent,
   ],
   imports: [
     BrowserModule,
