@@ -21,16 +21,16 @@ import { RatingModule } from 'ngx-rating';
 import { AppInfoComponent } from './app-info/app-info.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 
-import { FullCalendarModule } from '@fullcalendar/angular';
-// import { CalendarModule, DateAdapter } from 'angular-calendar';
-// import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from './calendar/calendar.component';
 import { MedicationsComponent } from './medications/medications.component'; // for FullCalendar!
 import { MobileFitnessComponent } from './mobile-fitness/mobile-fitness.component';
 import { TestComponent } from './test/test.component';
 import { AdminComponent } from './admin/admin.component';
-import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component'; // for FullCalendar!
+import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component';
+import { MyHeartComponent } from './my-heart/my-heart.component'; // for FullCalendar!
 
 @NgModule({
   declarations: [
@@ -49,6 +49,7 @@ import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-kno
     TestComponent,
     AdminComponent,
     HealthKnowledgeBaseComponent,
+    MyHeartComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,17 +69,19 @@ import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-kno
     MatBottomSheetModule,
     MatListModule,
     MatMenuModule,
-    // CalendarModule.forRoot({
-    //   provide: DateAdapter,
-    //   useFactory: adapterFactory
-    // }),
-    FullCalendarModule
+    NgbModalModule,
+
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    // FullCalendarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
-  entryComponents:[AppInfoComponent, HomeComponent],
+  entryComponents: [AppInfoComponent, HomeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

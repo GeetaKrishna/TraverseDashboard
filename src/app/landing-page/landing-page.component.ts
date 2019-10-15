@@ -95,11 +95,4 @@ export class LandingPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  changeBackground(k)
-  {
-
-    console.log("backGround", k.files[0]  )
-
-  } 
-
 }

@@ -13,6 +13,7 @@ import { TestComponent } from './test/test.component';
 import { MedicationsComponent } from './medications/medications.component';
 import { AdminComponent } from './admin/admin.component';
 import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component';
+import { MyHeartComponent } from './my-heart/my-heart.component';
 
 const routes: Routes = [
 
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'calendar', component: CalendarComponent },
+      { path: 'myHeart', component: MyHeartComponent },
       { path: 'medication', component: MedicationsComponent },
       {
         path: 'healthKnowledgeBase', component: HealthKnowledgeBaseComponent,
