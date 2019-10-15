@@ -45,7 +45,7 @@ const routes: Routes = [
       }
     ]
   },
-  // { path: '**', redirectTo: 'admin/landing' }
+  { path: '**', redirectTo: 'admin/landing' }
   // { path: '/:id', component: CustomerFormComponent }
 ];
 

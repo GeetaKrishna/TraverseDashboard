@@ -3,3 +3,8 @@
     box-shadow: 5px 20px 30px rgba(0,0,0,0.2);
     cursor: pointer;
 }
+
+.cardHead {
+    font-size: 24px;
+    margin-bottom: 0 !important;
+  }
