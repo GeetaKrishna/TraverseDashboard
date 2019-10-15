@@ -13,7 +13,11 @@ import { TestComponent } from './test/test.component';
 import { MedicationsComponent } from './medications/medications.component';
 import { AdminComponent } from './admin/admin.component';
 import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component';
+<<<<<<< HEAD
 import { HealthKnowledgeContentComponent } from './health-knowledge-content/health-knowledge-content.component';
+=======
+import { MyHeartComponent } from './my-heart/my-heart.component';
+>>>>>>> 443bc892c850730e95f77600a919b6d39da5f187
 
 const routes: Routes = [
 
@@ -26,6 +30,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'calendar', component: CalendarComponent },
+      { path: 'myHeart', component: MyHeartComponent },
       { path: 'medication', component: MedicationsComponent },
       {
         path: 'healthKnowledgeBase', component: HealthKnowledgeBaseComponent,
