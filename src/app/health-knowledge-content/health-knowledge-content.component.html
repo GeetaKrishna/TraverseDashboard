@@ -1,13 +1,36 @@
 <div class="pl-2">
-    <div style="width: 100%">
-        <mat-form-field class="example-form-field">
-            <input matInput type="search" placeholder="Search" [(ngModel)]="searchVal">
-            <button mat-button *ngIf="searchVal" matSuffix mat-icon-button (click)="clearValue()">
-              <mat-icon>close</mat-icon>
-            </button>
-            <button mat-button  matSuffix mat-icon-button (click)="searchValue(searchVal)" >
-                <mat-icon>search</mat-icon>
-            </button>
-          </mat-form-field>
-    </div>
+  <div style="width: 100%">
+    <mat-form-field class="example-form-field">
+      <input matInput type="search" placeholder="Search" [(ngModel)]="searchVal">
+      <button mat-button *ngIf="searchVal" matSuffix mat-icon-button (click)="clearValue()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <button mat-button matSuffix mat-icon-button (click)="searchValue(searchVal)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div style="display: flex;" class="row">    
+      <div *ngFor="let app of apps" class="col-md-6" style="margin-bottom: 5px;">
+          <mat-card class="example-card">
+              <img mat-card-md-image src="{{app.url}}" alt="Photo of a Shiba Inu">
+              <mat-card-header style="float: right; width: 240px;">
+                <mat-card-title>{{app.appTitle}}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                 {{app.appContent}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions>     
+                <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="shareCard(app.appId)">
+                  <mat-icon>share</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" (click)="shareMessage(app.appId)">
+                  <mat-icon>message</mat-icon>
+                </button>
+              </mat-card-actions>  
+            </mat-card>
+      </div>    
+  </div>
 </div>

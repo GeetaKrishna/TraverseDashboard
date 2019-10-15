@@ -27,7 +27,7 @@
     </div> -->
     <div class="card-body ">
         <div class="row no-gutters">
-            <div class="col-md-2 vertical">
+            <div class="col-md-2 vertical" style="overflow-x:hidden; overflow-y:auto;">
                 <div class="topic">Topics</div>
                 <div *ngFor=" let app of apps">
                     <div class="ml-2 mb-4 cursor-pointer" style="width: 120px" (click)="openAppInfo(app)">
