@@ -31,7 +31,7 @@ export class MyHeartComponent implements OnInit {
     },
     {
       "appId": 3,
-      "details": "Content here here here here here here here here here here here here here here",
+      "details": "You have a monthly appointment for your medication. Check your calendar for further details.",
       "version": "1.0v",
       "appName": "Appointment",
       "url": "assets/icons-home/motion01.png",
@@ -50,7 +50,10 @@ export class MyHeartComponent implements OnInit {
       "details": "KEEPS TRACK OF APPOITMENT",
       "version": "1.0v",
       "appName": "Medication",
-      "url": "assets/icons-home/calendar.jpg",
+      "content": "20mg",
+      "nature": "improves blood flow",
+      "text": "Benzapril ",
+      "url": "assets/medications/benazepril.jpg",
       "time": "twice a day"
     },
     {
@@ -58,24 +61,24 @@ export class MyHeartComponent implements OnInit {
       "details": "0.8 mg/dl",
       "version": "1.0v",
       "appName": "Lab",
-      "url": "assets/icons-home/motion13.jpeg",
-      "time": ""
-    },
-    {
-      "appId": 7,
-      "details": "3000 Steps",
-      "version": "1.0v",
-      "appName": "Distance Activity",
-      "url": "assets/myHeart/bluedistance.png",
-      "time": "yesterday"
+      "text": "Createnin",
+      "url": "assets/myHeart/lab.png",
+      "time": "10/23/19"
     },
     {
       "appId": 8,
-      "details": "2 Miles",
+      "details": "3000 Steps",
       "version": "1.0v",
       "appName": "Steps Activity",
       "url": "assets/myHeart/walk.png",
       "time": "3 days ago"
+    },{
+      "appId": 7,
+      "details": "2 Miles",
+      "version": "1.0v",
+      "appName": "Distance Activity",
+      "url": "assets/myHeart/bluedistance.png",
+      "time": "yesterday"
     },
   ]
 }

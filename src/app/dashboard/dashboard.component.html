@@ -4,14 +4,12 @@
   </div>
   <div class="card-body">
     <div class="row mt-4  justify-content-center">
-      <!-- <div class="col-md-6"> -->
       <div class="card shadow-sm mr-4 cardWidth">
         <div class="card-header title ch-0">
           Weight <span class="float-right"><span class="fa {{weightpresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
           <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
-          <!-- <div class="row" [hidden]="!weight"> -->
           <div class="row" [style.display]="!weight? 'none' : ''">
             <div [attr.contenteditable]="contenteditable1" class="col-md-4 font-weight-bold data text-right"
               [textContent]="currentWeight" (input)="currentWeight=$event.target.textContent">{{currentWeight}}
@@ -20,20 +18,10 @@
 
             <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-up"></span></div>
           </div>
-          <!-- <div style="display: block" [hidden]="weight"> -->
           <div [style.display]="weight ? 'none' : 'block'">
             <canvas id="canvas" height="80vh">{{ weightChart }}</canvas>
           </div>
-          <!-- <div class="row" *ngIf="weight">
-              <div [attr.contenteditable]="contenteditable1" class="col-md-4 font-weight-bold data"
-                [textContent]="currentWeight" (input)="currentWeight=$event.target.textContent">{{currentWeight}}
-              </div>
-              <div class="col-md-4 font-weight-bold data">lbs</div>
-              <div class="col-md-4 font-weight-bold data"><span class="fa fa-arrow-up"></span></div>
-                        </div> -->
-          <!-- <div style="display: block" *ngIf="!weight">
-              <canvas id="canvas" height="60vh">{{ weightChart }}</canvas>
-            </div> -->
+
           <div class="medium text-muted mt-2">As of 2 days ago</div>
         </div>
         <div class="card-footer">
@@ -46,12 +34,10 @@
             <span class="fa fa-plus-square text-muted cursor-pointer" (click)="toggleContenteditableWeight()"></span>
             &nbsp;
             <span class="fa fa-undo text-muted cursor-pointer" (click)="weightToggle()"></span>
-            <!-- <span class="fa fa-arrow-right text-muted cursor-pointer" (click)="toggleSubmitWeight()"></span> -->
           </div>
         </div>
       </div>
-      <!-- </div> -->
-      <!-- <div class="col-md-6"> -->
+
       <div class="card shadow-sm cardWidth">
         <div class="card-header title ch-2">
           Blood Pressure <span class="float-right"><span
@@ -75,7 +61,6 @@
           <div style="display: block" *ngIf="!bloodpressure">
             <canvas height="80vh" baseChart [datasets]="lineChartData2" [labels]="lineChartLabels" [legend]="false"
               [options]="lineChartOptions" [colors]="lineChartColors2" [chartType]="lineChartType"></canvas>
-            <!-- <canvas id="canvas" height="60vh">{{ BPChart }}</canvas> -->
           </div>
           <div class="medium text-muted">Over 1 month ago</div>
         </div>
@@ -89,11 +74,9 @@
             <span class="fa fa-plus-square text-muted cursor-pointer" (click)="toggleContenteditableBlood()"></span>
             &nbsp;
             <span class="fa fa-undo text-muted cursor-pointer" (click)="bloodpressureToggle()"></span>
-            <!-- <span class="fa fa-arrow-right text-muted cursor-pointer" (click)="toggleSubmitBlood()"></span> -->
           </div>
         </div>
       </div>
-      <!-- </div> -->
     </div>
 
     <div class="row my-4 justify-content-center">

@@ -8,7 +8,8 @@
             <div class="card-body">
                 <div class="row justify-content-center">
                     <div class="col-md-3 col-sm-6 p-4" *ngFor="let app of apps">
-                        <div class="card h-100">
+                        <div class="card h-100 bgbb"
+                            [style.background-color]="app.appName === 'Distance Activity' ? 'aliceblue' : app.appName === 'Steps Activity' ? 'skyblue': app.appName === 'HeartRate' ? 'darkgray' : app.appName === 'Blood Pressure' ? 'cornflowerblue': app.appName === 'Appointment' ? 'darkkhaki' : app.appName === 'EKG' ? 'snow': app.appName === 'Medication' ? 'whitesmoke': app.appName === 'Lab' ? 'burlywood': ''">
                             <b class="p-2">
                                 {{app.appName}}
                             </b>
@@ -16,14 +17,11 @@
 
                                 <div [ngSwitch]="app.appName">
                                     <div *ngSwitchCase="'HeartRate'">
-                                        <div class="row justify-content-center">
-                                            <img mat-card-md-image src="{{app.url}}" height="50px"
-                                                style="border-radius: 50%;" alt="Image Not Available">
-                                        </div>
-                                        <div class="row" style="color: red; font-size: xx-large; margin-left: 52px;
-                                        margin-top: 10px;">
-                                            {{app.details}} BPM
-                                        </div>
+                                        <img mat-card-md-image src="{{app.url}}" height="50px"
+                                            style="border-radius: 50%; display: block; margin-left: auto; margin-right: auto;"
+                                            alt="Image Not Available">
+                                        <h2 style="text-align: center; color: red">
+                                            {{app.details}} BPM</h2>
                                         <div class="row" style="font-size: x-small; margin-left: 122px;">
                                             {{app.time}}
                                         </div>
@@ -60,8 +58,8 @@
                                     </div>
                                     <div *ngSwitchCase="'EKG'">
                                         <div class="row justify-content-center">
-                                            <img src={{app.url}} width= 100%
-                                            height= auto style="mix-blend-mode: multiply;" />
+                                            <img src={{app.url}} width=100% height=auto
+                                                style="mix-blend-mode: multiply;" />
                                         </div>
                                         <div class="row">
                                             <div class="col">
@@ -76,21 +74,86 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div *ngSwitchCase="'Medication'">Medication</div>
-                                    <div *ngSwitchCase="'Lab'">Lab</div>
-                                    <div *ngSwitchCase="'Distance Activity'">
-                                        <div class="row" style="background-color: burlywood;">
-                                            <img src={{app.url}}  width= 100% height= auto  style="mix-blend-mode: multiply;"/> 
+                                    <div *ngSwitchCase="'Medication'">
+                                        <div class="row justify-content-center">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <img mat-card-md-image src="{{app.url}}" height="80px" width="100px"
+                                                        alt="Image Not Available">
+                                                </div>
+                                                <div class="col" style="width: 100%">
+                                                    <span>
+                                                        <i class="fa fa-clock-o" style="font-size: 50px; color: red; "
+                                                            aria-hidden="true"></i>
+                                                    </span>
+                                                    <span>
+                                                        <p style="font-size: 12px; height: 30px;">
+                                                            {{app.time}}
+                                                        </p>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                {{app.text}}
+
+                                            </div>
+                                            <div class="col-md-12 " style="font-size: x-small">
+                                                {{app.content}}
+                                            </div>
+                                            <div class="col-md-12 " style="font-size: x-small; font-weight: bolder">
+                                                {{app.nature}}
+                                            </div>
                                             <div class="col">
-                                                <div class="bottom-right">{{app.details}}</div>
-                                                <div class="bottom-left">{{app.time}}</div>    
+                                                <div style="float: right;">
+                                                    <span>
+                                                        <i class="fa fa-refresh mr-2" aria-hidden="true"></i>
+                                                    </span>
+                                                    <span>
+                                                        <i class="fa fa-calendar-plus-o mr-2" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngSwitchCase="'Lab'">
+                                        <div class="row">
+                                            <div class="col mt-4">
+
+                                                <div style="color: green; font-size: xx-large">
+                                                    <b>{{app.details}}</b>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-4">
+                                                <div style="display: inline-flex">{{app.text}}</div>
+                                                <div style="font-size: xx-small;">{{app.time}}</div>
+                                            </div>
+
+                                            <div class="col mt-4 ml-2">
+
+                                                <img src={{app.url}} height="auto" width="70%" style="mix-blend-mode: multiply;" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div *ngSwitchCase="'Distance Activity'">
+                                        <div class="row justify-content-center">
+                                            <!-- <img src={{app.url}} height="auto" width="50%" style="mix-blend-mode: multiply;"/>  -->
+                                            <img src={{app.url}} style="mix-blend-mode: multiply; height: 134px;
+                                            width: 134px;" />
+                                            <div class="col">
+                                                <div class="" style=""><b>{{app.details}}</b></div>
+                                                <div class="" style="font-size: xx-small;">{{app.time}}</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div *ngSwitchCase="'Steps Activity'">
-                                        <div class="row">
-                                            <img src={{app.url}}  width= 100%
-                                            height= auto />
+                                        <div class="row justify-content-center">
+                                            <img src={{app.url}} style="mix-blend-mode: multiply; height: 130px;
+                                            width: 82px;" />
+                                            <div class="row">
+                                                <div class="col-md-12" style="color: brown"><b>{{app.details}}</b></div>
+                                                <div class="col-md-12" style="font-size: xx-small;">{{app.time}}</div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div *ngSwitchDefault>One</div>
