@@ -1,0 +1,13 @@
+<div class="pl-2">
+    <div style="width: 100%">
+        <mat-form-field class="example-form-field">
+            <input matInput type="search" placeholder="Search" [(ngModel)]="searchVal">
+            <button mat-button *ngIf="searchVal" matSuffix mat-icon-button (click)="clearValue()">
+              <mat-icon>close</mat-icon>
+            </button>
+            <button mat-button  matSuffix mat-icon-button (click)="searchValue(searchVal)" >
+                <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+    </div>
+</div>

@@ -13,6 +13,7 @@ import { TestComponent } from './test/test.component';
 import { MedicationsComponent } from './medications/medications.component';
 import { AdminComponent } from './admin/admin.component';
 import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component';
+import { HealthKnowledgeContentComponent } from './health-knowledge-content/health-knowledge-content.component';
 
 const routes: Routes = [
 
@@ -30,7 +31,7 @@ const routes: Routes = [
         path: 'healthKnowledgeBase', component: HealthKnowledgeBaseComponent,
         children: [
           {
-            path: 'fitbit', component: TestComponent
+           path:'healthKnowledgeContent', component: HealthKnowledgeContentComponent
           }
         ]
       },

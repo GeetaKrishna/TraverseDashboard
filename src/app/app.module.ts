@@ -16,7 +16,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatListModule, MatBottomSheetModule, MatMenuModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatListModule, MatBottomSheetModule, MatMenuModule ,MatIconModule} from '@angular/material';
 import { RatingModule } from 'ngx-rating';
 import { AppInfoComponent } from './app-info/app-info.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -30,7 +30,8 @@ import { MedicationsComponent } from './medications/medications.component'; // f
 import { MobileFitnessComponent } from './mobile-fitness/mobile-fitness.component';
 import { TestComponent } from './test/test.component';
 import { AdminComponent } from './admin/admin.component';
-import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component'; // for FullCalendar!
+import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component';
+import { HealthKnowledgeContentComponent } from './health-knowledge-content/health-knowledge-content.component'; // for FullCalendar!
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-kno
     TestComponent,
     AdminComponent,
     HealthKnowledgeBaseComponent,
+    HealthKnowledgeContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +70,7 @@ import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-kno
     MatBottomSheetModule,
     MatListModule,
     MatMenuModule,
+    MatIconModule,
     // CalendarModule.forRoot({
     //   provide: DateAdapter,
     //   useFactory: adapterFactory

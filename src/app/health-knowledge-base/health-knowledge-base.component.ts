@@ -22,7 +22,7 @@ export class HealthKnowledgeBaseComponent implements OnInit {
       "url": "assets/icons-healthKnowledge/star.jpeg",
       "userTable": [],
       "rating": 2.5,
-      "routeScreen": 'fitbit'
+      "routeScreen": 'healthKnowledgeContent'
     },
     {
       "appId": 1,
@@ -32,7 +32,7 @@ export class HealthKnowledgeBaseComponent implements OnInit {
       "url": "assets/icons-healthKnowledge/hbp.png",
       "userTable": [],
       "rating": 2.5,
-      "routeScreen": 'fitbit'
+      "routeScreen": 'healthKnowledgeContent'
     },
     {
       "appId": 2,
@@ -42,7 +42,7 @@ export class HealthKnowledgeBaseComponent implements OnInit {
       "url": "assets/icons-healthKnowledge/heart.jpg",
       "userTable": [],
       "rating": 2.5,
-      "routeScreen": 'fitbit'
+      "routeScreen": 'healthKnowledgeContent'
     },
     {
       "appId": 3,
@@ -52,7 +52,7 @@ export class HealthKnowledgeBaseComponent implements OnInit {
       "url":  "assets/icons-healthKnowledge/excl.png",
       "userTable": [],
       "rating": 2.5,
-      "routeScreen": 'fitbit'
+      "routeScreen": 'healthKnowledgeContent'
     },
     {
       "appId": 4,
@@ -62,7 +62,7 @@ export class HealthKnowledgeBaseComponent implements OnInit {
       "url": "assets/icons-home/motion02.png",
       "userTable": [],
       "rating": 2.5,
-      "routeScreen": 'fitbit'
+      "routeScreen": 'healthKnowledgeContent'
     },
   ]
 
