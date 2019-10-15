@@ -28,6 +28,6 @@
     font-weight: bold;
 }
 .vertical{
-    border-right: 4px solid grey;
+    /* border-right: 4px solid grey; */
     height: 500px;
 }
