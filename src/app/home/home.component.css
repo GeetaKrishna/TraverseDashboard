@@ -22,28 +22,34 @@
    margin-right: auto;
  }
 */
-.container {
-  font-size: 12px;
-  text-align: center;
-  vertical-align: 15%
-}
- 
- .example-card {
-  max-width:200px;
-  margin-left: 7px;
+ .container {
+   font-size: 12px;
+   text-align: center;
+   vertical-align: 15%
+ }
 
-}
-.ch-1{
-  background-color: #d7dce2;
-    color: black
-  }
+ .cardHead {
+   font-size: 24px;
+   margin-bottom: 0 !important;
+ }
+
+ .example-card {
+   max-width: 200px;
+   margin-left: 7px;
+
+ }
+
+ .ch-1 {
+   background-color: #d7dce2;
+   color: black
+ }
 
  .example-full-width {
    width: 100%;
  }
 
  .category {
-  width: 200px;
-  margin-left: 20px;
-  margin-top: 8px;
-}
+   width: 200px;
+   margin-left: 20px;
+   margin-top: 8px;
+ }

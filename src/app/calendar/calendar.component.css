@@ -1,12 +1,18 @@
 .ch-1 {
-    background-color: #d7dce2;
-    color: black
+  background-color: #d7dce2;
+  color: black
 }
+
 h3 {
-    margin: 0 0 10px;
-  }
-  
-  pre {
-    background-color: #f5f5f5;
-    padding: 15px;
-  }
+  margin: 0 0 10px;
+}
+
+pre {
+  background-color: #f5f5f5;
+  padding: 15px;
+}
+
+.cardHead {
+  font-size: 24px;
+  margin-bottom: 0 !important;
+}
