@@ -24,6 +24,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+// import { start } from 'repl';
 
 const colors: any = {
   red: {
@@ -48,6 +49,7 @@ const colors: any = {
 })
 export class CalendarComponent {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  @ViewChild('tesst', { static: true }) tesst: TemplateRef<any>;
   constructor(private modal: NgbModal) { }
 
   view: CalendarView = CalendarView.Month;
@@ -79,11 +81,30 @@ export class CalendarComponent {
 
   refresh: Subject<any> = new Subject();
 
+  sampleEvent = [
+    {
+      start: subDays(startOfDay(new Date()), 1),
+      end: addDays(new Date(), 1),
+      title: 'Take your medicine recurrently',
+      type: "Medication",
+    }, {
+      start: subDays(startOfDay(new Date()), 1),
+      end: addDays(new Date(), 1),
+      title: 'Make an appointment for your EKG',
+      type: "Appointment",
+    }, {
+      start: subDays(startOfDay(new Date()), 1),
+      end: addDays(new Date(), 1),
+      title: 'Reschedule the appointment',
+      type: "Appointment",
+    },
+  ]
+
   events: CalendarEvent[] = [
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
-      title: 'A 3 day event',
+      title: 'Take your medicine recurrently',
       color: colors.red,
       actions: this.actions,
       allDay: true,
@@ -94,22 +115,16 @@ export class CalendarComponent {
       draggable: true
     },
     {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
       start: subDays(endOfMonth(new Date()), 3),
       end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
+      title: 'A recurring event that spans 2 months',
       color: colors.blue,
       allDay: true
     },
     {
       start: addHours(startOfDay(new Date()), 2),
       end: new Date(),
-      title: 'A draggable and resizable event',
+      title: 'Reschedule',
       color: colors.yellow,
       actions: this.actions,
       resizable: {
@@ -123,6 +138,7 @@ export class CalendarComponent {
   activeDayIsOpen: boolean = true;
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    console.log(date, events)
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -133,6 +149,10 @@ export class CalendarComponent {
         this.activeDayIsOpen = true;
       }
       this.viewDate = date;
+    }
+    if (events.length < 1) {
+
+      this.addNewEvent(date, date, 1)
     }
   }
 
@@ -175,17 +195,50 @@ export class CalendarComponent {
       }
     ];
   }
-//   addEvent(date) {
-//     console.log("inside adding date")
-//     //use concat, not push
-//     this.calendarEvents = this.calendarEvents.concat({ title: 'event 2', date: '2019-10-11' });
-//     console.log(this.calendarEvents)
-//   }
 
-//   handleDateClick(arg) {
-//     console.log(arg, "date");
-//     this.addEvent(arg.dateStr)
-//   }
+  addNewEvent(startDate, endDate, recurrence): void {
+
+    console.log(this.events)
+
+    this.modal.open(this.tesst)
+    if (this.events.length < 1) {
+
+    }
+    else {
+      // this.events = [
+      //   ...this.events,
+      //   {
+      //     title: 'New event',
+      //     start: startOfDay(new Date(startDate)),
+      //     end: endOfDay(new Date(endDate)),
+      //     color: colors.red,
+      //     draggable: true,
+      //     resizable: {
+      //       beforeStart: true,
+      //       afterEnd: true
+      //     }
+      //   },
+      //   // {
+      //   //   start: startOfDay(new Date(startDate)),
+      //   //   end: addDays(endOfDay(new Date(endDate)), 2),
+      //   //   title: 'Add another Event',
+      //   //   // actions: this.actions,
+      //   //   color: colors.blue,
+      //   //   allDay: true
+      //   // },
+      //   // {
+      //   //   start: startOfDay(new Date(startDate)),
+      //   //   end: addDays(endOfDay(new Date(endDate)), 2),
+      //   //   title: 'View Event',
+      //   //   // actions: this.actions,
+      //   //   color: colors.blue,
+      //   //   allDay: true
+      //   // }
+      // ];
+    }
+
+  }
+
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter(event => event !== eventToDelete);
   }

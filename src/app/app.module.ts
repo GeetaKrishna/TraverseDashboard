@@ -16,7 +16,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatListModule, MatBottomSheetModule, MatMenuModule ,MatIconModule} from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatListModule, MatBottomSheetModule, MatMenuModule, MatIconModule } from '@angular/material';
 import { RatingModule } from 'ngx-rating';
 import { AppInfoComponent } from './app-info/app-info.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -32,6 +32,8 @@ import { AdminComponent } from './admin/admin.component';
 import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component';
 import { HealthKnowledgeContentComponent } from './health-knowledge-content/health-knowledge-content.component'; // for FullCalendar!
 import { MyHeartComponent } from './my-heart/my-heart.component'; // for FullCalendar!
+
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,7 @@ import { MyHeartComponent } from './my-heart/my-heart.component'; // for FullCal
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
+    MatTabsModule
     // FullCalendarModule
   ],
   providers: [

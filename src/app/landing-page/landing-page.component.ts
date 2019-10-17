@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
+import { GetAppsService } from '../_services/get-apps.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
+  @Input() test;
   images = ["assets/icons-home/motion01.png", "assets/icons-home/motion02.png", "assets/icons-home/motion03.png", "assets/icons-home/motion04.png", "assets/icons-home/motion05png", "assets/icons-home/motion06.png"];
   apps: any[] = [
     {
@@ -89,10 +91,17 @@ export class LandingPageComponent implements OnInit {
       "routeScreen": 'admin/connect'
     },
   ]
-  
-  constructor() { }
+
+  constructor(private getApps: GetAppsService) { }
 
   ngOnInit() {
+
+    this.getApps.currentMessage.subscribe(message => {
+      if (message['appId']) {
+        this.apps.push(message)
+      }
+    })
+
   }
 
 }

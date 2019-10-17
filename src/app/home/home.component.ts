@@ -134,7 +134,7 @@ export class HomeComponent implements OnInit {
   // }
 
   openBottomSheet(app) {
-    // console.log(id, 'id');
+
     this._bottomSheet.open(AppInfoComponent, { data: app });
 
   }

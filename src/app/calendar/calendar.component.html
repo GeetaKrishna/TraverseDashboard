@@ -16,8 +16,8 @@
       </div>
       <div class="card-body col-md-12 " style="height:auto; overflow:scroll">
         <div class="row text-center">
-          <div class="col-md-4">
-            <div class="btn-group">
+          <!-- <div class="col-md-4"> -->
+          <!-- <div class="btn-group">
               <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
                 (viewDateChange)="closeOpenMonthViewDay()">
                 Previous
@@ -29,13 +29,13 @@
                 (viewDateChange)="closeOpenMonthViewDay()">
                 Next
               </div>
-            </div>
-          </div>
-          <div class="col-md-4">
+            </div> -->
+          <!-- </div> -->
+          <div class="col justify-content-center">
             <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
           </div>
-          <div class="col-md-4">
-            <div class="btn-group">
+          <!-- <div class="col-md-4"> -->
+          <!-- <div class="btn-group">
               <div class="btn btn-primary" (click)="setView(CalendarView.Month)"
                 [class.active]="view === CalendarView.Month">
                 Month
@@ -48,23 +48,23 @@
                 [class.active]="view === CalendarView.Day">
                 Day
               </div>
-            </div>
-          </div>
+            </div>  *ngSwitchCase="CalendarView.Month"-->
+          <!-- </div> -->
         </div>
         <br />
-        <div [ngSwitch]="view">
-          <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-            [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+        <div>
+          <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+            [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
             (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
           </mwl-calendar-month-view>
-          <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+          <!-- <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
             [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
             (eventTimesChanged)="eventTimesChanged($event)">
-          </mwl-calendar-week-view>
-          <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+          </mwl-calendar-week-view> -->
+          <!-- <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
             [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
             (eventTimesChanged)="eventTimesChanged($event)">
-          </mwl-calendar-day-view>
+          </mwl-calendar-day-view> -->
         </div>
       </div>
       <ng-template #modalContent let-close="close">
@@ -94,6 +94,41 @@
         <div>
           Event:
           <pre>{{ modalData?.event | json }}</pre>
+        </div>
+      </ng-template>
+      <ng-template #tesst>
+        <div class="row">
+          <div class="col justify-content-center">
+            <h3>{{ viewDate | date }}</h3>
+          </div>
+          <div class="col-md-12">
+            <mat-tab-group>
+              <mat-tab label="Events">
+                <div *ngFor="let event of sampleEvent">
+                  <div class="card">
+                    <div class="row">
+                      {{event.title}}
+                    </div>
+
+                    <div class="row">
+
+                      {{event.end | date: "shortTime"}}
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Request Appointment">
+                <div *ngFor="let k of [6,7,8,8]">
+                  <p>{{k}}</p>
+                </div>
+              </mat-tab>
+              <mat-tab label="Add Medication">
+                <div *ngFor="let k of [0,7,1,5]">
+                  <p>{{k}}</p>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
         </div>
       </ng-template>
     </div>
