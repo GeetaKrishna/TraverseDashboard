@@ -31,7 +31,7 @@ export class MyHeartComponent implements OnInit {
     },
     {
       "appId": 3,
-      "details": "You have a monthly appointment for your medication. Check your calendar for further details.",
+      "details": "You have a Doctor Appointment coming up, Please check your calendar.",
       "version": "1.0v",
       "appName": "Appointment",
       "url": "assets/icons-home/motion01.png",
@@ -52,7 +52,7 @@ export class MyHeartComponent implements OnInit {
       "appName": "Medication",
       "content": "20mg",
       "nature": "improves blood flow",
-      "text": "Benzapril ",
+      "text": "Benazepril ",
       "url": "assets/medications/benazepril.jpg",
       "time": "twice a day"
     },
@@ -61,7 +61,7 @@ export class MyHeartComponent implements OnInit {
       "details": "0.8 mg/dl",
       "version": "1.0v",
       "appName": "Lab",
-      "text": "Createnin",
+      "text": "Creatinine",
       "url": "assets/myHeart/lab.png",
       "time": "10/23/19"
     },
@@ -69,14 +69,14 @@ export class MyHeartComponent implements OnInit {
       "appId": 8,
       "details": "3000 Steps",
       "version": "1.0v",
-      "appName": "Steps Activity",
+      "appName": "Steps / Activity",
       "url": "assets/myHeart/walk.png",
       "time": "3 days ago"
     },{
       "appId": 7,
       "details": "2 Miles",
       "version": "1.0v",
-      "appName": "Distance Activity",
+      "appName": "Distance",
       "url": "assets/myHeart/bluedistance.png",
       "time": "yesterday"
     },

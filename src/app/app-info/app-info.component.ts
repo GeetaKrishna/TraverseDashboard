@@ -3,6 +3,7 @@ import { MatBottomSheetRef } from '@angular/material';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { GetAppsService } from '../_services/get-apps.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-app-info',
@@ -12,9 +13,10 @@ import { GetAppsService } from '../_services/get-apps.service';
 export class AppInfoComponent implements OnInit {
   install: boolean = false
   app;
+  appsToBePushed = [];
   ngOnInit() {
   }
-  constructor(private route: Router, private getApp: GetAppsService, private _bottomSheetRef: MatBottomSheetRef<AppInfoComponent>, @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
+  constructor(private route: Router, private toast: ToastrService, private getApp: GetAppsService, private _bottomSheetRef: MatBottomSheetRef<AppInfoComponent>, @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
     console.log(data, 'recievedData');
     this.app = data;
   }
@@ -28,8 +30,8 @@ export class AppInfoComponent implements OnInit {
     console.log('update clicked');
   }
 
-  installApp(id) {
-    console.log('install clicked', id);
+
+  navigateToApp(id) {
     if (id == 2) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/fitnessTracker/fitbit')
@@ -38,7 +40,7 @@ export class AppInfoComponent implements OnInit {
       this.route.navigateByUrl('admin/dashboard')
     } else if (id == 4) {
       this._bottomSheetRef.dismiss();
-      this.route.navigateByUrl('admin/healthKnowledgeBase')
+      this.route.navigateByUrl('admin/healthKnowledgeBase/healthKnowledgeContent')
     } else if (id == 5) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/calendar')
@@ -46,12 +48,56 @@ export class AppInfoComponent implements OnInit {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/medication')
     }
-    this.getApp.addApp(this.app);
-    this.install = !this.install
+  }
+
+  installApp(id, appDetails) {
+    console.log('install clicked', id);
+    console.log('install clicked', appDetails);
+    this.getApp.addApp(appDetails).subscribe((data) => {
+      console.log(data)
+      if (id == 2) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/fitnessTracker/fitbit')
+      } else if (id == 3) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/dashboard')
+      } else if (id == 4) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/healthKnowledgeBase/healthKnowledgeContent')
+      } else if (id == 5) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/calendar')
+      } else if (id == 7) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/medication')
+      }
+      this.toast.success('App installed Successfully.')
+      // if (JSON.parse(localStorage.getItem("apps"))) {
+      //   if (JSON.parse(localStorage.getItem("apps")).length > 0) {
+      //     console.log("inside")
+      //     this.appsToBePushed = this.appsToBePushed.concat(JSON.parse(localStorage.getItem("apps")))
+      //   }
+      // }
+      // this.appsToBePushed.push(this.data)
+      // console.log(new Set(this.appsToBePushed));
+      // localStorage.setItem('apps', JSON.stringify(this.appsToBePushed))
+
+    }, (error) => {
+      this.toast.error(`Could'nt install app, Please try later.`)
+      console.log(error, "error storing data")
+    })
+
   }
 
   uninstallApp(id) {
-    console.log('uninstall clicked');
-    this.install = !this.install
+    this.getApp.deleteApp(id).subscribe((res) => {
+      console.log(res);
+      this.toast.success(`App uninstalled successfully.`)
+      this._bottomSheetRef.dismiss({data:id});
+    }, (err) => {
+      this.toast.error(`Couldn't uninstall app, Please try later.`)
+
+      console.log(err);
+    })
   }
 }

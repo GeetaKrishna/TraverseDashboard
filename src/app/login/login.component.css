@@ -5,7 +5,7 @@
 
 .bgCard {
     /* background-image: url(../../assets/bg.jpg) !important; */
-    /* background-color: black; */
+    background-color:rgb(127, 180, 224);
     /* color: white; */
     height: 300px !important;
 }

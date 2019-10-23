@@ -19,7 +19,7 @@ export class HealthKnowledgeBaseComponent implements OnInit {
       "appDetails": "This is App Store Logo",
       "version": "1.0v",
       "appName": "Recommended for you",
-      "url": "assets/icons-healthKnowledge/star.jpeg",
+      "url": "assets/icons-healthKnowledge/star.png",
       "userTable": [],
       "rating": 2.5,
       "routeScreen": 'healthKnowledgeContent'

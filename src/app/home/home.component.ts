@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { AppInfoComponent } from '../app-info/app-info.component';
+import { GetAppsService } from '../_services/get-apps.service';
+import { element } from 'protractor';
 
 
 @Component({
@@ -15,112 +17,152 @@ export class HomeComponent implements OnInit {
   images = ["assets/icons-home/motion01.png", "assets/icons-home/motion02.png", "assets/icons-home/motion03.png", "assets/icons-home/motion04.png", "assets/icons-home/motion05png", "assets/icons-home/motion06.png"];
   apps: any[] = [
     {
-      "appId": 2,
-      "appDetails": "This is Android",
-      "version": "1.0v",
-      "appName": "Fitness Tracker",
-      "url": "assets/icons-home/motion01.png",
+      "APPID": 2,
+      "APPDETAILS": "This is Android Fitbit tracker which is used to track your fitness details.",
+      "VERSION": "1.0v",
+      "APPNAME": "Fitness Tracker",
+      "URL": "assets/icons-home/motion01.png",
       "userTable": [],
-      "rating": 2.5
+      "RATING": 2.5,
+      "ROUTESCREEN": 'admin/fitnessTracker/fitbit',
+      "installed": false
     },
     {
-      "appId": 3,
-      "appDetails": "KEEPS TRACK OF WEIGHT, GLUCOSE LEVEL, ETC",
-      "version": "1.0v",
-      "appName": "Four Corners Of Health",
-      "url": "assets/icons-home/motion02.png",
+      "APPID": 3,
+      "APPDETAILS": "KEEPS TRACK OF WEIGHT, GLUCOSE LEVEL, ETC",
+      "VERSION": "1.0v",
+      "APPNAME": "Four Corners Of Health",
+      "URL": "assets/icons-home/motion02.png",
       "userTable": [],
-      "rating": 3.5
+      "RATING": 3.5,
+      "ROUTESCREEN": 'admin/dashboard',
+      "installed": false
     },
     {
-      "appId": 4,
-      "appDetails": "YOU CAN SEARCH FOR ARTICLES FROM ONLINE",
-      "version": "1.0v",
-      "appName": "Health Knowledge Base",
-      "url": "assets/icons-home/motion03.png",
+      "APPID": 4,
+      "APPDETAILS": "YOU CAN SEARCH FOR ARTICLES FROM ONLINE",
+      "VERSION": "1.0v",
+      "APPNAME": "Health Knowledge Base",
+      "URL": "assets/icons-home/motion03.png",
       "userTable": [],
-      "rating": 1.5
+      "RATING": 1.5,
+      "ROUTESCREEN": 'admin/healthKnowledgeBase/healthKnowledgeContent',
+      "installed": false
     },
     {
-      "appId": 5,
-      "appDetails": "KEEPS TRACK OF APPOITMENT",
-      "version": "1.0v",
-      "appName": "Calendar",
-      "url": "assets/icons-home/motion04.png",
+      "APPID": 5,
+      "APPDETAILS": "KEEPS TRACK OF APPOITMENT",
+      "VERSION": "1.0v",
+      "APPNAME": "Calendar",
+      "URL": "assets/icons-home/motion04.png",
       "userTable": [],
-      "rating": 4.5
+      "RATING": 4.5,
+      "ROUTESCREEN": 'admin/calendar',
+      "installed": false
     },
     {
-      "appId": 6,
-      "appDetails": "HELPS TO TRACK INSURANCE DETAILS AND CLAIMS",
-      "version": "1.0v",
-      "appName": "My Heart",
-      "url": "assets/icons-home/motion05.png",
+      "APPID": 6,
+      "APPDETAILS": "HELPS TO TRACK INSURANCE DETAILS AND CLAIMS",
+      "VERSION": "1.0v",
+      "APPNAME": "My Heart",
+      "URL": "assets/icons-home/motion05.png",
       "userTable": [],
-      "rating": 5
+      "RATING": 5,
+      "ROUTESCREEN": 'admin/myHeart',
+      "installed": false
     },
     // {
-    //   "appId": 7,
-    //   "appDetails": "SAYS ABOUT THE MEDICATION DETAILS",
-    //   "version": "1.0v",
-    //   "appName": "MY MEDICATIONS",
-    //   "url": "assets/icons-home/motion06.png",
+    //   "APPID": 7,
+    //   "APPDETAILS": "SAYS ABOUT THE MEDICATION DETAILS",
+    //   "VERSION": "1.0v",
+    //   "APPNAME": "MY MEDICATIONS",
+    //   "URL": "assets/icons-home/motion06.png",
     //   "userTable": []
     //   },
 
   ]
   mapps: any[] = [
     {
-      "appId": 7,
-      "appDetails": "SAYS ABOUT THE MEDICATION DETAILS",
-      "version": "1.0v",
-      "appName": "MY MEDICATIONS",
-      "url": "assets/icons-home/motion07.png",
+      "APPID": 7,
+      "APPDETAILS": "SAYS ABOUT THE MEDICATION DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "MY MEDICATIONS",
+      "URL": "assets/icons-home/motion07.png",
       "userTable": [],
-      "rating": 3.5
+      "RATING": 3.5,
+      "ROUTESCREEN": 'admin/medication',
+      "installed": false
 
     },
     {
-      "appId": 8,
-      "appDetails": "SAYS ABOUT THE HEALTHprivate _bottomSheet: MatBottomSheet DOCUMENT DETAILS",
-      "version": "1.0v",
-      "appName": "MY HEALTH DOCUMENTS",
-      "url": "assets/icons-home/motion08.png",
+      "APPID": 8,
+      "APPDETAILS": "SAYS ABOUT THE HEALTHprivate _bottomSheet: MatBottomSheet DOCUMENT DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "MY HEALTH DOCUMENTS",
+      "URL": "assets/icons-home/motion08.png",
       "userTable": [],
-      "rating": 5
+      "RATING": 5,
+      "ROUTESCREEN": 'admin/**',
+      "installed": false
     },
     {
-      "appId": 9,
-      "appDetails": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
-      "version": "1.0v",
-      "appName": "HEALTH CONNECT",
-      "url": "assets/icons-home/motion09.jpeg",
+      "APPID": 9,
+      "APPDETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
+      "VERSION": "1.0v",
+      "APPNAME": "HEALTH CONNECT",
+      "URL": "assets/icons-home/motion09.jpeg",
       "userTable": [],
-      "rating": 3
+      "RATING": 3,
+      "ROUTESCREEN": 'admin/**',
+      "installed": false
     },
     {
-      "appId": 10,
-      "appDetails": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
-      "version": "1.0v",
-      "appName": "INSURANCE CENTRAL",
-      "url": "assets/icons-home/motion10.png",
+      "APPID": 10,
+      "APPDETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
+      "VERSION": "1.0v",
+      "APPNAME": "INSURANCE CENTRAL",
+      "URL": "assets/icons-home/motion10.png",
       "userTable": [],
-      "rating": 4
+      "RATING": 4,
+      "ROUTESCREEN": 'admin/insurance',
+      "installed": false
     },
     {
-      "appId": 11,
-      "appDetails": "MAINTAINS ALL MEDICAL RECORDS",
-      "version": "1.0v",
-      "appName": "EMR MANAGER",
-      "url": "assets/icons-home/motion13.jpeg",
+      "APPID": 11,
+      "APPDETAILS": "MAINTAINS ALL MEDICAL RECORDS",
+      "VERSION": "1.0v",
+      "APPNAME": "EMR MANAGER",
+      "URL": "assets/hrt.png",
       "userTable": [],
-      "rating": 4
+      "RATING": 4,
+      "ROUTESCREEN": 'admin/**',
+      "installed": false
     }
   ]
 
-  constructor(private roter: Router, private _bottomSheet: MatBottomSheet) { }
+  constructor(private roter: Router, private getApps: GetAppsService, private _bottomSheet: MatBottomSheet) { }
 
   ngOnInit() {
+
+    this.getApps.getAppStore().subscribe((data: []) => {
+      console.log(data, 'data 4, db')
+      // this.apps = this.apps.concat(data)
+
+      data.map((k) => {
+        this.apps.forEach((element) => {
+          if (k['APPID'] === element.APPID) {
+            element.installed = true;
+          }
+        })
+        this.mapps.forEach((element) => {
+          if (k['APPID'] === element.APPID) {
+            element.installed = true;
+          }
+        })
+      })
+    })
+
+    // console.log(this.apps, this.mapps)
 
   }
 
@@ -134,9 +176,23 @@ export class HomeComponent implements OnInit {
   // }
 
   openBottomSheet(app) {
-
-    this._bottomSheet.open(AppInfoComponent, { data: app });
-
+    this._bottomSheet.open(AppInfoComponent, { data: app }).afterDismissed().subscribe((data) => {
+      console.log(data);
+      if (data) {
+        this.apps.map((element, index) => {
+          // console.log('dsad', element.APPID)
+          // console.log('dsad',data)
+          if (element.APPID === data.data) {
+            // console.log('dsad', element.APPID)
+            this.apps[index].installed = !this.apps[index].installed;
+            // console.log('dsad', this.apps[index])
+          }
+        })
+        console.log(this.apps);
+      }
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

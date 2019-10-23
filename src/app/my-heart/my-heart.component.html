@@ -10,7 +10,7 @@
                         </p>
                     </div>
                     <div class="col justify-content-end">
-                        <img src="../../assets/icons-home/motion13.jpeg"
+                        <img src="../../assets/myHeart/myHeartt.png"
                             style="height: 45px; width: 45px; float: right;" />
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-3 col-sm-6 p-4" *ngFor="let app of apps">
                         <div class="card h-100 bgbb"
-                            [style.background-color]="app.appName === 'Distance Activity' ? 'aliceblue' : app.appName === 'Steps Activity' ? 'skyblue': app.appName === 'HeartRate' ? 'darkgray' : app.appName === 'Blood Pressure' ? 'cornflowerblue': app.appName === 'Appointment' ? 'darkkhaki' : app.appName === 'EKG' ? 'snow': app.appName === 'Medication' ? 'whitesmoke': app.appName === 'Lab' ? 'burlywood': ''">
+                            [style.background-color]="app.appName === 'Distance' ? 'aliceblue' : app.appName === 'Steps / Activity' ? 'skyblue': app.appName === 'HeartRate' ? 'darkgray' : app.appName === 'Blood Pressure' ? 'cornflowerblue': app.appName === 'Appointment' ? 'darkkhaki' : app.appName === 'EKG' ? 'snow': app.appName === 'Medication' ? 'whitesmoke': app.appName === 'Lab' ? 'burlywood': ''">
                             <b class="p-2">
                                 {{app.appName}}
                             </b>
@@ -149,7 +149,7 @@
 
                                         </div>
                                     </div>
-                                    <div *ngSwitchCase="'Distance Activity'">
+                                    <div *ngSwitchCase="'Distance'">
                                         <div class="row justify-content-center">
                                             <!-- <img src={{app.url}} height="auto" width="50%" style="mix-blend-mode: multiply;"/>  -->
                                             <img src={{app.url}} style="mix-blend-mode: multiply; height: 134px;
@@ -160,7 +160,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div *ngSwitchCase="'Steps Activity'">
+                                    <div *ngSwitchCase="'Steps / Activity'">
                                         <div class="row justify-content-center">
                                             <img src={{app.url}} style="mix-blend-mode: multiply; height: 130px;
                                             width: 82px;" />

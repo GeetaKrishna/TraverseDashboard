@@ -4,7 +4,8 @@
     width: 100%;
   }
   .bgCard{
-      background-image:url(../../assets/565.jpg);
+      /* background-image:url(../../assets/565.jpg); */
+      background-color: rgb(104, 169, 212);
       height: 300px;
   }
   .signUpCard{

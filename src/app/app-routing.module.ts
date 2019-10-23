@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
@@ -15,6 +14,7 @@ import { AdminComponent } from './admin/admin.component';
 import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component';
 import { HealthKnowledgeContentComponent } from './health-knowledge-content/health-knowledge-content.component';
 import { MyHeartComponent } from './my-heart/my-heart.component';
+import { InsuranceComponent } from './insurance/insurance.component';
 
 const routes: Routes = [
 
@@ -29,6 +29,7 @@ const routes: Routes = [
       { path: 'calendar', component: CalendarComponent },
       { path: 'myHeart', component: MyHeartComponent },
       { path: 'medication', component: MedicationsComponent },
+      { path: 'insurance', component: InsuranceComponent },
       {
         path: 'healthKnowledgeBase', component: HealthKnowledgeBaseComponent,
         children: [

@@ -6,6 +6,9 @@ import { Details } from '../details';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Graph } from '../graph';
 import * as Chart from 'chart.js';
+import { GetAppsService } from '../_services/get-apps.service';
+import { DatePipe } from '@angular/common';
+// import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +16,7 @@ import * as Chart from 'chart.js';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
   weightInfo: String = 'Weight is Normal'
   bloodPressureInfo: String = 'Blood Pressure is Normal'
   glucoseInfo: String = 'Glucose Levels are fine'
@@ -39,8 +43,16 @@ export class DashboardComponent implements OnInit {
   response;
   graph: Graph[];
   details: Details[];
-  avgMonth = [];
-  avgWeight = [];
+
+  weightChart: Chart;
+  glucoseChart: Chart;
+  colorClassForBP: string;
+  colorPresentedInfo: any;
+  getpatientWeight: Object;
+  BPChart: Chart;
+  cholesterolChart: Chart;
+
+
   public lineChartType = 'line';
 
   public lineChartOptions: ChartOptions & { annotation: any } = {
@@ -106,31 +118,30 @@ export class DashboardComponent implements OnInit {
   public lineChartData: ChartDataSets[] = [
     { data: [65, 59, 300, 81, 56, 140], label: 'Weight' }
   ];
-  weightChart: Chart;
-  colorClassForBP: string;
-  colorPresentedInfo: any;
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService, private getApp: GetAppsService, private datePipe: DatePipe) {
   }
   contenteditable3: boolean = false;
   contenteditable1: boolean = false;
   contenteditable2: boolean = false;
   contenteditable4: boolean = false;
   ngOnInit() {
+    // console.log(this.datePipe.transform(new Date()), 'dateeeeeeeee');
+    // current weight
     this.dashboardService.getDashboard().subscribe(
       (res) => {
-        console.log(res);
-        this.currentWeight = res;
+        // console.log(res);
+        this.currentWeight = res['currentWeight'];
       },
       err => {
         console.log("error", err);
       }
     );
-
-    this.dashboardService.getGlucose().subscribe(
+    // // // curent Glucose
+    this.dashboardService.getGlucoseofPatient().subscribe(
       (res) => {
         console.log(res);
-        this.currentGlucose = res;
+        this.currentGlucose = res['currentGlucose'];
       },
       err => {
         console.log("error", err);
@@ -139,19 +150,18 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getCholesterol().subscribe(
       (res) => {
         console.log(res);
-        this.currentCholesterol = res;
+        this.currentCholesterol = res['currentCholestrol'];
       },
       err => {
         console.log("error", err);
       }
     );
-    this.dashboardService.getBlood().subscribe(
+    this.dashboardService.getBloodPressure().subscribe(
       (res) => {
-
         console.log(res, 'ressssss');
         // console.log(res.highBP);
-        this.currentHBP = res.highBP;
-        this.currentLBP = res.lowBP;
+        this.currentHBP = res['highBP'];
+        this.currentLBP = res['lowBP'];
         this.colorForBP(this.currentHBP, this.currentLBP)
         // console.log(this.currentLBP);
         // this.currentBlood = res.lowBP;
@@ -160,13 +170,38 @@ export class DashboardComponent implements OnInit {
         console.log("error", err);
       }
     );
+    // // getWeightOfLoggedInUser()
+    // this.dashboardService.getWeightOfLoggedInUser().subscribe(
+    //   (res) => {
+    //     console.log(res, 'ressssss');
+    //   },
+    //   err => {
+    //     console.log("error", err);
+    //   }
+    // );
+
+    // this.getApp.getWeightProfile().subscribe(
+    //   (res) => {
+    //     console.log(res, 'res');
+    //   }, (err) => {
+    //     console.log(err);
+    //   }
+    // )
+
+    // this.getApp.getToken().subscribe(
+    //   (res) => {
+    //     console.log(res, 'res');
+    //   }, (err) => {
+    //     console.log(err);
+    //   }
+    // )
   }
 
   colorForBP(currentHBP, currentLBP) {
     if (currentHBP < 120 && currentLBP < 80) {
       this.colorClassForBP = 'green'
       this.presentedInfo = 'fa-check-circle'
-      
+
     } else if ((120 <= currentHBP && currentHBP < 129) && currentLBP < 80) {
       this.colorClassForBP = 'yellow'
       this.presentedInfo = 'fa-exclamation-triangle'
@@ -194,34 +229,31 @@ export class DashboardComponent implements OnInit {
     } else {
       this.colorClassForBP = 'grey'
     }
-
-
   }
 
   weightToggle() {
     this.weight = !this.weight;
-    console.log("Success");
-    // console.log(this.httpClient.get(this.url));
-    this.avgMonth = [];
-    this.avgWeight = [];
+
+    let avgMonthforWeight = [];
+    let avgWeight = [];
+
+
     this.dashboardService.getweight().subscribe((result: Graph[]) => {
       console.log(result);
       result.forEach(x => {
-        console.log(x, 'xxxxxx');
 
-        this.avgMonth.push(x.avgMonth);
-        this.avgWeight.push(x.avgWeight);
-        // console.log(this.httpClient.get(this.url));
+        avgMonthforWeight.push(x.avgMonth);
+        avgWeight.push(x.avgWeight);
+
       });
-      console.log(this.avgMonth, 'moooo');
-      console.log(this.avgWeight, 'weeeee');
+
       this.weightChart = new Chart('canvas', {
         type: 'line',
         data: {
-          labels: this.avgMonth,
+          labels: avgMonthforWeight,
           datasets: [
             {
-              data: this.avgWeight,
+              data: avgWeight,
               backgroundColor: 'transparent',
               borderColor: 'rgba(224,116,0,0.8)',
               pointBackgroundColor: 'rgba(224,116,0,1)',
@@ -245,51 +277,15 @@ export class DashboardComponent implements OnInit {
                 max: 400,
                 min: 85,
                 stepSize: 70
-            }
+              }
             }],
           }
         }
       });
     });
-
-    // this.weightChart = new Chart('canvas', {
-    //   type: 'line',
-    //   data: {
-    //     labels: ["124", "4"],//this.avgMonth,
-
-    //     datasets: [
-    //       {
-    //         data: [1,2,3,4],//this.avgWeight,
-    //         borderColor: '#3cba9f',
-    //         // backgroundColor: "#0000FF",
-    //       }
-    //     ]
-    //   },
-    //   options: {
-    //     legend: {
-    //       display: false
-    //     },
-    //     scales: {
-    //       xAxes: [{
-    //         display: true
-    //       }],
-    //       yAxes: [{
-    //         display: true
-    //       }],
-    //     }
-    //   }
-    // });
-
   }
 
-  ngAfterViewChecked() {
-
-  }
-  // weightToggle() {
-  //   this.weight = !this.weight;
-  // }
   public lineChartData1: ChartDataSets[] = [
-    // {data: [65, 59, 300, 81, 56, 140], label: 'Weight'},
     { data: [122, 234, 111, 222, 111, 123], label: 'glucose' }
 
 
@@ -297,47 +293,49 @@ export class DashboardComponent implements OnInit {
 
   glucoseToggle() {
     this.glucose = !this.glucose;
-    // this.dashboardService.getGlucose().subscribe((result: Graph[]) => {
-    //   console.log(result);
-    //   result.forEach(x => {
-    //     console.log(x, 'xxxxxx');
+    this.dashboardService.getGlucoses().subscribe((result: Graph[]) => {
+      console.log(result);
+      let avgMonthForGL = []
+      let avgWeightForGL = []
+      result.forEach(x => {
+        console.log(x, 'xxxxxx');
 
-    //     this.avgMonth.push(x.avgMonth);
-    //     this.avgWeight.push(x.avgWeight);
-    //     // console.log(this.httpClient.get(this.url));
-    //   });
-    //   console.log(this.avgMonth, 'moooo');
-    //   console.log(this.avgWeight, 'weeeee');
-    //   this.weightChart = new Chart('canvas', {
-    //     type: 'line',
-    //     data: {
-    //       labels: this.avgMonth,
-    //       datasets: [
-    //         {
-    //           data: this.avgWeight,
-    //           borderColor: '#3cba9f',
-    //           backgroundColor: "#0000FF",
-    //         }
-    //       ]
-    //     },
-    //     options: {
-    //       legend: {
-    //         display: false
-    //       },
-    //       scales: {
-    //         xAxes: [{
-    //           display: true
-    //         }],
-    //         yAxes: [{
-    //           display: true
-    //         }],
-    //       }
-    //     }
-    //   });
-    // });
+        avgMonthForGL.push(x.avgMonth);
+        avgWeightForGL.push(x['avgGL']);
+      });
+      console.log(avgMonthForGL, 'moooo');
+      console.log(avgWeightForGL, 'weeeee');
+      this.glucoseChart = new Chart('canvasforGL', {
+        type: 'line',
+        data: {
+          labels: avgMonthForGL,
+          datasets: [
+            {
+              data: avgWeightForGL,
+              borderColor: 'rgba(324,16,0,0.8)',
+              pointBackgroundColor: 'rgba(264,116,0,1)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgba(214,116,0,0.8)',
+            }
+          ]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              display: true
+            }],
+            yAxes: [{
+              display: true
+            }],
+          }
+        }
+      });
+    });
   }
-
-
   public lineChartColors2: Color[] = [
 
     {
@@ -358,44 +356,61 @@ export class DashboardComponent implements OnInit {
   ];
   bloodpressureToggle() {
     this.bloodpressure = !this.bloodpressure;
-    // this.dashboardService.getBlood().subscribe((result: Graph[]) => {
-    //   console.log(result);
-    //   result.forEach(x => {
-    //     console.log(x, 'xxxxxx');
+    this.dashboardService.getBloodPressures().subscribe((result: Graph[]) => {
+      console.log(result);
+      let avgHighBP = [];
+      let avgLowBP = [];
+      let avgMonthforBP = [];
+      result.forEach(x => {
+        console.log(x, 'xxxxxx');
 
-    //     this.avgMonth.push(x.avgMonth);
-    //     this.avgWeight.push(x.avgWeight);
-    //     // console.log(this.httpClient.get(this.url));
-    //   });
-    //   console.log(this.avgMonth, 'moooo');
-    //   console.log(this.avgWeight, 'weeeee');
-    //   this.BPChart = new Chart('canvas', {
-    //     type: 'line',
-    //     data: {
-    //       labels: this.avgMonth,
-    //       datasets: [
-    //         {
-    //           data: this.avgWeight,
-    //           borderColor: '#3cba9f',
-    //           backgroundColor: "#0000FF",
-    //         }
-    //       ]
-    //     },
-    //     options: {
-    //       legend: {
-    //         display: false
-    //       },
-    //       scales: {
-    //         xAxes: [{
-    //           display: true
-    //         }],
-    //         yAxes: [{
-    //           display: true
-    //         }],
-    //       }
-    //     }
-    //   });
-    // });
+        avgLowBP.push(x['avgLowBP']);
+        avgHighBP.push(x['avgHighBP']);
+        avgMonthforBP.push(x.avgMonth);
+
+      });
+
+      this.BPChart = new Chart('canvass', {
+        type: 'line',
+        data: {
+          labels: avgMonthforBP,
+          datasets: [
+            {
+              data: avgLowBP,
+              borderColor: 'rgba(224,116,0,0.8)',
+              pointBackgroundColor: 'rgba(224,116,0,1)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgba(224,116,0,0.8)',
+              label: 'LowBP'
+            },
+            {
+              data: avgHighBP,
+              backgroundColor: 'transparent',
+              borderColor: 'rgba(114,132,4,0.8)',
+              pointBackgroundColor: 'rgba(234,146,0,1)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgba(324,516,0,0.8)',
+              label: 'HighBP'
+            }
+          ]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              display: true
+            }],
+            yAxes: [{
+              display: true
+            }],
+          }
+        }
+      });
+    });
 
   }
 
@@ -418,44 +433,45 @@ export class DashboardComponent implements OnInit {
 
   cholesterolToggle() {
     this.cholesterol = !this.cholesterol;
-    // this.dashboardService.getCholesterol().subscribe((result: Graph[]) => {
-    //   console.log(result);
-    //   result.forEach(x => {
-    //     console.log(x, 'xxxxxx');
+    this.dashboardService.getCholesterols().subscribe((result: Graph[]) => {
+      console.log(result);
+      let avgMonthForCL = []
+      let avgCLForCL = []
+      result.forEach(x => {
+        console.log(x, 'xxxxxx');
 
-    //     this.avgMonth.push(x.avgMonth);
-    //     this.avgWeight.push(x.avgWeight);
-    //     // console.log(this.httpClient.get(this.url));
-    //   });
-    //   console.log(this.avgMonth, 'moooo');
-    //   console.log(this.avgWeight, 'weeeee');
-    //   this.cholesterolChart = new Chart('canvas', {
-    //     type: 'line',
-    //     data: {
-    //       labels: this.avgMonth,
-    //       datasets: [
-    //         {
-    //           data: this.avgWeight,
-    //           borderColor: '#3cba9f',
-    //           backgroundColor: "#0000FF",
-    //         }
-    //       ]
-    //     },
-    //     options: {
-    //       legend: {
-    //         display: false
-    //       },
-    //       scales: {
-    //         xAxes: [{
-    //           display: true
-    //         }],
-    //         yAxes: [{
-    //           display: true
-    //         }],
-    //       }
-    //     }
-    //   });
-    // });
+        avgMonthForCL.push(x.avgMonth);
+        avgCLForCL.push(x['avgCL']);
+      });
+      console.log(avgMonthForCL, 'moooo');
+      console.log(avgCLForCL, 'weeeee');
+      this.cholesterolChart = new Chart('canvasForCL', {
+        type: 'line',
+        data: {
+          labels: avgMonthForCL,
+          datasets: [
+            {
+              data: avgCLForCL,
+              borderColor: '#3cba9f',
+              backgroundColor: "#0000FF",
+            }
+          ]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              display: true
+            }],
+            yAxes: [{
+              display: true
+            }],
+          }
+        }
+      });
+    });
   }
 
 
@@ -472,8 +488,11 @@ export class DashboardComponent implements OnInit {
     this.contenteditable4 = false;
     this.details = this.currentCholesterol;
     console.log(this.details);
-    let json = {
-      chLevel: this.currentCholesterol
+    let json =
+    {
+      chLevel: this.currentCholesterol,
+      clDate: new Date().toISOString(),
+      pid: 2
     }
     console.log(json);
     this.dashboardService.sendCholesterol(json);
@@ -507,7 +526,10 @@ export class DashboardComponent implements OnInit {
     this.details = this.currentGlucose;
     console.log(this.details);
     let json1 = {
+      glDate: new Date().toISOString(),
       glucoseLevel: this.currentGlucose,
+      // id: 0,
+      pid: 2
     }
     console.log(json1);
     this.dashboardService.sendGlucose(json1);
@@ -530,6 +552,7 @@ export class DashboardComponent implements OnInit {
     // this.details = this.currentBlood1;
     let dataBP = {
       // highBP : this.high,
+      pId: "2",
       highBP: this.currentHBP,
       lowBP: this.currentLBP
     }

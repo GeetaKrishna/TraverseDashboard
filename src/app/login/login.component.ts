@@ -4,9 +4,9 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../_services/authentication.service';
 
-@Component({ 
+@Component({
     templateUrl: 'login.component.html',
-    selector: 'app-login',   
+    selector: 'app-login',
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
     returnUrl: string;
     error = '';
     emailFormControl = new FormControl('', [
-        Validators.required,
-        Validators.email,
+        // Validators.required,
+        // Validators.email,
     ]);
     passwordFormControl = new FormControl('', [
         Validators.required,
@@ -48,8 +48,11 @@ export class LoginComponent implements OnInit {
     get f() { return this.loginForm.controls; }
 
     onSubmit() {
+        console.log(this.emailFormControl.value);
+        console.log(this.passwordFormControl.value);
+
         this.submitted = true;
-        this.router.navigate(['admin/landing'])
+        // this.router.navigate(['admin/landing'])
 
         // stop here if form is invalid
 
@@ -59,15 +62,18 @@ export class LoginComponent implements OnInit {
         // }
 
         // this.loading = true;
-        // this.authenticationService.login(this.f.username.value, this.f.password.value)
-        //     .pipe(first())
-        //     .subscribe(
-        //         data => {
-        //             this.router.navigate([this.returnUrl]);
-        //         },
-        //         error => {
-        //             this.error = error;
-        //             this.loading = false;
-        //         });
+        this.authenticationService.login(this.emailFormControl.value, this.passwordFormControl.value)
+            // .pipe(first())
+            .subscribe(
+                data => {
+                    // this.router.navigate([this.returnUrl]);
+                    this.router.navigate(['admin/landing'])
+                    console.log(data);
+
+                },
+                error => {
+                    this.error = error;
+                    this.loading = false;
+                });
     }
 }

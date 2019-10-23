@@ -67,9 +67,10 @@
             <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-down text-center"></span>
             </div>
           </div>
-          <div style="display: block" *ngIf="!bloodpressure">
-            <canvas height="80vh" baseChart [datasets]="lineChartData2" [labels]="lineChartLabels" [legend]="false"
-              [options]="lineChartOptions" [colors]="lineChartColors2" [chartType]="lineChartType"></canvas>
+          <div [style.display]="bloodpressure ? 'none' : 'block'">
+            <!-- <canvas height="80vh" baseChart [datasets]="lineChartData2" [labels]="lineChartLabels" [legend]="false"
+              [options]="lineChartOptions" [colors]="lineChartColors2" [chartType]="lineChartType"></canvas> -->
+            <canvas #canvass id="canvass" height="80vh">{{ BPChart }}</canvas>
           </div>
           <div class="medium text-muted">Over 1 month ago</div>
         </div>
@@ -104,10 +105,10 @@
             <div class="col-md-4 font-weight-normal data text-left">mg</div>
             <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-up"></span></div>
           </div>
-          <div style="display: block" *ngIf="!glucose">
-            <canvas height="80vh" baseChart [datasets]="lineChartData1" [labels]="lineChartLabels" [legend]="false"
-              [options]="lineChartOptions" [colors]="lineChartColors1" [chartType]="lineChartType"></canvas>
-            <!-- <canvas id="canvas" height="60vh">{{ glucoseChart }}</canvas> -->
+          <div [style.display]="glucose ? 'none' : 'block'">
+            <!-- <canvas height="80vh" baseChart [datasets]="lineChartData1" [labels]="lineChartLabels" [legend]="false"
+              [options]="lineChartOptions" [colors]="lineChartColors1" [chartType]="lineChartType"></canvas> -->
+            <canvas id="canvasforGL" height="60vh">{{ glucoseChart }}</canvas>
           </div>
           <div class="medium text-muted">Today</div>
         </div>
@@ -142,10 +143,11 @@
             <div class="col-md-4 font-weight-normal data text-left">mg</div>
             <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-up"></span></div>
           </div>
-          <div style="display: block" *ngIf="!cholesterol">
-            <canvas height="80vh" baseChart [datasets]="lineChartData3" [labels]="lineChartLabels" [legend]="false"
-              [options]="lineChartOptions" [colors]="lineChartColors3" [chartType]="lineChartType"></canvas>
-            <!-- <canvas id="canvas" height="60vh">{{ cholesterolChart }}</canvas> -->
+          <div [style.display]="cholesterol ? 'none' : 'block'">
+
+            <!-- <canvas height="80vh" baseChart [datasets]="lineChartData3" [labels]="lineChartLabels" [legend]="false"
+              [options]="lineChartOptions" [colors]="lineChartColors3" [chartType]="lineChartType"></canvas> -->
+            <canvas id="canvasForCL" height="60vh">{{ cholesterolChart }}</canvas>
           </div>
           <div class="medium text-muted">Over 1 month ago</div>
           <!-- <button (click)="toggleContenteditable()">Edit Text Content</button> -->

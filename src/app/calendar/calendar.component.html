@@ -15,7 +15,8 @@
         </div>
       </div>
       <div class="card-body col-md-12 " style="height:auto; overflow:scroll">
-        <div class="row text-center">
+        <div class="">
+
           <!-- <div class="col-md-4"> -->
           <!-- <div class="btn-group">
               <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
@@ -31,8 +32,16 @@
               </div>
             </div> -->
           <!-- </div> -->
-          <div class="col justify-content-center">
-            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+          <div class="row ">
+            <div class="col-md-8" style="">
+              <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+            </div>
+            <div class="col-md-4" style="float:right">
+              <div>
+                <i class="fa fa-circle p-2" aria-hidden="true" style="color: orange"></i> Medications
+                <i class="fa fa-circle p-2" aria-hidden="true" style="color: skyblue"></i>Appointment
+              </div>
+            </div>
           </div>
           <!-- <div class="col-md-4"> -->
           <!-- <div class="btn-group">
@@ -51,6 +60,7 @@
             </div>  *ngSwitchCase="CalendarView.Month"-->
           <!-- </div> -->
         </div>
+
         <br />
         <div>
           <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [refresh]="refresh"
@@ -97,40 +107,101 @@
         </div>
       </ng-template>
       <ng-template #tesst>
-        <div class="row">
-          <div class="col justify-content-center">
-            <h3>{{ viewDate | date }}</h3>
+        <div class="card">
+          <div class="card-header">
+            <div class="justify-content-center">
+              <h3>{{ viewDate | date }}</h3>
+            </div>
           </div>
-          <div class="col-md-12">
+          <div class="card-body">
             <mat-tab-group>
               <mat-tab label="Events">
-                <div *ngFor="let event of sampleEvent">
-                  <div class="card">
+                <div *ngFor="let event of existingEvents">
+                  <div class="hoverClass">
                     <div class="row">
-                      {{event.title}}
+                      <div class="col-md-9">
+                        <div>
+                          {{event.title}}
+                        </div>
+                        <div>
+                          {{event.end | date: "shortTime"}}
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div *ngIf="event.type != 'Medication' else Appointment">
+                          <i class="fa fa-map-marker p-2" aria-hidden="true"></i>
+                          <i class="fa fa-clock-o p-2" aria-hidden="true"></i>
+                          <i class="fa fa-times-circle-o p-2" aria-hidden="true"></i>
+                        </div>
+                        <ng-template #Appointment>
+                          <i class="fa fa-refresh p-2" aria-hidden="true"></i>
+                          <i class="fa fa-times-circle-o p-2" aria-hidden="true"></i>
+                        </ng-template>
+
+                      </div>
+
                     </div>
 
-                    <div class="row">
-
-                      {{event.end | date: "shortTime"}}
-                    </div>
                   </div>
                 </div>
               </mat-tab>
               <mat-tab label="Request Appointment">
-                <div *ngFor="let k of [6,7,8,8]">
-                  <p>{{k}}</p>
-                </div>
+                Request for an Appoinment
+                <!-- <div *ngFor="let k of [6,7,8,8]">
+                  <div class="card-body hoverClass" style="padding: 10px !important;">
+                    <div>
+                      <p>{{k}}</p>
+                    </div>
+                  </div>
+                </div> -->
               </mat-tab>
               <mat-tab label="Add Medication">
-                <div *ngFor="let k of [0,7,1,5]">
-                  <p>{{k}}</p>
-                </div>
+                Add Medication Details
+                <!-- <div *ngFor="let k of [0,7,1,5]">
+                  <div class="card-body hoverClass" style="padding: 10px !important;">
+                    <div>
+                      <p>{{k}}</p>
+                    </div>
+                  </div>
+                </div> -->
               </mat-tab>
             </mat-tab-group>
           </div>
         </div>
       </ng-template>
+
+      <ng-template #newAppointment let-close="close">
+        <div class="card" >
+          <div class="card-header">
+            Add an Appointment
+          </div>
+          <div class="card-body">
+            <div class="example-container">
+              <mat-form-field >
+                <input matInput [formControl]="AppointmentName" placeholder="Input">
+              </mat-form-field>
+
+              <mat-form-field>
+                <textarea matInput [formControl]="AppointmentDetails" placeholder="Appointment Details"></textarea>
+              </mat-form-field>
+<!-- 
+              <mat-form-field>
+                <mat-select placeholder="Select">
+                  <mat-option value="option">Option</mat-option>
+                </mat-select>
+              </mat-form-field> -->
+
+              <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
+              <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
+
+            </div>
+          </div>
+
+        </div>
+      </ng-template>
+
     </div>
   </div>
+
 </div>

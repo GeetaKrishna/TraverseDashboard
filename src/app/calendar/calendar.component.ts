@@ -1,5 +1,7 @@
 
 // this component completley depends upon https://mattlewis92.github.io/angular-calendar/
+import { FormControl } from '@angular/forms';
+
 import {
   Component,
   ChangeDetectionStrategy,
@@ -24,6 +26,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import { start } from 'repl';
 // import { start } from 'repl';
 
 const colors: any = {
@@ -49,7 +52,9 @@ const colors: any = {
 })
 export class CalendarComponent {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  @ViewChild('newAppointment', { static: true }) newAppointment: TemplateRef<any>;
   @ViewChild('tesst', { static: true }) tesst: TemplateRef<any>;
+  existingEvents: any;
   constructor(private modal: NgbModal) { }
 
   view: CalendarView = CalendarView.Month;
@@ -62,6 +67,9 @@ export class CalendarComponent {
     action: string;
     event: CalendarEvent;
   };
+
+  AppointmentDetails = new FormControl()
+  AppointmentName = new FormControl()
 
   actions: CalendarEventAction[] = [
     {
@@ -85,7 +93,7 @@ export class CalendarComponent {
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
-      title: 'Take your medicine recurrently',
+      title: 'Take your medicine daily.',
       type: "Medication",
     }, {
       start: subDays(startOfDay(new Date()), 1),
@@ -104,7 +112,7 @@ export class CalendarComponent {
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
-      title: 'Take your medicine recurrently',
+      title: 'Take your medicine daily.',
       color: colors.red,
       actions: this.actions,
       allDay: true,
@@ -117,14 +125,14 @@ export class CalendarComponent {
     {
       start: subDays(endOfMonth(new Date()), 3),
       end: addDays(endOfMonth(new Date()), 3),
-      title: 'A recurring event that spans 2 months',
+      title: 'Take medicine daily for 2 Months',
       color: colors.blue,
       allDay: true
     },
     {
       start: addHours(startOfDay(new Date()), 2),
       end: new Date(),
-      title: 'Reschedule',
+      title: 'Appointment to be Rescheduled',
       color: colors.yellow,
       actions: this.actions,
       resizable: {
@@ -148,11 +156,14 @@ export class CalendarComponent {
       } else {
         this.activeDayIsOpen = true;
       }
+
       this.viewDate = date;
     }
     if (events.length < 1) {
-
-      this.addNewEvent(date, date, 1)
+      this.addNewEvent(date)
+    }
+    else {
+      this.openEvents(events)
     }
   }
 
@@ -176,7 +187,7 @@ export class CalendarComponent {
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'sm' });
+    // this.modal.open(this.modalContent, { size: 'sm' });
   }
 
   addEvent(): void {
@@ -196,48 +207,37 @@ export class CalendarComponent {
     ];
   }
 
-  addNewEvent(startDate, endDate, recurrence): void {
-
-    console.log(this.events)
-
+  openEvents(e) {
+    this.existingEvents = e;
     this.modal.open(this.tesst)
-    if (this.events.length < 1) {
+  }
 
-    }
-    else {
-      // this.events = [
-      //   ...this.events,
-      //   {
-      //     title: 'New event',
-      //     start: startOfDay(new Date(startDate)),
-      //     end: endOfDay(new Date(endDate)),
-      //     color: colors.red,
-      //     draggable: true,
-      //     resizable: {
-      //       beforeStart: true,
-      //       afterEnd: true
-      //     }
-      //   },
-      //   // {
-      //   //   start: startOfDay(new Date(startDate)),
-      //   //   end: addDays(endOfDay(new Date(endDate)), 2),
-      //   //   title: 'Add another Event',
-      //   //   // actions: this.actions,
-      //   //   color: colors.blue,
-      //   //   allDay: true
-      //   // },
-      //   // {
-      //   //   start: startOfDay(new Date(startDate)),
-      //   //   end: addDays(endOfDay(new Date(endDate)), 2),
-      //   //   title: 'View Event',
-      //   //   // actions: this.actions,
-      //   //   color: colors.blue,
-      //   //   allDay: true
-      //   // }
-      // ];
-    }
+  addNewEvent(startDate): void {
+
+    this.modal.open(this.newAppointment).result.then((data)=>{
+      console.log(data)
+      if(data === 'Add'){
+        this.events = [
+          ...this.events,
+          {
+            title: this.AppointmentDetails.value,
+            start: startOfDay(startDate),
+            end: endOfDay(startDate),
+            color: colors.red,
+            draggable: true,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            }
+          }
+        ];
+      }
+    })
+
 
   }
+
+
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter(event => event !== eventToDelete);

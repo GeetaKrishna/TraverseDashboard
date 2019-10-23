@@ -6,6 +6,7 @@
 .fitLogo {
     height: 45px;
     width: 45px;
+    mix-blend-mode: multiply;
 }
 
 .topic {

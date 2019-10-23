@@ -1,0 +1,12 @@
+.claim-inline{
+    display: inline;
+    float: right;
+}
+
+.inner1{
+    float:left; 
+    }
+    .inner2{
+    float:left; 
+    clear: left;
+    }

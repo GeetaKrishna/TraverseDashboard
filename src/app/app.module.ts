@@ -34,6 +34,9 @@ import { HealthKnowledgeContentComponent } from './health-knowledge-content/heal
 import { MyHeartComponent } from './my-heart/my-heart.component'; // for FullCalendar!
 
 import { MatTabsModule } from '@angular/material/tabs';
+import { InsuranceComponent } from './insurance/insurance.component';
+import { DatePipe } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     HealthKnowledgeBaseComponent,
     HealthKnowledgeContentComponent,
     MyHeartComponent,
+    InsuranceComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     // }),
     // FullCalendarModule,
     NgbModalModule,
-
+    ToastrModule.forRoot(),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
@@ -91,6 +95,7 @@ import { MatTabsModule } from '@angular/material/tabs';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    DatePipe,
   ],
   entryComponents: [AppInfoComponent, HomeComponent],
   bootstrap: [AppComponent]

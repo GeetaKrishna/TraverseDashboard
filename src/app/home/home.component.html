@@ -32,16 +32,16 @@
             <mat-card class="example-card" (click)="openBottomSheet(app)"
               style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
               <div style="text-align: center;">
-                <img mat-card-md-image src="{{app.url}}" alt="Image Not Available">
+                <img mat-card-md-image src="{{app.URL}}" alt="Image Not Available">
               </div>
               <mat-card-content style="width: 200px; font-size: 14px; margin-top: 8px;">
                 <p>
-                  {{app.appName}}
+                  {{app.APPNAME}}
                 </p>
               </mat-card-content>
               <mat-card-actions>
                 <div *ngFor="let item of [1]; let index = index" style="font-size: 15px;">
-                  <rating [(ngModel)]=app.rating [readonly]="true" [float]="true">
+                  <rating [(ngModel)]=app.RATING [readonly]="true" [float]="true">
                   </rating>
                 </div>
               </mat-card-actions>
@@ -53,16 +53,16 @@
             <mat-card class="example-card" (click)="openBottomSheet(app)"
               style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
               <div style="text-align: center;">
-                <img mat-card-md-image src="{{app.url}}" alt="Image Not Available">
+                <img mat-card-md-image src="{{app.URL}}" alt="Image Not Available">
               </div>
               <mat-card-content style="width: 200px; font-size: 14px; margin-top: 8px;">
                 <p>
-                  {{app.appName}}
+                  {{app.APPNAME}}
                 </p>
               </mat-card-content>
               <mat-card-actions>
                 <div *ngFor="let item of [1]; let index = index" style="font-size: 15px;">
-                  <rating [(ngModel)]=app.rating [readonly]="true" [float]="true">
+                  <rating [(ngModel)]=app.RATING [readonly]="true" [float]="true">
                   </rating>
                 </div>
               </mat-card-actions>

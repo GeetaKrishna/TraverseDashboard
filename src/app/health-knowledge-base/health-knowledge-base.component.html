@@ -29,10 +29,10 @@
         <div class="row no-gutters">
             <div class="col-md-2 vertical" style="overflow-x:hidden; overflow-y:auto;">
                 <div class="topic">Topics</div>
-                <div *ngFor=" let app of apps">
-                    <div class="ml-2 mb-4 cursor-pointer" style="width: 120px" (click)="openAppInfo(app)">
+                <div *ngFor="let app of apps" style="width:150px; text-align: center;">
+                    <div class="ml-2 mb-4 cursor-pointer" (click)="openAppInfo(app)">
                         <img src="{{app.url}}" alt="Image not available" class="fitLogo" />
-                        <p class="appName">{{app.appName}}</p>
+                        <p class="appName" >{{app.appName}}</p>
                     </div>
                 </div>
             </div>
