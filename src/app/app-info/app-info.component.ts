@@ -47,6 +47,9 @@ export class AppInfoComponent implements OnInit {
     } else if (id == 7) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/medication')
+    } else if (id == 8) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/document')
     }
   }
 
@@ -70,6 +73,9 @@ export class AppInfoComponent implements OnInit {
       } else if (id == 7) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/medication')
+      } else if (id == 8) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/document')
       }
       this.toast.success('App installed Successfully.')
       // if (JSON.parse(localStorage.getItem("apps"))) {
@@ -93,7 +99,7 @@ export class AppInfoComponent implements OnInit {
     this.getApp.deleteApp(id).subscribe((res) => {
       console.log(res);
       this.toast.success(`App uninstalled successfully.`)
-      this._bottomSheetRef.dismiss({data:id});
+      this._bottomSheetRef.dismiss({ data: id });
     }, (err) => {
       this.toast.error(`Couldn't uninstall app, Please try later.`)
 

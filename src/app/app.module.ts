@@ -37,6 +37,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { DatePipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { DocumentComponent } from './document/document.component';
+import { ElectronicHealthComponent } from './electronic-health/electronic-health.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 @NgModule({
   declarations: [
@@ -58,6 +61,8 @@ import { ToastrModule } from 'ngx-toastr';
     HealthKnowledgeContentComponent,
     MyHeartComponent,
     InsuranceComponent,
+    DocumentComponent,
+    ElectronicHealthComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +94,8 @@ import { ToastrModule } from 'ngx-toastr';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    MatTabsModule
+    MatTabsModule,
+    NgxFileDropModule
     // FullCalendarModule
   ],
   providers: [
