@@ -20,7 +20,6 @@ import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, Mat
 import { RatingModule } from 'ngx-rating';
 import { AppInfoComponent } from './app-info/app-info.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -34,9 +33,14 @@ import { HealthKnowledgeContentComponent } from './health-knowledge-content/heal
 import { MyHeartComponent } from './my-heart/my-heart.component'; // for FullCalendar!
 
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatSidenavModule} from '@angular/material/sidenav';
+
 import { InsuranceComponent } from './insurance/insurance.component';
 import { DatePipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { HealthConnectComponent } from './health-connect/health-connect.component';
+import { AvatarModule } from 'ngx-avatar';
+import { HealthConnectChatComponent } from './health-connect-chat/health-connect-chat.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +62,8 @@ import { ToastrModule } from 'ngx-toastr';
     HealthKnowledgeContentComponent,
     MyHeartComponent,
     InsuranceComponent,
+    HealthConnectComponent,
+    HealthConnectChatComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +84,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatListModule,
     MatMenuModule,
     MatIconModule,
+    AvatarModule,
     // CalendarModule.forRoot({
     //   provide: DateAdapter,
     //   useFactory: adapterFactory
@@ -89,7 +96,8 @@ import { ToastrModule } from 'ngx-toastr';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    MatTabsModule
+    MatTabsModule,
+    MatSidenavModule
     // FullCalendarModule
   ],
   providers: [

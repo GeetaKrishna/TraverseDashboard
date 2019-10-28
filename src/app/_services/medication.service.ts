@@ -11,7 +11,7 @@ export class MedicationService {
   
   getMedtcations() {
     // return this.http.get(`${environment.apiUrl}/api/medications/getmedpres`);
-    return this.http.get(`http://localhost:3000/medication/`);
+    return this.http.get(`${environment.localURL}/medication/`);
   }
   
   addMedication(jsonObject) {

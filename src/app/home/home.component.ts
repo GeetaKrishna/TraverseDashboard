@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
       "URL": "assets/icons-home/motion09.jpeg",
       "userTable": [],
       "RATING": 3,
-      "ROUTESCREEN": 'admin/**',
+      "ROUTESCREEN": 'admin/healthconnect',
       "installed": false
     },
     {

@@ -15,6 +15,8 @@ import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-kno
 import { HealthKnowledgeContentComponent } from './health-knowledge-content/health-knowledge-content.component';
 import { MyHeartComponent } from './my-heart/my-heart.component';
 import { InsuranceComponent } from './insurance/insurance.component';
+import { HealthConnectComponent } from './health-connect/health-connect.component';
+import { HealthConnectChatComponent } from './health-connect-chat/health-connect-chat.component';
 
 const routes: Routes = [
 
@@ -31,10 +33,18 @@ const routes: Routes = [
       { path: 'medication', component: MedicationsComponent },
       { path: 'insurance', component: InsuranceComponent },
       {
+        path: 'healthconnect', component: HealthConnectComponent,
+        children: [
+          {
+            path: 'healthconnectchat', component: HealthConnectChatComponent
+          }
+        ]
+      },
+      {
         path: 'healthKnowledgeBase', component: HealthKnowledgeBaseComponent,
         children: [
           {
-           path:'healthKnowledgeContent', component: HealthKnowledgeContentComponent
+            path: 'healthKnowledgeContent', component: HealthKnowledgeContentComponent
           }
         ]
       },

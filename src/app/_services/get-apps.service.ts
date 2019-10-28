@@ -29,13 +29,13 @@ export class GetAppsService {
     installAppData.PatientID = 2;
     this.messageSource.next(installAppData)
     console.log(installAppData)
-    return this.http.post(`http://localhost:3000/landing`, installAppData)
+    return this.http.post(`${environment.localURL}/landing`, installAppData)
   }
   
   deleteApp(appId) {
     console.log(appId);
     let body = { "id": appId }
-    return this.http.post(`http://localhost:3000/landing/uninstallApp`, body)
+    return this.http.post(`${environment.localURL}/landing/uninstallApp`, body)
   }
 
   // createWeightProfile(){
@@ -51,7 +51,7 @@ export class GetAppsService {
   }
 
   getAppStore() {
-    return this.http.get(`http://localhost:3000/landing/2`)
+    return this.http.get(`${environment.localURL}/landing/2`)
   }
 
 
