@@ -40,6 +40,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { DocumentComponent } from './document/document.component';
 import { ElectronicHealthComponent } from './electronic-health/electronic-health.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
+import { FamilyComponent } from './family/family.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     InsuranceComponent,
     DocumentComponent,
     ElectronicHealthComponent,
+    FamilyComponent,
   ],
   imports: [
     BrowserModule,

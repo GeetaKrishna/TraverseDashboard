@@ -17,6 +17,7 @@ import { MyHeartComponent } from './my-heart/my-heart.component';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { DocumentComponent } from './document/document.component';
 import { ElectronicHealthComponent } from './electronic-health/electronic-health.component';
+import { FamilyComponent } from './family/family.component';
 
 const routes: Routes = [
 
@@ -34,6 +35,7 @@ const routes: Routes = [
       { path: 'insurance', component: InsuranceComponent },
       { path: 'document', component: DocumentComponent },
       { path: 'electronicHealth', component: ElectronicHealthComponent },
+      { path: 'family', component: FamilyComponent },
       {
         path: 'healthKnowledgeBase', component: HealthKnowledgeBaseComponent,
         children: [

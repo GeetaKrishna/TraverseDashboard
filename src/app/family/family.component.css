@@ -56,3 +56,12 @@ td {
     text-align: center;
 }
 
+.verLine{
+    border-bottom:solid 10px rgb(87, 85, 85);
+    width: 100%;
+}
+
+.alert-orange{
+    background-color: rgb(240, 183, 109);
+    color: rgb(83, 60, 29);
+}
