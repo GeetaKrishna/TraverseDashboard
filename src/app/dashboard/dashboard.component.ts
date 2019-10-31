@@ -260,20 +260,14 @@ export class DashboardComponent implements OnInit {
 
   weightToggle() {
     this.weight = !this.weight;
-
     let avgMonthforWeight = [];
     let avgWeight = [];
-
-
     this.dashboardService.getweight().subscribe((result: Graph[]) => {
       console.log(result);
       result.forEach(x => {
-
         avgMonthforWeight.push(x.avgMonth);
         avgWeight.push(x.avgWeight);
-
       });
-
       this.weightChart = new Chart('canvas', {
         type: 'line',
         data: {
@@ -314,8 +308,6 @@ export class DashboardComponent implements OnInit {
 
   public lineChartData1: ChartDataSets[] = [
     { data: [122, 234, 111, 222, 111, 123], label: 'glucose' }
-
-
   ];
 
   glucoseToggle() {
@@ -326,7 +318,6 @@ export class DashboardComponent implements OnInit {
       let avgWeightForGL = []
       result.forEach(x => {
         console.log(x, 'xxxxxx');
-
         avgMonthForGL.push(x.avgMonth);
         avgWeightForGL.push(x['avgGL']);
       });
@@ -364,7 +355,6 @@ export class DashboardComponent implements OnInit {
     });
   }
   public lineChartColors2: Color[] = [
-
     {
       backgroundColor: 'transparent',
       borderColor: 'rgba(224,116,0,0.8)',
@@ -378,8 +368,6 @@ export class DashboardComponent implements OnInit {
   public lineChartData2: ChartDataSets[] = [
     { data: [65, 59, 300, 81, 56, 140], label: 'high' },
     { data: [122, 234, 111, 222, 111, 123], label: 'low' }
-
-
   ];
   bloodpressureToggle() {
     this.bloodpressure = !this.bloodpressure;
@@ -390,11 +378,9 @@ export class DashboardComponent implements OnInit {
       let avgMonthforBP = [];
       result.forEach(x => {
         console.log(x, 'xxxxxx');
-
         avgLowBP.push(x['avgLowBP']);
         avgHighBP.push(x['avgHighBP']);
         avgMonthforBP.push(x.avgMonth);
-
       });
 
       this.BPChart = new Chart('canvass', {

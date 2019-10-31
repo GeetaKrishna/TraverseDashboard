@@ -1,0 +1,69 @@
+.card-body {
+    padding: 0;
+    margin: 0;
+    /* background-color: gray; */
+    height: 100%;
+}
+
+.example-card {
+    width: 350px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    height: auto;
+    margin: 20px 45px;
+}
+
+.cardFoot {
+    background-color: rgb(206, 206, 206);
+    width: 350px;
+    display: flex;
+}
+
+.cardHead {
+    font-size: 22px;
+}
+
+.cardHeader {
+    display: flex;
+    width: 100%;
+    padding: 6px;
+    color: white;
+}
+
+p {
+    margin-bottom: 0 !important;
+}
+
+row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.cardHeaderIcon {
+    margin-left: auto;
+    order: 2;
+    font-size: 22px;
+}
+
+.measurement {
+    font-size: 54px;
+    color: rgb(101, 180, 98);
+    font-weight: bolder;
+}
+
+.unit {
+    font-size: 54px;
+    color: rgb(101, 180, 98);
+    font-weight: bolder;
+}
+
+#canvasss {
+    width: 100%;
+    height: 100%;
+}
+
+.timeText {
+    padding: 2px;
+    margin-left: 6px;
+    color: grey;
+}

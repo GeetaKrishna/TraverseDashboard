@@ -46,6 +46,8 @@ import { ElectronicHealthComponent } from './electronic-health/electronic-health
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { FilterPipe } from './filter.pipe';
 import { MedicalConditionComponent } from './medical-condition/medical-condition.component';
+import { FamilyComponent } from './family/family.component';
+import { FourCComponent } from './four-c/four-c.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { MedicalConditionComponent } from './medical-condition/medical-condition
     ElectronicHealthComponent,
     FilterPipe,
     MedicalConditionComponent,
+    FamilyComponent,
+    FourCComponent,
   ],
   imports: [
     BrowserModule,

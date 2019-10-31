@@ -1,0 +1,81 @@
+<div class="card mt-5">
+    <div class="card-header">
+        <h5>Family View</h5>
+    </div>
+    <div class="card-body">
+        <table class="table table-borderless">
+            <div class="row">
+                <div class="col-sm-2">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr *ngFor="let p of persons">
+                                <td>
+                                    <a href="#">
+                                        <img src="{{p.url}}" alt="Image not available"
+                                            style="height: 100px; width: 100px;">
+                                        <br />{{p.name}}
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-10">
+                    <div>
+                        <p>Health Summary for Ethan</p>
+                    </div>
+                    <div class="verLine"></div>
+
+                    <div class="mt-2">
+                        <div class="alert alert-primary text-center" role="alert">
+                            <i class="fa fa-2x fa-database" style="float: left;"></i>
+                            <span class="mr-5 ">
+                                Age: 14
+                            </span>
+                            <span class="mr-5">
+                                Height: 5'11
+                            </span>
+                            <span>
+                                Weight: 135 lbs
+                            </span>
+                        </div>
+                        <div class="alert alert-success text-center" role="alert">
+                            <i class="fa fa-2x fa-calendar " style="float: left;"></i>
+                            <span class="mr-5 ">
+                                Appointment with Dr.Stout on 06/23/19
+                            </span>
+                            <span style="float: right;">
+                                <i class="fa fa-map-marker mr-2"></i>
+                            </span>
+                            <span style="float: right;">
+                                <i class="fa fa-clock-o mr-2"></i>
+                            </span>
+                        </div>
+                        <div class="alert alert-orange text-center" role="alert">
+                            <i class="fa fa-2x fa-file" style="float: left;"></i>
+                            <span class="mr-5 ">
+                                Medical Record last updated on 02/03/19
+                            </span>
+                            <span style="float: right;">
+                                <i class="fa fa-cloud-download mr-2"></i>
+                            </span>
+                            <span style="float: right;">
+                                <i class="fa fa-eye mr-2"></i>
+                            </span>
+
+                        </div>
+                        <div class="alert alert-warning text-center" role="alert">
+                            <i class="fa fa-2x fa-plus" style="float: left;"></i>
+                            <span class="mr-5 ">
+                                Rx for Keflex on 01/12/19
+                            </span>
+                            <span style="float: right;">
+                                <i class="fa fa-question-circle mr-2"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </table>
+    </div>
+</div>
