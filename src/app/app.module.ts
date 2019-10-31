@@ -41,6 +41,7 @@ import { DocumentComponent } from './document/document.component';
 import { ElectronicHealthComponent } from './electronic-health/electronic-health.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { FamilyComponent } from './family/family.component';
+import { FourCComponent } from './four-c/four-c.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { FamilyComponent } from './family/family.component';
     DocumentComponent,
     ElectronicHealthComponent,
     FamilyComponent,
+    FourCComponent,
   ],
   imports: [
     BrowserModule,
