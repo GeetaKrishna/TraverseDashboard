@@ -1,25 +1,36 @@
     <div>
-        <div class="col" style="background-color: yellow; ">
+        <!-- <div class="col" style="background-color: yellow; ">
             <span> Adding Random Content Over here </span>
             <span style="float: right">
                 <i class="fa fa-map-marker p-1" aria-hidden="true"></i>
                 <i class="fa fa-clock-o p-1" aria-hidden="true"></i>
                 <i class="fa fa-times-circle-o p-1" aria-hidden="true"></i>
             </span>
-        </div>
+        </div> -->
         <div class="col" *ngFor='let chat of chat1; let i = index'>
-            <div class="row" style="float: right; clear: both; background-color: lightgray; border-radius: 15px; ">
-                <ngx-avatar class="p-1" name="Geeta Krishna" size="30"></ngx-avatar>
-                <p class="p-1">
-                    {{chat}}
-                </p>
-                <!-- {{new Date()}} -->
+            <div class="row" style="float: right; clear: both; ">
+                <!-- <ngx-avatar class="p-1" name="Geeta Krishna" size="25"></ngx-avatar> -->
+                <div>
+                    <p class="p-1"
+                        style="background-color: lightgray; border-radius: 7px; margin-bottom: 0 !important; ">
+                        {{chat['message']}}
+                    </p>
+                    <!-- {{new Date()}} -->
+                    <sub>{{chat['time']}}</sub>
+                </div>
+
             </div>
-            <div class="row" style="float: left; clear: both; background-color: lightblue; border-radius: 15px;">
-                <ngx-avatar class="p-1" name="Krishna" size="30"></ngx-avatar>
-                <p class="p-1" *ngIf="chat2[i] != undefined">
-                    {{chat2[i]}}
-                </p>
+
+            <div class="row" style="float: left; clear: both;" *ngIf="chat2[i] != null">
+                <ngx-avatar class="p-1" name="Krishna" size="25"></ngx-avatar>
+                <div>
+                    <p class="p-1"
+                        style="background-color: lightblue; border-radius: 7px;  margin-bottom: 0 !important;">
+                        {{chat2[i]['message']}}
+                    </p>
+                    <sub>{{chat2[i]['time']}}</sub>
+                </div>
+
             </div>
         </div>
     </div>

@@ -123,9 +123,10 @@ export class DashboardService {
   }
 
   postWeight(jsonObject) {
-    this.http.post(this.url + '/Weight/PatientWeight', jsonObject).toPromise().then((data) => {
-      console.log("returned object" + JSON.stringify(data));
-    })
+    return this.http.post(this.url + '/Weight/PatientWeight', jsonObject)
+    // this.http.post(this.url + '/Weight/PatientWeight', jsonObject).toPromise().then((data) => {
+    //   console.log("returned object" + JSON.stringify(data));
+    // })
   }
 
   sendCholesterol(jsonObject) {

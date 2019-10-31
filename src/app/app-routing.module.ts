@@ -17,6 +17,9 @@ import { MyHeartComponent } from './my-heart/my-heart.component';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { HealthConnectComponent } from './health-connect/health-connect.component';
 import { HealthConnectChatComponent } from './health-connect-chat/health-connect-chat.component';
+import { DocumentComponent } from './document/document.component';
+import { ElectronicHealthComponent } from './electronic-health/electronic-health.component';
+import { MedicalConditionComponent } from './medical-condition/medical-condition.component';
 
 const routes: Routes = [
 
@@ -32,6 +35,9 @@ const routes: Routes = [
       { path: 'myHeart', component: MyHeartComponent },
       { path: 'medication', component: MedicationsComponent },
       { path: 'insurance', component: InsuranceComponent },
+      { path: 'document', component: DocumentComponent },
+      { path: 'electronicHealth', component: ElectronicHealthComponent },
+      { path: 'medicalCondition', component: MedicalConditionComponent },
       {
         path: 'healthconnect', component: HealthConnectComponent,
         children: [

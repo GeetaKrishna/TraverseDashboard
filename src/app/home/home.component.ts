@@ -96,13 +96,13 @@ export class HomeComponent implements OnInit {
     },
     {
       "APPID": 8,
-      "APPDETAILS": "SAYS ABOUT THE HEALTHprivate _bottomSheet: MatBottomSheet DOCUMENT DETAILS",
+      "APPDETAILS": "SAYS ABOUT THE HEALTH DOCUMENT DETAILS",
       "VERSION": "1.0v",
       "APPNAME": "MY HEALTH DOCUMENTS",
-      "URL": "assets/icons-home/motion08.png",
+      "URL": "assets/healthDocs/doclogo.png",
       "userTable": [],
       "RATING": 5,
-      "ROUTESCREEN": 'admin/**',
+      "ROUTESCREEN": 'admin/document',
       "installed": false
     },
     {

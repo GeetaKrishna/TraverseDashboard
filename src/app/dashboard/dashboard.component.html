@@ -31,7 +31,7 @@
             <canvas id="canvas" height="80vh">{{ weightChart }}</canvas>
           </div>
 
-          <div class="medium text-muted mt-2">As of 2 days ago</div>
+          <div class="medium text-muted mt-2">As of {{WeightDate['days']}} {{WeightDate['timer']}} ago</div>
         </div>
         <div class="card-footer">
           <div class="float-right">
@@ -72,7 +72,7 @@
               [options]="lineChartOptions" [colors]="lineChartColors2" [chartType]="lineChartType"></canvas> -->
             <canvas #canvass id="canvass" height="80vh">{{ BPChart }}</canvas>
           </div>
-          <div class="medium text-muted">Over 1 month ago</div>
+          <div class="medium text-muted">As of {{bpdate['days']}} {{bpdate['timer']}} ago</div>
         </div>
         <div class="card-footer">
           <div class="float-right">
@@ -110,7 +110,7 @@
               [options]="lineChartOptions" [colors]="lineChartColors1" [chartType]="lineChartType"></canvas> -->
             <canvas id="canvasforGL" height="60vh">{{ glucoseChart }}</canvas>
           </div>
-          <div class="medium text-muted">Today</div>
+          <div class="medium text-muted">As of {{glucoseDate['days']}} {{glucoseDate['timer']}} ago</div>
         </div>
         <div class="card-footer">
           <div class="float-right">
@@ -149,7 +149,7 @@
               [options]="lineChartOptions" [colors]="lineChartColors3" [chartType]="lineChartType"></canvas> -->
             <canvas id="canvasForCL" height="60vh">{{ cholesterolChart }}</canvas>
           </div>
-          <div class="medium text-muted">Over 1 month ago</div>
+          <div class="medium text-muted">As of {{cholesterolDate['days']}} {{cholesterolDate['timer']}} ago</div>
           <!-- <button (click)="toggleContenteditable()">Edit Text Content</button> -->
         </div>
         <div class="card-footer">

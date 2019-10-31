@@ -34,6 +34,7 @@
     "font-awesome": "^4.7.0",
     "ng2-charts": "^2.3.0",
     "ngx-avatar": "^3.7.0",
+    "ngx-file-drop": "^8.0.8",
     "ngx-rating": "0.0.9",
     "ngx-toastr": "^11.1.2",
     "rxjs": "^6.4.0",

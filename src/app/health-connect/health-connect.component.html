@@ -1,4 +1,4 @@
-<div class="card mt-5">
+<div class="card mt-5" style=" height: 100%;">
     <div class="card-header ch-1">
         <div class="row ">
             <div class="col justify-content-start">
@@ -18,13 +18,20 @@
                 <div style="margin-right: 5px;">
                     <div class="inner-addon left-addon">
                         <i class="fa fa-search"></i>
-                        <input type="text" class="form-control" />
+                        <input type="text" [(ngModel)]="searchText" class="form-control" />
                     </div>
+<!-- 
+                    <ul>
+                        <li *ngFor="let c of characters | filter : searchText">
+                          {{c.name}}
+                        </li>
+                      </ul> -->
+
                     <mat-tab-group>
                         <mat-tab label="Contacts">
                             <mat-list class="test">
                                 <mat-list-item
-                                    *ngFor="let message of [{ from: ' test test test test test test test test', image: '../assets/icons-home/motion03.png', name: 'Geeta Krishna'}, {name: 'Geeta Krishna Adhikari', from: 'Hail your villain', image: '../assets/icons-home/motion03.jpeg'}]; let i = index">
+                                    *ngFor="let message of contactsList | filter: searchText; let i = index">
                                     <ngx-avatar src="{{message.image}}" name="{{message.name}}" (click)="test('das')"
                                         size="30"></ngx-avatar>
                                     <h3 matLine (click)="test('fasf')"> {{message.from}} </h3>

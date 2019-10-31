@@ -1,0 +1,143 @@
+<div class="animated fadeIn mt-5">
+    <!--Recommended apps Begin-->
+    <div class="col-md-12">
+        <div class="card h-100">
+            <div class="card-header ch-0">
+                <div class="row">
+                    <div class="col">
+                        Medication
+                    </div>
+                    <div class="col">
+                        <img src="assets/medicalCondition/medicationLogo.png" height="45px" width="45px"
+                            style="float: right" alt="Image Not Available">
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-3 m-4" *ngFor="let app of apps; let i = index">
+                    <div class="card h-100" [style.background-color]="app.color">
+                        <div class="card-header font-weight-bold ch-1"
+                            style="background-color:whitesmoke; display:flex;">
+                            <div style="width: 100%">
+                                {{app.medication}}
+                            </div>
+                        </div>
+                        <div *ngIf="i != 0; else addMedication" class="card-body">
+                            <img mat-card-md-image [src]=app.medicationImage height="125px" width="200px"
+                                alt="Image Not Available">
+                            <div class="row mt-4">
+                                <div class="col-md-12">
+                                    <i class="fas fa-spider-web"></i> <a href="http://www.google.com"
+                                        style="font-size: 12px"><i class="fa fa-external-link" aria-hidden="true"></i>
+                                        Learn
+                                        More </a>
+                                </div>
+                                <div class="col-md-12 ">
+                                    {{app.restrictions}}
+                                </div>
+                                <div class="col-md-12 ">
+                                    {{app.diagnoised}}
+                                </div>
+                                <div class="col-md-12 ">
+                                    {{app.severity}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="i != 0; ">
+                            <div class="col">
+                                <div style="float: right;">
+                                    <span>
+                                        <i class="fa fa-calendar mr-2" aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-plus mr-2" aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-trash mr-2" (click)="removeMedication(app.id, i)"
+                                            aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-template #addMedication>
+                            <div class="row justify-content-center align-items-center"
+                                style="color: gray; height: 100%;">
+                                <div class=" align-items-center" *ngIf="addMedicationToggle">
+                                    <div (click)="toggleMedication()">
+                                        <i class="fa fa-plus-circle" aria-hidden="true" style=" font-size: 50px; "></i>
+                                    </div>
+                                </div>
+                                <div *ngIf="!addMedicationToggle" style="margin-left: 40px;   margin-bottom: 50px;">
+                                    <div>
+                                        <mat-form-field style="color: black;">
+                                            <input matInput placeholder="Condition Name" [formControl]="conditionName"
+                                                required>
+                                        </mat-form-field>
+                                        <mat-form-field style="color: black;">
+                                            <input matInput placeholder="Diagnosed" [formControl]="Diagnosed"
+                                                required>
+                                        </mat-form-field>
+                                        <mat-form-field style="color: black;">
+                                            <input matInput placeholder="Severity" [formControl]="severity"
+                                                required>
+                                        </mat-form-field>
+                                        <mat-form-field style="color: black;">
+                                            <input matInput placeholder="Triggers" [formControl]="triggers"
+                                                required>
+                                        </mat-form-field>
+                                        <!-- <mat-form-field style="color: black;">
+                                            <input matInput placeholder="Before/After Meal" [formControl]="medMeal"
+                                                required>
+                                        </mat-form-field> -->
+                                        <!-- <input type="file" [formControl]='medImage' (change)="imageInput($event)"> -->
+                                        <button (click)="fileInput.click()">
+                                            <span>Upload an image</span>
+                                            <input #fileInput type="file" (change)="imageInput($event)"
+                                                style="display:none;" />
+                                        </button>
+                                        <!-- <mat-form-field>
+                                            <mat-label>Schedule / day</mat-label>
+                                            <mat-select [formControl]="medIntake">
+                                                <mat-option value="once">Once</mat-option>
+                                                <mat-option value="twice">Twice</mat-option>
+                                                <mat-option value="thrice">Thrice</mat-option>
+                                                <mat-option value="four">Four</mat-option>
+                                                <mat-option value="five">Five</mat-option>
+                                            </mat-select>
+                                        </mat-form-field> -->
+                                        <!-- <mat-form-field>
+                                            <input matInput type="file" >
+                                        </mat-form-field> -->
+                                        <div style="text-align: center; width: 190px;">
+                                            <!-- <span  class="cursor-pointer">
+                                                <i class="fa fa-check mr-2" aria-hidden="true" style="font-size: 22px; color: green;" >
+                                                </i>
+                                            </span>
+                                            <span  class="cursor-pointer">
+                                                <i class="fa fa-times-circle-o mr-2" aria-hidden="true" style="font-size: 22px; color: red;"></i>
+                                            </span> -->
+                                            <button mat-icon-button color="primary" (click)="cancelAdding()"
+                                                aria-label="Example icon-button with a heart icon">
+                                                <mat-icon>highlight_off</mat-icon>
+                                            </button>
+                                            <button mat-icon-button color="primary" (click)="successAdding()"
+                                                [disabled]="triggers.errors || severity.errors || Diagnosed.errors || conditionName.errors"
+                                                aria-label="Example icon-button with a heart icon">
+                                                <mat-icon>check_circle_outline
+                                                </mat-icon>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

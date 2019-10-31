@@ -41,6 +41,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { HealthConnectComponent } from './health-connect/health-connect.component';
 import { AvatarModule } from 'ngx-avatar';
 import { HealthConnectChatComponent } from './health-connect-chat/health-connect-chat.component';
+import { DocumentComponent } from './document/document.component';
+import { ElectronicHealthComponent } from './electronic-health/electronic-health.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { FilterPipe } from './filter.pipe';
+import { MedicalConditionComponent } from './medical-condition/medical-condition.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +69,10 @@ import { HealthConnectChatComponent } from './health-connect-chat/health-connect
     InsuranceComponent,
     HealthConnectComponent,
     HealthConnectChatComponent,
+    DocumentComponent,
+    ElectronicHealthComponent,
+    FilterPipe,
+    MedicalConditionComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,7 +106,8 @@ import { HealthConnectChatComponent } from './health-connect-chat/health-connect
       useFactory: adapterFactory
     }),
     MatTabsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    NgxFileDropModule
     // FullCalendarModule
   ],
   providers: [

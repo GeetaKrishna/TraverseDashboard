@@ -8,6 +8,7 @@ import { Graph } from '../graph';
 import * as Chart from 'chart.js';
 import { GetAppsService } from '../_services/get-apps.service';
 import { DatePipe } from '@angular/common';
+import { timer } from 'rxjs';
 // import { runInThisContext } from 'vm';
 
 @Component({
@@ -118,6 +119,23 @@ export class DashboardComponent implements OnInit {
   public lineChartData: ChartDataSets[] = [
     { data: [65, 59, 300, 81, 56, 140], label: 'Weight' }
   ];
+  WeightDate = {
+    days: "",
+    timer: ""
+  };
+  glucoseDate = {
+    days: "",
+    timer: ""
+  };
+  cholesterolDate = {
+    days: "",
+    timer: ""
+  };
+  bpdate = {
+    days: "",
+    timer: ""
+  };
+  timer: string;
 
   constructor(private dashboardService: DashboardService, private getApp: GetAppsService, private datePipe: DatePipe) {
   }
@@ -130,7 +148,10 @@ export class DashboardComponent implements OnInit {
     // current weight
     this.dashboardService.getDashboard().subscribe(
       (res) => {
-        // console.log(res);
+        console.log(res);
+
+        this.WeightDate = this.getDifferenceInDays(res['TimeStamp'])
+        console.log(this.WeightDate)
         this.currentWeight = res['currentWeight'];
       },
       err => {
@@ -141,6 +162,8 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getGlucoseofPatient().subscribe(
       (res) => {
         console.log(res);
+        this.glucoseDate = this.getDifferenceInDays(res['TimeStamp'])
+
         this.currentGlucose = res['currentGlucose'];
       },
       err => {
@@ -150,6 +173,8 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getCholesterol().subscribe(
       (res) => {
         console.log(res);
+        this.cholesterolDate = this.getDifferenceInDays(res['TimeStamp'])
+
         this.currentCholesterol = res['currentCholestrol'];
       },
       err => {
@@ -160,8 +185,10 @@ export class DashboardComponent implements OnInit {
       (res) => {
         console.log(res, 'ressssss');
         // console.log(res.highBP);
-        this.currentHBP = res['highBP'];
-        this.currentLBP = res['lowBP'];
+        this.bpdate = this.getDifferenceInDays(res['TimeStamp'])
+
+        this.currentHBP = res['highBp'];
+        this.currentLBP = res['lowBp'];
         this.colorForBP(this.currentHBP, this.currentLBP)
         // console.log(this.currentLBP);
         // this.currentBlood = res.lowBP;
@@ -511,7 +538,12 @@ export class DashboardComponent implements OnInit {
     let json = {
       weight: this.currentWeight
     }
-    this.dashboardService.postWeight(json);
+    this.dashboardService.postWeight(json).subscribe((data) => {
+      console.log(data, 'dasssssssssssssh');
+      this.WeightDate =  this.getDifferenceInDays(data['weightDate'])
+    }, (err) => {
+
+    })
   }
 
   toggleContenteditableGlucose(): void {
@@ -569,13 +601,33 @@ export class DashboardComponent implements OnInit {
   // this.dashboardService.postCholesterol.
   // this.currentCholesterol.value = ;
 
+  getDifferenceInDays(date) {
+    let difference = new Date().getTime() - new Date(date).getTime();
+    let days;
 
+    if (difference / 1000 < 60) {
+      days = difference / 1000
+      console.log(days.toFixed())
+      return { days: days.toFixed(), timer: "seconds" };
+    }
+    else if (difference / 1000 >= 60 && difference / 1000 < 3600) {
+      days = difference / (1000 * 60)
+      console.log(days.toFixed())
 
+      return { days: days.toFixed(), timer: "minutes" };
+    }
+    else if (difference / 1000 >= 3600 && difference / 1000 < 3600 * 24) {
+      days = difference / (1000 * 3600)
+      console.log(days.toFixed())
 
+      return { days: days.toFixed(), timer: "hours" };
+    }
+    else if (difference / 1000 >= 3600 * 24) {
+      days = difference / (1000 * 3600 * 24)
+      console.log(days.toFixed())
+      return { days: days.toFixed(), timer: "days" };
+    }
 
-
-
-
-
+  }
 
 }
