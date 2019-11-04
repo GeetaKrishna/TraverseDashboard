@@ -11,8 +11,8 @@
       <div style="display: flex;">
           <mat-card class="example-card m-2">
               <div class="dragDrop">
-                  <ngx-file-drop [dropZoneClassName]="dropZone" dropZoneLabel="Drop files here"
-                      (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                  <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                      (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
                       <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
                           Drag and Drop Files here.
                           <!-- <button type="button" class="btn" (click)="openFileSelector()">Browse</button> -->
@@ -99,12 +99,9 @@
                       </mat-card-actions>
                   </mat-card>
               </div>
-
-
           </div>
           <div *ngIf="state == 'Personal'">
               <div style="display: flex;">
-
                   <mat-card class="example-card m-2" *ngFor="let file of availableDocsForPersonal"
                       style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                       <div class="CardImage">
@@ -125,7 +122,6 @@
                       </mat-card-actions>
                   </mat-card>
               </div>
-
           </div>
       </div>
   </div>
