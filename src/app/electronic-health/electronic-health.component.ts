@@ -10,7 +10,6 @@ export class ElectronicHealthComponent implements OnInit {
   availableDocs = [];
 
   constructor() { }
-
   ngOnInit() {
   }
   public files: NgxFileDropEntry[] = [];

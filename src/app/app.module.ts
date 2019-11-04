@@ -48,6 +48,8 @@ import { FilterPipe } from './filter.pipe';
 import { MedicalConditionComponent } from './medical-condition/medical-condition.component';
 import { FamilyComponent } from './family/family.component';
 import { FourCComponent } from './four-c/four-c.component';
+import { DocumentTypeComponent } from './document-type/document-type.component';
+import { ElectronicHealthTypeComponent } from './electronic-health-type/electronic-health-type.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,8 @@ import { FourCComponent } from './four-c/four-c.component';
     MedicalConditionComponent,
     FamilyComponent,
     FourCComponent,
+    DocumentTypeComponent,
+    ElectronicHealthTypeComponent,
   ],
   imports: [
     BrowserModule,

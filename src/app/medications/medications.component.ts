@@ -79,6 +79,7 @@ export class MedicationsComponent implements OnInit {
   ngOnInit() {
     this.medServ.getMedtcations().subscribe(
       (res: []) => {
+        console.log(res)
         let medicinesAvailable = []
         // console.log(res);
         // medicinesAvailable.concat(res)

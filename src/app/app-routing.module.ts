@@ -22,6 +22,8 @@ import { ElectronicHealthComponent } from './electronic-health/electronic-health
 import { MedicalConditionComponent } from './medical-condition/medical-condition.component';
 import { FamilyComponent } from './family/family.component';
 import { FourCComponent } from './four-c/four-c.component';
+import { DocumentTypeComponent } from './document-type/document-type.component';
+import { ElectronicHealthTypeComponent } from './electronic-health-type/electronic-health-type.component';
 
 const routes: Routes = [
 
@@ -37,8 +39,18 @@ const routes: Routes = [
       { path: 'myHeart', component: MyHeartComponent },
       { path: 'medication', component: MedicationsComponent },
       { path: 'insurance', component: InsuranceComponent },
-      { path: 'document', component: DocumentComponent },
-      { path: 'electronicHealth', component: ElectronicHealthComponent },
+      {
+        path: 'document', component: DocumentComponent,
+        children: [
+          { path: ':id', component: DocumentTypeComponent }
+        ]
+      },
+      {
+        path: 'electronicHealth', component: ElectronicHealthComponent,
+        children: [
+          { path: ':id', component: ElectronicHealthTypeComponent }
+        ]
+      },
       { path: 'medicalCondition', component: MedicalConditionComponent },
       {
         path: 'healthconnect', component: HealthConnectComponent,
