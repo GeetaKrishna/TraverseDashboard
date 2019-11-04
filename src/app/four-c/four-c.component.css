@@ -67,3 +67,27 @@ row {
     margin-left: 6px;
     color: grey;
 }
+
+.green {
+    color: green;
+}
+
+.yellow {
+    color: rgb(255, 255, 0);
+}
+
+.darkYellow {
+    color: rgb(255, 174, 0);
+}
+
+.red {
+    color: rgb(173, 24, 24)
+}
+
+.darkRed {
+    color: rgb(255, 0, 0)
+}
+
+.grey {
+    color: lightgray
+}

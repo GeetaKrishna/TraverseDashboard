@@ -37,7 +37,7 @@
                         <div [style.display]="weight ? 'none' : 'block'">
                             <canvas id="canvasss" height="102vh">{{ weightCharts }}</canvas>
                         </div>
-                        <p class="timeText">As of 2 Months Ago</p>
+                        <p class="timeText">As of {{WeightDate['days']}} {{WeightDate['timer']}} ago</p>
                         <div style="border-bottom: solid 1px grey;">
                         </div>
                         <div class="cardFoot">
@@ -69,13 +69,13 @@
                             style="font-size: 22px;"></span>
                         <div *ngIf="bloodpressure" style="display: flex; align-items: center; margin-left: 20px;">
                             <!-- <p class="measurement">165</p>&nbsp;&nbsp;&nbsp;&nbsp; -->
-                            <p [attr.contenteditable]="contenteditable3"
-                                class="measurement font-weight-bold {{colorClassForBP}}" [textContent]="currentHBP"
-                                (input)="currentHBP=$event.target.textContent">{{currentHBP}}
+                            <p [attr.contenteditable]="contenteditable3" class=" font-weight-bold {{colorClassForBP}}"
+                                [textContent]="currentHBP" (input)="currentHBP=$event.target.textContent"
+                                style="font-size: 54px;">{{currentHBP}}
                             </p>
-                            <p class="measurement"> / </p>
-                            <p [attr.contenteditable]="contenteditable3"
-                                class="measurement font-weight-bold {{colorClassForBP}}" [textContent]="currentLBP"
+                            <p class="{{colorClassForBP}}" style="font-size: 54px;"> / </p>
+                            <p [attr.contenteditable]="contenteditable3" class=" font-weight-bold {{colorClassForBP}}"
+                                style="font-size: 54px;" [textContent]="currentLBP"
                                 (input)="currentLBP=$event.target.textContent">{{currentLBP}}
                             </p>
                             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -88,7 +88,7 @@
                                   [options]="lineChartOptions" [colors]="lineChartColors2" [chartType]="lineChartType"></canvas> -->
                             <canvas #canvass id="canvass" height="102vh">{{ BPChart }}</canvas>
                         </div>
-                        <p class="timeText">As of 2 Months Ago</p>
+                        <p class="timeText">As of {{bpdate['days']}} {{bpdate['timer']}} ago</p>
 
                         <div style="border-bottom: solid 1px grey;">
                         </div>
@@ -138,7 +138,7 @@
                                   [options]="lineChartOptions" [colors]="lineChartColors1" [chartType]="lineChartType"></canvas> -->
                             <canvas id="canvasforGL" height="102vh">{{ glucoseChart }}</canvas>
                         </div>
-                        <p class="timeText">As of 2 Months Ago</p>
+                        <p class="timeText">As of {{glucoseDate['days']}} {{glucoseDate['timer']}} ago</p>
                         <div style="border-bottom: solid 1px grey;">
                         </div>
                         <div class="cardFoot">
@@ -182,7 +182,7 @@
                         <div [style.display]="cholesterol ? 'none' : 'block'">
                             <canvas id="canvasForCL" height="102vh">{{ cholesterolChart }}</canvas>
                         </div>
-                        <p class="timeText">As of 2 Months Ago</p>
+                        <p class="timeText">As of {{cholesterolDate['days']}} {{cholesterolDate['timer']}} ago</p>
                         <div style="border-bottom: solid 1px grey;">
                         </div>
                         <div class="cardFoot">
