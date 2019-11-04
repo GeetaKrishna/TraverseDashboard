@@ -21,6 +21,9 @@ export class FourCComponent implements OnInit {
     this.dashboardService.getDashboard().subscribe(
       (res) => {
         // console.log(res);
+
+        this.WeightDate = this.getDifferenceInDays(res['TimeStamp'])
+        console.log(this.WeightDate)
         this.currentWeight = res['currentWeight'];
       },
       err => {
@@ -31,6 +34,7 @@ export class FourCComponent implements OnInit {
     this.dashboardService.getGlucoseofPatient().subscribe(
       (res) => {
         console.log(res);
+        this.glucoseDate = this.getDifferenceInDays(res['TimeStamp'])
         this.currentGlucose = res['currentGlucose'];
       },
       err => {
@@ -40,6 +44,8 @@ export class FourCComponent implements OnInit {
     this.dashboardService.getCholesterol().subscribe(
       (res) => {
         console.log(res);
+        this.cholesterolDate = this.getDifferenceInDays(res['TimeStamp'])
+
         this.currentCholesterol = res['currentCholestrol'];
       },
       err => {
@@ -49,6 +55,8 @@ export class FourCComponent implements OnInit {
     this.dashboardService.getBloodPressure().subscribe(
       (res) => {
         console.log(res, 'ressssss');
+        this.bpdate = this.getDifferenceInDays(res['TimeStamp'])
+
         // console.log(res.highBP);
         this.currentHBP = res['highBp'];
         this.currentLBP = res['lowBp'];
@@ -87,6 +95,35 @@ export class FourCComponent implements OnInit {
     // )
   }
 
+  getDifferenceInDays(date) {
+    let difference = new Date().getTime() - new Date(date).getTime();
+    let days;
+
+    if (difference / 1000 < 60) {
+      days = difference / 1000
+      console.log(days.toFixed())
+      return { days: days.toFixed(), timer: "seconds" };
+    }
+    else if (difference / 1000 >= 60 && difference / 1000 < 3600) {
+      days = difference / (1000 * 60)
+      console.log(days.toFixed())
+
+      return { days: days.toFixed(), timer: "minutes" };
+    }
+    else if (difference / 1000 >= 3600 && difference / 1000 < 3600 * 24) {
+      days = difference / (1000 * 3600)
+      console.log(days.toFixed())
+
+      return { days: days.toFixed(), timer: "hours" };
+    }
+    else if (difference / 1000 >= 3600 * 24) {
+      days = difference / (1000 * 3600 * 24)
+      console.log(days.toFixed())
+      return { days: days.toFixed(), timer: "days" };
+    }
+
+  }
+
   weightInfo: String = 'Weight is Normal'
   bloodPressureInfo: String = 'Blood Pressure is Normal'
   glucoseInfo: String = 'Glucose Levels are fine'
@@ -98,7 +135,6 @@ export class FourCComponent implements OnInit {
   currentWeight;
   currentGlucose;
   currentCholesterol;
-
   weightpresentedInfo: string = 'fa-check-circle' //icon of 3rd point in req sheet.
   glucoseweightpresentedInfo: string = 'fa-check-circle' //icon of 3rd point in req sheet.
   cholesterolpresentedInfo: string = 'fa-check-circle' //icon of 3rd point in req sheet.
@@ -124,6 +160,23 @@ export class FourCComponent implements OnInit {
   BPChart: Chart;
   cholesterolChart: Chart;
 
+  WeightDate = {
+    days: "",
+    timer: ""
+  };
+  glucoseDate = {
+    days: "",
+    timer: ""
+  };
+  cholesterolDate = {
+    days: "",
+    timer: ""
+  };
+  bpdate = {
+    days: "",
+    timer: ""
+  };
+  timer: string;
   //////////////////////////////////
   public lineChartColors2: Color[] = [
     {
