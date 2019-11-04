@@ -71,7 +71,9 @@ export class MedicationsComponent implements OnInit {
   medIntake = new FormControl('');
   medDesc = new FormControl('');
   medMeal = new FormControl('');
-  medData: { "description": any; "medImage": string; "medid": number; "medname": any; };
+  medData: { "DESCRIPTION": any; "MEDIMAGE": any; "MEDNAME": any; };
+  imageData: any ;
+  // medData: { "description": any; "medImage": string; "medid": number; "medname": any; };
   constructor(private http: HttpClient, private medServ: MedicationService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
@@ -89,18 +91,18 @@ export class MedicationsComponent implements OnInit {
         //   this.apps.push(t);
         //   console.log(element)
         // });
-        res.map((element, index) => {
-          if (element['MEDID'] != 44) {
+        res.forEach((element, index) => {
+          if (element['MEDID'] != 44 && index<4) {
             let colors = ['lightgreen',
-            'lightyellow',
-            'pink',
-            'lightgray',
-            'lightblue']
+              'lightyellow',
+              'pink',
+              'lightgray',
+              'lightblue']
             let t = {};
 
-if(index%2 == 0){
-  t['medicationIndication'] = 'warn'
-}
+            if (index % 2 == 0) {
+              t['medicationIndication'] = 'warn'
+            }
 
 
             t['color'] = colors[index];
@@ -109,11 +111,13 @@ if(index%2 == 0){
             t['medicationDetails'] = element['DESCRIPTION'];
             t['medication'] = element['MEDNAME'];
             let TYPED_ARRAY = new Uint8Array(element['MEDIMAGE']['data']);
-            const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
-            let base64String = btoa(STRING_CHAR);
-            let imageurl = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ` + base64String);
+
+
+            // const STRING_CHAR = ;
+            // // let base64String = ;
+            // let imageurl = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ` + btoa(String.fromCharCode.apply(null, TYPED_ARRAY)));
             // console.log(imageurl, 'imageURLLLLLu');
-            t['medicationImage'] = imageurl;
+            t['medicationImage'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ` + btoa(String.fromCharCode.apply(null, TYPED_ARRAY)));
             this.apps.push(t);
             // console.log(element)
           }
@@ -125,18 +129,28 @@ if(index%2 == 0){
     );
   }
 
-  imageInput(event) {
-    console.log(event.target.files);
-    let file = event.target.files[0]
-    // console.log(new ArrayBuffer(file))
 
-    // console.log(event.target.files[0].split('base64,')[1]);
-    var reader = new FileReader();
-    // console.log(reader.readAsArrayBuffer(file))
-    console.log(reader.readAsDataURL(file))
-    // reader.readAsArrayBuffer(file);
+  create_blob(file, callback) {
 
   }
+
+  imageInput(event) {
+var file = event.target.files[0];
+this.imageData = file;
+    // var reader = new FileReader();
+    // reader.onload = () => {
+    //   let data = reader.result as ArrayBuffer;
+    //   this.imageData = new Uint8Array(data);
+
+    // var array = new Int8Array(this.imageData);
+    // console.log(array)
+    // };
+    // // reader.readAsDataURL(event.target.files[0]);
+    // reader.readAsArrayBuffer(file)
+    // // reader.readAsBinaryString(event.target.files[0]);
+
+  }
+
   processFile(theFile) {
     return function (e) {
       let fileByteArray = [];
@@ -147,9 +161,11 @@ if(index%2 == 0){
       }
     }
   }
+
   toggleMedication() {
     this.addMedicationToggle = !this.addMedicationToggle
   }
+
   successAdding() {
     // console.log("medMeal", this.medIntake)
     let ta = {
@@ -157,11 +173,14 @@ if(index%2 == 0){
       // "medDesc": this.medDesc.value,
       // "intake": this.medIntake.value
     }
+    const formData = new FormData();
+    formData.append('DESCRIPTION', this.medDesc.value);
+    formData.append('MEDIMAGE', this.imageData);
+    formData.append('MEDNAME', this.medName.value);
     this.medData = {
-      "description": this.medDesc.value,
-      "medImage": this.medImage.value,
-      "medid": 2,
-      "medname": this.medName.value
+      "DESCRIPTION": this.medDesc.value,
+      "MEDIMAGE": {data: this.imageData, 'content-type':"image/*"},
+      "MEDNAME": this.medName.value
       // "MEDNAME": this.medName.value,
       // "DESCRIPTION": this.medDesc.value,
       // "intake": this.medIntake.value,
@@ -176,9 +195,17 @@ if(index%2 == 0){
     //   "medicationSchedule": this.medIntake.value + " times",
     //   "color": "lightgreen"
     // })
-    console.log(this.medData, 'data');
+    console.log(formData, 'data');
 
-    this.medServ.addMedication(this.medData)
+    this.medServ.addMedication(formData).subscribe((data) => {
+      console.log(data);
+
+    }, (err) => {
+      console.log(err, "err");
+
+    })
+
+
     // console.log(this.medData, 'data');
     this.medName.setValue('')
     this.medIntake.setValue('')
@@ -191,7 +218,10 @@ if(index%2 == 0){
 
   }
   removeMedication(k, i) {
-    this.medServ.deleteMedtcations(k).subscribe((res) => {
+
+    console.log(k)
+
+    this.medServ.deleteMedtcations(JSON.stringify(k.id)).subscribe((res) => {
       console.log(res);
       this.apps.splice(i, 1)
     }, (err) => {

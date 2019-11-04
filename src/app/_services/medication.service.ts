@@ -16,10 +16,10 @@ export class MedicationService {
   
   addMedication(jsonObject) {
     console.log(jsonObject, 'apiii');
-    
-    this.http.post(`${environment.apiUrl}/api/medications/addmedication`, jsonObject).toPromise().then((data) => {
-      console.log("returned object" + JSON.stringify(data));
-    })
+    return this.http.post(`${environment.apiUrl}/api/medications/addmedication`, jsonObject)
+    // .toPromise().then((data) => {
+    //   console.log("returned object" + JSON.stringify(data));
+    // })
   }
   addMedicationPP(jsonObject) {
     this.http.post(`${environment.apiUrl}/api/medications/addPP`, jsonObject).toPromise().then((data) => {
@@ -32,8 +32,8 @@ export class MedicationService {
     })
   }
 
-  deleteMedtcations(id) {
-    return this.http.delete(`${environment.apiUrl}/api/medications/${id}`);
+  deleteMedtcations(medid) {
+    return this.http.delete(`${environment.apiUrl}/api/medications/deletemed/${medid}`);
   }
   
 }
