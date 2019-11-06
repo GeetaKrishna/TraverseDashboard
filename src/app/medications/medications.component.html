@@ -18,7 +18,8 @@
                     <div class="card h-100" [style.background-color]="app.color">
                         <div class="card-header font-weight-bold ch-1"
                             style="background-color:whitesmoke; display:flex;">
-                            <div style="width: 100%">
+                            <div style="width: 100%" [attr.contenteditable]="flag"
+                             [textContent]="app.medication" (input)="app.medication=$event.target.textContent">
                                 {{app.medication}}
                                 <span style="float: right;" *ngIf="app.medicationIndication === 'warn'"><i
                                         class="fa fa-exclamation-triangle" style="color: darkgoldenrod"></i></span>
@@ -26,9 +27,10 @@
                         </div>
                         <div *ngIf="i != 0; else addMedication" class="card-body">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-6" [attr.contenteditable]="flag">
                                     <img mat-card-md-image [src]=app.medicationImage height="80px" width="100px"
                                         alt="Image Not Available">
+                                        <input type="file" *ngIf="flag" (change)="editImageInput($event, i, apps)">
                                 </div>
                                 <div class="col" style="width: 100%">
                                     <span>
@@ -36,14 +38,16 @@
                                             aria-hidden="true"></i>
                                     </span>
                                     <span>
-                                        <p style="font-size: 12px; height: 30px;">
+                                        <p style="font-size: 12px; height: 30px;" [attr.contenteditable]="flag"
+                                        [textContent]="app.medicationSchedule" (input)="app.medicationSchedule=$event.target.textContent">
                                             {{app.medicationSchedule}}
                                         </p>
                                     </span>
                                 </div>
                             </div>
                             <div class="row mt-4">
-                                <div class="col-md-12 ">
+                                <div class="col-md-12 " [attr.contenteditable]="flag"
+                                [textContent]="app.medicationDetails" (input)="app.medicationDetails=$event.target.textContent">
                                     {{app.medicationDetails}}
                                 </div>
                                 <div class="col-md-12">
@@ -58,7 +62,7 @@
                             <div class="col">
                                 <div style="float: right;">
                                     <span>
-                                        <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
+                                        <i class="fa fa-pencil-square-o mr-2" (click)="editMedication(app)" aria-hidden="true"></i>
                                     </span>
                                     <span>
                                         <i class="fa fa-refresh mr-2" aria-hidden="true"></i>
@@ -100,6 +104,9 @@
                                                 <span>Upload an image</span>
                                                 <input #fileInput type="file" (change)="imageInput($event)" style="display:none;" />
                                               </button>
+                                              <span *ngIf="imageData">
+                                                {{imageData['name']}}
+                                              </span>
                                         <mat-form-field>
                                             <mat-label>Schedule / day</mat-label>
                                             <mat-select [formControl]="medIntake">
