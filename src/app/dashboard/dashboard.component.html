@@ -1,4 +1,4 @@
-<div class="card mt-5">
+<div class="card mt-5 mb-5">
   <div class="card-header ch-1">
     <div class="row">
       <div class="col justify-content-start">
@@ -7,25 +7,32 @@
         </p>
       </div>
       <div class="col justify-content-end">
-        <img src="../../assets/icons-home/motion01.png" style="height: 45px; width: 45px; float: right;" />
+        <img src="../../assets/icons-home/motion01.png" style="height: 35px; width: 35px; float: right;" />
       </div>
     </div>
   </div>
   <div class="card-body">
     <div class="row mt-4  justify-content-center">
       <div class="card shadow-sm mr-4 cardWidth">
-        <div class="card-header title ch-0">
+        <div class="card-header title ">
           Weight <span class="float-right"><span class="fa {{weightpresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
           <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
           <div class="row" [style.display]="!weight? 'none' : ''">
             <div [attr.contenteditable]="contenteditable1" class="col-md-4 font-weight-bold data text-right"
-              [textContent]="currentWeight" (input)="currentWeight=$event.target.textContent">{{currentWeight}}
+              [textContent]="currentWeight" [ngClass]="{'editTrue' : contenteditable1}"
+              (input)="currentWeight=$event.target.textContent">
+              {{currentWeight}}
             </div>
             <div class="col-md-4 font-weight-normal data text-left">lbs</div>
 
-            <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-up"></span></div>
+            <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable1"><span
+                class="fa fa-arrow-up"></span></div>
+            <div>
+              <button *ngIf="contenteditable1" class="btn btn-success" (click)="toggleContenteditableWeight()"
+                style="margin-left: 30px;margin-top: 20px;"><i class="fa fa-check"></i></button>
+            </div>
           </div>
           <div [style.display]="weight ? 'none' : 'block'">
             <canvas id="canvas" height="80vh">{{ weightChart }}</canvas>
@@ -33,22 +40,22 @@
 
           <div class="medium text-muted mt-2">As of {{WeightDate['days']}} {{WeightDate['timer']}} ago</div>
         </div>
-        <div class="card-footer">
+        <div class="card-footer ch-0">
           <div class="float-right">
-            <span class="fa fa-info-circle text-muted cursor-pointer" data-toggle="tooltip" data-html="true"
+            <span class="fa fa-info-circle black cursor-pointer" data-toggle="tooltip" data-html="true"
               title={{weightInfo}}></span>
             &nbsp;
-            <span class="fa fa-share-alt text-muted cursor-pointer"></span>
+            <span class="fa fa-share-alt black cursor-pointer"></span>
             &nbsp;
-            <span class="fa fa-plus-square text-muted cursor-pointer" (click)="toggleContenteditableWeight()"></span>
+            <span class="fa fa-plus-square black cursor-pointer" (click)="toggleContenteditableWeight()"></span>
             &nbsp;
-            <span class="fa fa-undo text-muted cursor-pointer" (click)="weightToggle()"></span>
+            <span class="fa fa-undo black cursor-pointer" (click)="weightToggle()"></span>
           </div>
         </div>
       </div>
 
       <div class="card shadow-sm cardWidth">
-        <div class="card-header title ch-2">
+        <div class="card-header title ">
           Blood Pressure <span class="float-right"><span
               class="fa {{presentedInfo}} {{colorPresentedInfo}} cursor-pointer"></span></span>
         </div>
@@ -56,15 +63,21 @@
           <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
           <div class="row" *ngIf="bloodpressure">
             <div [attr.contenteditable]="contenteditable3"
-              class="col-md-3 font-weight-bold data {{colorClassForBP}} text-right" [textContent]="currentHBP"
+              class="col-md-3 font-weight-bold data {{colorClassForBP}} text-right"
+              [ngClass]="{'editTrue' : contenteditable3}" [textContent]="currentHBP"
               (input)="currentHBP=$event.target.textContent">{{currentHBP}}
             </div>
             <div class="col-md-1 font-weight-normal data {{colorClassForBP}} text-center">/</div>
-            <div [attr.contenteditable]="contenteditable3"
+            <div [attr.contenteditable]="contenteditable3" [ngClass]="{'editTrue' : contenteditable3}"
               class="col-md-3 font-weight-bold data {{colorClassForBP}} text-left" [textContent]="currentLBP"
               (input)="currentLBP=$event.target.textContent">{{currentLBP}}
             </div>
-            <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-down text-center"></span>
+            <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable3"><span
+                class="fa fa-arrow-down text-center"></span>
+            </div>
+            <div>
+              <button *ngIf="contenteditable3" class="btn btn-success" (click)="toggleContenteditableBlood()"
+                style="margin-left: 30px;margin-top: 20px;"><i class="fa fa-check"></i></button>
             </div>
           </div>
           <div [style.display]="bloodpressure ? 'none' : 'block'">
@@ -74,16 +87,16 @@
           </div>
           <div class="medium text-muted">As of {{bpdate['days']}} {{bpdate['timer']}} ago</div>
         </div>
-        <div class="card-footer">
+        <div class="card-footer ch-2">
           <div class="float-right">
-            <span class="fa fa-info-circle text-muted cursor-pointer" data-toggle="tooltip" data-html="true"
+            <span class="fa fa-info-circle black cursor-pointer" data-toggle="tooltip" data-html="true"
               title={{bloodPressureInfo}}></span>
             &nbsp;
-            <span class="fa fa-share-alt text-muted cursor-pointer"></span>
+            <span class="fa fa-share-alt black  cursor-pointer"></span>
             &nbsp;
-            <span class="fa fa-plus-square text-muted cursor-pointer" (click)="toggleContenteditableBlood()"></span>
+            <span class="fa fa-plus-square black  cursor-pointer" (click)="toggleContenteditableBlood()"></span>
             &nbsp;
-            <span class="fa fa-undo text-muted cursor-pointer" (click)="bloodpressureToggle()"></span>
+            <span class="fa fa-undo black  cursor-pointer" (click)="bloodpressureToggle()"></span>
           </div>
         </div>
       </div>
@@ -92,18 +105,24 @@
     <div class="row my-4 justify-content-center">
       <!-- <div class="col-md-6"> -->
       <div class="card shadow-sm mr-4 cardWidth">
-        <div class="card-header title ch-3">
+        <div class="card-header title ">
           Glucose Level <span class="float-right"><span
               class="fa {{glucoseweightpresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
           <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
           <div class="row" *ngIf="glucose">
-            <div [attr.contenteditable]="contenteditable2" class="col-md-4 font-weight-bold data text-right"
-              [textContent]="currentGlucose" (input)="currentGlucose=$event.target.textContent">{{currentGlucose}}
+            <div [attr.contenteditable]="contenteditable2" [ngClass]="{'editTrue' : contenteditable2}"
+              class="col-md-4 font-weight-bold data text-right" [textContent]="currentGlucose"
+              (input)="currentGlucose=$event.target.textContent">{{currentGlucose}}
             </div>
             <div class="col-md-4 font-weight-normal data text-left">mg</div>
-            <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-up"></span></div>
+            <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable2"><span
+                class="fa fa-arrow-up"></span></div>
+            <div>
+              <button *ngIf="contenteditable2" class="btn btn-success" (click)="toggleContenteditableGlucose()"
+                style="margin-left: 30px;margin-top: 20px;"><i class="fa fa-check"></i></button>
+            </div>
           </div>
           <div [style.display]="glucose ? 'none' : 'block'">
             <!-- <canvas height="80vh" baseChart [datasets]="lineChartData1" [labels]="lineChartLabels" [legend]="false"
@@ -112,16 +131,16 @@
           </div>
           <div class="medium text-muted">As of {{glucoseDate['days']}} {{glucoseDate['timer']}} ago</div>
         </div>
-        <div class="card-footer">
+        <div class="card-footer ch-3">
           <div class="float-right">
-            <span class="fa fa-info-circle text-muted cursor-pointer" data-toggle="tooltip" data-html="true"
+            <span class="fa fa-info-circle black cursor-pointer" data-toggle="tooltip" data-html="true"
               title={{glucoseInfo}}></span>
             &nbsp;
-            <span class="fa fa-share-alt text-muted cursor-pointer"></span>
+            <span class="fa fa-share-alt black cursor-pointer"></span>
             &nbsp;
-            <span class="fa fa-plus-square text-muted cursor-pointer" (click)="toggleContenteditableGlucose()"></span>
+            <span class="fa fa-plus-square black cursor-pointer" (click)="toggleContenteditableGlucose()"></span>
             &nbsp;
-            <span class="fa fa-undo text-muted cursor-pointer" (click)="glucoseToggle()"></span>
+            <span class="fa fa-undo black cursor-pointer" (click)="glucoseToggle()"></span>
             <!-- <span class="fa fa-arrow-right text-muted cursor-pointer" (click)="toggleSubmitGlucose()"></span> -->
           </div>
         </div>
@@ -129,19 +148,25 @@
       <!-- </div> -->
       <!-- <div class="col-md-6"> -->
       <div class="card shadow-sm cardWidth">
-        <div class="card-header title ch-4">
+        <div class="card-header title ">
           Cholesterol <span class="float-right"><span
               class="fa {{cholesterolpresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
           <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
           <div class="row" *ngIf="cholesterol">
-            <div [attr.contenteditable]="contenteditable4" class="col-md-4 font-weight-bold data text-right"
-              [textContent]="currentCholesterol" (input)="currentCholesterol=$event.target.textContent">
+            <div [attr.contenteditable]="contenteditable4" [ngClass]="{'editTrue' : contenteditable4}"
+              class="col-md-4 font-weight-bold data text-right" [textContent]="currentCholesterol"
+              (input)="currentCholesterol=$event.target.textContent">
               {{currentCholesterol}}
             </div>
             <div class="col-md-4 font-weight-normal data text-left">mg</div>
-            <div class="col-md-4 font-weight-bold data text-center"><span class="fa fa-arrow-up"></span></div>
+            <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable4"><span
+                class="fa fa-arrow-up"></span></div>
+            <div>
+              <button *ngIf="contenteditable4" class="btn btn-success" (click)="toggleContenteditableCholestrol()"
+                style="margin-left: 30px;margin-top: 20px;"><i class="fa fa-check"></i></button>
+            </div>
           </div>
           <div [style.display]="cholesterol ? 'none' : 'block'">
 
@@ -152,17 +177,16 @@
           <div class="medium text-muted">As of {{cholesterolDate['days']}} {{cholesterolDate['timer']}} ago</div>
           <!-- <button (click)="toggleContenteditable()">Edit Text Content</button> -->
         </div>
-        <div class="card-footer">
+        <div class="card-footer ch-4">
           <div class="float-right">
-            <span class="fa fa-info-circle text-muted cursor-pointer" data-toggle="tooltip" data-html="true"
+            <span class="fa fa-info-circle black cursor-pointer" data-toggle="tooltip" data-html="true"
               title={{cholesterolInfo}}></span>
             &nbsp;
-            <span class="fa fa-share-alt text-muted cursor-pointer"></span>
+            <span class="fa fa-share-alt black cursor-pointer"></span>
             &nbsp;
-            <span class="fa fa-plus-square text-muted cursor-pointer"
-              (click)="toggleContenteditableCholestrol()"></span>
+            <span class="fa fa-plus-square black cursor-pointer" (click)="toggleContenteditableCholestrol()"></span>
             &nbsp;
-            <span class="fa fa-undo text-muted cursor-pointer" (click)="cholesterolToggle()"></span>
+            <span class="fa fa-undo black cursor-pointer" (click)="cholesterolToggle()"></span>
             <!-- <span class="fa fa-arrow-right text-muted cursor-pointer" (click)="toggleSubmitCholestrol()"></span> -->
           </div>
         </div>

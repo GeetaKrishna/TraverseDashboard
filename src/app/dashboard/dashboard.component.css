@@ -5,8 +5,12 @@
 .title {
   font-size: 20px !important;
   font-weight: bold;
-  background: #3C3C3C;
-  color: rgb(255, 255, 255);
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.black {
+  color: rgb(255, 255, 255)
 }
 
 .cardHead {
@@ -68,4 +72,8 @@
 
 .cardWidth {
   width: 465px;
+}
+
+.editTrue {
+  border-bottom: 2px dotted black;
 }

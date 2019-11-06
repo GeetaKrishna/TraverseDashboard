@@ -1,4 +1,4 @@
-<div class="animated fadeIn mt-5">
+<div class="animated fadeIn mt-5 mb-5">
   <!--Recommended apps Begin-->
   <div class="col-md-12">
     <div class="card" style="height:auto;">
@@ -172,20 +172,20 @@
       </ng-template>
 
       <ng-template #newAppointment let-close="close">
-        <div class="card" >
+        <div class="card">
           <div class="card-header">
             Add an Appointment
           </div>
           <div class="card-body">
             <div class="example-container">
-              <mat-form-field >
+              <mat-form-field>
                 <input matInput [formControl]="AppointmentName" placeholder="Input">
               </mat-form-field>
 
               <mat-form-field>
                 <textarea matInput [formControl]="AppointmentDetails" placeholder="Appointment Details"></textarea>
               </mat-form-field>
-<!-- 
+              <!-- 
               <mat-form-field>
                 <mat-select placeholder="Select">
                   <mat-option value="option">Option</mat-option>

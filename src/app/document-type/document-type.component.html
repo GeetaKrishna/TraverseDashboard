@@ -1,4 +1,4 @@
-  <div class="col-sm-10">
+  <div>
       <div class="input-group md-form form-sm form-2 pl-0">
           <input class="form-control my-0 py-1" type="text" placeholder="Find document by name, date, type, etc..."
               aria-label="Search">
@@ -11,8 +11,14 @@
       <div style="display: flex;">
           <mat-card class="example-card m-2">
               <div class="dragDrop">
-                  <ngx-file-drop [dropZoneClassName]="dropZone" dropZoneLabel="Drop files here"
-                      (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                  <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                      (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                      <!-- <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                        Drag and Drop Files here.
+                          <i class="fa fa-arrows-alt"></i>
+                          <div style=" background-image: url('../assets/icons-home/motion01.png')"> </div> -->
+                      <!-- <button type="button" class="btn" (click)="openFileSelector()">Browse</button> 
+                      </ng-template> -->
                       <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
                           Drag and Drop Files here.
                           <!-- <button type="button" class="btn" (click)="openFileSelector()">Browse</button> -->

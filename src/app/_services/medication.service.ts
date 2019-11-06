@@ -7,11 +7,11 @@ import { environment } from '../../environments/environment';
 export class MedicationService {
 
   constructor(private http: HttpClient) { }
-  // url = 'http://172.17.5.45:8080'
   
   getMedtcations() {
-    // return this.http.get(`${environment.apiUrl}/api/medications/getmedpres`);
-    return this.http.get(`${environment.apiUrl}/api/medications/getmedpres/2`);
+    // return this.http.get(`${environment.apiUrl}/api/medications/getmedpres/2`);
+    return this.http.get(`${environment.apiUrl}/api/medications/getmeds`);
+
   }
   
   addMedication(jsonObject) {

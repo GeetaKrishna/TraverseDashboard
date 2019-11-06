@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
       "APPDETAILS": "KEEPS TRACK OF APPOITMENT",
       "VERSION": "1.0v",
       "APPNAME": "Calendar",
-      "URL": "assets/icons-home/calendar.jpg",
+      "URL": "assets/calendar1.png",
       "userTable": [],
       "RATING": 4.5,
       "ROUTESCREEN": 'admin/calendar',
@@ -102,7 +102,7 @@ export class HomeComponent implements OnInit {
       "URL": "assets/icons-home/healthDocuments.png",
       "userTable": [],
       "RATING": 5,
-      "ROUTESCREEN": 'admin/document',
+      "ROUTESCREEN": 'admin/document/Personal',
       "installed": false
     },
     {

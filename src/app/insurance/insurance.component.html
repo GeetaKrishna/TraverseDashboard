@@ -1,4 +1,4 @@
-<div class="card mt-5">
+<div class="card mt-5 mb-5">
     <div class="card-header">
         Insurance Central
     </div>
@@ -9,7 +9,7 @@
                     Your {{date}} Plan Summary
                     <hr size="20" color="#b3cbdd" style="height:0.5em; background-color: #4d4d4d;">
                     <div class="row">
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <div class="card" style="height: 100%">
                                 <div class="card-body" style="background-color: #b3b3b3; padding: 0px; margin: 0px;">
                                     <div>
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <div class="card" style="height: 100%">
                                 <div class="card-body" style="background-color: #75b6eb">
                                     <div>
@@ -39,10 +39,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <div class="card" style="height: 100%">
                                 <div class="card-body" style="background-color: #86ee8f; align-content: center">
-                                    <div style="width: 70%; height: 50%;">
+                                    <div style="width: auto; height: auto;">
                                         <canvas style="object-fit: contain;" baseChart [datasets]="deductChartData"
                                             [labels]="deductChartLabels" [options]="deductChartOptions"
                                             [legend]="deductChartLegend" [chartType]="deductChartType">

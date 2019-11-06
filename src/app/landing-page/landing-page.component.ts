@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { GetAppsService } from '../_services/get-apps.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -92,12 +93,14 @@ export class LandingPageComponent implements OnInit {
     // },
   ]
 
-  constructor(private getApps: GetAppsService) { }
-
+  constructor(private getApps: GetAppsService, private route: Router) { }
+  nav(routes) {
+    this.route.navigateByUrl(routes)
+  }
   ngOnInit() {
     // this.apps.pop()
     // console.log(this.apps, 'apps');
-    this.getApps.getAppStore().subscribe((data)=>{
+    this.getApps.getAppStore().subscribe((data) => {
       console.log(data, 'data 4, db')
       this.apps = this.apps.concat(data)
     })

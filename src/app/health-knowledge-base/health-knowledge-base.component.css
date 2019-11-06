@@ -29,6 +29,6 @@
     font-weight: bold;
 }
 .vertical{
-    /* border-right: 4px solid grey; */
-    height: 500px;
+    border-right: 4px solid grey;
+    height: auto;
 }
