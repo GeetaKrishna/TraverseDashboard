@@ -18,20 +18,20 @@ export class RegisterComponent implements OnInit {
   returnUrl: string;
   error = '';
   emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
+    // Validators.required,
+    // Validators.email,
   ]);
   firstNameFormControl = new FormControl('', [
-    Validators.required,
+    // Validators.required,
   ]);
   lastNameFormControl = new FormControl('', [
-    Validators.required,
+    // Validators.required,
   ]);
   passwordFormControl = new FormControl('', [
-    Validators.required,
+    // Validators.required,
   ]);
   cfpasswordFormControl = new FormControl('', [
-    Validators.required,
+    // Validators.required,
   ]);
   constructor(
     private formBuilder: FormBuilder,

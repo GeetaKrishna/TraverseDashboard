@@ -1,8 +1,8 @@
   <div class="row mt-5 mb-5" style="background-color: #f3f9ff; border-radius: 10px;">
     <div class="col-md-3 col-sm-6 mt-5 mb-5" *ngFor="let app of apps">
       <div class="card" style="background: transparent; text-align: center; border: none;">
-        <div>
-          <a (click)="nav(app.ROUTESCREEN)">
+        <div (click)="nav(app.ROUTESCREEN)">
+          <a >
             <img src="{{app.URL}}"
               style="height: 80px !important; width: 80px !important; background-color: transparent; mix-blend-mode: multiply"
               alt="Image Not Available">

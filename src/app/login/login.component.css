@@ -1,11 +1,10 @@
 .alert-content {
-
     text-align: center
 }
 
 .bgCard {
     /* background-image: url(../../assets/bg.jpg) !important; */
-    background-color:rgb(127, 180, 224);
+    background-color: rgb(127, 180, 224);
     /* color: white; */
     height: 300px !important;
 }
@@ -21,5 +20,27 @@
 }
 
 .example-full-width {
-    width: 100%;
+    width: 50%;
+}
+
+
+.twoCard {
+    height: 560px;
+    width: 400px;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: rgb(10, 10, 10) !important;
+}
+
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: rgb(10, 10, 10) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: rgb(10, 10, 10) !important;
+    ;
 }
