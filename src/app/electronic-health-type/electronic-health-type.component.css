@@ -67,10 +67,10 @@ td {
     text-align: center;
 }
 
-.CardImage {
+/* .CardImage {
     background-color: rgb(151, 188, 224);
     text-align: center;
-}
+} */
 
 /* .dragDrop {
     text-align: center;
@@ -126,4 +126,8 @@ td {
 
 :host {
     width: 80%;
+}
+.example-card {
+    width: 212px;
+    text-align: center;
 }

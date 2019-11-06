@@ -24,10 +24,8 @@ export class ElectronicHealthTypeComponent implements OnInit {
 
     // this.docService.getDocuments().subscribe((data) => {
     //   console.log(data);
-
     // }, (err) => {
     //   console.log(err);
-
     // })
 
     this.activatedRoute.paramMap.subscribe((data) => {
@@ -91,14 +89,74 @@ export class ElectronicHealthTypeComponent implements OnInit {
   fileLeave(event) {
     console.log(event, 'leave');
   }
-  addRecord() {
-    console.log('addRecord() clicked');
-    this.files.forEach((f, index) => {
-      // console.log(f.relativePath);
-      this.availableDocs.push(f)
-      this.files.splice(index, 1)
 
-    });
+  addDocToDB(type) {
+    for (const droppedFile of this.files) {
+      // Is it a file?
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          // Here you can access the real file
+          console.log(droppedFile.relativePath, file);
+          const formData = new FormData()
+          formData.append('file', file, droppedFile.relativePath)
+          formData.append('doc_type', type)
+          this.docService.addDocuments(formData).subscribe((data) => {
+            console.log(data);
+            data['file_name'] = data['fileName']
+            switch (type) {
+              case 'Visits':
+                this.availableDocsForVisits.push(data)
+                //formdata
+                break;
+              case 'Imaging':
+                this.availableDocsForImaging.push(data);
+                break;
+              case 'Labs':
+                this.availableDocsForLabs.push(data);
+                break;
+              default:
+                this.availableDocsForRecords.push(data)
+                break;
+            }
+            this.files.splice(this.files.indexOf(droppedFile), 1)
+          }, (err) => {
+            console.log(err);
+          })
+        });
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+        console.log(droppedFile.relativePath, fileEntry);
+      }
+    }
+  }
+  addRecord(state) {
+    console.log('addRecord() clicked');
+    // this.files.forEach((f, index) => {
+    //   // console.log(f.relativePath);
+    //   this.availableDocs.push(f)
+    //   this.files.splice(index, 1)
+    // });
+
+    switch (state) {
+      case 'Visits': {
+        this.addDocToDB('Visits')
+        break;
+      }
+      case 'Imaging': {
+        this.addDocToDB('Imaging')
+        break;
+      }
+      case 'Labs': {
+        this.addDocToDB('Labs')
+        break;
+      }
+      default: {
+        this.addDocToDB('Records')
+        break;
+      }
+    }
 
     /**  // You could upload it like this:
          const formData = new FormData()
