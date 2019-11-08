@@ -56,3 +56,11 @@ td {
     text-align: center;
 }
 
+.activeClass {
+    color: #2b82d3
+}
+
+.activeClassText {
+    color: #2b82d3;
+    font-weight: bolder;
+}

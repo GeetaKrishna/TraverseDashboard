@@ -128,3 +128,12 @@ td {
 :host {
     width: 80%;
 }
+.activeClass {
+    /* background-color: rgb(23, 24, 24); */
+    color: #2b82d3;
+}
+.activeClassText {
+    /* background-color: rgb(23, 24, 24); */
+    color: #2b82d3;
+    font-weight: bolder;
+}
