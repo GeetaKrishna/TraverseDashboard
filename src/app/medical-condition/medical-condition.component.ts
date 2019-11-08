@@ -139,6 +139,7 @@ export class MedicalConditionComponent implements OnInit {
   }
 
   removeMedication(id, i) {
+    console.log(id, 'ts');
     // this.apps.splice(i, 1)
     this.medicalConditionService.deleteMedicalCondition(id).subscribe((res) => {
       console.log(res);
