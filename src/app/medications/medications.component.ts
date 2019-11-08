@@ -192,6 +192,7 @@ export class MedicationsComponent implements OnInit {
   //Method to edit the form
   editMedication(medicationDetail) {
     this.flag = !this.flag;
+    
     if (!this.flag) {
       let formDataa = new FormData();
       if (this.setImageEditFlag) {

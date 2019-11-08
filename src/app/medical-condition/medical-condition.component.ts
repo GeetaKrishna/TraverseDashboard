@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MedicationService } from '../_services/medication.service';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MedicalConditionService } from '../_services/medical-condition.service';
 
 @Component({
   selector: 'app-medical-condition',
@@ -13,37 +14,37 @@ export class MedicalConditionComponent implements OnInit {
 
   apps: any[] = [
     {
-      "medication": "Add a Condition",
-      "medicationImage": "assets/icons-home/motion01.png",
+      "Condition_Name": "Add a Condition",
+      "conditionImage": "assets/icons-home/motion01.png",
       "color": "lightgrey"
     },
-    {
-      "appId": 2,
-      "medication": "Gout",
-      "medicationImage": "assets/medicalCondition/gout.jpg",
-      "diagnoised": "First Diagnosed 6/12/2016",
-      "severity": "Chronic",
-      "restrictions": "Diet based Triggers",
-      "color": "lightblue"
-    },
-    {
-      "appId": 4,
-      "medication": "Peanuts Allergy",
-      "medicationImage": "assets/medicalCondition/peanuts.png",
-      "diagnoised": "Since childhood",
-      "severity": "Mild, small quantities allowed",
-      "restrictions": "No other restrictions",
-      "color": "lightpink"
-    },
-    {
-      "appId": 5,
-      "medication": "High Blood Pressure",
-      "medicationImage": "assets/medicalCondition/highBP.jpg",
-      "diagnoised": "First diagnosed 5/11/2017",
-      "severity": "Monitor at home regularly",
-      "restrictions": "Yearly EKG required",
-      "color": "aliceblue"
-    },
+    // {
+    //   "appId": 2,
+    //   "medication": "Gout",
+    //   "medicationImage": "assets/medicalCondition/gout.jpg",
+    //   "diagnoised": "First Diagnosed 6/12/2016",
+    //   "severity": "Chronic",
+    //   "restrictions": "Diet based Triggers",
+    //   "color": "lightblue"
+    // },
+    // {
+    //   "appId": 4,
+    //   "medication": "Peanuts Allergy",
+    //   "medicationImage": "assets/medicalCondition/peanuts.png",
+    //   "diagnoised": "Since childhood",
+    //   "severity": "Mild, small quantities allowed",
+    //   "restrictions": "No other restrictions",
+    //   "color": "lightpink"
+    // },
+    // {
+    //   "appId": 5,
+    //   "medication": "High Blood Pressure",
+    //   "medicationImage": "assets/medicalCondition/highBP.jpg",
+    //   "diagnoised": "First diagnosed 5/11/2017",
+    //   "severity": "Monitor at home regularly",
+    //   "restrictions": "Yearly EKG required",
+    //   "color": "aliceblue"
+    // },
 
   ]
 
@@ -54,53 +55,42 @@ export class MedicalConditionComponent implements OnInit {
   severity = new FormControl('');
   triggers = new FormControl('');
   medicalConditionData: { "medication": any; "medicationImage": any; "diagnosed": any; "restrictions": any; "severity": any; };
+  imageData: any;
+  setImageEditFlag: boolean;
+  editedImageData: any;
 
-  constructor(private http: HttpClient, private medServ: MedicationService, private sanitizer: DomSanitizer) { }
+  constructor(private http: HttpClient, private medicalConditionService: MedicalConditionService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    // this.medServ.getMedtcations().subscribe(
-    //   (res: []) => {
-    //     let medicinesAvailable = []
-
-    //     res.map((element, index) => {
-    //       if (element['MEDID'] != 44) {
-    //         let colors = ['lightgreen',
-    //         'lightyellow',
-    //         'pink',
-    //         'lightgray',
-    //         'lightblue']
-    //         let t = {};
-
-    //         t['color'] = colors[index];
-    //         t['id'] = element['MEDID']
-    //         t['medicationSchedule'] = element['MEDSCHEDULE'];
-    //         t['medicationDetails'] = element['DESCRIPTION'];
-    //         t['medication'] = element['MEDNAME'];
-    //         let TYPED_ARRAY = new Uint8Array(element['MEDIMAGE']['data']);
-    //         const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
-    //         let base64String = btoa(STRING_CHAR);
-    //         let imageurl = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ` + base64String);
-    //         // console.log(imageurl, 'imageURLLLLLu');
-    //         t['medicationImage'] = imageurl;
-    //         this.apps.push(t);
-    //         // console.log(element)
-    //       }
-    //     });
-    //   },
-    //   err => {
-    //     console.log("error", err);
-    //   }
-    // );
+    this.medicalConditionService.getMedicalCondition().subscribe(
+      (res: []) => {
+        console.log(res);
+        this.apps = this.apps.concat(res)
+      },
+      err => {
+        console.log("error", err);
+      }
+    );
   }
 
   imageInput(event) {
     console.log(event.target.files);
     let file = event.target.files[0]
+    this.imageData = file;
+    console.log(this.imageData);
+  }
 
-    var reader = new FileReader();
-
-    console.log(reader.readAsDataURL(file))
-
+  editImageInput(event, index, data) {
+    this.setImageEditFlag = false;
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    this.editedImageData = file;
+    let oldImageValue = data[index].medicationImage;
+    reader.onload = function (e) {
+      console.log(e.target['result'])
+      data[index].medicationImage = e.target['result'];
+    }
+    reader.readAsDataURL(file);
   }
 
   processFile(theFile) {
@@ -122,32 +112,40 @@ export class MedicalConditionComponent implements OnInit {
     this.medicalConditionData = {
       "medication": this.conditionName.value,
       "medicationImage": this.medImage.value,
+      // "medicationImage": this.imageData,
       "diagnosed": this.Diagnosed.value,
       "restrictions": this.triggers.value,
       "severity": this.severity.value
     }
     this.apps.push(this.medicalConditionData)
     console.log(this.medicalConditionData, 'data');
-
-    // this.medServ.addMedication(this.medicalConditionData)
-
+    let formDataa = new FormData();
+    formDataa.append("conditionName", this.conditionName.value)
+    formDataa.append("linkToApi", `http://www.google.com/${this.conditionName.value}`)
+    formDataa.append("severity", this.severity.value)
+    formDataa.append("triggers", this.triggers.value)
+    formDataa.append("diagnosisDate", this.Diagnosed.value)
+    formDataa.append("image", this.imageData, this.imageData.name)
+    this.medicalConditionService.addMedicalCondition(formDataa).subscribe((data) => {
+      console.log(data);
+    }, (err) => {
+      console.log(err);
+    })
     this.addMedicationToggle = !this.addMedicationToggle
   }
 
   cancelAdding() {
-
     this.addMedicationToggle = !this.addMedicationToggle
-
   }
 
-  removeMedication(k, i) {
-    this.apps.splice(i, 1)
-    // this.medServ.deleteMedtcations(k).subscribe((res) => {
-    //   console.log(res);
-    //   this.apps.splice(i, 1)
-    // }, (err) => {
-    //   console.log(err);
-    // })
+  removeMedication(id, i) {
+    // this.apps.splice(i, 1)
+    this.medicalConditionService.deleteMedicalCondition(id).subscribe((res) => {
+      console.log(res);
+      this.apps.splice(i, 1)
+    }, (err) => {
+      console.log(err);
+    })
   }
-  
+
 }

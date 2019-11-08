@@ -5,7 +5,7 @@
             <div class="card-header ch-0">
                 <div class="row">
                     <div class="col">
-                        Medication
+                        Medical Conditions
                     </div>
                     <div class="col">
                         <img src="assets/medicalCondition/medicationLogo.png" height="45px" width="45px"
@@ -19,11 +19,11 @@
                         <div class="card-header font-weight-bold ch-1"
                             style="background-color:whitesmoke; display:flex;">
                             <div style="width: 100%">
-                                {{app.medication}}
+                                {{app.Condition_Name}}
                             </div>
                         </div>
                         <div *ngIf="i != 0; else addMedication" class="card-body">
-                            <img mat-card-md-image [src]=app.medicationImage height="125px" width="200px"
+                            <img mat-card-md-image [src]="app.Image" height="125px" width="200px"
                                 alt="Image Not Available">
                             <div class="row mt-4">
                                 <div class="col-md-12">
@@ -32,14 +32,14 @@
                                         Learn
                                         More </a>
                                 </div>
-                                <div class="col-md-12 ">
-                                    {{app.restrictions}}
+                                <div class="col-md-12">
+                                    {{app.Triggers}}
                                 </div>
-                                <div class="col-md-12 ">
-                                    {{app.diagnoised}}
+                                <div class="col-md-12">
+                                    {{app.DiagnosisDate}}
                                 </div>
-                                <div class="col-md-12 ">
-                                    {{app.severity}}
+                                <div class="col-md-12">
+                                    {{app.Severity}}
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                         <i class="fa fa-plus mr-2" aria-hidden="true"></i>
                                     </span>
                                     <span>
-                                        <i class="fa fa-trash mr-2" (click)="removeMedication(app.id, i)"
+                                        <i class="fa fa-trash mr-2" (click)="removeMedication(app.ConditionType_ID, i)"
                                             aria-hidden="true"></i>
                                     </span>
                                 </div>
@@ -77,16 +77,13 @@
                                                 required>
                                         </mat-form-field>
                                         <mat-form-field style="color: black;">
-                                            <input matInput placeholder="Diagnosed" [formControl]="Diagnosed"
-                                                required>
+                                            <input matInput placeholder="Diagnosed" [formControl]="Diagnosed" required>
                                         </mat-form-field>
                                         <mat-form-field style="color: black;">
-                                            <input matInput placeholder="Severity" [formControl]="severity"
-                                                required>
+                                            <input matInput placeholder="Severity" [formControl]="severity" required>
                                         </mat-form-field>
                                         <mat-form-field style="color: black;">
-                                            <input matInput placeholder="Triggers" [formControl]="triggers"
-                                                required>
+                                            <input matInput placeholder="Triggers" [formControl]="triggers" required>
                                         </mat-form-field>
                                         <!-- <mat-form-field style="color: black;">
                                             <input matInput placeholder="Before/After Meal" [formControl]="medMeal"

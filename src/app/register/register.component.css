@@ -22,7 +22,7 @@
 
 .twoCard {
   height: 560px;
-  width: 380px;
+  width: 400px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
