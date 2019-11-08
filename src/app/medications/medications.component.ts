@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MedicationService } from '../_services/medication.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-medications',
@@ -27,7 +28,7 @@ export class MedicationsComponent implements OnInit {
     //   "color": "lightblue"
     // },
   ]
-  
+
   addMedicationToggle: boolean = true;
   medName = new FormControl('');
   medImage = new FormControl('');
@@ -36,11 +37,13 @@ export class MedicationsComponent implements OnInit {
   medMeal = new FormControl('');
   medData: { "DESCRIPTION": any; "MEDIMAGE": any; "MEDNAME": any; };
   imageData: any;
-  
-  constructor(private http: HttpClient, private medServ: MedicationService, private sanitizer: DomSanitizer) { }
+  flag: boolean = false;
+  editedImageData: any;
+  setImageEditFlag: boolean = true;
+  constructor(private http: HttpClient, private medicationService: MedicationService, private sanitizer: DomSanitizer, ) { }
 
   ngOnInit() {
-    this.medServ.getMedtcations().subscribe(
+    this.medicationService.getMedtcations().subscribe(
       (res: []) => {
         console.log(res)
         let medicinesAvailable = []
@@ -71,6 +74,7 @@ export class MedicationsComponent implements OnInit {
             t['medicationSchedule'] = element['medschedule'];
             t['medicationDetails'] = element['description'];
             t['medication'] = element['medname'];
+            t['image'] = element['medimage']
 
             t['medicationImage'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${element['medimage']}`);
             this.apps.push(t);
@@ -83,14 +87,25 @@ export class MedicationsComponent implements OnInit {
     );
   }
 
-
-  create_blob(file, callback) {
+  imageInput(event) {
+    let file = event.target.files[0];
+    this.imageData = file;
+    console.log(this.imageData);
 
   }
 
-  imageInput(event) {
-    var file = event.target.files[0];
-    this.imageData = file;
+  editImageInput(event, index, data) {
+    this.setImageEditFlag = false;
+    let file = event.target.files[0];
+    let reader = new FileReader();
+    this.editedImageData = file;
+    let oldImageValue = data[index].medicationImage;
+    reader.onload = function (e) {
+      console.log(e.target['result'])
+      data[index].medicationImage = e.target['result'];
+    }
+
+    reader.readAsDataURL(file);
   }
 
   processFile(theFile) {
@@ -123,7 +138,7 @@ export class MedicationsComponent implements OnInit {
     }
     console.log(formData, 'data');
 
-    this.medServ.addMedication(formData).subscribe((data) => {
+    this.medicationService.addMedication(formData).subscribe((data) => {
       console.log(data);
 
     }, (err) => {
@@ -145,11 +160,62 @@ export class MedicationsComponent implements OnInit {
 
     console.log(k)
 
-    this.medServ.deleteMedtcations(JSON.stringify(k.id)).subscribe((res) => {
+    this.medicationService.deleteMedtcations(JSON.stringify(k.id)).subscribe((res) => {
       console.log(res);
       this.apps.splice(i, 1)
     }, (err) => {
       console.log(err);
     })
+  }
+
+  //Function to convert base64 String to ByteArray
+  b64toBlob(b64Data, contentType = '', sliceSize = 512) {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+  }
+
+  //Method to edit the form
+  editMedication(medicationDetail) {
+    this.flag = !this.flag;
+    
+    if (!this.flag) {
+      let formDataa = new FormData();
+      if (this.setImageEditFlag) {
+        console.log()
+        console.log(medicationDetail.medicationImage.changingThisBreaksApplicationSecurity);
+        const blob = this.b64toBlob(medicationDetail.image);
+
+        formDataa.append("MEDIMAGE", blob)
+
+        this.setImageEditFlag = true;
+      }
+      else {
+        formDataa.append("MEDIMAGE", this.editedImageData)
+      }
+      console.log(medicationDetail.medicationSchedule);
+
+      this.medicationService.editMedications(parseInt(medicationDetail.id), medicationDetail.medicationDetails,
+        medicationDetail.medication, medicationDetail.medicationSchedule, formDataa).subscribe((data) => {
+
+        }, (err) => {
+
+        })
+    }
+
   }
 }
