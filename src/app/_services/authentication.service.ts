@@ -24,6 +24,8 @@ export class AuthenticationService {
     login(username: string, password: string) {
         // return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
         return this.http.post<any>(`${environment.localURL}/users/login`, {USER_NAME: username, PASSWORD:  password})
+        // return this.http.post<any>(`${environment.apiUrl}/authenticate`, { username, password })
+        // return this.http.post<any>(`${environment.localURL}/users/login`, {USER_NAME: username, PASSWORD:  password})
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 console.log(user)
