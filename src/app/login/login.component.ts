@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     passwordFormControl = new FormControl('', [
         // Validators.required,
     ]);
+    loginData: { "fname": string; "id": number; "lname": string; "passowrd": string; "password": string; "role": string; "roles": string; "username": string; };
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -62,6 +63,16 @@ export class LoginComponent implements OnInit {
         // }
 
         // this.loading = true;
+        // this.loginData = {
+        //     "fname": "string",
+        //     "id": 0,
+        //     "lname": "string",
+        //     "passowrd": "string",
+        //     "password": "string",
+        //     "role": "string",
+        //     "roles": "string",
+        //     "username": "string"
+        // }
         this.authenticationService.login(this.emailFormControl.value, this.passwordFormControl.value)
             // .pipe(first())
             .subscribe(

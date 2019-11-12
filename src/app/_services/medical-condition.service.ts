@@ -24,7 +24,7 @@ export class MedicalConditionService {
 
   deleteMedicalCondition(id) {
     console.log('removed', parseInt(id));
-    return this.http.delete(`${environment.apiUrl}/condition-types/${parseInt(id)}`);
+    return this.http.delete(`${environment.apiUrl}/conditions-types/${parseInt(id)}`);
   }
 
 

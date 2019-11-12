@@ -65,6 +65,8 @@ export class MedicalConditionComponent implements OnInit {
     this.medicalConditionService.getMedicalCondition().subscribe(
       (res: []) => {
         console.log(res);
+        // console.log('img',res['Image']);
+        
         this.apps = this.apps.concat(res)
       },
       err => {
@@ -140,7 +142,7 @@ export class MedicalConditionComponent implements OnInit {
 
   removeMedication(id, i) {
     console.log(id, 'ts');
-    // this.apps.splice(i, 1)
+    this.apps.splice(i, 1)
     this.medicalConditionService.deleteMedicalCondition(id).subscribe((res) => {
       console.log(res);
       this.apps.splice(i, 1)
