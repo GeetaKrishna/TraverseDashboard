@@ -67,8 +67,9 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     // this.router.navigate([this.returnUrl]);
-                    this.router.navigate(['admin/landing'])
                     console.log(data);
+                    // localStorage.setItem('token', data.token)
+                    this.router.navigate(['admin/landing'])
 
                 },
                 error => {

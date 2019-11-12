@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MedicationService } from '../_services/medication.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-medications',
@@ -35,7 +34,6 @@ export class MedicationsComponent implements OnInit {
   medIntake = new FormControl('');
   medDesc = new FormControl('');
   medMeal = new FormControl('');
-  medData: { "DESCRIPTION": any; "MEDIMAGE": any; "MEDNAME": any; };
   imageData: any;
   flag: boolean = false;
   editedImageData: any;
@@ -49,13 +47,6 @@ export class MedicationsComponent implements OnInit {
         let medicinesAvailable = []
 
         res.forEach((element, index) => {
-
-          //   t['color'] = colors[index];
-          //   // t['id'] = element['MEDID']
-          //   // t['medicationSchedule'] = element['MEDSCHEDULE'];
-          //   // t['medicationDetails'] = element['DESCRIPTION'];
-          //   // t['medication'] = element['MEDNAME'];
-          //   // let TYPED_ARRAY = new Uint8Array(element['MEDIMAGE']);
 
           if (element['medid'] != 44) {
             let colors = ['lightgreen',
@@ -125,21 +116,47 @@ export class MedicationsComponent implements OnInit {
 
   successAdding() {
 
+    switch (this.medIntake.value) {
+      case 'once': {
+        this.medIntake.setValue("Once a Day")
+        break;
+      }
+      case 'twice': {
+        this.medIntake.setValue("Twice a Day")
+        break;
+      }
+      case 'thrice': {
+        this.medIntake.setValue("Thrice a Day")
+        break;
+      }
+      case 'four': {
+        this.medIntake.setValue("Four times a Day")
+        break;
+      }
+      case 'five': {
+        this.medIntake.setValue("Five times a Day")
+        break;
+      }
+    }
+
     const formData = new FormData();
     formData.append('DESCRIPTION', this.medDesc.value);
     formData.append('MEDIMAGE', this.imageData);
     formData.append('MEDNAME', this.medName.value);
-    formData.append('MEDSCHEDULE', this.medIntake.value); console.log(formData);
-
-    this.medData = {
-      "DESCRIPTION": this.medDesc.value,
-      "MEDIMAGE": { data: this.imageData, 'content-type': "image/*" },
-      "MEDNAME": this.medName.value
-    }
-    console.log(formData, 'data');
+    formData.append('MEDSCHEDULE', this.medIntake.value);
 
     this.medicationService.addMedication(formData).subscribe((data) => {
       console.log(data);
+      let t = {};
+
+      t['id'] = data['medid']
+      t['medicationSchedule'] = data['medschedule'];
+      t['medicationDetails'] = data['description'];
+      t['medication'] = data['medname'];
+      t['image'] = data['medimage']
+
+      t['medicationImage'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${data['medimage']}`);
+      this.apps.push(t);
 
     }, (err) => {
       console.log(err, "err");
@@ -192,7 +209,7 @@ export class MedicationsComponent implements OnInit {
   //Method to edit the form
   editMedication(medicationDetail) {
     this.flag = !this.flag;
-    
+
     if (!this.flag) {
       let formDataa = new FormData();
       if (this.setImageEditFlag) {

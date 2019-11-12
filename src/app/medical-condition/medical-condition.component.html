@@ -18,13 +18,19 @@
                     <div class="card h-100" [style.background-color]="app.color">
                         <div class="card-header font-weight-bold ch-1"
                             style="background-color:whitesmoke; display:flex;">
-                            <div style="width: 100%">
+                            <div style="width: 100%" [attr.contenteditable]="flag" [textContent]="app.Condition_Name"
+                                (input)="app.Condition_Name=$event.target.textContent">
                                 {{app.Condition_Name}}
                             </div>
                         </div>
                         <div *ngIf="i != 0; else addMedication" class="card-body">
-                            <img mat-card-md-image [src]="app.Image" height="125px" width="200px"
-                                alt="Image Not Available">
+
+                            <div [attr.contenteditable]="flag">
+                                <img mat-card-md-image [src]="app.Image" height="125px" width="200px"
+                                    alt="Image Not Available">
+                                <input type="file" *ngIf="flag" (change)="editImageInput($event, i, apps)">
+
+                            </div>
                             <div class="row mt-4">
                                 <div class="col-md-12">
                                     <i class="fas fa-spider-web"></i> <a href="http://www.google.com"
@@ -32,13 +38,16 @@
                                         Learn
                                         More </a>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12" [attr.contenteditable]="flag" [textContent]="app.Triggers"
+                                    (input)="app.Triggers=$event.target.textContent">
                                     {{app.Triggers}}
                                 </div>
-                                <div class="col-md-12">
-                                    {{app.DiagnosisDate}}
+                                <div class="col-md-12" [attr.contenteditable]="flag" [textContent]="app.DiagnosisDate"
+                                    (input)="app.DiagnosisDate=$event.target.textContent">
+                                    First Diagnosed <b>{{app.DiagnosisDate | date : mm}}</b>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12" [attr.contenteditable]="flag" [textContent]="app.Severity"
+                                    (input)="app.Severity=$event.target.textContent">
                                     {{app.Severity}}
                                 </div>
                             </div>
@@ -50,7 +59,8 @@
                                         <i class="fa fa-calendar mr-2" aria-hidden="true"></i>
                                     </span>
                                     <span>
-                                        <i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>
+                                        <i class="fa fa-pencil-square-o mr-2" (click)="editMedicalCondition(i, app)"
+                                            aria-hidden="true"></i>
                                     </span>
                                     <span>
                                         <i class="fa fa-plus mr-2" aria-hidden="true"></i>

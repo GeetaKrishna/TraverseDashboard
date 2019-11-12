@@ -58,6 +58,7 @@ export class MedicalConditionComponent implements OnInit {
   imageData: any;
   setImageEditFlag: boolean;
   editedImageData: any;
+  flag: any = false;
 
   constructor(private http: HttpClient, private medicalConditionService: MedicalConditionService, private sanitizer: DomSanitizer) { }
 
@@ -65,7 +66,22 @@ export class MedicalConditionComponent implements OnInit {
     this.medicalConditionService.getMedicalCondition().subscribe(
       (res: []) => {
         console.log(res);
-        this.apps = this.apps.concat(res)
+
+        res.forEach((data) => {
+          console.log(data);
+          let t = {};
+          t['ConditionType_ID'] = data['ConditionType_ID']
+          t['Condition_Name'] = data['Condition_Name']
+          t['DiagnosisDate'] = data['DiagnosisDate']
+          t['LinktoAPI'] = data['LinktoAPI']
+          t['PID'] = data['PID']
+          t['Severity'] = data['Severity']
+          t['Triggers'] = data['Triggers']
+          t['Image'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${data['Image']}`);
+          this.apps.push(t)
+        })
+
+        // this.apps = this.apps.concat(res)
       },
       err => {
         console.log("error", err);
@@ -88,20 +104,9 @@ export class MedicalConditionComponent implements OnInit {
     let oldImageValue = data[index].medicationImage;
     reader.onload = function (e) {
       console.log(e.target['result'])
-      data[index].medicationImage = e.target['result'];
+      data[index].Image = e.target['result'];
     }
     reader.readAsDataURL(file);
-  }
-
-  processFile(theFile) {
-    return function (e) {
-      let fileByteArray = [];
-      var theBytes = e.target.result;
-      fileByteArray.push(theBytes);
-      for (var i = 0; i < fileByteArray.length; i++) {
-        document.getElementById('file').innerText += fileByteArray[i];
-      }
-    }
   }
 
   toggleMedication() {
@@ -109,16 +114,21 @@ export class MedicalConditionComponent implements OnInit {
   }
 
   successAdding() {
-    this.medicalConditionData = {
-      "medication": this.conditionName.value,
-      "medicationImage": this.medImage.value,
-      // "medicationImage": this.imageData,
-      "diagnosed": this.Diagnosed.value,
-      "restrictions": this.triggers.value,
-      "severity": this.severity.value
+    let newMedicalCondition = {
+      "Condition_Name": this.conditionName.value,
+      "DiagnosisDate": this.Diagnosed.value,
+      "Triggers": this.triggers.value,
+      "Severity": this.severity.value
+    };
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      console.log(e.target['result'])
+      newMedicalCondition['Image'] = e.target['result'];
     }
-    this.apps.push(this.medicalConditionData)
-    console.log(this.medicalConditionData, 'data');
+
+    reader.readAsDataURL(this.imageData);
+
+    // console.log(newMedicalCondition, 'data');
     let formDataa = new FormData();
     formDataa.append("conditionName", this.conditionName.value)
     formDataa.append("linkToApi", `http://www.google.com/${this.conditionName.value}`)
@@ -128,8 +138,13 @@ export class MedicalConditionComponent implements OnInit {
     formDataa.append("image", this.imageData, this.imageData.name)
     this.medicalConditionService.addMedicalCondition(formDataa).subscribe((data) => {
       console.log(data);
+      this.apps.push(newMedicalCondition)
+
     }, (err) => {
       console.log(err);
+      if (err === "OK") {
+        this.apps.push(newMedicalCondition)
+      }
     })
     this.addMedicationToggle = !this.addMedicationToggle
   }
@@ -140,12 +155,65 @@ export class MedicalConditionComponent implements OnInit {
 
   removeMedication(id, i) {
     // this.apps.splice(i, 1)
+    console.log(id, i);
+
     this.medicalConditionService.deleteMedicalCondition(id).subscribe((res) => {
       console.log(res);
       this.apps.splice(i, 1)
     }, (err) => {
       console.log(err);
+
+      if (err === "OK") {
+        this.apps.splice(i, 1)
+      }
     })
+  }
+
+  //Function to convert base64 String to ByteArray
+  b64toBlob(b64Data, contentType = '', sliceSize = 512) {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+  }
+
+  editMedicalCondition(index, medicationDetail){
+    this.flag = !this.flag;
+    if (!this.flag) {
+      let formDataa = new FormData();
+      if (this.setImageEditFlag) {
+        console.log(medicationDetail.medicationImage.changingThisBreaksApplicationSecurity);
+        const blob = this.b64toBlob(medicationDetail.image);
+
+        formDataa.append("MEDIMAGE", blob)
+
+        this.setImageEditFlag = true;
+      }
+      else {
+        formDataa.append("MEDIMAGE", this.editedImageData)
+      }
+      console.log(medicationDetail.medicationSchedule);
+
+      // this.medicationService.editMedications(parseInt(medicationDetail.id), medicationDetail.medicationDetails,
+      //   medicationDetail.medication, medicationDetail.medicationSchedule, formDataa).subscribe((data) => {
+
+      //   }, (err) => {
+
+      //   })
+    }
   }
 
 }

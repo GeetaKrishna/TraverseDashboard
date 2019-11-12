@@ -19,13 +19,16 @@ export class MedicalConditionService {
   }
 
   editMedicalCondition(id, description, name, schedule, body) {
-    return this.http.put(`${environment.apiUrl}/api/medications/editmed/${id}?DESCRIPTION=${description}&MEDNAME=${name}&MEDSCHEDULE=${schedule}`, body);
+    console.log(id, description, name, schedule, body);
+    
+    return this.http.put(`${environment.apiUrl}/api/medicatdions/editmed/${id}?DESCRIPTIdsaON=${description}&MEDNAME=${name}&MEDSCHEDULE=${schedule}`, body);
+    // return this.http.put(`${environment.apiUrl}/api/medications/editmed/${id}?DESCRIPTION=${description}&MEDNAME=${name}&MEDSCHEDULE=${schedule}`, body);
   }
 
   deleteMedicalCondition(id) {
     console.log('removed', id);
 
-    return this.http.delete(`${environment.apiUrl}/condition-types/${parseInt(id)}`);
+    return this.http.delete(`${environment.apiUrl}/conditions-types/${parseInt(id)}`);
   }
 
 
