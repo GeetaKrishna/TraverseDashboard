@@ -10,7 +10,26 @@
     color: black;
 }
 
+.ch-3 {
+    background-color: rgb(96, 107, 117);
+    color: white;
+
+}
+
+.ch-2 {
+    background-color: rgb(65, 118, 168);
+    color: white;
+
+}
+
+.ch-4 {
+    background-color: rgb(180, 80, 80);
+    color: white;
+
+}
+
 mat-form-field {
     border-top: 0px !important;
 padding: 0px !important;
 }
+

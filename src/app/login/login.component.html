@@ -73,6 +73,9 @@
                 <div style="margin-top: 40px;">
                     <mat-form-field class="example-full-width">
                         <input matInput placeholder="Username" [formControl]="emailFormControl">
+                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                            Username is <strong>required</strong>
+                        </mat-error>
                         <!-- <mat-error
                                 *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                                 Please enter a valid email address
@@ -84,11 +87,12 @@
                     <br>
                     <mat-form-field class="example-full-width">
                         <input matInput placeholder="Password" type="password" [formControl]="passwordFormControl">
-                        <!-- <mat-error *ngIf="passwordFormControl.hasError('required')">
-                                Password is <strong>required</strong>
-                            </mat-error> -->
+                        <mat-error *ngIf="passwordFormControl.hasError('required')">
+                            Password is <strong>required</strong>
+                        </mat-error>
                     </mat-form-field><br>
-                    <button class="btn btn-secondary" mat-raised-button (click)="onSubmit()">
+                    <button class="btn btn-secondary" mat-raised-button
+                        [disabled]="!(emailFormControl.valid && passwordFormControl.valid)" (click)="onSubmit()">
                         Login
                     </button>
                 </div>
@@ -98,6 +102,7 @@
                         <button mat-raised-button class="btn-secondary" [routerLink]="['/signUp']">Sign Up</button>
                     </div>
                 </div>
+                <!--  (click)="signup()" -->
             </div>
         </div>
     </div>

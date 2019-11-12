@@ -18,20 +18,20 @@ export class RegisterComponent implements OnInit {
   returnUrl: string;
   error = '';
   emailFormControl = new FormControl('', [
-    // Validators.required,
-    // Validators.email,
+    Validators.required,
+    Validators.email,
   ]);
   firstNameFormControl = new FormControl('', [
-    // Validators.required,
+    Validators.required,
   ]);
   lastNameFormControl = new FormControl('', [
-    // Validators.required,
+    Validators.required,
   ]);
   passwordFormControl = new FormControl('', [
-    // Validators.required,
+    Validators.required,
   ]);
   cfpasswordFormControl = new FormControl('', [
-    // Validators.required,
+    Validators.required,
   ]);
   constructor(
     private formBuilder: FormBuilder,
@@ -46,6 +46,9 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    // console.log('yo');
+    // window.alert('helooo')
+
     this.signUpForm = this.formBuilder.group({
       fname: ['', Validators.required],
       lname: ['', Validators.required],
@@ -66,7 +69,6 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['login'])
 
     // stop here if form is invalid
-
 
     // if (this.loginForm.invalid) {
     //     return;

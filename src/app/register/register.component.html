@@ -151,8 +151,9 @@
                             </mat-form-field>
                             <br>
                             <div>
-                                <button mat-raised-button class="btn-secondary" [routerLink]="['/home']">Sign
+                                <button mat-raised-button class="btn-secondary" [disabled]="!(firstNameFormControl.valid && lastNameFormControl.valid && emailFormControl.valid && passwordFormControl.valid && cfpasswordFormControl.valid)">Sign
                                     Up</button>
+                                <!-- [routerLink]="['/home']" -->
                             </div>
                         </form>
                     </div>

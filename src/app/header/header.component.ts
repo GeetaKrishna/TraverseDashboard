@@ -1,4 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef, private router: Router, private authentication: AuthenticationService) { }
 
   ngOnInit() {
   }
@@ -22,5 +24,13 @@ export class HeaderComponent implements OnInit {
 
     reader.readAsDataURL(k.files[0]);//attempts to read the file in question.
     console.log(localStorage)
+  }
+  logOut() {
+    console.log('logged out');
+    this.authentication.logout()
+    // localStorage.clear()
+    // this.router.navigateByUrl('/');
+    // localStorage.clear()
+    // // [routerLink]="['/']"
   }
 }

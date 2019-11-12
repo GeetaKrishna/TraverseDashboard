@@ -16,11 +16,11 @@ export class LoginComponent implements OnInit {
     returnUrl: string;
     error = '';
     emailFormControl = new FormControl('', [
-        // Validators.required,
+        Validators.required,
         // Validators.email,
     ]);
     passwordFormControl = new FormControl('', [
-        // Validators.required,
+        Validators.required,
     ]);
     constructor(
         private formBuilder: FormBuilder,
@@ -28,13 +28,15 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService
     ) {
+
         // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) {
-            this.router.navigate(['/']);
-        }
+        // if (this.authenticationService.currentUserValue) {
+        //     this.router.navigate(['/']);
+        // }
     }
 
     ngOnInit() {
+
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
@@ -76,5 +78,10 @@ export class LoginComponent implements OnInit {
                     this.error = error;
                     this.loading = false;
                 });
+    }
+    signup() {
+        console.log('heloo');
+        
+        this.router.navigateByUrl('signUp');
     }
 }
