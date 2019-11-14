@@ -7,7 +7,7 @@ export const environment = {
   // apiUrl: 'http://localhost:4200'
   apiUrl: 'http://172.17.5.95:8090',
   // apiUrl: 'http://localhost:8080',
-  localURL: 'http://b916b7c1.ngrok.io'
+  localURL: 'https://24696d01.ngrok.io'
 };
 
 /*

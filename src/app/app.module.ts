@@ -50,6 +50,7 @@ import { FamilyComponent } from './family/family.component';
 import { FourCComponent } from './four-c/four-c.component';
 import { DocumentTypeComponent } from './document-type/document-type.component';
 import { ElectronicHealthTypeComponent } from './electronic-health-type/electronic-health-type.component';
+import { PharmacyComponent } from './pharmacy/pharmacy.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { ElectronicHealthTypeComponent } from './electronic-health-type/electron
     FourCComponent,
     DocumentTypeComponent,
     ElectronicHealthTypeComponent,
+    PharmacyComponent,
   ],
   imports: [
     BrowserModule,

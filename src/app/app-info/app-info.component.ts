@@ -50,6 +50,12 @@ export class AppInfoComponent implements OnInit {
     } else if (id == 8) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/document')
+    } else if (id == 11) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/electronicHealth/Visits')
+    } else if (id == 23) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/pharmacy')
     }
   }
 
@@ -76,6 +82,12 @@ export class AppInfoComponent implements OnInit {
       } else if (id == 8) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/document')
+      } else if (id == 11) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/electronicHealth/Visits')
+      } else if (id == 23) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/pharmacy')
       }
       this.toast.success('App installed Successfully.')
       // if (JSON.parse(localStorage.getItem("apps"))) {

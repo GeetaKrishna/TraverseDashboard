@@ -24,6 +24,7 @@ import { FamilyComponent } from './family/family.component';
 import { FourCComponent } from './four-c/four-c.component';
 import { DocumentTypeComponent } from './document-type/document-type.component';
 import { ElectronicHealthTypeComponent } from './electronic-health-type/electronic-health-type.component';
+import { PharmacyComponent } from './pharmacy/pharmacy.component';
 
 const routes: Routes = [
 
@@ -75,7 +76,8 @@ const routes: Routes = [
         children: [
           { path: 'fitbit', component: TestComponent }
         ]
-      }
+      },
+      { path: 'pharmacy', component: PharmacyComponent },
     ]
   },
   { path: '**', redirectTo: 'admin/landing' }
