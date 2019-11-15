@@ -1,5 +1,6 @@
 
 // this component completley depends upon https://mattlewis92.github.io/angular-calendar/
+// https://mattlewis92.github.io/angular-calendar/#/custom-templates
 import { FormControl } from '@angular/forms';
 
 import {
@@ -55,7 +56,10 @@ export class CalendarComponent {
   @ViewChild('newAppointment', { static: true }) newAppointment: TemplateRef<any>;
   @ViewChild('tesst', { static: true }) tesst: TemplateRef<any>;
   existingEvents: any;
+  clickedDate: Date;
   constructor(private modal: NgbModal) { }
+
+  ngOnInit(){}
 
   view: CalendarView = CalendarView.Month;
 
@@ -82,6 +86,9 @@ export class CalendarComponent {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
+        if(this.events.length <=1){
+          this.activeDayIsOpen = !this.activeDayIsOpen
+        }
         this.handleEvent('Deleted', event);
       }
     }
@@ -147,6 +154,7 @@ export class CalendarComponent {
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     console.log(date, events)
+    this.clickedDate = date;
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -186,6 +194,8 @@ export class CalendarComponent {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
+    console.log('handling event', event);
+    
     this.modalData = { event, action };
     // this.modal.open(this.modalContent, { size: 'sm' });
   }
@@ -198,6 +208,7 @@ export class CalendarComponent {
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
         color: colors.red,
+        actions: this.actions,
         draggable: true,
         resizable: {
           beforeStart: true,
@@ -212,11 +223,39 @@ export class CalendarComponent {
     this.modal.open(this.tesst)
   }
 
+  close(k) {
+    console.log(k);
+    console.log(this.AppointmentName.value);
+    console.log(this.AppointmentDetails.value);
+
+    if (k === "Add") {
+      this.events = [
+        ...this.events,
+        {
+          title: this.AppointmentDetails.value,
+          start: startOfDay(this.clickedDate),
+          end: endOfDay(this.clickedDate),
+          color: colors.red,
+          actions: this.actions,
+          draggable: true,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true
+          }
+        }
+      ];
+    }
+    this.modal.dismissAll();
+    this.AppointmentName.reset()
+    this.AppointmentDetails.reset()
+    // this.addNewEvent(new Date())
+  }
+
   addNewEvent(startDate): void {
 
-    this.modal.open(this.newAppointment).result.then((data)=>{
+    this.modal.open(this.newAppointment).result.then((data) => {
       console.log(data)
-      if(data === 'Add'){
+      if (data === 'Add') {
         this.events = [
           ...this.events,
           {
@@ -224,6 +263,7 @@ export class CalendarComponent {
             start: startOfDay(startDate),
             end: endOfDay(startDate),
             color: colors.red,
+            actions: this.actions,
             draggable: true,
             resizable: {
               beforeStart: true,
@@ -236,7 +276,6 @@ export class CalendarComponent {
 
 
   }
-
 
 
   deleteEvent(eventToDelete: CalendarEvent) {
