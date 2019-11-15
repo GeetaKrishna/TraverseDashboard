@@ -12,6 +12,8 @@ import { element } from 'protractor';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  selectedVal: String = 'Consumers'
+  selected = 'Consumers'
   starsCount: number = 2.5;
   starsCounts: number[] = [];
   images = ["assets/icons-home/motion01.png", "assets/icons-home/motion02.png", "assets/icons-home/motion03.png", "assets/icons-home/motion04.png", "assets/icons-home/motion05png", "assets/icons-home/motion06.png"];
@@ -71,6 +73,73 @@ export class HomeComponent implements OnInit {
       "ROUTESCREEN": 'admin/myHeart',
       "installed": false
     },
+    {
+      "APPID": 7,
+      "APPDETAILS": "SAYS ABOUT THE MEDICATION DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "My Medications",
+      "URL": "assets/icons-home/motion07.png",
+      "userTable": [],
+      "RATING": 3.5,
+      "ROUTESCREEN": 'admin/medication',
+      "installed": false
+
+    },
+    {
+      "APPID": 8,
+      "APPDETAILS": "SAYS ABOUT THE HEALTH DOCUMENT DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "Health Documents",
+      "URL": "assets/icons-home/healthDocuments.png",
+      "userTable": [],
+      "RATING": 5,
+      "ROUTESCREEN": 'admin/document/Personal',
+      "installed": false
+    },
+    {
+      "APPID": 9,
+      "APPDETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
+      "VERSION": "1.0v",
+      "APPNAME": "Health Connect",
+      "URL": "assets/icons-home/motion09.jpeg",
+      "userTable": [],
+      "RATING": 3,
+      "ROUTESCREEN": 'admin/healthconnect',
+      "installed": false
+    },
+    {
+      "APPID": 10,
+      "APPDETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
+      "VERSION": "1.0v",
+      "APPNAME": "Insurance Central",
+      "URL": "assets/icons-home/motion10.png",
+      "userTable": [],
+      "RATING": 4,
+      "ROUTESCREEN": 'admin/insurance',
+      "installed": false
+    },
+    {
+      "APPID": 11,
+      "APPDETAILS": "MAINTAINS ALL HEALTH RECORDS",
+      "VERSION": "1.0v",
+      "APPNAME": "Electronic Health Records",
+      "URL": "assets/hrt.png",
+      "userTable": [],
+      "RATING": 4,
+      "ROUTESCREEN": 'admin/electronicHealth/Visits',
+      "installed": false
+    },
+    // {
+    //   "APPID": 11,
+    //   "APPDETAILS": "MAINTAINS ALL MEDICAL RECORDS",
+    //   "VERSION": "1.0v",
+    //   "APPNAME": "EMR Manager",
+    //   "URL": "assets/hrt.png",
+    //   "userTable": [],
+    //   "RATING": 4,
+    //   "ROUTESCREEN": 'admin/**',
+    //   "installed": false
+    // }
     // {
     //   "APPID": 7,
     //   "APPDETAILS": "SAYS ABOUT THE MEDICATION DETAILS",
@@ -129,13 +198,114 @@ export class HomeComponent implements OnInit {
     },
     {
       "APPID": 11,
-      "APPDETAILS": "MAINTAINS ALL MEDICAL RECORDS",
+      "APPDETAILS": "MAINTAINS ALL HEALTH RECORDS",
       "VERSION": "1.0v",
-      "APPNAME": "EMR Manager",
+      "APPNAME": "Electronic Health Records",
       "URL": "assets/hrt.png",
       "userTable": [],
       "RATING": 4,
-      "ROUTESCREEN": 'admin/**',
+      "ROUTESCREEN": 'admin/electronicHealth/Visits',
+      "installed": false
+    },
+    // {
+    //   "APPID": 11,
+    //   "APPDETAILS": "MAINTAINS ALL MEDICAL RECORDS",
+    //   "VERSION": "1.0v",
+    //   "APPNAME": "EMR Manager",
+    //   "URL": "assets/hrt.png",
+    //   "userTable": [],
+    //   "RATING": 4,
+    //   "ROUTESCREEN": 'admin/**',
+    //   "installed": false
+    // }
+  ]
+  pApps: any[] = [
+    {
+      "APPID": 20,
+      "APPDETAILS": "SAYS ABOUT THE LABORATORY DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "Laboratory",
+      "URL": "assets/icons-home/Lab.png",
+      "userTable": [],
+      "RATING": 3.5,
+      // "ROUTESCREEN": 'admin/medication',
+      "installed": false
+    },
+    {
+      "APPID": 21,
+      "APPDETAILS": "SAYS ABOUT THE PATIENT DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "Patients",
+      "URL": "assets/icons-home/patients.png",
+      "userTable": [],
+      "RATING": 5,
+      // "ROUTESCREEN": 'admin/medication',
+      "installed": false
+    },
+    {
+      "APPID": 22,
+      "APPDETAILS": "SAYS ABOUT THE BILLING DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "Billing",
+      "URL": "assets/icons-home/billing.png",
+      "userTable": [],
+      "RATING": 4,
+      // "ROUTESCREEN": 'admin/medication',
+      "installed": false
+    },
+    {
+      "APPID": 23,
+      "APPDETAILS": "SAYS ABOUT THE PHARMACY DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "Pharmacy",
+      "URL": "assets/icons-home/pharmacy.webp",
+      "userTable": [],
+      "RATING": 3,
+      "ROUTESCREEN": 'admin/pharmacy',
+      "installed": false
+    },
+    {
+      "APPID": 24,
+      "APPDETAILS": "SAYS ABOUT THE RECORDS DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "Records",
+      "URL": "assets/icons-home/records.png",
+      "userTable": [],
+      "RATING": 5,
+      // "ROUTESCREEN": 'admin/medication',
+      "installed": false
+    },
+    {
+      "APPID": 25,
+      "APPDETAILS": "SAYS ABOUT THE PROVIDERS CONNECT DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "Providers Connect",
+      "URL": "assets/icons-home/providers.png",
+      "userTable": [],
+      "RATING": 1,
+      // "ROUTESCREEN": 'admin/medication',
+      "installed": false
+    },
+    {
+      "APPID": 26,
+      "APPDETAILS": "SAYS ABOUT THE EMERGENCY ROOM DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "Emergency Room",
+      "URL": "assets/icons-home/emer.png",
+      "userTable": [],
+      "RATING": 2.5,
+      // "ROUTESCREEN": 'admin/medication',
+      "installed": false
+    },
+    {
+      "APPID": 4,
+      "APPDETAILS": "YOU CAN SEARCH FOR ARTICLES FROM ONLINE",
+      "VERSION": "1.0v",
+      "APPNAME": "Health Knowledge Base",
+      "URL": "assets/icons-home/healthKnowledgeBase.jpeg",
+      "userTable": [],
+      "RATING": 1.5,
+      "ROUTESCREEN": 'admin/healthKnowledgeBase/healthKnowledgeContent',
       "installed": false
     }
   ]
@@ -168,6 +338,10 @@ export class HomeComponent implements OnInit {
 
   goTo(apps) {
     console.log(apps);
+  }
+  changeClient(value) {
+    this.selectedVal = value
+    console.log(value);
   }
   // navigate(id) {
   //   if (id == 3) {

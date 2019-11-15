@@ -15,12 +15,11 @@
           </div>
         </div>
       </div>
-
       <div class="card-body col-md-12">
         <div class="category">
           <mat-form-field class="example-full-width" style="font-family: 'Montserrat', sans-serif; ">
             <mat-label>Category</mat-label>
-            <mat-select [(value)]="selected">
+            <mat-select [(value)]="selected" (selectionChange)="changeClient($event.value)">
               <mat-option>None</mat-option>
               <mat-option value="Consumers">Consumers</mat-option>
               <mat-option value="Providers">Providers</mat-option>
@@ -28,8 +27,8 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div style="display: flex; margin-top: 8px;">
-          <div *ngFor="let app of apps">
+        <div *ngIf="selectedVal == 'Consumers'" style="margin-top: 8px; margin:auto;" class="row">
+          <div *ngFor="let app of apps" class="col-3 mt-2 mb-2">
             <mat-card class="example-card" (click)="openBottomSheet(app)"
               style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
               <div style="text-align: center;">
@@ -49,8 +48,8 @@
             </mat-card>
           </div>
         </div>
-        <div style="display: flex; margin-top: 8px;">
-          <div *ngFor="let app of mapps">
+        <!-- <div *ngIf="selectedVal == 'Consumers'" style=" margin-top: 8px;" class="row">
+          <div *ngFor="let app of mapps" class="col-3 mt-2 mb-2">
             <mat-card class="example-card" (click)="openBottomSheet(app)"
               style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
               <div style="text-align: center;">
@@ -69,6 +68,32 @@
               </mat-card-actions>
             </mat-card>
           </div>
+        </div> -->
+        <div *ngIf="selectedVal == 'Providers'" style="margin-top: 8px; margin:auto;" class="row">
+          <div *ngFor="let app of pApps" class="col-3 mt-2 mb-2">
+            <mat-card class="example-card" (click)="openBottomSheet(app)"
+              style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
+              <div style="text-align: center;">
+                <img mat-card-md-image src="{{app.URL}}" alt="Image Not Available">
+              </div>
+              <mat-card-content style="width: 200px; font-size: 14px; margin-top: 8px;">
+                <p>
+                  {{app.APPNAME}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <div *ngFor="let item of [1]; let index = index" style="font-size: 15px;">
+                  <rating [(ngModel)]=app.RATING [readonly]="true" [float]="true">
+                  </rating>
+                </div>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+        <div *ngIf="selectedVal == 'StakeHolders'" style="margin-top: 8px; margin:auto;" class="row">
+          <p style="margin: auto;" class="center">
+            No Apps found.
+          </p>
         </div>
       </div>
     </div>

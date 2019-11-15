@@ -1,0 +1,63 @@
+<div class="card mt-5 mb-5">
+    <div class="card-header ch-1">
+        <div class="row ">
+            <div class="col justify-content-start">
+                <p class="cardHead">
+                    Pharmacies
+                </p>
+            </div>
+            <div class="col justify-content-end">
+                <img src="../../assets/icons-home/pharmacy.webp"
+                    style="height: 35px; width: 35px; float: right; mix-blend-mode: multiply" />
+            </div>
+        </div>
+    </div>
+    <div class="card-body ">
+        <div style="display: flex;" class="row ml-2 mr-2">
+            <div *ngFor="let app of apps" class="col-md-4" style="margin-bottom: 20px;">
+                <mat-card class="example-card"
+                    style=" border-radius: 5px;box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;">
+                    <mat-card-header>
+                        <mat-card-title>{{app.APP_NAME}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>
+                            <span class="mr-2">
+                                <i class="fa fa-map-marker icon "></i>
+                            </span>
+                            <span>{{app.APP_LOCATION}}</span>
+                        </p>
+                        <p>
+                            <span class="mr-2">
+                                <i class="fa fa-clock-o icon"></i>
+                            </span>
+                            <span> {{app.APP_TIMINGS}}</span>
+                        </p>
+                        <p>
+                            <span class="mr-2">
+                                <i class="fa fa-medkit icon "></i>
+                            </span>
+                            <span>{{app.APP_PRES}} Prescriptions</span>
+                        </p>
+                        <p>
+                            <span class="mr-2">
+                                <i class="fa fa-hourglass-half icon"></i>
+                            </span>
+                            <span>{{app.APP_DURATION}}</span>
+                        </p>
+                    </mat-card-content>
+                    <mat-card-actions style="margin-left:190px; ">
+                        <button mat-icon-button aria-label="Example icon-button with a heart icon"
+                            (click)="shareCard(app.APPID)">
+                            <mat-icon>refresh</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon"
+                            (click)="shareMessage(app.APPID)">
+                            <mat-icon>message</mat-icon>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
