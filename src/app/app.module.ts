@@ -51,6 +51,9 @@ import { FourCComponent } from './four-c/four-c.component';
 import { DocumentTypeComponent } from './document-type/document-type.component';
 import { ElectronicHealthTypeComponent } from './electronic-health-type/electronic-health-type.component';
 import { PharmacyComponent } from './pharmacy/pharmacy.component';
+import { PatientViewComponent } from './patient-view/patient-view.component';
+import { PatientBillingComponent } from './patient-billing/patient-billing.component';
+import { TelemedicineComponent } from './telemedicine/telemedicine.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +86,9 @@ import { PharmacyComponent } from './pharmacy/pharmacy.component';
     DocumentTypeComponent,
     ElectronicHealthTypeComponent,
     PharmacyComponent,
+    PatientViewComponent,
+    PatientBillingComponent,
+    TelemedicineComponent,
   ],
   imports: [
     BrowserModule,

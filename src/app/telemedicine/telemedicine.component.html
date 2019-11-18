@@ -1,0 +1,72 @@
+<div class="card mt-5 mb-5" style=" height: 100%;">
+    <div class="card-header ch-1">
+        <div class="row ">
+            <div class="col justify-content-start">
+                <p class="cardHead" style="font-size: 24px; margin-bottom: 0 !important;">
+                    Health Connect
+                </p>
+            </div>
+            <div class="col justify-content-end">
+                <img src="../../assets/icons-home/motion09.jpeg"
+                    style="height: 35px; width: 35px; float: right; mix-blend-mode: multiply" />
+            </div>
+        </div>
+    </div>
+    <div class="card-body" style="height: 540px;">
+        <div class="row no-gutters" style="height: 516px;">
+            <div class="col-md-4 vertical" style="overflow-x:hidden; overflow-y:auto;">
+                <div style="margin-right: 5px;">
+
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Medical Team</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let medicalTeam of medicalTeams" [value]="medicalTeam.value">
+                                    {{medicalTeam.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="inner-addon right-addon">
+                        <i class="fa fa-search"></i>
+                        <input type="text" [(ngModel)]="searchText" class="form-control" />
+                    </div>
+                    Members
+                    <hr style="border-top: 1px solid black;">
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr *ngFor="let message of contactsList | filter: searchText; let i = index">
+                                        <td>
+                                            <ngx-avatar src="{{message.image}}" name="{{message.name}}"
+                                                (click)="test('das')">
+                                            </ngx-avatar>
+                                        </td>
+                                        <td>
+                                            {{message.name}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div style="width: 100%; clear: left">
+                        <div style="float: right">
+                            <i class="fa fa-video-camera p-2" aria-hidden="true"></i>
+                            <i class="fa fa-phone-square p-2" aria-hidden="true"></i>
+                            <i class="fa fa-calendar-plus-o p-2" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row" style="width: 100%; margin-left: 10px; height: 100%;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

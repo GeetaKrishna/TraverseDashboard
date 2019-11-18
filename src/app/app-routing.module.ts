@@ -25,6 +25,9 @@ import { FourCComponent } from './four-c/four-c.component';
 import { DocumentTypeComponent } from './document-type/document-type.component';
 import { ElectronicHealthTypeComponent } from './electronic-health-type/electronic-health-type.component';
 import { PharmacyComponent } from './pharmacy/pharmacy.component';
+import { PatientViewComponent } from './patient-view/patient-view.component';
+import { PatientBillingComponent } from './patient-billing/patient-billing.component';
+import { TelemedicineComponent } from './telemedicine/telemedicine.component';
 
 const routes: Routes = [
 
@@ -78,6 +81,9 @@ const routes: Routes = [
         ]
       },
       { path: 'pharmacy', component: PharmacyComponent },
+      { path: 'patientView', component: PatientViewComponent },
+      { path: 'patientBilling', component: PatientBillingComponent },
+      { path: 'teleMedicine', component: TelemedicineComponent },
     ]
   },
   { path: '**', redirectTo: 'admin/landing' }

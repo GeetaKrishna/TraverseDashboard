@@ -1,0 +1,103 @@
+.card-body {
+    padding: 0;
+    margin: 0;
+    /* background-color: gray; */
+    height: 100%;
+}
+
+.col-sm-10 {
+    border-left: 12px solid RGB(84, 120, 168);
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 3%;
+}
+
+.row [class*="col-"] {
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+::placeholder {
+    font-style: italic;
+}
+
+i {
+    color: RGB(29, 85, 110);
+    text-decoration-color: RGB(99, 107, 106);
+}
+
+a {
+    color: RGB(99, 107, 106);
+}
+
+.row {
+    overflow: hidden;
+}
+
+.table {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+td {
+    align-content: center;
+    text-align: center;
+}
+
+.fileContent {
+    width: 160px;
+}
+
+.delete-file {
+    color: red;
+    float: right;
+    align-content: center;
+    text-align: center;
+}
+
+.verLine{
+    border-bottom:solid 10px rgb(87, 85, 85);
+    width: 100%;
+}
+
+.alert-orange{
+    background-color: rgb(240, 183, 109);
+    color: rgb(83, 60, 29);
+}
+
+/* enable absolute positioning */
+.inner-addon {
+    position: relative;
+  }
+  
+  /* style icon */
+  .inner-addon .fa {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+  }
+  
+  .vertical {
+    border-right: solid 2px black;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  /* align icon */
+  .left-addon .fa {
+    left: 0px;
+  }
+  
+  .right-addon .fa {
+    right: 6px;
+  }
+  
+  /* add padding  */
+  .left-addon input {
+    padding-left: 30px;
+  }
+  
+  .right-addon input {
+    padding-right: 30px;
+  }
