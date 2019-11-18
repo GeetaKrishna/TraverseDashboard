@@ -49,11 +49,11 @@ export class MedicationsComponent implements OnInit {
         res.forEach((element, index) => {
 
           if (element['medid'] != 44) {
-            let colors = ['lightgreen',
-              'lightyellow',
-              'pink',
-              'lightgray',
-              'lightblue']
+            let colors = ['ch-1',
+              'ch-2',
+              'ch-3',
+              'ch-4',
+              'ch-0']
             let t = {};
 
             if (index % 2 == 0) {

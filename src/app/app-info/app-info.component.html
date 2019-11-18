@@ -1,7 +1,7 @@
 <div style="width: 480px;">
     <mat-nav-list>
         <h4>{{app.APPNAME}}</h4>
-        <p class="text-justify">
+        <p class="text-justify" style="text-transform: uppercase;">
             <!-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
             the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
             of type and scrambled it to make a type specimen book. It has survived not only five centuries,
@@ -12,10 +12,11 @@
             {{app.APPDETAILS}}
         </p>
         <!-- <button mat-flat-button (click)="updateApp(id)">Update</button> &nbsp; -->
-        <button mat-flat-button (click)="installApp(app.APPID, app)" *ngIf="!app.installed else uninstall">Install</button>
+        <button (click)="installApp(app.APPID, app)" *ngIf="!app.installed else uninstall"
+            class="btn btn-secondary mr-2">Install</button>
         <ng-template #uninstall>
-                <button mat-flat-button (click)="navigateToApp(app.APPID)">Open</button>
-                <button mat-flat-button (click)="uninstallApp(app.APPID)">Uninstall</button>
+            <button class="btn btn-success mr-2" (click)="navigateToApp(app.APPID)">Open</button>
+            <button class="btn btn-danger mr-2" (click)="uninstallApp(app.APPID)">Uninstall</button>
         </ng-template>
     </mat-nav-list>
 </div>

@@ -4,19 +4,19 @@
         <div class="card h-100">
             <div class="card-header ch-0">
                 <div class="row">
-                    <div class="col">
+                    <div class="col" style="font-size: 24px; margin-bottom: 0 !important;">
                         Medical Conditions
                     </div>
                     <div class="col">
-                        <img src="assets/medicalCondition/medicationLogo.png" height="45px" width="45px"
+                        <img src="assets/medicalCondition/medicationLogo.png" height="35px" width="35px"
                             style="float: right" alt="Image Not Available">
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-3 m-4" *ngFor="let app of apps; let i = index">
-                    <div class="card h-100" [style.background-color]="app.color">
-                        <div class="card-header font-weight-bold ch-1"
+                    <div [ngClass]="['card', 'h-100', app.color]">
+                        <div class="card-header font-weight-bold cardHeader"
                             style="background-color:whitesmoke; display:flex;">
                             <div style="width: 100%" [attr.contenteditable]="flag" [textContent]="app.Condition_Name"
                                 (input)="app.Condition_Name=$event.target.textContent">
@@ -34,7 +34,8 @@
                             <div class="row mt-4">
                                 <div class="col-md-12">
                                     <i class="fas fa-spider-web"></i> <a href="http://www.google.com"
-                                        style="font-size: 12px"><i class="fa fa-external-link" aria-hidden="true"></i>
+                                        style="font-size: 12px; color: white !important; text-decoration: none;"><i
+                                            class="fa fa-external-link" aria-hidden="true"></i>
                                         Learn
                                         More </a>
                                 </div>
@@ -42,9 +43,9 @@
                                     (input)="app.Triggers=$event.target.textContent">
                                     {{app.Triggers}}
                                 </div>
-                                <div class="col-md-12" [attr.contenteditable]="flag" [textContent]="app.DiagnosisDate"
+                                <div class="col-md-12" [attr.contenteditable]="flag"
                                     (input)="app.DiagnosisDate=$event.target.textContent">
-                                    First Diagnosed <b>{{app.DiagnosisDate | date : mm}}</b>
+                                    First Diagnosed <b>{{app.DiagnosisDate | date:mm }}</b>
                                 </div>
                                 <div class="col-md-12" [attr.contenteditable]="flag" [textContent]="app.Severity"
                                     (input)="app.Severity=$event.target.textContent">

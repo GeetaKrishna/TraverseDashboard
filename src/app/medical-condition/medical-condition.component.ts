@@ -66,10 +66,15 @@ export class MedicalConditionComponent implements OnInit {
     this.medicalConditionService.getMedicalCondition().subscribe(
       (res: []) => {
         console.log(res);
-
-        res.forEach((data) => {
+        let colorsList = ['ch-1',
+          'ch-2',
+          'ch-3',
+          'ch-4',
+          'ch-0']
+        res.forEach((data, index) => {
           console.log(data);
           let t = {};
+          t['color'] = colorsList[index]
           t['ConditionType_ID'] = data['ConditionType_ID']
           t['Condition_Name'] = data['Condition_Name']
           t['DiagnosisDate'] = data['DiagnosisDate']
@@ -190,7 +195,7 @@ export class MedicalConditionComponent implements OnInit {
     return blob;
   }
 
-  editMedicalCondition(index, medicationDetail){
+  editMedicalCondition(index, medicationDetail) {
     this.flag = !this.flag;
     if (!this.flag) {
       let formDataa = new FormData();
@@ -198,21 +203,23 @@ export class MedicalConditionComponent implements OnInit {
         console.log(medicationDetail.medicationImage.changingThisBreaksApplicationSecurity);
         const blob = this.b64toBlob(medicationDetail.image);
 
-        formDataa.append("MEDIMAGE", blob)
+        formDataa.append("image", blob)
 
         this.setImageEditFlag = true;
       }
       else {
-        formDataa.append("MEDIMAGE", this.editedImageData)
+        formDataa.append("image", this.editedImageData)
       }
-      console.log(medicationDetail.medicationSchedule);
+      console.log(medicationDetail);
+      this.medicalConditionService.editMedicalCondition(medicationDetail.ConditionType_ID,
+        medicationDetail.Condition_Name, medicationDetail.LinktoAPI,
+        medicationDetail.Severity, medicationDetail.Triggers, medicationDetail).subscribe((data) => {
+          console.log(data);
 
-      // this.medicationService.editMedications(parseInt(medicationDetail.id), medicationDetail.medicationDetails,
-      //   medicationDetail.medication, medicationDetail.medicationSchedule, formDataa).subscribe((data) => {
+        }, (err) => {
+          console.log(err);
 
-      //   }, (err) => {
-
-      //   })
+        })
     }
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -18,11 +18,10 @@ export class MedicalConditionService {
     return this.http.post(`${environment.apiUrl}/add-condition-types`, medicalConditionsData)
   }
 
-  editMedicalCondition(id, description, name, schedule, body) {
-    console.log(id, description, name, schedule, body);
-    
-    return this.http.put(`${environment.apiUrl}/api/medicatdions/editmed/${id}?DESCRIPTIdsaON=${description}&MEDNAME=${name}&MEDSCHEDULE=${schedule}`, body);
-    // return this.http.put(`${environment.apiUrl}/api/medications/editmed/${id}?DESCRIPTION=${description}&MEDNAME=${name}&MEDSCHEDULE=${schedule}`, body);
+  editMedicalCondition(id,conditionName, linkToApi, severity, triggers, body) {
+
+    // return this.http.put(`${environment.apiUrl}/editmed/${id}`,{params: params}, body);
+    return this.http.put(`${environment.apiUrl}/editmed/${id}?conditionName=${conditionName}&linkToApi=${linkToApi}&severity=${severity}&triggers=${triggers}`, body);
   }
 
   deleteMedicalCondition(id) {

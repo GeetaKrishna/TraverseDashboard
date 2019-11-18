@@ -1,0 +1,136 @@
+<div class="card mt-5 mb-5">
+    <div class="card-header">
+        <div class="row ">
+            <div class="col justify-content-start">
+                <p class="cardHead" style="font-size: 24px; margin-bottom: 0 !important;">
+                    Patient Billing
+                </p>
+            </div>
+            <div class="col justify-content-end">
+                <span style="float: right;font-weight: bolder; font-size: 158%"> Ethan Sheng</span> <i
+                    class="fa fa-user fa-2x" style="float: right; color: black"></i>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-sm-2">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr *ngFor="let p of [
+                                    {url: '../../assets/patientBilling/invoice.png', name: 'Invoices'},
+                                    {url: '../../assets/patientBilling/payments.jpg', name: 'Payments'},
+                                    {url: '../../assets/patientBilling/insurance.png', name: 'Insurance'},
+                                    {url: '../../assets/patientBilling/records.png', name: 'Agig Reports'}]">
+                            <td>
+                                <a href="#">
+                                    <img src="{{p.url}}" alt="Image not available" style="height: 90px; width: 90px;">
+                                    <br />{{p.name}}
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div>
+                            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                                [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+                            </canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" style="float: right; position: relative;">
+                        <div style="width: auto; height: auto;">
+                            <canvas style="object-fit: contain;" baseChart [datasets]="deductChartData"
+                                [labels]="deductChartLabels" [options]="deductChartOptions" [legend]="deductChartLegend"
+                                [chartType]="deductChartType">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Invoices for last 90 days</p>
+                    </div>
+                </div>
+                <div class="verLine"></div>
+
+                <div class="mt-2">
+                    <div [ngClass]="['alert', patient.color, 'text-center']" *ngFor="let patient of patientsDetails" role="alert">
+                        <div class="row">
+                            <div class="col-md-4" >
+                                <div style="float: left" class="mr-1">
+                                    <ngx-avatar src={{patient.imageUrl}} name={{patient.name}} size="30">
+                                    </ngx-avatar>
+                                </div>
+                                <div style="float: left; font-weight: bold" >
+                                    {{patient.name}}
+                                </div>
+                                <div style="float: left; font-size: 79%">
+                                    {{patient.hospital}}
+                                </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                {{patient.amount | currency}} 
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                2019-09-08
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                {{patient.fromDays}} 
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <i class="fa fa-comments fa-lg mr-1" style="color: black;" aria-hidden="true"></i>
+                            <i class="fa fa-television fa-lg" style="color: black;" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- <div class="alert alert-success text-center" role="alert">
+                                <i class="fa fa-2x fa-calendar " style="float: left;"></i>
+                                <span class="mr-5 ">
+                                    Appointment with Dr.Stout on 06/23/19
+                                </span>
+                                <span style="float: right;">
+                                    <i class="fa fa-map-marker mr-2"></i>
+                                </span>
+                                <span style="float: right;">
+                                    <i class="fa fa-clock-o mr-2"></i>
+                                </span>
+                            </div>
+                            <div class="alert alert-orange text-center" role="alert">
+                                <i class="fa fa-2x fa-file" style="float: left;"></i>
+                                <span class="mr-5 ">
+                                    Medical Record last updated on 02/03/19
+                                </span>
+                                <span style="float: right;">
+                                    <i class="fa fa-cloud-download mr-2"></i>
+                                </span>
+                                <span style="float: right;">
+                                    <i class="fa fa-eye mr-2"></i>
+                                </span>
+    
+                            </div>
+                            <div class="alert alert-warning text-center" role="alert">
+                                <i class="fa fa-2x fa-plus" style="float: left;"></i>
+                                <span class="mr-5 ">
+                                    Rx for Keflex on 01/12/19
+                                </span>
+                                <span style="float: right;">
+                                    <i class="fa fa-question-circle mr-2"></i>
+                                </span>
+                            </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+</div>

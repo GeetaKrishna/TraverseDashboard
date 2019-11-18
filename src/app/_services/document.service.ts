@@ -17,6 +17,8 @@ getDocumentsByType(doc_type){
  return this.http.get(`${environment.localURL}/document/${doc_type}`)
 }
 addDocuments(body){
+  console.log(body);
+  
   return this.http.post(`${environment.apiUrl}/uploadFile`, body)
 }
 
