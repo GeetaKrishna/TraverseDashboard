@@ -47,3 +47,10 @@
   .right-addon input {
     padding-right: 30px;
   }
+
+  .example-card {
+    max-width: 400px;
+  }
+  .test :hover {
+    background-color: aliceblue
+  }

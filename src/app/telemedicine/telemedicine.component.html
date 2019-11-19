@@ -7,7 +7,7 @@
                 </p>
             </div>
             <div class="col justify-content-end">
-                <img src="../../assets/icons-home/motion09.jpeg"
+                <img src="../../assets/teleMedicine/bidirectionalLogo.png"
                     style="height: 35px; width: 35px; float: right; mix-blend-mode: multiply" />
             </div>
         </div>
@@ -32,16 +32,20 @@
                         <i class="fa fa-search"></i>
                         <input type="text" [(ngModel)]="searchText" class="form-control" />
                     </div>
-                    Members
+                    <div class="mt-2">
+                        <b>
+                            Members
+                        </b>
+                    </div>
                     <hr style="border-top: 1px solid black;">
 
                     <div class="row">
-                        <div class="col-sm-4">
+                        <div class="col">
                             <table class="table table-borderless">
-                                <tbody>
+                                <tbody class="test">
                                     <tr *ngFor="let message of contactsList | filter: searchText; let i = index">
                                         <td>
-                                            <ngx-avatar src="{{message.image}}" name="{{message.name}}"
+                                            <ngx-avatar size='30' src="{{message.image}}" name="{{message.name}}"
                                                 (click)="test('das')">
                                             </ngx-avatar>
                                         </td>
@@ -55,18 +59,28 @@
 
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div style="width: 100%; clear: left">
-                        <div style="float: right">
-                            <i class="fa fa-video-camera p-2" aria-hidden="true"></i>
-                            <i class="fa fa-phone-square p-2" aria-hidden="true"></i>
-                            <i class="fa fa-calendar-plus-o p-2" aria-hidden="true"></i>
-                        </div>
+            </div>
+            <div class="col-md-8">
+                <div style="width: 100%; clear: left">
+                    <div style="float: right">
+                        <i class="fa fa-video-camera p-2" aria-hidden="true"></i>
+                        <i class="fa fa-phone-square p-2" aria-hidden="true"></i>
+                        <i class="fa fa-calendar-plus-o p-2" aria-hidden="true"></i>
                     </div>
-                    <div class="row" style="width: 100%; margin-left: 10px; height: 100%;">
-
+                </div>
+                <div class="row" style="width: 100%; margin-left: 10px; height: 100%;">
+                    <div style="display: flex;" class="row ml-2 mr-2">
+                        <div *ngFor="let app of apps" class="col-md-6" style="margin-bottom: 20px;">
+                            <mat-card class="example-card "
+                                style=" border-radius: 5px;box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;">
+                                <img style="background-size: cover; height: 150px;width: 278px;
+                            " src="{{app.url}}">
+                            </mat-card>
+                            {{app.appTitle}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
