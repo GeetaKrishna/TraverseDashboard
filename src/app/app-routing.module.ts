@@ -28,6 +28,9 @@ import { PharmacyComponent } from './pharmacy/pharmacy.component';
 import { PatientViewComponent } from './patient-view/patient-view.component';
 import { PatientBillingComponent } from './patient-billing/patient-billing.component';
 import { TelemedicineComponent } from './telemedicine/telemedicine.component';
+import { EmergencyRoomComponent } from './emergency-room/emergency-room.component';
+import { LabReportsComponent } from './lab-reports/lab-reports.component';
+import { LabReportTypeComponent } from './lab-report-type/lab-report-type.component';
 
 const routes: Routes = [
 
@@ -81,9 +84,16 @@ const routes: Routes = [
         ]
       },
       { path: 'pharmacy', component: PharmacyComponent },
+      { path: 'emergency', component: EmergencyRoomComponent },
       { path: 'patientView', component: PatientViewComponent },
       { path: 'patientBilling', component: PatientBillingComponent },
       { path: 'teleMedicine', component: TelemedicineComponent },
+      {
+        path: 'labReports', component: LabReportsComponent, 
+        children: [
+          { path: ':id', component: LabReportTypeComponent }
+        ]
+      },
     ]
   },
   { path: '**', redirectTo: 'admin/landing' }

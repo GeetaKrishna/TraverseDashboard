@@ -1,0 +1,162 @@
+<div class="card mt-5 mb-5">
+    <div class="card-header ch-1">
+        <div class="row ">
+            <div class="col justify-content-start">
+                <p class="cardHead">
+                    Emergency Room
+                </p>
+            </div>
+            <div class="col justify-content-end">
+                <img src="../../assets/icons-home/emer.png"
+                    style="height: 35px; width: 35px; float: right; mix-blend-mode: multiply" />
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row ml-2 mr-2">
+            <div style="display: flex; width: 100%;" class="justify-content-center">
+                <div style="margin-top: 15px;">
+                    <h5>Status Data</h5>
+                </div>
+                <div style="margin-left: 720px;">
+                    <mat-form-field class="example-form-field">
+                        <input matInput type="text" placeholder="Clearable input" [(ngModel)]="value">
+                        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="value=''">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                        <button mat-button matSuffix mat-icon-button>
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <!-- <div>
+                            <input class="form-control" type="text"
+                            placeholder="Find Patient" aria-label="Search">
+                        <div class="input-group-append">
+                            <span class="input-group-text cyan lighten-2"><i class="fa fa-search"
+                                    aria-hidden="true"></i></span>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <!-- <div *ngFor="let app of apps" class="col-md-4" style="margin-bottom: 20px;">
+                <mat-card class="example-card"
+                    style=" border-radius: 5px;box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;">
+                    <mat-card-header>
+                        <mat-card-title>{{app.APP_NAME}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>
+                            <span class="mr-2">
+                                <i class="fa fa-map-marker icon "></i>
+                            </span>
+                            <span>{{app.APP_LOCATION}}</span>
+                        </p>
+                        <p>
+                            <span class="mr-2">
+                                <i class="fa fa-clock-o icon"></i>
+                            </span>
+                            <span> {{app.APP_TIMINGS}}</span>
+                        </p>
+                        <p>
+                            <span class="mr-2">
+                                <i class="fa fa-medkit icon "></i>
+                            </span>
+                            <span>{{app.APP_PRES}} Prescriptions</span>
+                        </p>
+                        <p>
+                            <span class="mr-2">
+                                <i class="fa fa-hourglass-half icon"></i>
+                            </span>
+                            <span>{{app.APP_DURATION}}</span>
+                        </p>
+                    </mat-card-content>
+                    <mat-card-actions style="margin-left:190px; ">
+                        <button mat-icon-button aria-label="Example icon-button with a heart icon"
+                            (click)="shareCard(app.APPID)">
+                            <mat-icon>refresh</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon"
+                            (click)="shareMessage(app.APPID)">
+                            <mat-icon>message</mat-icon>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div> -->
+        </div>
+        <div style="border-bottom: 1px solid grey;">
+        </div>
+        <div style="display: flex;" class="mt-4">
+            <div *ngFor="let data of avlblData" class="mr-2 ml-2"
+                style="box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; margin: auto;width: 100%;">
+                <div style="text-align: center;">
+                    <div style="background-color: rgb(255, 255, 255); padding: 40px;">
+                        <p class="t1">{{data.text1}}</p>
+                        <p class="t2">{{data.text2}}</p>
+                    </div>
+                    <div style=" background-color: rgb(75, 72, 72); padding: 20px; color: white;">
+                        <strong>{{data.header}}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 15px;">
+            <h5>Patients</h5>
+        </div>
+        <div style="border-bottom: 1px solid grey;">
+        </div>
+        <div class="mt-2">
+            <table class="table table-striped">
+                <!-- <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead> -->
+                <tbody>
+                    <tr>
+                        <!-- <th>1</th> -->
+                        <td>Andrew Yuan</td>
+                        <td>Current: Triage</td>
+                        <td>Next: Imaging</td>
+                        <td>No Assignment</td>
+                        <td>18 Minutes</td>
+                        <td>
+                            <i class="fa fa-share-alt-square mr-2 ml-2 cursor-pointer"></i>
+                            <i class="fa fa-file-text mr-2 ml-2 cursor-pointer"></i>
+                            <i class="fa fa-comment mr-2 ml-2 cursor-pointer"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- <th></th> -->
+                        <td>Josh Kendra Yuan</td>
+                        <td>Current: Check out</td>
+                        <td>Next: Imaging</td>
+                        <td>No Assignment</td>
+                        <td>22 Minutes</td>
+                        <td>
+                            <i class="fa fa-share-alt-square mr-2 ml-2 cursor-pointer"></i>
+                            <i class="fa fa-file-text mr-2 ml-2 cursor-pointer"></i>
+                            <i class="fa fa-comment mr-2 ml-2 cursor-pointer"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- <th>1</th> -->
+                        <td>Tristan Skov</td>
+                        <td>Current: In Room</td>
+                        <td>Next: Siregery Room</td>
+                        <td>Dr. Spencer Lim</td>
+                        <td>01: 20</td>
+                        <td>
+                            <i class="fa fa-share-alt-square mr-2 ml-2 cursor-pointer"></i>
+                            <i class="fa fa-file-text mr-2 ml-2 cursor-pointer"></i>
+                            <i class="fa fa-comment mr-2 ml-2 cursor-pointer"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
