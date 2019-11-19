@@ -25,5 +25,27 @@ export class TelemedicineComponent implements OnInit {
 
   ngOnInit() {
   }
+  apps: any[] = [
+    {
+      "appId": 1,
+      "appTitle": "Dr. Lin",
+      "url": "assets/teleMedicine/doctor.jpg",
+    },
+    {
+      "appId": 2,
+      "appTitle": "Dr. Lang",
+      "url": "assets/teleMedicine/Female.jpeg",
+    },
+    {
+      "appId": 3,
+      "appTitle": "Ethan Cheng",
+      "url": "assets/teleMedicine/patient.jpeg",
+    },
+    {
+      "appId": 4,
+      "appTitle": "MRI",
+      "url": "assets/teleMedicine/MRI.jpeg",
 
+    }
+  ]
 }
