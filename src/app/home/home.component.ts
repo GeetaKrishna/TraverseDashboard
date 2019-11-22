@@ -316,7 +316,7 @@ export class HomeComponent implements OnInit {
       "URL": "assets/icons-home/records.png",
       "userTable": [],
       "RATING": 5,
-      // "ROUTESCREEN": 'admin/medication',
+      "ROUTESCREEN": 'admin/recordsProvider',
       "installed": false
     },
     {

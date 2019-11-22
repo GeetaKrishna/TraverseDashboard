@@ -60,6 +60,8 @@ import { EmergencyRoomComponent } from './emergency-room/emergency-room.componen
 import { LabReportsComponent } from './lab-reports/lab-reports.component';
 import { LabReportTypeComponent } from './lab-report-type/lab-report-type.component';
 import { InsuranceProvComponent } from './insurance-prov/insurance-prov.component';
+import { RecordsProviderComponent } from './records-provider/records-provider.component';
+import { RecordsProvTypeComponent } from './records-prov-type/records-prov-type.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +101,8 @@ import { InsuranceProvComponent } from './insurance-prov/insurance-prov.componen
     LabReportsComponent,
     LabReportTypeComponent,
     InsuranceProvComponent,
+    RecordsProviderComponent,
+    RecordsProvTypeComponent,
   ],
   imports: [
     BrowserModule,
