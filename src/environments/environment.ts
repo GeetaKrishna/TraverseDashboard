@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://172.17.5.45:8090',
-  localURL: 'https://ab9b9bd6.ngrok.io'
+  localURL: 'https://5aef86a7.ngrok.io'
 };
 
 /*
