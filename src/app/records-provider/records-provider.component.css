@@ -1,0 +1,139 @@
+.card-body {
+    padding: 0;
+    margin: 0;
+    /* background-color: gray; */
+    height: 100%;
+}
+
+
+
+.col-sm-10 {
+    border-left: 12px solid RGB(84, 120, 168);
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 3%;
+}
+
+.row [class*="col-"] {
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+::placeholder {
+    font-style: italic;
+}
+
+i {
+    color: RGB(29, 85, 110);
+    text-decoration-color: RGB(99, 107, 106);
+}
+
+a {
+    color: RGB(99, 107, 106);
+}
+
+.row {
+    overflow: hidden;
+}
+
+.table {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+td {
+    align-content: center;
+    text-align: center;
+}
+
+/* 
+.example-card {
+    max-width: 200px;
+    margin-left: 7px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    height: 260px;
+
+} */
+
+.fileContent {
+    width: 160px;
+}
+
+.delete-file {
+    color: red;
+    float: right;
+    align-content: center;
+    text-align: center;
+}
+
+.CardImage {
+    background-color: rgb(151, 188, 224);
+    text-align: center;
+}
+
+/* .dragDrop {
+    text-align: center;
+    height: 200px;
+} */
+
+.card-body {
+    padding: 0;
+    margin: 0;
+    /* background-color: gray; */
+    height: 100%;
+}
+
+.col-sm-10 {
+    border-left: 12px solid RGB(84, 120, 168);
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-right: 3%;
+}
+
+.row [class*="col-"] {
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+::placeholder {
+    font-style: italic;
+}
+
+i {
+    color: RGB(29, 85, 110);
+    text-decoration-color: RGB(99, 107, 106);
+}
+
+a {
+    color: RGB(99, 107, 106);
+}
+
+.row {
+    overflow: hidden;
+}
+
+.table {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+td {
+    align-content: center;
+    text-align: center;
+}
+
+:host {
+    width: 80%;
+}
+.activeClass {
+    /* background-color: rgb(23, 24, 24); */
+    color: #2b82d3;
+}
+.activeClassText {
+    /* background-color: rgb(23, 24, 24); */
+    color: #2b82d3;
+    font-weight: bolder;
+}
