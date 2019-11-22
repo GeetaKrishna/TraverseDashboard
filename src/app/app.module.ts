@@ -16,7 +16,9 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatListModule, MatBottomSheetModule, MatMenuModule, MatIconModule } from '@angular/material';
+import { MatCardModule, MatNativeDateModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatListModule, MatBottomSheetModule, MatMenuModule, MatIconModule } from '@angular/material';
+// import {MatDatepickerModule} from '@angular/material/datepicker';
+
 import { RatingModule } from 'ngx-rating';
 import { AppInfoComponent } from './app-info/app-info.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -57,6 +59,7 @@ import { TelemedicineComponent } from './telemedicine/telemedicine.component';
 import { EmergencyRoomComponent } from './emergency-room/emergency-room.component';
 import { LabReportsComponent } from './lab-reports/lab-reports.component';
 import { LabReportTypeComponent } from './lab-report-type/lab-report-type.component';
+import { InsuranceProvComponent } from './insurance-prov/insurance-prov.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +98,7 @@ import { LabReportTypeComponent } from './lab-report-type/lab-report-type.compon
     EmergencyRoomComponent,
     LabReportsComponent,
     LabReportTypeComponent,
+    InsuranceProvComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +116,8 @@ import { LabReportTypeComponent } from './lab-report-type/lab-report-type.compon
     MatSelectModule,
     RatingModule,
     MatBottomSheetModule,
+    MatDatepickerModule,
+    MatNativeDateModule ,
     MatListModule,
     MatMenuModule,
     MatIconModule,
@@ -136,6 +142,7 @@ import { LabReportTypeComponent } from './lab-report-type/lab-report-type.compon
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     DatePipe,
+    MatDatepickerModule
   ],
   entryComponents: [AppInfoComponent, HomeComponent],
   bootstrap: [AppComponent]

@@ -129,6 +129,28 @@ export class HomeComponent implements OnInit {
       "ROUTESCREEN": 'admin/electronicHealth/Visits',
       "installed": false
     },
+    {
+      "APPID": 12,
+      "APPDETAILS": "MAINTAINS ALL HEALTH RECORDS",
+      "VERSION": "1.0v",
+      "APPNAME": "Family View",
+      "URL": "assets/family.png",
+      "userTable": [],
+      "RATING": 4,
+      "ROUTESCREEN": 'admin/family',
+      "installed": false
+    },
+    {
+      "APPID": 13,
+      "APPDETAILS": "MAINTAINS ALL HEALTH RECORDS",
+      "VERSION": "1.0v",
+      "APPNAME": "Medical Conditions",
+      "URL": "assets/medicalCondition/medicationLogo.png",
+      "userTable": [],
+      "RATING": 4,
+      "ROUTESCREEN": 'admin/medicalCondition',
+      "installed": false
+    },
     // {
     //   "APPID": 11,
     //   "APPDETAILS": "MAINTAINS ALL MEDICAL RECORDS",
@@ -207,6 +229,28 @@ export class HomeComponent implements OnInit {
       "ROUTESCREEN": 'admin/electronicHealth/Visits',
       "installed": false
     },
+    {
+      "APPID": 12,
+      "APPDETAILS": "MAINTAINS ALL HEALTH RECORDS",
+      "VERSION": "1.0v",
+      "APPNAME": "Family View",
+      "URL": "assets/hrt.png",
+      "userTable": [],
+      "RATING": 4,
+      "ROUTESCREEN": 'admin/family',
+      "installed": false
+    },
+    {
+      "APPID": 13,
+      "APPDETAILS": "MAINTAINS ALL HEALTH RECORDS",
+      "VERSION": "1.0v",
+      "APPNAME": "Medical Conditions",
+      "URL": "assets/hrt.png",
+      "userTable": [],
+      "RATING": 4,
+      "ROUTESCREEN": 'admin/medicalCondition',
+      "installed": false
+    },
     // {
     //   "APPID": 11,
     //   "APPDETAILS": "MAINTAINS ALL MEDICAL RECORDS",
@@ -228,7 +272,7 @@ export class HomeComponent implements OnInit {
       "URL": "assets/icons-home/Lab.png",
       "userTable": [],
       "RATING": 3.5,
-      // "ROUTESCREEN": 'admin/medication',
+      "ROUTESCREEN": 'admin/labReports/Labs',
       "installed": false
     },
     {
@@ -239,7 +283,7 @@ export class HomeComponent implements OnInit {
       "URL": "assets/icons-home/patients.png",
       "userTable": [],
       "RATING": 5,
-      // "ROUTESCREEN": 'admin/medication',
+      "ROUTESCREEN": 'admin/patientView',
       "installed": false
     },
     {
@@ -250,7 +294,7 @@ export class HomeComponent implements OnInit {
       "URL": "assets/icons-home/billing.png",
       "userTable": [],
       "RATING": 4,
-      // "ROUTESCREEN": 'admin/medication',
+      "ROUTESCREEN": 'admin/patientBilling',
       "installed": false
     },
     {
@@ -294,7 +338,7 @@ export class HomeComponent implements OnInit {
       "URL": "assets/icons-home/emer.png",
       "userTable": [],
       "RATING": 2.5,
-      // "ROUTESCREEN": 'admin/medication',
+      "ROUTESCREEN": 'admin/emergency',
       "installed": false
     },
     {

@@ -56,6 +56,18 @@ export class AppInfoComponent implements OnInit {
     } else if (id == 23) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/pharmacy')
+    } else if (id == 20) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/labReports/Labs')
+    } else if (id == 21) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/patientView')
+    } else if (id == 22) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/patientBilling')
+    } else if (id == 26) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/emergency')
     }
   }
 
@@ -88,6 +100,18 @@ export class AppInfoComponent implements OnInit {
       } else if (id == 23) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/pharmacy')
+      } else if (id == 20) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/labReports/Labs')
+      } else if (id == 21) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/patientView')
+      } else if (id == 22) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/patientBilling')
+      } else if (id == 26) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/emergency')
       }
       this.toast.success('App installed Successfully.')
       // if (JSON.parse(localStorage.getItem("apps"))) {
