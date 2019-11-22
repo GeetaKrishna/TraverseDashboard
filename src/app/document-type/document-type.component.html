@@ -1,6 +1,6 @@
   <div>
       <div class="input-group md-form form-sm form-2 pl-0">
-          <input class="form-control my-0 py-1" type="text" placeholder="Find document by name, date, type, etc..."
+          <input class="form-control my-0 py-1" [(ngModel)]="searchText" type="text" placeholder="Find document by name, date, type, etc..."
               aria-label="Search">
           <div class="input-group-append">
               <span class="input-group-text cyan lighten-2"><i class="fa fa-search" aria-hidden="true"></i></span>
@@ -38,7 +38,7 @@
           </mat-card>
           <div *ngIf="state == 'Insurance'">
               <div style="display: flex;">
-                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForInsurance"
+                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForInsurance | searchDocuments: searchText"
                       style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                       <div class="CardImage">
                           <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
@@ -61,7 +61,7 @@
           </div>
           <div *ngIf="state == 'Travel'">
               <div style="display: flex;">
-                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForTravel"
+                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForTravel | searchDocuments: searchText"
                       style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                       <div class="CardImage">
                           <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
@@ -85,7 +85,7 @@
           </div>
           <div *ngIf="state == 'Family'">
               <div style="display: flex;">
-                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForFamily"
+                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForFamily | searchDocuments: searchText"
                       style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                       <div class="CardImage">
                           <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
@@ -108,7 +108,7 @@
           </div>
           <div *ngIf="state == 'Personal'">
               <div style="display: flex;">
-                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForPersonal"
+                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForPersonal | searchDocuments: searchText"
                       style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                       <div class="CardImage">
                           <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">

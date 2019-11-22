@@ -62,6 +62,7 @@ import { LabReportTypeComponent } from './lab-report-type/lab-report-type.compon
 import { InsuranceProvComponent } from './insurance-prov/insurance-prov.component';
 import { RecordsProviderComponent } from './records-provider/records-provider.component';
 import { RecordsProvTypeComponent } from './records-prov-type/records-prov-type.component';
+import { SearchDocumentsPipe } from './search-documents.pipe';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { RecordsProvTypeComponent } from './records-prov-type/records-prov-type.
     InsuranceProvComponent,
     RecordsProviderComponent,
     RecordsProvTypeComponent,
+    SearchDocumentsPipe,
   ],
   imports: [
     BrowserModule,
