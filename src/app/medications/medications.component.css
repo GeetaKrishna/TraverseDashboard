@@ -2,6 +2,11 @@
     /* margin: 10px; 
   } */
 
+.editTrue {
+    border-bottom: 2px dotted black;
+    padding-bottom: 0%;
+}
+
 .mat-slider-horizontal {
     width: 198px;
 }
@@ -9,6 +14,7 @@
 .card-body {
     height: auto;
 }
+
 .ch-0 {
     background-color: #9ba6b4;
     color: black;

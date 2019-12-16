@@ -7,41 +7,6 @@
                     <div class="col" style="font-size: 24px; margin-bottom: 0 !important;">
                         Medication
                     </div>
-                    <!-- <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    This is the expansion title
-                                </mat-panel-title>
-                                <mat-panel-description>
-                                    This is a summary of the content
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <p>This is the primary content of the panel.</p>
-                        </mat-expansion-panel> -->
-
-                    <!-- <span>
-                        <span class="fa fa-plus cursor-pointer" mat-button [matMenuTriggerFor]="menu"
-                            style="margin-right: 8px; color: white; font-size: 22px;">
-                        </span>
-                        <mat-menu #menu="matMenu">
-                            <span mat-menu-item (click)="$event.stopPropagation();">
-                                <label class="myLabel">
-                                    <input type="text" placeholder="trest" required />
-                                    <span>Set BackGround Image</span>
-                                </label>
-                            </span>
-                            <span mat-menu-item (click)="$event.stopPropagation();">
-                                <label class="myLabel">
-                                    <input type="text" placeholder="trest" required /> </label>
-                            </span>
-                            <span mat-menu-item (click)="$event.stopPropagation();">
-                                <label class="myLabel">
-                                    <input type="text" placeholder="trest" required /> <br>
-                                    <span>Set BackGround Image</span>
-                                </label>
-                            </span>
-                        </mat-menu>
-                    </span> -->
                     <div class="col">
                         <img src="assets/icons-home/motion07.png" height="35px" width="35px" style="float: right"
                             alt="Image Not Available" (click)="openDialog()" />
@@ -67,7 +32,6 @@
                                     <div class="col-6">
                                         <img mat-card-md-image [src]=app.image height="80px" width="100px"
                                             alt="Image Not Available">
-                                        <!-- <input type="file" *ngIf="flag" (change)="editImageInput($event, i, apps)"> -->
                                     </div>
                                     <div class="col" style="width: 100% ; margin: auto;">
                                         <span>
@@ -76,6 +40,7 @@
                                         </span>
                                         <span style="display: flex ; font-size: 14px; height: 30px;">
                                             <p [attr.contenteditable]="flag" [textContent]="app.dosage"
+                                                [ngClass]="{'editTrue' : flag}"
                                                 (input)="app.dosage=$event.target.textContent">
                                                 {{app.dosage}}
                                             </p> &nbsp;
@@ -83,7 +48,40 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="row mt-4">
+                                <div *ngIf="flag">
+                                    <mat-form-field style="color: black;">
+                                        <input matInput [matDatepicker]="pickerStart" placeholder="Start Date"
+                                            [formControl]="startTime">
+                                        <mat-datepicker-toggle matSuffix [for]="pickerStart">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #pickerStart disabled="false"></mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field style="color: black;">
+                                        <input matInput [matDatepicker]="pickerEnd" placeholder="End Date"
+                                            [formControl]="endTime">
+                                        <mat-datepicker-toggle matSuffix [for]="pickerEnd">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #pickerEnd disabled="false"></mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-label>Schedule / day</mat-label>
+                                        <mat-select [formControl]="medIntake">
+                                            <mat-option value="once">Once</mat-option>
+                                            <mat-option value="twice">Twice</mat-option>
+                                            <mat-option value="thrice">Thrice</mat-option>
+                                            <mat-option value="four">Four</mat-option>
+                                            <mat-option value="five">Five</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <!-- style="margin-left: 30px;margin-top: 20px;" -->
+                                    <div>
+                                        <button class="btn btn-success" (click)="saveNewData(app)"><i
+                                                class="fa fa-check"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row mt-4" *ngIf="!flag">
                                     <div class="table-responsive">
                                         <table class="table-borderless">
                                             <tr>
@@ -138,7 +136,7 @@
                             <div class="row" *ngIf="i != 0; ">
                                 <div class="col">
                                     <div style="float: right;">
-                                        <span>
+                                        <span *ngIf="!flag">
                                             <i class="fa fa-pencil-square-o mr-2" (click)="editMedication(app)"
                                                 aria-hidden="true"></i>
                                         </span>
@@ -166,25 +164,21 @@
                                     </div>
                                     <div *ngIf="!addMedicationToggle" style="margin-left: 40px; margin-bottom: 50px;">
                                         <div>
-                                            <!--"
-                                                    <mat-form-field style="color: black;">
-                                                        <input matInput placeholder="Medicine Name" [formControl]="medName"
-                                                            required>
-                                                    </mat-form-field> -->
-
+                                            <!--<mat-form-field style="color: black;">
+                                                <input matInput placeholder="Medicine Name" [formControl]="medName"
+                                                required>
+                                                </mat-form-field> -->
                                             <mat-form-field>
                                                 <mat-label>Medicine Name</mat-label>
                                                 <mat-select [formControl]="medName"
                                                     (selectionChange)="test($event.value)">
-
                                                     <mat-option [value]="medication"
                                                         *ngFor="let medication of medicationDetails">{{medication.name}}
                                                     </mat-option>
-
                                                 </mat-select>
                                             </mat-form-field>
                                             <br>
-                                            <span style="color: blue">
+                                            <span style="color: rgb(120, 120, 129); font-size: 12px;">
                                                 {{description}}
                                             </span>
                                             <mat-form-field>
@@ -208,19 +202,14 @@
                                                 <mat-datepicker-toggle matSuffix [for]="pickerStart">
                                                 </mat-datepicker-toggle>
                                                 <mat-datepicker #pickerStart disabled="false"></mat-datepicker>
-                                                <!-- <input matInput placeholder="Start" [formControl]="startTime"
-                                                    (dateChange)="dateInput($event.value, 'start')"
-                                                    type="date" required>  -->
                                             </mat-form-field>
+
                                             <mat-form-field style="color: black;">
                                                 <input matInput [matDatepicker]="pickerEnd" placeholder="End Date"
                                                     [formControl]="endTime">
                                                 <mat-datepicker-toggle matSuffix [for]="pickerEnd">
                                                 </mat-datepicker-toggle>
                                                 <mat-datepicker #pickerEnd disabled="false"></mat-datepicker>
-                                                <!-- <input matInput placeholder="End" [formControl]="endTime" type="date"
-                                                    (dateChange)="dateInput($event.value, 'end')"
-                                                    required> -->
                                             </mat-form-field>
 
                                             <div style="text-align: center; width: 190px;">

@@ -1,18 +1,21 @@
-<h1 mat-dialog-title>Medicine</h1>
+<h5 mat-dialog-title>Medicine</h5>
 <div mat-dialog-content>
 
     <mat-form-field style="color: black;">
         <input matInput placeholder="Medicine Name" [(ngModel)]="name" required>
-    </mat-form-field>
+    </mat-form-field> 
+    &nbsp;
     <mat-form-field style="color: black;">
         <input matInput placeholder="Description" [(ngModel)]="description" type="text">
     </mat-form-field>
+    &nbsp;
+
     <button class="btn btn-secondary" (click)="fileInput.click()">
         <span>Choose file</span>
         <input #fileInput type="file" (change)="imageInput($event)" style="display:none;" />
     </button>
-    <span *ngIf="data['image']">
-        {{data['image']}}
+    <span *ngIf="fileName">
+        {{fileName}}
     </span>
 
 </div>

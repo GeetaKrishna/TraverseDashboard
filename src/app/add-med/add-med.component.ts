@@ -9,6 +9,7 @@ import { MedicationService } from '../_services/medication.service';
 })
 
 export class AddMedComponent implements OnInit {
+  fileName: any;
 
   constructor(public dialogRef: MatDialogRef<AddMedComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private medicationService: MedicationService) { }
@@ -22,6 +23,8 @@ export class AddMedComponent implements OnInit {
   imageInput(event) {
     let file = event.target.files[0];
     this.data.image = file;
+    this.fileName = file.name;
+
     console.log(this.data.image);
   }
   successAdding() {

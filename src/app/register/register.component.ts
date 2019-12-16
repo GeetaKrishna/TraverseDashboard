@@ -187,7 +187,7 @@ if(this.userNameTaken == true || this.userNameTaken == false){
       console.log(data);
       this.toast.success('Registration was Successful.')
       this.signUpSuccess = false
-      // this.router.navigateByUrl('/login')
+      this.router.navigateByUrl('/login')
     }, (error) => {
       this.signUpSuccess = false;
     })
