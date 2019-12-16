@@ -32,3 +32,10 @@ pre {
 .example-container > * {
   width: 100%;
 }
+.modal-xl .modal-lg {
+  /* max-width: 90%; */
+  /* height: 405px */
+}
+::-webkit-scrollbar {
+  width: 1px;
+}

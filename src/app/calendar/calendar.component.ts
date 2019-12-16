@@ -207,13 +207,13 @@ export class CalendarComponent {
     if (action == "Edit") {
       this.editAppointmentDetails.setValue(event.title)
       this.editAppointmentName.setValue(event.start)
-      this.modal.open(this.editApponitment)
+      this.modal.open(this.editApponitment, { centered: true })
     }
     else if(action == "Deleted"){
       
     }
     else {
-      this.modal.open(this.tesst)
+      this.modal.open(this.tesst, { centered: true })
     }
 
   }
@@ -238,7 +238,7 @@ export class CalendarComponent {
 
   openEvents(e) {
     this.existingEvents = e;
-    this.modal.open(this.tesst)
+    this.modal.open(this.tesst, { centered: true, size: 'lg', windowClass: "tesst" })
   }
 
   close(k) {
@@ -273,7 +273,7 @@ export class CalendarComponent {
 
   addNewEvent(startDate): void {
 
-    this.modal.open(this.newAppointment).result.then((data) => {
+    this.modal.open(this.newAppointment, { centered: true }).result.then((data) => {
       console.log(data)
       if (data === 'Add') {
         this.events = [
@@ -303,8 +303,8 @@ export class CalendarComponent {
   }
   removeEvent(eve, _index) {
     console.log(_index);
-
-    this.events = this.existingEvents = this.events.filter((value, index, arr) => {
+    // 
+    this.existingEvents = this.existingEvents.filter((value, index, arr) => {
       return index != _index;
     });
 

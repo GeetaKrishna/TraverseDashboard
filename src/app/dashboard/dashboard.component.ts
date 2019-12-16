@@ -182,6 +182,7 @@ export class DashboardComponent implements OnInit {
         console.log("error", err);
       }
     );
+    
     this.dashboardService.getCholesterol().subscribe(
       (res) => {
         console.log(res);
