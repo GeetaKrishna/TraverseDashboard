@@ -18,7 +18,8 @@
           Weight <span class="float-right"><span class="fa {{weightpresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
-          <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
+          <span class="fa {{measurementProviderForWeight}} text-muted cursor-pointer" style="font-size: 22px;"></span>
+          <!-- <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span> -->
           <div class="row" [style.display]="!weight? 'none' : ''">
             <div [attr.contenteditable]="contenteditable1" class="col-md-4 font-weight-bold data text-right"
               [textContent]="currentWeight" [ngClass]="{'editTrue' : contenteditable1}"
@@ -66,7 +67,7 @@
               class="fa {{presentedInfo}} {{colorPresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
-          <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
+          <span class="fa {{measurementProviderForBP}} text-muted cursor-pointer" style="font-size: 22px;"></span>
           <div class="row" *ngIf="bloodpressure">
             <div [attr.contenteditable]="contenteditable3"
               class="col-md-4 font-weight-bold data {{colorClassForBP}} text-right"
@@ -93,6 +94,9 @@
             <canvas #canvass id="canvass" height="80vh">{{ BPChart }}</canvas>
           </div>
           <div class="medium text-muted">As of {{bpdate['days']}} {{bpdate['timer']}} ago</div>
+          <div  style="color: red; font-size: 16px; font-weight: 700;">
+              {{dangerStatement}}
+          </div>
         </div>
         <div class="card-footer ch-2">
           <div class="float-right">
@@ -117,7 +121,7 @@
               class="fa {{glucoseweightpresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
-          <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
+          <span class="fa {{measurementProviderForGL}} text-muted cursor-pointer" style="font-size: 22px;"></span>
           <div class="row" *ngIf="glucose">
             <div [attr.contenteditable]="contenteditable2" [ngClass]="{'editTrue' : contenteditable2}"
               class="col-md-4 font-weight-bold data text-right" [textContent]="currentGlucose"
@@ -162,7 +166,7 @@
               class="fa {{cholesterolpresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
-          <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span>
+          <span class="fa {{measurementProviderForCL}} text-muted cursor-pointer" style="font-size: 22px;"></span>
           <div class="row" *ngIf="cholesterol">
             <div [attr.contenteditable]="contenteditable4" [ngClass]="{'editTrue' : contenteditable4}"
               class="col-md-4 font-weight-bold data text-right" [textContent]="currentCholesterol"

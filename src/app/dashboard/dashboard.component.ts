@@ -32,7 +32,10 @@ export class DashboardComponent implements OnInit {
   glucoseweightpresentedInfo: string = 'fa-check-circle' //icon of 3rd point in req sheet.
   cholesterolpresentedInfo: string = 'fa-check-circle' //icon of 3rd point in req sheet.
   presentedInfo: string = 'fa-check-circle' //icon of 3rd point in req sheet.
-  mesurementProvider: string = 'fa-user-md' //icon of 4th point in req sheet.
+  measurementProviderForWeight: string = 'fa-user-md' //icon of 4th point in req sheet.
+  measurementProviderForBP: string = 'fa-user-md' //icon of 4th point in req sheet.
+  measurementProviderForGL: string = 'fa-user-md' //icon of 4th point in req sheet.
+  measurementProviderForCL: string = 'fa-user-md' //icon of 4th point in req sheet.
 
   currentHBP;
   currentLBP;
@@ -137,6 +140,7 @@ export class DashboardComponent implements OnInit {
   weightCompare: boolean;
   clCompare: boolean;
   glucoseCompare: boolean;
+  dangerStatement: string;
 
   constructor(private dashboardService: DashboardService, private getApp: GetAppsService, private datePipe: DatePipe) {
   }
@@ -149,6 +153,13 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getCurrentWeight().subscribe(
       (res) => {
         console.log(res);
+        if (parseInt(localStorage.getItem("userId")) == res['modifiedBy']) {
+          this.measurementProviderForWeight = "fa-user"
+        }
+        else {
+          this.measurementProviderForWeight = "fa-user-md"
+        }
+        console.log(this.measurementProviderForWeight);
 
         this.WeightDate = this.getDifferenceInDays(res['TimeStamp'])
         // console.log(this.WeightDate)
@@ -156,10 +167,10 @@ export class DashboardComponent implements OnInit {
 
         this.dashboardService.getPatientsTopTwoWeights().subscribe((data) => {
           console.log(data);
-          if(data[0].weight>data[1].weight){
+          if (data[0].weight > data[1].weight) {
             this.weightCompare = true;
           }
-          else{
+          else {
             this.weightCompare = false;
           }
 
@@ -177,15 +188,21 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getGlucoseofPatient().subscribe(
       (res) => {
         console.log(res);
+        if (parseInt(localStorage.getItem("userId")) == res['modifiedBy']) {
+          this.measurementProviderForGL = "fa-user"
+        }
+        else {
+          this.measurementProviderForGL = "fa-user-md"
+        }
         this.glucoseDate = this.getDifferenceInDays(res['glDate'])
 
         this.currentGlucose = res['glucoseLevel'];
         this.dashboardService.getPatientsTopTwoGL().subscribe((data) => {
           console.log(data);
-          if(data[0].glucoseLevel>data[1].glucoseLevel){
+          if (data[0].glucoseLevel > data[1].glucoseLevel) {
             this.glucoseCompare = true;
           }
-          else{
+          else {
             this.glucoseCompare = false;
           }
 
@@ -198,18 +215,24 @@ export class DashboardComponent implements OnInit {
         console.log("error", err);
       }
     );
-    
+
     this.dashboardService.getCholesterol().subscribe(
       (res) => {
         console.log(res);
+        if (parseInt(localStorage.getItem("userId")) == res['modifiedBy']) {
+          this.measurementProviderForCL = "fa-user"
+        }
+        else {
+          this.measurementProviderForCL = "fa-user-md"
+        }
         this.cholesterolDate = this.getDifferenceInDays(res['clDate'])
         this.currentCholesterol = res['chLevel'];
         this.dashboardService.getPatientsTopTwoCL().subscribe((data) => {
           console.log(data);
-          if(data[0].chLevel>data[1].chLevel){
+          if (data[0].chLevel > data[1].chLevel) {
             this.clCompare = true;
           }
-          else{
+          else {
             this.clCompare = false;
           }
 
@@ -227,7 +250,12 @@ export class DashboardComponent implements OnInit {
         console.log(res, 'ressssss');
         // console.log(res.highBP);
         this.bpdate = this.getDifferenceInDays(res['bpDate'])
-
+        if (parseInt(localStorage.getItem("userId")) == res['modifiedBy']) {
+          this.measurementProviderForBP = "fa-user"
+        }
+        else {
+          this.measurementProviderForBP = "fa-user-md"
+        }
         this.currentHBP = res['highBP'];
         this.currentLBP = res['lowBP'];
         this.colorForBP(this.currentHBP, this.currentLBP)
@@ -278,38 +306,77 @@ export class DashboardComponent implements OnInit {
     // )
   }
 
-  colorForBP(currentHBP, currentLBP) {
-    if (currentHBP < 120 && currentLBP < 80) {
+  colorForBP(currentHBP: Number, currentLBP) {
+
+    // hbp <= 90 , lbp <= 60 ==> Low, Consult Doctor Immediately.
+    // hbp 91 tp 120 , lbp 61 to 80 ==> Normal
+    // hbp 121 to 140, lbp 81 to 90 ==> PRE-HYPERtENSION
+    // hbp 141 to 160, lbp 91 to 100 ==> Hypertension Stage-1, Consult Doctor
+    // hbp >= 161, lbp > 100 ==> Hypertension Stage -2,  Consult Doctor Immediately
+    
+
+
+    if (currentHBP <= 90 && currentLBP <= 60) {
+      this.dangerStatement = "Low, Consult Doctor Immediately";
+      this.colorClassForBP = 'dark-red'
+      this.presentedInfo = 'fa-exclamation-triangle'
+
+    }
+    else if(currentHBP <= 120 && currentHBP >= 91 && currentLBP >= 61 && currentLBP < 80 ){
+      this.dangerStatement = "Normal";
       this.colorClassForBP = 'green'
       this.presentedInfo = 'fa-check-circle'
-
-    } else if ((120 <= currentHBP && currentHBP < 129) && currentLBP < 80) {
-      this.colorClassForBP = 'yellow'
-      this.presentedInfo = 'fa-exclamation-triangle'
-      this.colorPresentedInfo = this.colorClassForBP
-    } else if ((129 <= currentHBP && currentHBP < 139) || (80 <= currentLBP && currentLBP < 89)) {
-      this.colorClassForBP = 'darkYellow'
-      this.presentedInfo = 'fa-exclamation-triangle'
-      this.colorPresentedInfo = this.colorClassForBP
-
-    } else if ((139 <= currentHBP && currentHBP < 180) || (90 <= currentLBP && currentLBP < 120)) {
-      this.colorClassForBP = 'red'
-      this.presentedInfo = 'fa-exclamation-triangle'
-      this.colorPresentedInfo = this.colorClassForBP
-
-    } else if (currentHBP >= 180 && currentLBP > 120) {
-      this.colorClassForBP = 'darkRed'
-      this.presentedInfo = 'fa-exclamation-triangle'
-      this.colorPresentedInfo = this.colorClassForBP
-
-    } else if (currentHBP >= 180 || currentLBP > 120) {
-      this.colorClassForBP = 'darkRed'
-      this.presentedInfo = 'fa-exclamation-triangle'
-      this.colorPresentedInfo = this.colorClassForBP
-
-    } else {
-      this.colorClassForBP = 'grey'
     }
+    else if(currentHBP <= 140 && currentHBP >= 121 && currentLBP >= 81 && currentLBP < 90 ){
+      this.dangerStatement = "Pre-Hypertension";
+      this.colorClassForBP = 'orange'
+      this.presentedInfo = 'fa-exclamation-triangle'
+    }
+    else if(currentHBP <= 160 && currentHBP >= 141 && currentLBP >= 91 && currentLBP < 100 ){
+      this.dangerStatement = "Hypertension Stage-1, Consult Doctor";
+      this.colorClassForBP = 'dark-red'
+      this.presentedInfo = 'fa-exclamation-triangle'
+    }
+    else if(currentHBP >= 161 && currentLBP > 100 ){
+      this.dangerStatement = "Hypertension Stage -2,  Consult Doctor Immediately";
+      this.colorClassForBP = 'dark-red'
+      this.presentedInfo = 'fa-exclamation-triangle'
+    }
+
+
+    // if (currentHBP < 120 && currentLBP < 80) {
+    //   // Normal
+    //   this.colorClassForBP = 'green'
+    //   this.presentedInfo = 'fa-check-circle'
+
+    // } else if ((120 <= currentHBP && currentHBP < 129) && currentLBP < 80) {
+
+    //   this.colorClassForBP = 'yellow'
+    //   this.presentedInfo = 'fa-exclamation-triangle'
+    //   this.colorPresentedInfo = this.colorClassForBP
+    // } else if ((129 <= currentHBP && currentHBP < 139) || (80 <= currentLBP && currentLBP < 89)) {
+    //   this.colorClassForBP = 'darkYellow'
+    //   this.presentedInfo = 'fa-exclamation-triangle'
+    //   this.colorPresentedInfo = this.colorClassForBP
+
+    // } else if ((139 <= currentHBP && currentHBP < 180) || (90 <= currentLBP && currentLBP < 120)) {
+    //   this.colorClassForBP = 'red'
+    //   this.presentedInfo = 'fa-exclamation-triangle'
+    //   this.colorPresentedInfo = this.colorClassForBP
+
+    // } else if (currentHBP >= 180 && currentLBP > 120) {
+    //   this.colorClassForBP = 'darkRed'
+    //   this.presentedInfo = 'fa-exclamation-triangle'
+    //   this.colorPresentedInfo = this.colorClassForBP
+
+    // } else if (currentHBP >= 180 || currentLBP > 120) {
+    //   this.colorClassForBP = 'darkRed'
+    //   this.presentedInfo = 'fa-exclamation-triangle'
+    //   this.colorPresentedInfo = this.colorClassForBP
+
+    // } else {
+    //   this.colorClassForBP = 'grey'
+    // }
   }
 
   weightToggle() {
@@ -569,7 +636,7 @@ export class DashboardComponent implements OnInit {
     {
       chLevel: this.currentCholesterol,
       clDate: new Date().toISOString(),
-      modifiedBy: localStorage.getItem("userId"),
+      modifiedBy: parseInt(localStorage.getItem("userId")),
       pid: localStorage.getItem("patientId")
     }
 
@@ -591,7 +658,7 @@ export class DashboardComponent implements OnInit {
     let json = {
       "pid": localStorage.getItem("patientId"),
       "weight": this.currentWeight,
-      modifiedBy: localStorage.getItem("userId"),
+      modifiedBy: parseInt(localStorage.getItem("userId")),
       "weightDate": new Date().toISOString()
     }
     this.dashboardService.postWeight(json).subscribe((data) => {
@@ -623,7 +690,7 @@ export class DashboardComponent implements OnInit {
     let json1 = {
       glDate: new Date().toISOString(),
       glucoseLevel: this.currentGlucose,
-      modifiedBy: localStorage.getItem("userId"),
+      modifiedBy: parseInt(localStorage.getItem("userId")),
       pid: localStorage.getItem("patientId")
     }
 
@@ -648,7 +715,7 @@ export class DashboardComponent implements OnInit {
       pid: parseInt(localStorage.getItem("patientId")),
       highBP: parseInt(this.currentHBP),
       lowBP: parseInt(this.currentLBP),
-      modifiedBy: localStorage.getItem("userId"),
+      modifiedBy: parseInt(localStorage.getItem("userId")),
       bpDate: new Date().toISOString()
     }
     console.log(dataBP);

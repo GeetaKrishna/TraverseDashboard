@@ -90,6 +90,9 @@ export class AppInfoComponent implements OnInit {
         this.route.navigateByUrl('admin/fitnessTracker/fitbit')
       } else if (id == 2) {
         this._bottomSheetRef.dismiss();
+
+
+        
         this.route.navigateByUrl('admin/dashboard')
       } else if (id == 3) {
         this._bottomSheetRef.dismiss();
