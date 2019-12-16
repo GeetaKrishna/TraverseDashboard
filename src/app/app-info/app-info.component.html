@@ -11,9 +11,49 @@
             Lorem Ipsum. -->
             {{app.APP_DETAILS}}
         </p>
-        <!-- <span *ngIf="false">
+        <div *ngIf="app.APPNAME == 'Four Corners Of Health'">
+            <!-- <p>hi</p> -->
+            <form action="">
+                <p>
+                    Please enter the following details
+                </p>                
+                <mat-form-field>
+                    <input matInput placeholder="Weight" type="text" [formControl]="weightFormControl">
+                    <mat-error *ngIf="weightFormControl.hasError('required')">
+                        Weight is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                &nbsp;
+                <mat-form-field>
+                    <input matInput placeholder="Cholesterol Level" [formControl]="cholesterolFormControl">
+                    <mat-error *ngIf="cholesterolFormControl.hasError('required')">
+                        Cholesterol Level is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field> 
+                &nbsp;
+                <mat-form-field>
+                    <input matInput placeholder="Glucose Level" [formControl]="glucoseFormControl">
+                    <mat-error *ngIf="glucoseFormControl.hasError('required')">
+                        Glucose Level is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field> 
+                <br>
+                <mat-form-field>
+                    <input matInput placeholder="High BP" [formControl]="highBPFormControl">
+                    <mat-error *ngIf="highBPFormControl.hasError('required')">
+                        High BP is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field> 
+                &nbsp;
+                <mat-form-field>
+                    <input matInput placeholder="Low BP" [formControl]="lowBPFormControl">
+                    <mat-error *ngIf="lowBPFormControl.hasError('required')">
+                        Low BP is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field> 
 
-        </span> -->
+            </form>
+        </div>
         <!-- <button mat-flat-button (click)="updateApp(id)">Update</button> &nbsp; -->
         <button (click)="installApp(app.APP_ID, app)" [disabled]="stopInstall" *ngIf="!app.installed"
             class="btn btn-secondary mr-2">Install</button>

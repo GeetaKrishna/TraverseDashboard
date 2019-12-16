@@ -4,6 +4,7 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { GetAppsService } from '../_services/get-apps.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-app-info',
@@ -15,7 +16,21 @@ export class AppInfoComponent implements OnInit {
   app;
   appsToBePushed = [];
   stopInstall = false;
-
+  weightFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+  cholesterolFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+  glucoseFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+  highBPFormControl = new FormControl('', [
+    Validators.required,
+  ]);
+  lowBPFormControl = new FormControl('', [
+    Validators.required,
+  ]);
   ngOnInit() {
   }
   constructor(private route: Router, private toast: ToastrService, private getApp: GetAppsService, private _bottomSheetRef: MatBottomSheetRef<AppInfoComponent>, @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
