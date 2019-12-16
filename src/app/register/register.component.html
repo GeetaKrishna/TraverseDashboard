@@ -89,8 +89,8 @@
     </div> -->
     <div>
         <div class="row text-center" style="display: flex; max-width: 68%; margin: auto;">
-            <div class="twoCard bg-dark" style="color: white; ">
-                <div class=" text-right" style="margin-top: 250px; padding: 15px;">
+            <div class="twoCard" style="color: white; ">
+                <div class=" text-right" style="margin-top: 310px; padding: 15px;">
                     Welcome to
                     <b>Traverse Healthcare</b>
                 </div>
@@ -147,6 +147,13 @@
                                             mat-icon-button matTooltip="That username is taken. Try another.">
                                             <mat-icon>warning</mat-icon>
                                         </button>
+                                        <button mat-button matSuffix mat-icon-button
+                                            matTooltip="Loading" style="color: black;" class="spinner-border spinner-border-sm">
+                                            <mat-icon>refresh</mat-icon>
+                                            <!-- <div class="spinner-grow spinner-grow-sm" role="status">
+                                             
+                                            </div> -->
+                                        </button>
                                         <button *ngIf="usernameAvialable" mat-button style="color: green" matSuffix
                                             mat-icon-button matTooltip="That username is available.">
                                             <mat-icon>check_circle</mat-icon>
@@ -177,17 +184,7 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <!-- <br> -->
-                            <!-- <br> -->
                             <div class="row">
-                                <div class="col-sm-6" class="example-full-width">
-                                    <mat-form-field>
-                                        <input matInput [matDatepicker]="picker" placeholder="DOB" (dateChange)="dateInput($event.value)"  [formControl]="dateFormControl">
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
-                                    </mat-form-field>
-                                    <!-- <br> -->
-                                </div>
                                 <div class="col-sm-6">
                                     <mat-form-field>
                                         <!-- <span matPrefix>+1 &nbsp;</span> -->
@@ -196,6 +193,15 @@
                                         <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
                                     </mat-form-field>
                                 </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="picker" placeholder="DOB"
+                                            (dateChange)="dateInput($event.value)" [formControl]="dateFormControl">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                    <!-- <br> -->
+                                </div>                             
                             </div>
                             <!-- <br> -->
                             <div class="row">
@@ -213,7 +219,8 @@
                                 <div class="col-sm-6">
                                     <mat-form-field>
                                         <mat-label>Role</mat-label>
-                                        <mat-select [(value)]="selectedd" (selectionChange)="changeClient($event.value)">
+                                        <mat-select [(value)]="selectedd"
+                                            (selectionChange)="changeClient($event.value)">
                                             <mat-option value="Consumer">Consumer</mat-option>
                                             <mat-option value="Provider">Provider</mat-option>
                                             <mat-option value="StakeHolder">StakeHolder</mat-option>
@@ -224,21 +231,21 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <mat-form-field>
-                                            <input matInput placeholder="Height" type="text"
-                                                [formControl]="heightFormControl">
-                                            <mat-error *ngIf="heightFormControl.hasError('required')">
-                                                Height is <strong>required</strong>
-                                            </mat-error>
+                                        <input matInput placeholder="Height" type="text"
+                                            [formControl]="heightFormControl">
+                                        <mat-error *ngIf="heightFormControl.hasError('required')">
+                                            Height is <strong>required</strong>
+                                        </mat-error>
                                     </mat-form-field>
                                     <!-- <br> -->
                                 </div>
                                 <div class="col-sm-6">
                                     <mat-form-field>
-                                            <input matInput placeholder="Weight" type="text"
-                                                [formControl]="weightFormControl">
-                                            <mat-error *ngIf="weightFormControl.hasError('required')">
-                                                Weight is <strong>required</strong>
-                                            </mat-error>
+                                        <input matInput placeholder="Weight" type="text"
+                                            [formControl]="weightFormControl">
+                                        <mat-error *ngIf="weightFormControl.hasError('required')">
+                                            Weight is <strong>required</strong>
+                                        </mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -279,7 +286,9 @@
                                 <button mat-raised-button class="btn-secondary"
                                     (click)="register(firstNameFormControl, lastNameFormControl, userNameFormControl, numberFormControl, emailFormControl, passwordFormControl, heightFormControl, weightFormControl)"
                                     [disabled]="!(firstNameFormControl.valid && lastNameFormControl.valid && emailFormControl.valid && passwordFormControl.valid && cfpasswordFormControl.valid && userNameFormControl.valid)">Sign
-                                    Up</button>
+                                    Up <div *ngIf="signUpSuccess" class="spinner-grow spinner-grow-sm" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div></button>
                                 <!-- [routerLink]="['/home']" -->
                             </div>
                         </form>

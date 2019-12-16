@@ -24,6 +24,9 @@
 .twoCard {
   height: 680px;
   width: 500px;
+  background-color: rgba(84, 91, 95, 0.959)
+  /* bg-dark */
+
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {

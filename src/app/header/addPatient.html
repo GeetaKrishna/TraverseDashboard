@@ -1,93 +1,62 @@
-<div class="container-fluid mt-5 mb-5">
-    <div>
-        <div class="row text-center" style="display: flex; max-width: 100%; margin: auto;">
-            <div class="text-center bg-light ">
-                <div>
-                    <div>
-                        <h4>Patient Profile</h4>
+<div class="container">
+    <div style="float: right;">
+        <span>
+            <i class="fa fa-times"></i>
+        </span>
+    </div>
+    <div class="row">
+        <div>
+            <h4>Patient Profile</h4>
+        </div>
+        <div style="width: 100%;" class="mt-2">
+            <form class="ml-2">
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field>
+                            <input matInput placeholder="PatientName" [formControl]="patientNameFormControl">
+                            <mat-error *ngIf="patientNameFormControl.hasError('required')">
+                                Patient Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
                     </div>
-                    <div style="margin-top: 30px;">
-                            <!-- <img src="../../assets/mainLogo.png" height="50px" width="50px" alt=""> -->
-                            
-                        </div>
-                    <div>
-                        <form>
-                            <!-- <br> -->
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput placeholder="PatientName"
-                                            [formControl]="patientNameFormControl">
-                                        <!-- <button mat-button style="color: red" *ngIf="userNameTaken" matSuffix
-                                                mat-icon-button matTooltip="That username is taken. Try another.">
-                                                <mat-icon>warning</mat-icon>
-                                            </button>
-                                            <button *ngIf="usernameAvialable" mat-button style="color: green" matSuffix
-                                                mat-icon-button matTooltip="That username is available.">
-                                                <mat-icon>check_circle</mat-icon>
-                                            </button> -->
-                                        <!-- <mat-error *ngIf="!patientNameControl.hasError('required')">
-                                                Please enter a valid UserName
-                                            </mat-error> -->
-
-                                        <mat-error *ngIf="patientNameFormControl.hasError('required')">
-                                            UserName is <strong>required</strong>
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <mat-label>Relation</mat-label>
-                                        <mat-select [(value)]="selected"
-                                            (selectionChange)="changeRelation($event.value)">
-                                            <mat-option value="Father">Father</mat-option>
-                                            <mat-option value="Mother">Mother</mat-option>
-                                            <mat-option value="Daughter">Daughter</mat-option>
-                                            <mat-option value="Son">Son</mat-option>
-                                            <mat-option value="Other">Other</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput placeholder="Height" type="text"
-                                            [formControl]="heightFormControl">
-                                        <mat-error *ngIf="heightFormControl.hasError('required')">
-                                            Height is <strong>required</strong>
-                                        </mat-error>
-                                    </mat-form-field>
-                                    <!-- <br> -->
-                                </div>
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-sm-6">
-                                    <mat-form-field>
-                                        <input matInput placeholder="Weight" type="text"
-                                            [formControl]="weightFormControl">
-                                        <mat-error *ngIf="weightFormControl.hasError('required')">
-                                            Weight is <strong>required</strong>
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <br>
-                            <div>
-                                <button mat-raised-button class="btn-secondary"
-                                    (click)="patientProfile(patientNameFormControl, heightFormControl, weightFormControl)"
-                                    [disabled]="!(patientNameFormControl.valid)">Add Patient Profile</button>
-                            </div>
-                        </form>
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Relation</mat-label>
+                            <mat-select [(value)]="selected" (selectionChange)="changeRelation($event.value)">
+                                <mat-option value="Father">Father</mat-option>
+                                <mat-option value="Mother">Mother</mat-option>
+                                <mat-option value="Daughter">Daughter</mat-option>
+                                <mat-option value="Son">Son</mat-option>
+                                <mat-option value="Other">Other</mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
-
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field>
+                            <input matInput placeholder="Height" type="text" [formControl]="heightFormControl">
+                            <mat-error *ngIf="heightFormControl.hasError('required')">
+                                Height is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field>
+                            <input matInput placeholder="Weight" type="text" [formControl]="weightFormControl">
+                            <mat-error *ngIf="weightFormControl.hasError('required')">
+                                Weight is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <button mat-raised-button class="btn-secondary"
+                        (click)="patientProfile(patientNameFormControl, heightFormControl, weightFormControl)"
+                        [disabled]="!(patientNameFormControl.valid)">Add Patient Profile</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

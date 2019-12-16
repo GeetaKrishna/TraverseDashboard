@@ -36,3 +36,19 @@ label.myLabel input[type="file"] {
 .myLabel:active {
   background: #CCF;
 }
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: rgb(10, 10, 10) !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: rgb(10, 10, 10) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: rgb(10, 10, 10) !important;
+  ;
+}
