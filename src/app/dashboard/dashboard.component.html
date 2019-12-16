@@ -29,12 +29,12 @@
 
             <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable1">
               <span *ngIf="weightCompare else down">
-                  <span class="fa fa-arrow-up" ></span>
+                <span class="fa fa-arrow-up" style="color: green"></span>
               </span>
               <ng-template #down>
-                  <span class="fa fa-arrow-down" ></span>
+                <span class="fa fa-arrow-down" style="color: red"></span>
               </ng-template>
-              </div>
+            </div>
             <div>
               <button *ngIf="contenteditable1" class="btn btn-success" (click)="toggleContenteditableWeight()"
                 style="margin-left: 30px;margin-top: 20px;"><i class="fa fa-check"></i></button>
@@ -79,7 +79,8 @@
               (input)="currentLBP=$event.target.textContent">{{currentLBP}}
             </div>
             <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable3"><span
-                class="fa fa-arrow-down text-center"></span>
+                class="fa fa-arrow-down text-center" style="color: red"></span>
+              <span class="fa fa-arrow-up text-center" *ngIf="false" style="color: green"></span>
             </div>
             <div>
               <button *ngIf="contenteditable3" class="btn btn-success" (click)="toggleContenteditableBlood()"
@@ -124,7 +125,9 @@
             </div>
             <div class="col-md-4 font-weight-normal data text-left">mg</div>
             <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable2"><span
-                class="fa fa-arrow-up"></span></div>
+                *ngIf="glucoseCompare" class="fa fa-arrow-up" style="color: green"></span>
+              <span *ngIf="!glucoseCompare" class="fa fa-arrow-down" style="color: red"></span>
+            </div>
             <div>
               <button *ngIf="contenteditable2" class="btn btn-success" (click)="toggleContenteditableGlucose()"
                 style="margin-left: 30px;margin-top: 20px;"><i class="fa fa-check"></i></button>
@@ -167,8 +170,10 @@
               {{currentCholesterol}}
             </div>
             <div class="col-md-4 font-weight-normal data text-left">mg</div>
-            <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable4"><span
-                class="fa fa-arrow-up"></span></div>
+            <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable4"><span *ngIf="clCompare"
+                class="fa fa-arrow-up" style="color: green"></span>
+              <span *ngIf="!clCompare" style="color: red" class="fa fa-arrow-down"></span>
+            </div>
             <div>
               <button *ngIf="contenteditable4" class="btn btn-success" (click)="toggleContenteditableCholestrol()"
                 style="margin-left: 30px;margin-top: 20px;"><i class="fa fa-check"></i></button>

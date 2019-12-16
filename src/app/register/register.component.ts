@@ -21,13 +21,18 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  refresh: boolean = false;
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
-  userNameFormControl = new FormControl('', [
-    Validators.required,
-  ]);
+
+  // use updateOn for performance ;
+
+  userNameFormControl = new FormControl('', {
+    validators: Validators.required
+  });
+
   firstNameFormControl = new FormControl('', [
     Validators.required,
   ]);
@@ -52,7 +57,7 @@ export class RegisterComponent implements OnInit {
   cfpasswordFormControl = new FormControl('', [
     Validators.required,
   ]);
-  userNameTaken: boolean;
+  userNameTaken: any;
   usernameAvialable: boolean;
   constructor(
     private toast: ToastrService,
@@ -69,8 +74,19 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log('yo');
-    // window.alert('helooo')
+
+    this.userNameFormControl.valueChanges.subscribe((data) => {
+      console.log(data);
+      // this.usernameAvialable = false;
+      // this.userNameTaken = false;
+
+if(this.userNameTaken == true || this.userNameTaken == false){
+  this.userNameTaken = "True";
+}
+
+      this.refresh = true;
+    })
+
     this.signUpForm = this.formBuilder.group({
       fname: ['', Validators.required],
       lname: ['', Validators.required],
@@ -83,36 +99,20 @@ export class RegisterComponent implements OnInit {
       .pipe(debounceTime(3000))
       .subscribe((k) => {
         console.log(k);
-        this.authenticationService.verifyUserName(k).subscribe((data) => {
+        this.refresh = false;
+        this.authenticationService.verifyUserName(k).subscribe((data: boolean) => {
           let usernameTake: Boolean
           console.log(data);
-          if (data) {
-            this.usernameAvialable = true
-            this.userNameTaken = false
-          }
-          else {
-            this.usernameAvialable = false
-            this.userNameTaken = true
-          }
+          this.userNameTaken = data;
+          // if (data) {
+          //   this.usernameAvialable = true
+          //   this.userNameTaken = false;
+          // }
+          // else {
+          //   this.usernameAvialable = false
+          //   this.userNameTaken = true
+          // }
         })
-        // let usernameTake: Boolean
-        // if (k === "Geeta") {
-        //   // usernameTake = true
-        //   this.usernameAvialable = false
-        //   this.userNameTaken = true
-        //   console.log('this name exists, no API call', this.userNameTaken)
-        // }
-        // else {
-        //   // usernameTake = false
-        //   this.usernameAvialable = true
-        //   this.userNameTaken = false
-        //   console.log('API call')
-
-        // }
-        // api call for validation of username 
-
-        // this.formGroup.controls.name.setValidators([ Validators.minLength(5) ]);
-        // this.formGroup.controls.name.updateValueAndValidity();
       }
       );
     // get return url from route parameters or default to '/'
@@ -124,6 +124,7 @@ export class RegisterComponent implements OnInit {
 
   userNameValidation(username) {
     console.log(username);
+    this.refresh = true;
     this.subject.next(username);
   }
 
