@@ -102,6 +102,7 @@ export class LoginComponent implements OnInit {
                     this.authenticationService.getUserId(localStorage.getItem('userName')).subscribe((data) => {
                         console.log(data);
                         localStorage.setItem('userId', data['userId'])
+                        data['password'] = undefined;
                         localStorage.setItem('loggedInUser', JSON.stringify(data))
                         this.loginSuccess = false;
                         this.authenticationService.getPatientByUserId(localStorage.getItem('userId')).subscribe((patientData) => {

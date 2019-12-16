@@ -143,18 +143,18 @@
                                     <mat-form-field>
                                         <input matInput placeholder="Username" [formControl]="userNameFormControl"
                                             (keyup)="userNameValidation(userNameFormControl.value)">
-                                        <button mat-button style="color: red" *ngIf="userNameTaken" matSuffix
+                                        <button mat-button style="color: red" *ngIf="userNameTaken == true" matSuffix
                                             mat-icon-button matTooltip="That username is taken. Try another.">
                                             <mat-icon>warning</mat-icon>
                                         </button>
-                                        <button mat-button matSuffix mat-icon-button
+                                        <button mat-button matSuffix mat-icon-button *ngIf="refresh && !userNameFormControl.hasError('required')"
                                             matTooltip="Loading" style="color: black;" class="spinner-border spinner-border-sm">
-                                            <mat-icon>refresh</mat-icon>
+                                            <mat-icon >refresh</mat-icon>
                                             <!-- <div class="spinner-grow spinner-grow-sm" role="status">
                                              
                                             </div> -->
                                         </button>
-                                        <button *ngIf="usernameAvialable" mat-button style="color: green" matSuffix
+                                        <button *ngIf="userNameTaken == false" mat-button style="color: green" matSuffix
                                             mat-icon-button matTooltip="That username is available.">
                                             <mat-icon>check_circle</mat-icon>
                                         </button>

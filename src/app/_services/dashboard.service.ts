@@ -47,6 +47,15 @@ export class DashboardService {
   getPatientsTopTwoWeights() {
     return this.http.get(this.url + `/fc/weight/top2/${this.patientId}`);
   }
+  getPatientsTopTwoCL() {
+    return this.http.get(this.url + `/fc/cl/top2/${this.patientId}`);
+  }
+  getPatientsTopTwoGL() {
+    return this.http.get(this.url + `/fc/gl/top2/${this.patientId}`);
+  }
+  getPatientsTopTwoBP() {
+    return this.http.get(this.url + `/fc/bp/top2/${this.patientId}`);
+  }
 
   // Glucose funcs
 
