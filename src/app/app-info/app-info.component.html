@@ -11,6 +11,9 @@
             Lorem Ipsum. -->
             {{app.APP_DETAILS}}
         </p>
+        <!-- <span *ngIf="false">
+
+        </span> -->
         <!-- <button mat-flat-button (click)="updateApp(id)">Update</button> &nbsp; -->
         <button (click)="installApp(app.APP_ID, app)" [disabled]="stopInstall" *ngIf="!app.installed"
             class="btn btn-secondary mr-2">Install</button>
