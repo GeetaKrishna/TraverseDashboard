@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../_services/authentication.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
     templateUrl: 'login.component.html',
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        public jwtHelper: JwtHelperService
     ) {
 
         // redirect to home if already logged in
@@ -50,7 +52,9 @@ export class LoginComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
-    onSubmit() {
+    onSubmit(event) {
+        event.preventDefault();
+
         console.log(this.emailFormControl.value);
         console.log(this.passwordFormControl.value);
 
@@ -78,21 +82,49 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.emailFormControl.value, this.passwordFormControl.value)
             // .pipe(first())
             .subscribe(
-                data => {
-                    // this.router.navigate([this.returnUrl]);
-                    console.log(data);
-                    // localStorage.setItem('token', data.token)
-                    this.router.navigate(['admin/landing'])
+                user => {
+                    if (user.headers.get('authorization')) {
+                        console.log(user.headers.get('authorization'))
+                    }
+                    // if (user && user['token']) {
+                    //     // store user details and jwt token in local storage to keep user logged in between page refreshes
+    
+                    // localStorage.setItem('token', user.headers.get('authorization'));
+                    // console.log(this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]));
+    
+                    // localStorage.setItem('userId', this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]).sub);
+                    // this.currentUserSubject.next(this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]).sub);
+                    // }
+                    this.authenticationService.getUserId(localStorage.getItem('userName')).subscribe((data)=>{
+                        console.log(data);
+                        localStorage.setItem('userId', data['userId'])
+                        localStorage.setItem('loggedInUser', JSON.stringify(data))
 
+                        this.authenticationService.getPatientByUserId(localStorage.getItem('userId')).subscribe((patientData)=>{
+                            console.log(patientData);
+                            localStorage.setItem('patientId', patientData['pid'])
+                            this.router.navigate(['admin/landing'])
+                        })
+
+                    })                    
+                    // if (loginResponse.headers.get('authorization') != "") {
+
+                    //     this.router.navigate([this.returnUrl]);
+                    //     localStorage.setItem('token', loginResponse.headers.get('authorization'))
+                    //     console.log(loginResponse.headers.get('authorization'));
+                    // }
                 },
                 error => {
-                    this.error = error;
-                    this.loading = false;
+                    console.log(error);
+                    
+                    // this.error = error;
+                    // this.loading = false;
                 });
+                
     }
     signup() {
         console.log('heloo');
-        
+
         this.router.navigateByUrl('signUp');
     }
 }

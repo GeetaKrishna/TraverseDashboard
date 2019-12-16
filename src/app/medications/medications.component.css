@@ -1,3 +1,14 @@
+/* .example-margin {
+    /* margin: 10px; 
+  } */
+
+.mat-slider-horizontal {
+    width: 198px;
+}
+
+.card-body {
+    height: auto;
+}
 .ch-0 {
     background-color: #9ba6b4;
     color: black;
@@ -6,12 +17,12 @@
 }
 
 .ch-1 {
-    background-color: #9ba6b4;
+    background-color: #cbd7e6;
     color: black;
 }
 
 .ch-3 {
-    background-color: rgb(96, 107, 117);
+    background-color: rgb(156, 156, 156);
     color: white;
 
 }
@@ -30,7 +41,7 @@
 
 mat-form-field {
     border-top: 0px !important;
-padding: 0px !important;
+    padding: 0px !important;
 }
 
 
@@ -47,5 +58,32 @@ padding: 0px !important;
 ::ng-deep.mat-form-field-ripple {
     /*change color of underline when focused*/
     background-color: rgb(10, 10, 10) !important;
-    ;
+
+}
+
+::ng-deep.mat-slider-horizontal .mat-slider-wrapper {
+    /*change color of label*/
+    color: rgb(10, 10, 10) !important;
+}
+
+::ng-deep.mat-slider-track-wrapper .mat-slider-ticks-container {
+    /*change color of underline*/
+    color: rgb(10, 10, 10) !important;
+}
+
+::ng-deep.mat-slider-focus-ring .mat-slider-thumb {
+    /*change color of underline*/
+    background-color: rgb(10, 10, 10) !important;
+}
+
+::ng-deep.mat-slider-thumb-label {
+    /*change color of underline when focused*/
+    background-color: rgb(10, 10, 10) !important;
+
+}
+
+::ng-deep.mat-slider-thumb-label-text {
+    /*change color of underline when focused*/
+    color: rgb(255, 255, 255) !important;
+
 }

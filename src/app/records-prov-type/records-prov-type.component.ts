@@ -100,8 +100,8 @@ export class RecordsProvTypeComponent implements OnInit {
           console.log(droppedFile.relativePath, file);
           const formData = new FormData()
           formData.append('file', file, droppedFile.relativePath)
-          formData.append('doc_type', type)
-          this.docService.addDocuments(formData).subscribe((data) => {
+          // formData.append('doc_type', type)
+          this.docService.addDocuments(formData, type).subscribe((data) => {
             console.log(data);
             data['file_name'] = data['fileName']
             switch (type) {

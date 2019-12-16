@@ -41,25 +41,33 @@ export class DocumentTypeComponent implements OnInit {
       this.availableDocsForInsurance = []
       this.state = data['params']['id']
       this.docService.getDocumentsByType(data['params']['id']).subscribe((document) => {
-        console.log(document['recordset'])
+        // console.log(document['recordset'])
+        console.log(document);
+//         documentType: "Personal"
+// fileName: "6_ft.png"
+// fileType: "image/png"
+// fileURI: "http://172.17.12.143:8302/downloadFile/6_ft.png"
+// id: 3
+// pid: 1
+// size: 102609
         switch (this.state) {
           case 'Insurance': {
-            this.availableDocsForInsurance = this.availableDocsForInsurance.concat(document['recordset'])
+            this.availableDocsForInsurance = this.availableDocsForInsurance.concat(document)
             console.log(this.availableDocsForInsurance, 'i');
             break;
           }
           case 'Family': {
-            this.availableDocsForFamily = this.availableDocsForFamily.concat(document['recordset'])
+            this.availableDocsForFamily = this.availableDocsForFamily.concat(document)
             console.log(this.availableDocsForFamily, 'f');
             break;
           }
           case 'Travel': {
-            this.availableDocsForTravel = this.availableDocsForTravel.concat(document['recordset'])
+            this.availableDocsForTravel = this.availableDocsForTravel.concat(document)
             console.log(this.availableDocsForTravel, 't');
             break;
           }
           default: {
-            this.availableDocsForPersonal = this.availableDocsForPersonal.concat(document['recordset'])
+            this.availableDocsForPersonal = this.availableDocsForPersonal.concat(document)
             console.log(this.availableDocsForPersonal, 'p');
             break;
           }
@@ -71,20 +79,20 @@ export class DocumentTypeComponent implements OnInit {
   public files: NgxFileDropEntry[] = [];
   dropped(files: NgxFileDropEntry[]) {
     this.files = files;
-    for (const droppedFile of files) {
-      // Is it a file?
-      if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
-          // Here you can access the real file
-          console.log(droppedFile.relativePath, file, 'name');
-        });
-      } else {
-        // It was a directory (empty directories are added, otherwise only files)
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
-      }
-    }
+    // for (const droppedFile of files) {
+    //   // Is it a file?
+    //   if (droppedFile.fileEntry.isFile) {
+    //     const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+    //     fileEntry.file((file: File) => {
+    //       // Here you can access the real file
+    //       console.log(droppedFile.relativePath, file, 'name');
+    //     });
+    //   } else {
+    //     // It was a directory (empty directories are added, otherwise only files)
+    //     const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+    //     console.log(droppedFile.relativePath, fileEntry);
+    //   }
+    // }
     // console.log(this.files);
   }
 
@@ -98,17 +106,21 @@ export class DocumentTypeComponent implements OnInit {
   dropZoneClassName: string = 'dropZone';
 
   addDocToDB(type) {
+
+      console.log(this.files, "this fi;les");
+
     for (const droppedFile of this.files) {
       // Is it a file?
+
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        console.log(fileEntry, "this dropped fi;les");
         fileEntry.file((file: File) => {
           // Here you can access the real file
           console.log(droppedFile.relativePath, file);
           const formData = new FormData()
           formData.append('file', file, droppedFile.relativePath)
-          formData.append('doc_type', type)
-          this.docService.addDocuments(formData).subscribe((data) => {
+          this.docService.addDocuments(formData, type).subscribe((data) => {
             console.log(data);
             data['file_name'] = data['fileName']
             switch (type) {
@@ -137,6 +149,7 @@ export class DocumentTypeComponent implements OnInit {
       }
     }
   }
+
   addRecord(state) {
     console.log('addRecord() clicked', state);
     // this.files.forEach((f, index) => {

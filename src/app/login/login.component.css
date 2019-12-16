@@ -25,9 +25,9 @@
 
 
 .twoCard {
-    height: 560px;
-    width: 400px;
-}
+    height: 680px;
+    width: 500px;
+  }
 
 ::ng-deep .mat-focused .mat-form-field-label {
     /*change color of label*/

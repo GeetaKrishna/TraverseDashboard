@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InsuranceService } from '../_services/insurance.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-insurance',
@@ -7,6 +8,8 @@ import { InsuranceService } from '../_services/insurance.service';
   styleUrls: ['./insurance.component.css']
 })
 export class InsuranceComponent implements OnInit {
+  patientsListAll: Object;
+  selectedIndex: number = 0;
 
   constructor(private insuranceService: InsuranceService) { }
 
@@ -15,6 +18,8 @@ export class InsuranceComponent implements OnInit {
   private claims: any;
 
   private date = "2019";
+
+  patientId = parseInt(localStorage.getItem("patientId"));
 
   private dentalDeductable: number = 0;
 
@@ -45,6 +50,12 @@ export class InsuranceComponent implements OnInit {
   public deductChartData = [
     { backgroundColor: 'rgba(54, 162, 235, 0.6)', borderColor: 'rgba(54, 162, 235, 1)', data: [65, 59, 80, 100], label: 'Deductibles' }
   ];
+  public setRow(_index: number, patient) {
+    this.selectedIndex = _index;
+    console.log(patient);
+    
+  }
+  dateFormControl = new FormControl("", [Validators.required])
   // public chartType: string = 'horizontalBar';
 
   // public chartDatasets: Array<any> = [
@@ -112,6 +123,16 @@ export class InsuranceComponent implements OnInit {
       (res) => {
         console.log(res);
         this.claims = res;
+
+        this.insuranceService.getAllPatientsList().subscribe((patientsList) => {
+          console.log(patientsList);
+          this.patientsListAll = patientsList;
+        }, (error) => {
+          console.log(error, "error from patients list API");
+
+        })
+
+
       },
       err => {
         console.log("error", err);

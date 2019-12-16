@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent, AddPatientComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChartsModule } from 'ng2-charts';
@@ -16,8 +16,10 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatNativeDateModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatListModule, MatBottomSheetModule, MatMenuModule, MatIconModule } from '@angular/material';
+import { MatSliderModule, MatTooltipModule, MatExpansionModule, MatCardModule, MatNativeDateModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatListModule, MatBottomSheetModule, MatMenuModule, MatIconModule } from '@angular/material';
 // import {MatDatepickerModule} from '@angular/material/datepicker';
+
+import { JwtModule } from "@auth0/angular-jwt";
 
 import { RatingModule } from 'ngx-rating';
 import { AppInfoComponent } from './app-info/app-info.component';
@@ -35,7 +37,7 @@ import { HealthKnowledgeContentComponent } from './health-knowledge-content/heal
 import { MyHeartComponent } from './my-heart/my-heart.component'; // for FullCalendar!
 
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { InsuranceComponent } from './insurance/insurance.component';
 import { DatePipe } from '@angular/common';
@@ -46,7 +48,7 @@ import { HealthConnectChatComponent } from './health-connect-chat/health-connect
 import { DocumentComponent } from './document/document.component';
 import { ElectronicHealthComponent } from './electronic-health/electronic-health.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
-import { FilterPipe } from './filter.pipe';
+import { FilterPipe } from './_pipes/filter.pipe';
 import { MedicalConditionComponent } from './medical-condition/medical-condition.component';
 import { FamilyComponent } from './family/family.component';
 import { FourCComponent } from './four-c/four-c.component';
@@ -62,7 +64,8 @@ import { LabReportTypeComponent } from './lab-report-type/lab-report-type.compon
 import { InsuranceProvComponent } from './insurance-prov/insurance-prov.component';
 import { RecordsProviderComponent } from './records-provider/records-provider.component';
 import { RecordsProvTypeComponent } from './records-prov-type/records-prov-type.component';
-import { SearchDocumentsPipe } from './search-documents.pipe';
+import { SearchDocumentsPipe } from './_pipes/search-documents.pipe';
+import { AddMedComponent } from './add-med/add-med.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +108,8 @@ import { SearchDocumentsPipe } from './search-documents.pipe';
     RecordsProviderComponent,
     RecordsProvTypeComponent,
     SearchDocumentsPipe,
+    AddMedComponent,
+    AddPatientComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,10 +128,13 @@ import { SearchDocumentsPipe } from './search-documents.pipe';
     RatingModule,
     MatBottomSheetModule,
     MatDatepickerModule,
-    MatNativeDateModule ,
+    MatNativeDateModule,
+    MatTooltipModule,
     MatListModule,
     MatMenuModule,
     MatIconModule,
+    MatSliderModule,
+    MatExpansionModule,
     AvatarModule,
     // CalendarModule.forRoot({
     //   provide: DateAdapter,
@@ -141,7 +149,16 @@ import { SearchDocumentsPipe } from './search-documents.pipe';
     }),
     MatTabsModule,
     MatSidenavModule,
-    NgxFileDropModule
+    NgxFileDropModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem("access_token");
+        },
+        // whitelistedDomains: ["example.com"],
+        // blacklistedRoutes: ["example.com/examplebadroute/"]
+      }
+    })
     // FullCalendarModule
   ],
   providers: [
@@ -150,7 +167,7 @@ import { SearchDocumentsPipe } from './search-documents.pipe';
     DatePipe,
     MatDatepickerModule
   ],
-  entryComponents: [AppInfoComponent, HomeComponent],
+  entryComponents: [AppInfoComponent, HomeComponent, AddMedComponent, AddPatientComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MedicationService } from '../_services/medication.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AddMedComponent } from '../add-med/add-med.component';
 
 @Component({
   selector: 'app-medications',
@@ -13,7 +15,7 @@ export class MedicationsComponent implements OnInit {
 
   apps: any[] = [
     {
-      "medication": "Add Medication",
+      "name": "Add Medication",
       "medicationImage": "assets/icons-home/motion01.png",
       "color": "lightgrey"
     },
@@ -30,6 +32,9 @@ export class MedicationsComponent implements OnInit {
 
   addMedicationToggle: boolean = true;
   medName = new FormControl('');
+  // new FormControl({value: 'Nancy', disabled: true}, Validators.required),
+  startTime = new FormControl({value: '', disabled: true});
+  endTime = new FormControl({value: '', disabled: true});
   medImage = new FormControl('');
   medIntake = new FormControl('');
   medDesc = new FormControl('');
@@ -38,51 +43,111 @@ export class MedicationsComponent implements OnInit {
   flag: boolean = false;
   editedImageData: any;
   setImageEditFlag: boolean = true;
-  constructor(private http: HttpClient, private medicationService: MedicationService, private sanitizer: DomSanitizer, ) { }
+  showPres: boolean;
+  medicationDetails: any;
+  description: any;
+  constructor(
+    private http: HttpClient,
+    private medicationService: MedicationService,
+    private sanitizer: DomSanitizer, public dialog: MatDialog) { }
+  max = 100;
+  min = 0;
+  step = 1;
+  thumbLabel = true;
+  sliderValue = 0;
+  animal: string;
+  name: string;
 
   ngOnInit() {
-    this.medicationService.getMedtcations().subscribe(
-      (res: []) => {
-        console.log(res)
-        let medicinesAvailable = []
+    let colors = ['ch-1',
+      'ch-2',
+      'ch-3',
+      'ch-4',
+      'ch-0']
+    this.medicationService.getPrescriptions().subscribe(
+      (pres: []) => {
+        this.medicationService.getMedications().subscribe(
+          (res: []) => {
+            console.log(res)
+            console.log(pres);
 
-        res.forEach((element, index) => {
+            this.medicationDetails = res;
+            res.map((e) => {
+              pres.map((press: any, index) => {
+                if (e['id'] === press['medicationId']) {
+                  press.startDate = press.startDate.split("T")[0];
+                  press.endDate = press.endDate.split("T")[0];
 
-          if (element['medid'] != 44) {
-            let colors = ['ch-1',
-              'ch-2',
-              'ch-3',
-              'ch-4',
-              'ch-0']
-            let t = {};
+                  let t = {};
+                  t = press;
+                  if (index % 2 == 0) {
+                    t['medicationIndication'] = 'warn'
+                  }
 
-            if (index % 2 == 0) {
-              t['medicationIndication'] = 'warn'
-            }
+                  t['color'] = colors[index];
+                  t['name'] = e['name'];
+                  t['image'] = e['image'];
+                  t['description'] = e['description'];
+                  t['image'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${t['image']}`);
+                  console.log(t);
+                  this.apps.push(t);
+                }
 
-            t['color'] = colors[index];
-            t['id'] = element['medid']
-            t['medicationSchedule'] = element['medschedule'];
-            t['medicationDetails'] = element['description'];
-            t['medication'] = element['medname'];
-            t['image'] = element['medimage']
+              })
+            })
+            // res.forEach((element, index) => {
 
-            t['medicationImage'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${element['medimage']}`);
-            this.apps.push(t);
+            //   if (element['medid'] != 44) {
+            //     let colors = ['ch-1',
+            //       'ch-2',
+            //       'ch-3',
+            //       'ch-4',
+            //       'ch-0']
+            //     let t = {};
+
+            //     if (index % 2 == 0) {
+            //       t['medicationIndication'] = 'warn'
+            //     }
+
+            //     t['color'] = colors[index];
+            //     t['id'] = element['medid']
+            //     t['medicationSchedule'] = element['medschedule'];
+            //     t['medicationDetails'] = element['description'];
+            //     t['medication'] = element['medname'];
+            //     t['image'] = element['medimage']
+
+            //     t['medicationImage'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${element['medimage']}`);
+            //     this.apps.push(t);
+            //   }
+            // });
+          },
+          err => {
+            console.log("error", err);
           }
-        });
-      },
-      err => {
-        console.log("error", err);
-      }
-    );
+        );
+      }, (err) => {
+        console.log(err);
+
+      })
+
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddMedComponent, {
+      data: { name: this.name, animal: this.animal }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
 
   imageInput(event) {
     let file = event.target.files[0];
     this.imageData = file;
     console.log(this.imageData);
-
   }
 
   editImageInput(event, index, data) {
@@ -116,55 +181,74 @@ export class MedicationsComponent implements OnInit {
 
   successAdding() {
 
-    switch (this.medIntake.value) {
-      case 'once': {
-        this.medIntake.setValue("Once a Day")
-        break;
-      }
-      case 'twice': {
-        this.medIntake.setValue("Twice a Day")
-        break;
-      }
-      case 'thrice': {
-        this.medIntake.setValue("Thrice a Day")
-        break;
-      }
-      case 'four': {
-        this.medIntake.setValue("Four times a Day")
-        break;
-      }
-      case 'five': {
-        this.medIntake.setValue("Five times a Day")
-        break;
-      }
-    }
+    // switch (this.medIntake.value) {
+    //   case 'once': {
+    //     this.medIntake.setValue("Once a Day")
+    //     break;
+    //   }
+    //   case 'twice': {
+    //     this.medIntake.setValue("Twice a Day")
+    //     break;
+    //   }
+    //   case 'thrice': {
+    //     this.medIntake.setValue("Thrice a Day")
+    //     break;
+    //   }
+    //   case 'four': {
+    //     this.medIntake.setValue("Four times a Day")
+    //     break;
+    //   }
+    //   case 'five': {
+    //     this.medIntake.setValue("Five times a Day")
+    //     break;
+    //   }
+    // }
 
-    const formData = new FormData();
-    formData.append('DESCRIPTION', this.medDesc.value);
-    formData.append('MEDIMAGE', this.imageData);
-    formData.append('MEDNAME', this.medName.value);
-    formData.append('MEDSCHEDULE', this.medIntake.value);
+    // {
+    //   "dosage": this.sliderValue.toString(),
+    //   "endDate": this.endTime.value,
+    //   "instruction": this.medIntake.value,
+    //   "medicationId": this.medName.value.id,
+    //   "pid": localStorage.getItem("patientId"),
+    //   "startDate": this.startTime.value
+    // }
 
-    this.medicationService.addMedication(formData).subscribe((data) => {
+    // const formData = new FormData();
+    // formData.append('instruction', this.medIntake.value);
+    // formData.append('medicationId', this.medName.value.id);
+    // formData.append('pid', localStorage.getItem("patientId"));
+    // formData.append('startDate', this.startTime.value);
+    // formData.append('endDate', this.endTime.value);
+    // formData.append('dosage', this.sliderValue.toString());
+
+    this.medicationService.addPrescription({
+      "dosage": this.sliderValue.toString(),
+      "endDate": this.endTime.value,
+      "instruction": this.medIntake.value,
+      "medicationId": this.medName.value.id,
+      "pid": localStorage.getItem("patientId"),
+      "startDate": this.startTime.value
+    }).subscribe((data) => {
       console.log(data);
-      let t = {};
+      // let t = {};
 
-      t['id'] = data['medid']
-      t['medicationSchedule'] = data['medschedule'];
-      t['medicationDetails'] = data['description'];
-      t['medication'] = data['medname'];
-      t['image'] = data['medimage']
+      // t['id'] = data['medid']
+      // t['medicationSchedule'] = data['medschedule'];
+      // t['medicationDetails'] = data['description'];
+      // t['medication'] = data['medname'];
+      // t['image'] = data['medimage']
 
-      t['medicationImage'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${data['medimage']}`);
-      this.apps.push(t);
+      // t['medicationImage'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${data['medimage']}`);
+      // this.apps.push(t);
 
     }, (err) => {
       console.log(err, "err");
 
     })
+    console.log(this.startTime, this.endTime);
 
-    this.medName.setValue('')
-    this.medIntake.setValue('')
+    // this.medName.setValue('')
+    // this.medIntake.setValue('')
     this.addMedicationToggle = !this.addMedicationToggle
   }
   cancelAdding() {
@@ -173,18 +257,21 @@ export class MedicationsComponent implements OnInit {
     this.addMedicationToggle = !this.addMedicationToggle
 
   }
-  removeMedication(k, i) {
+  removeMedication(medication, i) {
 
-    console.log(k)
+    console.log(medication, i)
 
-    this.medicationService.deleteMedtcations(JSON.stringify(k.id)).subscribe((res) => {
+    this.medicationService.deletePrescription(parseInt(medication.id)).subscribe((res) => {
       console.log(res);
       this.apps.splice(i, 1)
     }, (err) => {
       console.log(err);
     })
   }
+//   dateInput(value, dateType){
+// console.log(value, dateType, this.endTime, this.startTime);
 
+//   }
   //Function to convert base64 String to ByteArray
   b64toBlob(b64Data, contentType = '', sliceSize = 512) {
     const byteCharacters = atob(b64Data);
@@ -208,31 +295,42 @@ export class MedicationsComponent implements OnInit {
 
   //Method to edit the form
   editMedication(medicationDetail) {
+    console.log(medicationDetail, "details");
+
     this.flag = !this.flag;
 
+    // dosage: "23"
+    // endDate: "2020-01-02"
+    // id: 4
+    // instruction: "Twice"
+    // medicationId: 4
+    // pid: 1
+    // startDate: "2020-02-01"
+
     if (!this.flag) {
-      let formDataa = new FormData();
-      if (this.setImageEditFlag) {
-        console.log()
-        console.log(medicationDetail.medicationImage.changingThisBreaksApplicationSecurity);
-        const blob = this.b64toBlob(medicationDetail.image);
 
-        formDataa.append("MEDIMAGE", blob)
-
-        this.setImageEditFlag = true;
-      }
-      else {
-        formDataa.append("MEDIMAGE", this.editedImageData)
-      }
       console.log(medicationDetail.medicationSchedule);
 
-      this.medicationService.editMedications(parseInt(medicationDetail.id), medicationDetail.medicationDetails,
-        medicationDetail.medication, medicationDetail.medicationSchedule, formDataa).subscribe((data) => {
+      this.medicationService.editPrescription({
+        "dosage": medicationDetail.dosage,
+        "endDate": medicationDetail.endDate,
+        "id": medicationDetail.id,
+        "instruction": medicationDetail.instruction,
+        "medicationId": medicationDetail.medicationId,
+        "pid": medicationDetail.pid,
+        "startDate": medicationDetail.startDate
+      }).subscribe((data) => {
+        console.log(data, "after updating");
 
-        }, (err) => {
+      }, (err) => {
 
-        })
+      })
     }
+
+  }
+  test(test) {
+    console.log(test, this.medName);
+    this.description = test.description;
 
   }
 }

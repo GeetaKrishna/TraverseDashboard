@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MyHeartService } from '../_services/my-heart.service';
 
 @Component({
   selector: 'app-my-heart',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyHeartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private myHeartService: MyHeartService) { }
 
   ngOnInit() {
+    this.myHeartService.getHeartRateByPatientId().subscribe((data) => {
+      console.log(data);
+
+    }, (err) => {
+      console.log(err);
+
+    })
+    this.myHeartService.getEkgByPatientId().subscribe((data) => {
+      console.log(data);
+
+    }, (err) => {
+      console.log(err);
+
+    })
+
   }
 
   apps: any[] = [
@@ -72,7 +88,7 @@ export class MyHeartComponent implements OnInit {
       "appName": "Steps / Activity",
       "url": "assets/myHeart/walk.png",
       "time": "3 days ago"
-    },{
+    }, {
       "appId": 7,
       "details": "2 Miles",
       "version": "1.0v",

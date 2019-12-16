@@ -14,6 +14,8 @@ export class AppInfoComponent implements OnInit {
   install: boolean = false
   app;
   appsToBePushed = [];
+  stopInstall = false;
+
   ngOnInit() {
   }
   constructor(private route: Router, private toast: ToastrService, private getApp: GetAppsService, private _bottomSheetRef: MatBottomSheetRef<AppInfoComponent>, @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
@@ -32,86 +34,99 @@ export class AppInfoComponent implements OnInit {
 
 
   navigateToApp(id) {
-    if (id == 2) {
+    if (id == 1) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/fitnessTracker/fitbit')
-    } else if (id == 3) {
+    } else if (id == 2) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/dashboard')
-    } else if (id == 4) {
+    } else if (id == 3) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/healthKnowledgeBase/healthKnowledgeContent')
-    } else if (id == 5) {
+    } else if (id == 4) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/calendar')
-    } else if (id == 7) {
+    } else if (id == 6) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/medication')
-    } else if (id == 8) {
+    } else if (id == 7) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/document')
-    } else if (id == 11) {
+    } else if (id == 10) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/electronicHealth/Visits')
-    } else if (id == 23) {
+    } else if (id == 16) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/pharmacy')
-    } else if (id == 20) {
+    } else if (id == 13) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/labReports/Labs')
-    } else if (id == 21) {
+    } else if (id == 14) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/patientView')
-    } else if (id == 22) {
+    } else if (id == 15) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/patientBilling')
-    } else if (id == 26) {
+    } else if (id == 19) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/emergency')
+    } else if (id == 11) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/family')
+    } else if (id == 12) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/medicalCondition')
     }
   }
 
   installApp(id, appDetails) {
     console.log('install clicked', id);
     console.log('install clicked', appDetails);
-    this.getApp.addApp(appDetails).subscribe((data) => {
+    this.stopInstall = true;
+    this.getApp.addApp(id).subscribe((data) => {
       console.log(data)
-      if (id == 2) {
+      if (id == 1) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/fitnessTracker/fitbit')
-      } else if (id == 3) {
+      } else if (id == 2) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/dashboard')
-      } else if (id == 4) {
+      } else if (id == 3) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/healthKnowledgeBase/healthKnowledgeContent')
-      } else if (id == 5) {
+      } else if (id == 4) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/calendar')
-      } else if (id == 7) {
+      } else if (id == 6) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/medication')
-      } else if (id == 8) {
+      } else if (id == 7) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/document')
-      } else if (id == 11) {
+      } else if (id == 10) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/electronicHealth/Visits')
-      } else if (id == 23) {
+      } else if (id == 16) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/pharmacy')
-      } else if (id == 20) {
+      } else if (id == 13) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/labReports/Labs')
-      } else if (id == 21) {
+      } else if (id == 14) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/patientView')
-      } else if (id == 22) {
+      } else if (id == 15) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/patientBilling')
-      } else if (id == 26) {
+      } else if (id == 19) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/emergency')
+      } else if (id == 11) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/family')
+      } else if (id == 12) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/medicalCondition')
       }
       this.toast.success('App installed Successfully.')
       // if (JSON.parse(localStorage.getItem("apps"))) {
@@ -123,9 +138,10 @@ export class AppInfoComponent implements OnInit {
       // this.appsToBePushed.push(this.data)
       // console.log(new Set(this.appsToBePushed));
       // localStorage.setItem('apps', JSON.stringify(this.appsToBePushed))
-
+      this.stopInstall = false;
     }, (error) => {
       this.toast.error(`Could'nt install app, Please try later.`)
+      this.stopInstall = false;
       console.log(error, "error storing data")
     })
 
@@ -138,7 +154,6 @@ export class AppInfoComponent implements OnInit {
       this._bottomSheetRef.dismiss({ data: id });
     }, (err) => {
       this.toast.error(`Couldn't uninstall app, Please try later.`)
-
       console.log(err);
     })
   }

@@ -54,12 +54,14 @@ const colors: any = {
 export class CalendarComponent {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('newAppointment', { static: true }) newAppointment: TemplateRef<any>;
+  @ViewChild('editApponitment', { static: true }) editApponitment: TemplateRef<any>;
   @ViewChild('tesst', { static: true }) tesst: TemplateRef<any>;
   existingEvents: any;
   clickedDate: Date;
+  selectedIndex: number = 0;
   constructor(private modal: NgbModal) { }
 
-  ngOnInit(){}
+  ngOnInit() { }
 
   view: CalendarView = CalendarView.Month;
 
@@ -74,6 +76,8 @@ export class CalendarComponent {
 
   AppointmentDetails = new FormControl()
   AppointmentName = new FormControl()
+  editAppointmentDetails = new FormControl()
+  editAppointmentName = new FormControl()
 
   actions: CalendarEventAction[] = [
     {
@@ -86,7 +90,7 @@ export class CalendarComponent {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
-        if(this.events.length <=1){
+        if (this.events.length <= 1) {
           this.activeDayIsOpen = !this.activeDayIsOpen
         }
         this.handleEvent('Deleted', event);
@@ -117,10 +121,11 @@ export class CalendarComponent {
 
   events: CalendarEvent[] = [
     {
+      id: "Medication",
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
       title: 'Take your medicine daily.',
-      color: colors.red,
+      color: colors.blue,
       actions: this.actions,
       allDay: true,
       resizable: {
@@ -130,6 +135,7 @@ export class CalendarComponent {
       draggable: true
     },
     {
+      id: "Medication",
       start: subDays(endOfMonth(new Date()), 3),
       end: addDays(endOfMonth(new Date()), 3),
       title: 'Take medicine daily for 2 Months',
@@ -137,6 +143,7 @@ export class CalendarComponent {
       allDay: true
     },
     {
+      id: "Appointment",
       start: addHours(startOfDay(new Date()), 2),
       end: new Date(),
       title: 'Appointment to be Rescheduled',
@@ -161,6 +168,7 @@ export class CalendarComponent {
         events.length === 0
       ) {
         this.activeDayIsOpen = false;
+        // this.addNewEvent(date)
       } else {
         this.activeDayIsOpen = true;
       }
@@ -195,9 +203,19 @@ export class CalendarComponent {
 
   handleEvent(action: string, event: CalendarEvent): void {
     console.log('handling event', event);
-    
     this.modalData = { event, action };
-    // this.modal.open(this.modalContent, { size: 'sm' });
+    if (action == "Edit") {
+      this.editAppointmentDetails.setValue(event.title)
+      this.editAppointmentName.setValue(event.start)
+      this.modal.open(this.editApponitment)
+    }
+    else if(action == "Deleted"){
+      
+    }
+    else {
+      this.modal.open(this.tesst)
+    }
+
   }
 
   addEvent(): void {
@@ -248,6 +266,8 @@ export class CalendarComponent {
     this.modal.dismissAll();
     this.AppointmentName.reset()
     this.AppointmentDetails.reset()
+    // this.editAppointmentName.reset()
+    // this.editAppointmentDetails.reset()
     // this.addNewEvent(new Date())
   }
 
@@ -274,14 +294,23 @@ export class CalendarComponent {
       }
     })
 
-
   }
 
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter(event => event !== eventToDelete);
+    this.activeDayIsOpen = !this.activeDayIsOpen
   }
+  removeEvent(eve, _index) {
+    console.log(_index);
 
+    this.events = this.existingEvents = this.events.filter((value, index, arr) => {
+      return index != _index;
+    });
+
+    console.log(this.events);
+
+  }
   setView(view: CalendarView) {
     this.view = view;
   }

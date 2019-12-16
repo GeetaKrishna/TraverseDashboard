@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
-import { DocumentService } from '../_services/document.service';
 import { ActivatedRoute } from '@angular/router';
+import { EhrService } from '../_services/ehr.service';
 
 @Component({
   selector: 'app-electronic-health-type',
@@ -14,7 +14,7 @@ export class ElectronicHealthTypeComponent implements OnInit {
   availableDocsForImaging = [];
   availableDocsForLabs = [];
   availableDocsForRecords = [];
-  constructor(private docService: DocumentService, public activatedRoute: ActivatedRoute) { }
+  constructor(public ehrService: EhrService, public activatedRoute: ActivatedRoute) { }
   state;
   ngOnInit() {
     this.availableDocsForVisits = [];
@@ -22,12 +22,13 @@ export class ElectronicHealthTypeComponent implements OnInit {
     this.availableDocsForLabs = [];
     this.availableDocsForRecords = [];
 
-    // this.docService.getDocuments().subscribe((data) => {
+    // this.ehrService.getDocuments().subscribe((data) => {
     //   console.log(data);
     // }, (err) => {
     //   console.log(err);
     // })
 
+    // })
     this.activatedRoute.paramMap.subscribe((data) => {
       console.log(data['params']['id'])
       this.availableDocsForVisits = [];
@@ -35,26 +36,26 @@ export class ElectronicHealthTypeComponent implements OnInit {
       this.availableDocsForLabs = [];
       this.availableDocsForRecords = [];
       this.state = data['params']['id']
-      this.docService.getDocumentsByType(data['params']['id']).subscribe((document) => {
-        console.log(document['recordset'])
+      this.ehrService.getDocumentsByType(data['params']['id']).subscribe((document) => {
+        console.log(document)
         switch (this.state) {
           case 'Visits': {
-            this.availableDocsForVisits = this.availableDocsForVisits.concat(document['recordset'])
+            this.availableDocsForVisits = this.availableDocsForVisits.concat(document)
             console.log(this.availableDocsForVisits, 'i');
             break;
           }
           case 'Imaging': {
-            this.availableDocsForImaging = this.availableDocsForImaging.concat(document['recordset'])
+            this.availableDocsForImaging = this.availableDocsForImaging.concat(document)
             console.log(this.availableDocsForImaging, 'f');
             break;
           }
           case 'Labs': {
-            this.availableDocsForLabs = this.availableDocsForLabs.concat(document['recordset'])
+            this.availableDocsForLabs = this.availableDocsForLabs.concat(document)
             console.log(this.availableDocsForLabs, 't');
             break;
           }
           default: {
-            this.availableDocsForRecords = this.availableDocsForRecords.concat(document['recordset'])
+            this.availableDocsForRecords = this.availableDocsForRecords.concat(document)
             console.log(this.availableDocsForRecords, 'p');
             break;
           }
@@ -100,10 +101,10 @@ export class ElectronicHealthTypeComponent implements OnInit {
           console.log(droppedFile.relativePath, file);
           const formData = new FormData()
           formData.append('file', file, droppedFile.relativePath)
-          formData.append('doc_type', type)
-          this.docService.addDocuments(formData).subscribe((data) => {
+          // formData.append('doc_type', type)
+          this.ehrService.addDocuments(formData, type).subscribe((data) => {
             console.log(data);
-            data['file_name'] = data['fileName']
+            data['fileName'] = data['fileName']
             switch (type) {
               case 'Visits':
                 this.availableDocsForVisits.push(data)

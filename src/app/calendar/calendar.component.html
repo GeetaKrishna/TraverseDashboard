@@ -10,7 +10,7 @@
             </p>
           </div>
           <div class="col justify-content-end">
-            <img src="../../assets/icons-home/calendar.jpg" style="height: 45px; width: 45px; float: right;" />
+            <img src="../../assets/calendar1.png" style="height: 45px; width: 45px; float: right;" />
           </div>
         </div>
       </div>
@@ -41,8 +41,8 @@
             </div>
             <div class="col-md-4" style="float:right">
               <div>
-                <i class="fa fa-circle p-2" aria-hidden="true" style="color: orange"></i> Medications
-                <i class="fa fa-circle p-2" aria-hidden="true" style="color: skyblue"></i>Appointment
+                <i class="fa fa-circle p-2" aria-hidden="true" style="color: orange"></i> Appointment
+                <i class="fa fa-circle p-2" aria-hidden="true" style="color: skyblue"></i>Medications
               </div>
             </div>
           </div>
@@ -117,9 +117,10 @@
             </div>
           </div>
           <div class="card-body">
+            <!-- <mat-tab-group [selectedIndex]="selectedIndex"> -->
             <mat-tab-group>
               <mat-tab label="Events">
-                <div *ngFor="let event of existingEvents">
+                <div *ngFor="let event of existingEvents; let i=index">
                   <div class="hoverClass">
                     <div class="row">
                       <div class="col-md-9">
@@ -131,15 +132,15 @@
                         </div>
                       </div>
 
-                      <div class="col-md-3">
-                        <div *ngIf="event.type != 'Medication' else Appointment">
+                      <div class="col-md-3" style="display: block; float: right">
+                        <div *ngIf="event.id != 'Medication' else Appointment" >
                           <i class="fa fa-map-marker p-2" aria-hidden="true"></i>
                           <i class="fa fa-clock-o p-2" aria-hidden="true"></i>
                           <i class="fa fa-times-circle-o p-2" aria-hidden="true"></i>
                         </div>
                         <ng-template #Appointment>
                           <i class="fa fa-refresh p-2" aria-hidden="true"></i>
-                          <i class="fa fa-times-circle-o p-2" aria-hidden="true"></i>
+                          <i class="fa fa-trash" (click)="removeEvent(event, i)" aria-hidden="true"></i>
                         </ng-template>
 
                       </div>
@@ -149,11 +150,11 @@
                   </div>
                 </div>
               </mat-tab>
-              <mat-tab label="New Appointment">
+              <mat-tab label="Request Appointment">
                 <!-- <ng-container *ngTemplateOutlet="newAppointment;"></ng-container> -->
                 <div class="card">
                   <div class="card-header">
-                    Add an Appointment
+                      Request an Appoinment
                   </div>
                   <div class="card-body">
                     <div class="example-container">
@@ -179,16 +180,6 @@
                   </div>
 
                 </div>
-              </mat-tab>
-              <mat-tab label="Request Appointment">
-                Request for an Appoinment
-                <!-- <div *ngFor="let k of [6,7,8,8]">
-                  <div class="card-body hoverClass" style="padding: 10px !important;">
-                    <div>
-                      <p>{{k}}</p>
-                    </div>
-                  </div>
-                </div> -->
               </mat-tab>
               <mat-tab label="Add Medication">
                 Add Medication Details
@@ -235,7 +226,99 @@
         </div>
       </ng-template>
 
+      <ng-template #editApponitment let-close="close">
+        <div class="card">
+          <div class="card-header">
+            Edit Appointment
+          </div>
+          <div class="card-body">
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput [formControl]="editAppointmentName" placeholder="Input">
+              </mat-form-field>
+
+              <mat-form-field>
+                <textarea matInput [formControl]="editAppointmentDetails" placeholder="Appointment Details"></textarea>
+              </mat-form-field>
+
+              <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
+              <button mat-button color="primary" (click)="close('Add')">Edit Appointment</button>
+
+            </div>
+          </div>
+
+        </div>
+      </ng-template>
+
     </div>
   </div>
 
 </div>
+
+<!-- <ng-template
+    #customTemplate
+    let-day="day"
+    let-openDay="openDay"
+    let-locale="locale"
+    let-tooltipPlacement="tooltipPlacement"
+    let-highlightDay="highlightDay"
+    let-unhighlightDay="unhighlightDay"
+    let-eventClicked="eventClicked"
+    let-tooltipTemplate="tooltipTemplate"
+    let-tooltipAppendToBody="tooltipAppendToBody">
+    <div class="cal-cell-top">
+      <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+      <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    </div>
+    <div class="cal-events" *ngIf="day.events.length > 0">
+      <div
+        class="cal-event"
+        *ngFor="let event of day.events; trackBy:trackByEventId"
+        [style.backgroundColor]="event.color?.secondary"
+        [ngClass]="event?.cssClass"
+        (mouseenter)="highlightDay.emit({event: event})"
+        (mouseleave)="unhighlightDay.emit({event: event})"
+        [mwlCalendarTooltip]="event.title | calendarEventTitle:'monthTooltip':event"
+        [tooltipPlacement]="tooltipPlacement"
+        [tooltipEvent]="event"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipAppendToBody]="tooltipAppendToBody"
+        mwlDraggable
+        [class.cal-draggable]="event.draggable"
+        dragActiveClass="cal-drag-active"
+        [dropData]="{event: event, draggedFrom: day}"
+        [dragAxis]="{x: event.draggable, y: event.draggable}"
+        (mwlClick)="eventClicked.emit({ event: event })">
+      </div>
+    </div>
+  </ng-template> -->
+  <!-- <ng-template #customCellTemplate let-day="day" let-locale="locale">
+        <div class="cal-cell-top">
+          <span class="cal-day-badge" *ngIf="day.badgeTotal > 0"
+            >{{ day.badgeTotal }}</span
+          >
+          <span class="cal-day-number"
+            >{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span
+          >
+        </div>
+        <div
+        class="cal-event"
+        *ngFor="let event of day.events; trackBy:trackByEventId"
+        [style.backgroundColor]="event.color?.secondary"
+        [ngClass]="event?.cssClass"
+        (mouseenter)="highlightDay.emit({event: event})"
+        (mouseleave)="unhighlightDay.emit({event: event})"
+        [mwlCalendarTooltip]="event.title | calendarEventTitle:'monthTooltip':event"
+        [tooltipPlacement]="tooltipPlacement"
+        [tooltipEvent]="event"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipAppendToBody]="tooltipAppendToBody"
+        mwlDraggable
+        [class.cal-draggable]="event.draggable"
+        dragActiveClass="cal-drag-active"
+        [dropData]="{event: event, draggedFrom: day}"
+        [dragAxis]="{x: event.draggable, y: event.draggable}"
+        (mwlClick)="eventClicked.emit({ event: event })">
+      </div>
+      </ng-template> -->
+ 

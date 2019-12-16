@@ -18,6 +18,11 @@
     padding-bottom: 99999px;
 }
 
+.btn:focus {
+    box-shadow: none;
+
+}
+
 ::placeholder {
     font-style: italic;
 }

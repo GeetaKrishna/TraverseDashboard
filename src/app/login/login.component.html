@@ -1,4 +1,4 @@
-<div class="mt-5 mb-5 container " style="font-family: 'Montserrat' !important">
+<div class="mt-5 mb-5 container-fluid" style="font-family: 'Montserrat' !important">
     <!-- <div class="row" style="margin-top: 200px;">
         <div class="col">
             <mat-card class="bgCard">
@@ -55,7 +55,7 @@
         </div>
     </div> -->
 
-    <div class="row" style="display: flex; max-width: 75%; margin: auto;">
+    <div class="row" style="display: flex; max-width: 68%; margin: auto;">
         <div class="twoCard bg-dark" style="color: white; ">
             <div class=" text-right" style="margin-top: 250px; padding: 15px;">
                 Welcome to
@@ -92,7 +92,7 @@
                         </mat-error>
                     </mat-form-field><br>
                     <button class="btn btn-secondary" mat-raised-button
-                        [disabled]="!(emailFormControl.valid && passwordFormControl.valid)" (click)="onSubmit()">
+                        [disabled]="!(emailFormControl.valid && passwordFormControl.valid)" (click)="onSubmit($event)">
                         Login
                     </button>
                 </div>

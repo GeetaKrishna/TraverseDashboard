@@ -4,11 +4,14 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://172.17.5.45:8090',
-  localURL: 'https://5aef86a7.ngrok.io'
+  // http://172.17.12.143:8300/thc/users/check/{username}
+
+  apiUrl: 'http://172.17.12.143:8300/thc',
+  // apiUrl: 'http://172.17.5.45:8090',
+  localURL: ' https://e5b09703.ngrok.io'
 };
 
-/*
+/* 20224
  * For easier  in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *  

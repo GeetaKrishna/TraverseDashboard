@@ -10,4 +10,9 @@
 .inner2 {
     float: left;
     clear: left;
+    /* padding: 5px */
+}
+
+.highlight {
+    color: rgb(58, 171, 241)
 }

@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Color, Label, MultiDataSet } from 'ng2-charts';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { DashboardService } from '../dashboard.service';
+import { Color, Label } from 'ng2-charts';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { DashboardService } from '../_services/dashboard.service';
 import { Details } from '../details';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Graph } from '../graph';
 import * as Chart from 'chart.js';
 import { GetAppsService } from '../_services/get-apps.service';
 import { DatePipe } from '@angular/common';
-import { timer } from 'rxjs';
-// import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-dashboard',
@@ -136,6 +133,7 @@ export class DashboardComponent implements OnInit {
     timer: ""
   };
   timer: string;
+  weightCompare: boolean;
 
   constructor(private dashboardService: DashboardService, private getApp: GetAppsService, private datePipe: DatePipe) {
   }
@@ -144,27 +142,41 @@ export class DashboardComponent implements OnInit {
   contenteditable2: boolean = false;
   contenteditable4: boolean = false;
   ngOnInit() {
-    // console.log(this.datePipe.transform(new Date()), 'dateeeeeeeee');
     // current weight
-    this.dashboardService.getDashboard().subscribe(
+    this.dashboardService.getCurrentWeight().subscribe(
       (res) => {
         console.log(res);
 
         this.WeightDate = this.getDifferenceInDays(res['TimeStamp'])
-        console.log(this.WeightDate)
+        // console.log(this.WeightDate)
         this.currentWeight = res['currentWeight'];
+
+        this.dashboardService.getPatientsTopTwoWeights().subscribe((data) => {
+          console.log(data);
+          if(data[0].weight>data[1].weight){
+            this.weightCompare = true;
+          }
+          else{
+            this.weightCompare = false;
+          }
+
+        }, (error) => {
+          console.log(error);
+
+        })
+
       },
       err => {
         console.log("error", err);
       }
     );
-    // // // curent Glucose
+    //curent Glucose
     this.dashboardService.getGlucoseofPatient().subscribe(
       (res) => {
         console.log(res);
-        this.glucoseDate = this.getDifferenceInDays(res['TimeStamp'])
+        this.glucoseDate = this.getDifferenceInDays(res['glDate'])
 
-        this.currentGlucose = res['currentGlucose'];
+        this.currentGlucose = res['glucoseLevel'];
       },
       err => {
         console.log("error", err);
@@ -173,9 +185,9 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getCholesterol().subscribe(
       (res) => {
         console.log(res);
-        this.cholesterolDate = this.getDifferenceInDays(res['TimeStamp'])
+        this.cholesterolDate = this.getDifferenceInDays(res['clDate'])
 
-        this.currentCholesterol = res['currentCholestrol'];
+        this.currentCholesterol = res['chLevel'];
       },
       err => {
         console.log("error", err);
@@ -185,10 +197,10 @@ export class DashboardComponent implements OnInit {
       (res) => {
         console.log(res, 'ressssss');
         // console.log(res.highBP);
-        this.bpdate = this.getDifferenceInDays(res['TimeStamp'])
+        this.bpdate = this.getDifferenceInDays(res['bpDate'])
 
-        this.currentHBP = res['highBp'];
-        this.currentLBP = res['lowBp'];
+        this.currentHBP = res['highBP'];
+        this.currentLBP = res['lowBP'];
         this.colorForBP(this.currentHBP, this.currentLBP)
         // console.log(this.currentLBP);
         // this.currentBlood = res.lowBP;
@@ -369,7 +381,10 @@ export class DashboardComponent implements OnInit {
     { data: [65, 59, 300, 81, 56, 140], label: 'high' },
     { data: [122, 234, 111, 222, 111, 123], label: 'low' }
   ];
+
   bloodpressureToggle() {
+    console.log("inide toggle", this.bloodpressure);
+
     this.bloodpressure = !this.bloodpressure;
     this.dashboardService.getBloodPressures().subscribe((result: Graph[]) => {
       console.log(result);
@@ -487,14 +502,13 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  isNumberKey(evt)
-      {
-         var charCode = (evt.which) ? evt.which : evt.keyCode
-         if (charCode > 31 && (charCode < 48 || charCode > 57))
-            return false;
+  isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+      return false;
 
-         return true;
-      }
+    return true;
+  }
 
 
 
@@ -513,8 +527,9 @@ export class DashboardComponent implements OnInit {
     {
       chLevel: this.currentCholesterol,
       clDate: new Date().toISOString(),
-      pid: 2
+      pid: localStorage.getItem("patientId")
     }
+
     console.log(json);
     this.dashboardService.sendCholesterol(json);
   }
@@ -529,12 +544,21 @@ export class DashboardComponent implements OnInit {
   toggleSubmitWeight(): void {
     this.contenteditable1 = false;
     this.details = this.currentWeight;
+
     let json = {
-      weight: this.currentWeight
+      "pid": localStorage.getItem("patientId"),
+      "weight": this.currentWeight,
+      "weightDate": new Date().toISOString()
     }
     this.dashboardService.postWeight(json).subscribe((data) => {
+
+      // BMI: "Infinity"
+      // BMI status: "Normal Weight"
+      // TimeStamp: "2019-12-10T13:46:12.370+0000"
+      // currentWeight: 35
+
       console.log(data, 'dasssssssssssssh');
-      this.WeightDate =  this.getDifferenceInDays(data['weightDate'])
+      this.WeightDate = this.getDifferenceInDays(data['weightDate'])
     }, (err) => {
 
     })
@@ -551,12 +575,13 @@ export class DashboardComponent implements OnInit {
     this.contenteditable2 = false;
     this.details = this.currentGlucose;
     console.log(this.details);
+
     let json1 = {
       glDate: new Date().toISOString(),
       glucoseLevel: this.currentGlucose,
-      // id: 0,
-      pid: 2
+      pid: localStorage.getItem("patientId")
     }
+
     console.log(json1);
     this.dashboardService.sendGlucose(json1);
   }
@@ -570,21 +595,21 @@ export class DashboardComponent implements OnInit {
 
   toggleSubmitBlood() {
     this.contenteditable3 = false;
-    // this.details=;
     this.details = this.currentHBP;
     this.details = this.currentLBP;
     console.log(this.details);
-    //   console.log(this.details);
-    // this.details = this.currentBlood1;
+
     let dataBP = {
-      // highBP : this.high,
-      pId: "2",
-      highBP: this.currentHBP,
-      lowBP: this.currentLBP
+      pid: parseInt(localStorage.getItem("patientId")),
+      highBP: parseInt(this.currentHBP),
+      lowBP: parseInt(this.currentLBP),
+      bpDate: new Date().toISOString()
     }
+    console.log(dataBP);
+
     this.colorForBP(this.currentHBP, this.currentLBP)
     console.log("json1 " + JSON.stringify(dataBP));
-    this.dashboardService.postBlood(dataBP);
+    this.dashboardService.postBloodPressure(dataBP);
   }
 
   //this.dashboardService.postCholesterol(this.details).subscribe();

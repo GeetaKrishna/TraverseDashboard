@@ -16,13 +16,14 @@
 }
 
 .example-full-width {
-  width: 50%;
+  width: 45%;
+  margin-left: 25px;
 }
 
 
 .twoCard {
-  height: 560px;
-  width: 400px;
+  height: 680px;
+  width: 500px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {

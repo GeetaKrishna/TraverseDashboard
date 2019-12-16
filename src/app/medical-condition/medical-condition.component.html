@@ -127,15 +127,15 @@
                                             <span  class="cursor-pointer">
                                                 <i class="fa fa-times-circle-o mr-2" aria-hidden="true" style="font-size: 22px; color: red;"></i>
                                             </span> -->
-                                            <button mat-icon-button color="primary" (click)="cancelAdding()"
-                                                aria-label="Example icon-button with a heart icon">
-                                                <mat-icon>highlight_off</mat-icon>
-                                            </button>
                                             <button mat-icon-button color="primary" (click)="successAdding()"
                                                 [disabled]="triggers.errors || severity.errors || Diagnosed.errors || conditionName.errors"
                                                 aria-label="Example icon-button with a heart icon">
                                                 <mat-icon>check_circle_outline
                                                 </mat-icon>
+                                            </button>
+                                            <button mat-icon-button color="primary" (click)="cancelAdding()"
+                                                aria-label="Example icon-button with a heart icon">
+                                                <mat-icon>highlight_off</mat-icon>
                                             </button>
                                         </div>
 

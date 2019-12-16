@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Color, Label, MultiDataSet } from 'ng2-charts';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { DashboardService } from '../dashboard.service';
+import { DashboardService } from '../_services/dashboard.service';
 import { Details } from '../details';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Graph } from '../graph';
@@ -18,18 +18,18 @@ export class FourCComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    this.dashboardService.getDashboard().subscribe(
-      (res) => {
-        // console.log(res);
+    // this.dashboardService.getDashboard().subscribe(
+    //   (res) => {
+    //     // console.log(res);
 
-        this.WeightDate = this.getDifferenceInDays(res['TimeStamp'])
-        console.log(this.WeightDate)
-        this.currentWeight = res['currentWeight'];
-      },
-      err => {
-        console.log("error", err);
-      }
-    );
+    //     this.WeightDate = this.getDifferenceInDays(res['TimeStamp'])
+    //     console.log(this.WeightDate)
+    //     this.currentWeight = res['currentWeight'];
+    //   },
+    //   err => {
+    //     console.log("error", err);
+    //   }
+    // );
     // // // curent Glucose
     this.dashboardService.getGlucoseofPatient().subscribe(
       (res) => {
@@ -231,53 +231,53 @@ export class FourCComponent implements OnInit {
     this.weight = !this.weight;
     let avgMonthforWeight = [];
     let avgWeight = [];
-    this.dashboardService.getweight().subscribe((result: Graph[]) => {
-      console.log(result);
-      result.forEach(x => {
-        avgMonthforWeight.push(x.avgMonth);
-        avgWeight.push(x.avgWeight);
-      });
-      console.log(avgMonthforWeight, avgWeight)
-      this.weightCharts = new Chart('canvasss', {
-        type: 'line',
-        data: {
-          labels: avgMonthforWeight,
-          // labels: ["1", "2", "3", "4"],
-          datasets: [
-            {
-              // data: avgWeight,
-              data: [1, 2, 3, 4, 4],
-              backgroundColor: 'transparent',
-              borderColor: 'rgba(224,116,0,0.8)',
-              pointBackgroundColor: 'rgba(224,116,0,1)',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: 'rgba(224,116,0,0.8)',
-            }
-          ]
-        },
-        options: {
-          responsive: false,
+    // this.dashboardService.getweight().subscribe((result: Graph[]) => {
+    //   console.log(result);
+    //   result.forEach(x => {
+    //     avgMonthforWeight.push(x.avgMonth);
+    //     avgWeight.push(x.avgWeight);
+    //   });
+    //   console.log(avgMonthforWeight, avgWeight)
+    //   this.weightCharts = new Chart('canvasss', {
+    //     type: 'line',
+    //     data: {
+    //       labels: avgMonthforWeight,
+    //       // labels: ["1", "2", "3", "4"],
+    //       datasets: [
+    //         {
+    //           // data: avgWeight,
+    //           data: [1, 2, 3, 4, 4],
+    //           backgroundColor: 'transparent',
+    //           borderColor: 'rgba(224,116,0,0.8)',
+    //           pointBackgroundColor: 'rgba(224,116,0,1)',
+    //           pointBorderColor: '#fff',
+    //           pointHoverBackgroundColor: '#fff',
+    //           pointHoverBorderColor: 'rgba(224,116,0,0.8)',
+    //         }
+    //       ]
+    //     },
+    //     options: {
+    //       responsive: false,
 
-          legend: {
-            display: false
-          },
-          scales: {
-            xAxes: [{
-              display: true
-            }],
-            yAxes: [{
-              display: true,
-              // ticks: {
-              //   max: 400,
-              //   min: 85,
-              //   stepSize: 70
-              // }
-            }],
-          }
-        }
-      });
-    });
+    //       legend: {
+    //         display: false
+    //       },
+    //       scales: {
+    //         xAxes: [{
+    //           display: true
+    //         }],
+    //         yAxes: [{
+    //           display: true,
+    //           // ticks: {
+    //           //   max: 400,
+    //           //   min: 85,
+    //           //   stepSize: 70
+    //           // }
+    //         }],
+    //       }
+    //     }
+    //   });
+    // });
   }
 
   toggleContenteditableWeight(): void {
@@ -375,7 +375,7 @@ export class FourCComponent implements OnInit {
     }
     this.colorForBP(this.currentHBP, this.currentLBP)
     console.log("json1 " + JSON.stringify(dataBP));
-    this.dashboardService.postBlood(dataBP);
+    this.dashboardService.postBloodPressure(dataBP);
   }
 
   colorForBP(currentHBP, currentLBP) {
