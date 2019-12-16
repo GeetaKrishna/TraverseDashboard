@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
+    loginSuccess: boolean = false;
     error = '';
     emailFormControl = new FormControl('', [
         Validators.required,
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
     get f() { return this.loginForm.controls; }
 
     onSubmit(event) {
+        this.loginSuccess = true
         event.preventDefault();
 
         console.log(this.emailFormControl.value);
@@ -86,27 +88,29 @@ export class LoginComponent implements OnInit {
                     if (user.headers.get('authorization')) {
                         console.log(user.headers.get('authorization'))
                     }
+                    this.loginSuccess = false;
+
                     // if (user && user['token']) {
                     //     // store user details and jwt token in local storage to keep user logged in between page refreshes
-    
+
                     // localStorage.setItem('token', user.headers.get('authorization'));
                     // console.log(this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]));
-    
+
                     // localStorage.setItem('userId', this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]).sub);
                     // this.currentUserSubject.next(this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]).sub);
                     // }
-                    this.authenticationService.getUserId(localStorage.getItem('userName')).subscribe((data)=>{
+                    this.authenticationService.getUserId(localStorage.getItem('userName')).subscribe((data) => {
                         console.log(data);
                         localStorage.setItem('userId', data['userId'])
                         localStorage.setItem('loggedInUser', JSON.stringify(data))
-
-                        this.authenticationService.getPatientByUserId(localStorage.getItem('userId')).subscribe((patientData)=>{
+                        this.loginSuccess = false;
+                        this.authenticationService.getPatientByUserId(localStorage.getItem('userId')).subscribe((patientData) => {
                             console.log(patientData);
                             localStorage.setItem('patientId', patientData['pid'])
                             this.router.navigate(['admin/landing'])
                         })
 
-                    })                    
+                    })
                     // if (loginResponse.headers.get('authorization') != "") {
 
                     //     this.router.navigate([this.returnUrl]);
@@ -116,11 +120,12 @@ export class LoginComponent implements OnInit {
                 },
                 error => {
                     console.log(error);
-                    
+                    this.loginSuccess = false;
+
                     // this.error = error;
                     // this.loading = false;
                 });
-                
+
     }
     signup() {
         console.log('heloo');

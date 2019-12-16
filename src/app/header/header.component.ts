@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AddPatientComponent, {
-      // width: '250px',
+      width: '480px',
       // data: {name: this.name, animal: this.animal}
     });
 

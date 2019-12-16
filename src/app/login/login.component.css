@@ -4,7 +4,7 @@
 
 .bgCard {
     /* background-image: url(../../assets/bg.jpg) !important; */
-    background-color: rgb(127, 180, 224);
+    /* background-color: rgb(127, 180, 224); */
     /* color: white; */
     height: 300px !important;
 }
@@ -27,7 +27,8 @@
 .twoCard {
     height: 680px;
     width: 500px;
-  }
+    background-color: rgba(84, 91, 95, 0.959)
+}
 
 ::ng-deep .mat-focused .mat-form-field-label {
     /*change color of label*/

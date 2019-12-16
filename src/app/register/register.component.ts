@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterComponent implements OnInit {
   subject: Subject<any> = new Subject();
   signUpForm: FormGroup;
+  signUpSuccess: boolean = false;
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -135,8 +136,8 @@ export class RegisterComponent implements OnInit {
     this.selectedGender = value
     console.log(value);
   }
-  dateInput(value){
-    console.log    (this.dateFormControl.value);
+  dateInput(value) {
+    console.log(this.dateFormControl.value);
     this.selectedDate = new Date(value).toLocaleDateString().split("/").reverse().join('-')
     console.log(this.selectedDate);
   }
@@ -159,7 +160,7 @@ export class RegisterComponent implements OnInit {
     //     .subscribe(
     //         data => {
     //             this.router.navigate([this.returnUrl]);
-            // },
+    // },
     //         error => {https://github.com/TeamWertarbyte/material-ui-chip-input/blob/master/src/ChipInput.js
     //             this.error = error;
     //             this.loading = false;
@@ -167,6 +168,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(FNAME, LNAME, USERNAME, PHONENUMBER, EMAIL, PWD, HEIGHT, WEIGHT) {
+    this.signUpSuccess = true;
     // console.log(FNAME.value, LNAME.value, USERNAME.value, EMAIL.value, PWD.value, this.selectedVal);
     let registrationData = {
       "dob": this.selectedDate,
@@ -183,10 +185,10 @@ export class RegisterComponent implements OnInit {
     this.registrationService.register(registrationData, HEIGHT.value, WEIGHT.value).subscribe((data) => {
       console.log(data);
       this.toast.success('Registration was Successful.')
-
+      this.signUpSuccess = false
       // this.router.navigateByUrl('/login')
     }, (error) => {
-
+      this.signUpSuccess = false;
     })
   }
 
