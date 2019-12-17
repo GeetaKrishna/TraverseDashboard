@@ -1,28 +1,39 @@
 <div class="wrapper">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar">
-      <img src="../../assets/mainLogo.png" [routerLink]="['landing']" class="img-center" alt="">
-      <p style="float: left; color: white; font-weight: 600; font-size: 22px; display: contents;">
-        Motion
+      <img src="../../assets/newmainLogo.png" [routerLink]="['landing']" class="img-center" alt="">
+      <p style=" font-weight:bolder; font-size: 26px; ">
+        <span style="color: rgb(24, 240, 71);">M</span>
+        <span style="color: rgb(0, 60, 255);">O</span>
+        <span style="color: rgb(208, 255, 0);">T</span>
+        <span style="color: rgb(132, 0, 255);">I</span>
+        <span style="color: rgb(0, 60, 255);">O</span>
+        <span style="color: rgb(0, 255, 115);">N</span>
       </p>
-      
-      <div >
-          <span  class="fa fa-user cursor-pointer" style="margin-right: 8px; color: white; font-size: 22px;">
-            </span>
-          <span  class="fa fa-gear cursor-pointer" mat-button [matMenuTriggerFor]="menu" style="margin-right: 8px; color: white; font-size: 22px;">
-            </span>
-          <span (click)="logOut()" class="fa fa-sign-out cursor-pointer" style="float: right; color: white; font-size: 22px;">
-            </span>
-      </div>   
-    </div> 
+
+      <div>
+        <span class="fa fa-user cursor-pointer" style="margin-right: 10px; color: white; font-size: 24px;">
+        </span>
+        <!-- <span >
+          <img src="../../assets/newprofHeader.png" style="margin-right: 10px; font-size: 24px;" height="26px"
+            width="26px">
+        </span> -->
+        <span class="fa fa-gear cursor-pointer" mat-button [matMenuTriggerFor]="menu"
+          style="margin-right: 10px; color: white; font-size: 24px;">
+        </span>
+        <span (click)="logOut()" class="fa fa-sign-out cursor-pointer"
+          style="float: right; color: white; font-size: 24px;">
+        </span>
+      </div>
+    </div>
   </div>
   <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <label class="myLabel">
-          <input type="file" (change)="backGroundImageChange($event.target)" required/>
-          <span>Set BackGround Image</span>
+    <button mat-menu-item>
+      <label class="myLabel">
+        <input type="file" (change)="backGroundImageChange($event.target)" required />
+        <span>Set BackGround Image</span>
       </label></button>
-      <button mat-menu-item>Other Settings</button>
-      <button mat-menu-item (click)="openDialog()">Add Patient Profile</button>
-    </mat-menu>
+    <button mat-menu-item>Other Settings</button>
+    <button mat-menu-item (click)="openDialog()">Add Patient Profile</button>
+  </mat-menu>
 </div>

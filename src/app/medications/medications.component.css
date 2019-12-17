@@ -1,10 +1,15 @@
 /* .example-margin {
     /* margin: 10px; 
   } */
+.editFlag {
+    padding-bottom: 0%;
+    margin: auto;
+}
 
 .editTrue {
     border-bottom: 2px dotted black;
     padding-bottom: 0%;
+    margin: auto;
 }
 
 .mat-slider-horizontal {
@@ -23,7 +28,7 @@
 }
 
 .ch-1 {
-    background-color: #cbd7e6;
+    background-color: #d7dce2;
     color: black;
 }
 
@@ -50,6 +55,10 @@ mat-form-field {
     padding: 0px !important;
 }
 
+::ng-deep .mat-form-field {
+    line-height: 1;
+
+}
 
 ::ng-deep .mat-focused .mat-form-field-label {
     /*change color of label*/

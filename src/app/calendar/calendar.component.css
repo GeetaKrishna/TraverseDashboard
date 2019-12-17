@@ -1,6 +1,11 @@
 .ch-1 {
-  background-color: #d7dce2;
-  color: black
+  background-color: #0000005e;
+  color: white;
+}
+
+.card {
+  background-color: #00000024;
+  
 }
 
 h3 {
@@ -16,10 +21,12 @@ pre {
   font-size: 24px;
   margin-bottom: 0 !important;
 }
-.hoverClass:hover{
+
+.hoverClass:hover {
   background-color: rgb(148, 192, 228);
 }
-.hoverClass{
+
+.hoverClass {
   overflow: hidden;
   padding: 10px !important;
 }
@@ -29,13 +36,15 @@ pre {
   flex-direction: column;
 }
 
-.example-container > * {
+.example-container>* {
   width: 100%;
 }
+
 .modal-xl .modal-lg {
   /* max-width: 90%; */
   /* height: 405px */
 }
+
 ::-webkit-scrollbar {
   width: 1px;
 }

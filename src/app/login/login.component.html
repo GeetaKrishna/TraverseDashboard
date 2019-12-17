@@ -62,12 +62,12 @@
                 <b>Traverse Healthcare</b>
             </div>
         </div>
-        <div class="twoCard text-center bg-light ">
+        <div class="twoCardd text-center ">
             <div style="margin-top: 80px;">
                 <div>
                     <img src="../../assets/mainLogo.png" height="50px" width="50px" alt="">
                 </div>
-                <div style="margin-top: 25px;">
+                <div style="margin-top: 25px; font-size: 26px;">
                     <h5>Login to your Account</h5>
                 </div>
                 <div style="margin-top: 40px;">
@@ -91,17 +91,18 @@
                             Password is <strong>required</strong>
                         </mat-error>
                     </mat-form-field><br>
-                    <button class="btn btn-secondary" mat-raised-button
-                        [disabled]="!(emailFormControl.valid && passwordFormControl.valid)" (click)="onSubmit($event)">
+                    <button class="btn btn-primary" [disabled]="!(emailFormControl.valid && passwordFormControl.valid)"
+                        (click)="onSubmit($event)">
                         Login <div *ngIf="loginSuccess" class="spinner-grow spinner-grow-sm" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
                     </button>
                 </div>
                 <div>
-                    <div class="text-center" style="margin-top: 120px;">
-                        <span>Don't have an Account? </span>
-                        <button mat-raised-button class="btn-secondary" [routerLink]="['/signUp']">Sign Up</button>
+                    <div class="text-center" style="margin-top: 120px; color: rgb(0, 0, 0);">
+                        <span style="font-size: 20px;">Don't have an Account? </span>
+                        <a href="" [routerLink]="['/signUp']" style="font-weight: bold;font-size: 20px;">Sign Up</a>
+                        <!-- <button  class="btn btn-secondary" [routerLink]="['/signUp']">Sign Up</button> -->
                     </div>
                 </div>
                 <!--  (click)="signup()" -->

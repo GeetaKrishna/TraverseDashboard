@@ -95,12 +95,12 @@
                     <b>Traverse Healthcare</b>
                 </div>
             </div>
-            <div class=" twoCard text-center bg-light ">
+            <div class="twoCardd text-center">
                 <div>
                     <div style="margin-top: 30px;">
                         <img src="../../assets/mainLogo.png" height="50px" width="50px" alt="">
                     </div>
-                    <div style="margin-top: 20px;">
+                    <div style="margin-top: 20px;font-size: 26px;">
                         <h5>Sign up here</h5>
                     </div>
                     <div>
@@ -147,9 +147,11 @@
                                             mat-icon-button matTooltip="That username is taken. Try another.">
                                             <mat-icon>warning</mat-icon>
                                         </button>
-                                        <button mat-button matSuffix mat-icon-button *ngIf="refresh && !userNameFormControl.hasError('required')"
-                                            matTooltip="Loading" style="color: black;" class="spinner-border spinner-border-sm">
-                                            <mat-icon >refresh</mat-icon>
+                                        <button mat-button matSuffix mat-icon-button
+                                            *ngIf="refresh && !userNameFormControl.hasError('required')"
+                                            matTooltip="Loading" style="color: black;"
+                                            class="spinner-border spinner-border-sm">
+                                            <mat-icon>refresh</mat-icon>
                                             <!-- <div class="spinner-grow spinner-grow-sm" role="status">
                                              
                                             </div> -->
@@ -201,7 +203,7 @@
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
                                     <!-- <br> -->
-                                </div>                             
+                                </div>
                             </div>
                             <!-- <br> -->
                             <div class="row">
@@ -283,7 +285,7 @@
 
                             <br>
                             <div>
-                                <button mat-raised-button class="btn-secondary"
+                                <button class="btn btn-primary"
                                     (click)="register(firstNameFormControl, lastNameFormControl, userNameFormControl, numberFormControl, emailFormControl, passwordFormControl, heightFormControl, weightFormControl)"
                                     [disabled]="!(firstNameFormControl.valid && lastNameFormControl.valid && emailFormControl.valid && passwordFormControl.valid && cfpasswordFormControl.valid && userNameFormControl.valid)">Sign
                                     Up <div *ngIf="signUpSuccess" class="spinner-grow spinner-grow-sm" role="status">
@@ -294,9 +296,11 @@
                         </form>
                     </div>
                     <div>
-                        <div class="text-center mt-2">
-                            <span>Already have an Account? </span>
-                            <button mat-raised-button class="btn-secondary" [routerLink]="['/']">Login</button>
+                        <div class="text-center mt-2" style="color: rgb(0, 0, 0);">
+                            <span style="font-size: 20px;">Already have an Account? </span>
+                            <!-- <button mat-raised-button class="btn-secondary" [routerLink]="['/']">Login</button> -->
+                            <a href="" [routerLink]="['/']" style="font-weight: bold; font-size: 20px;">Login</a>
+
                         </div>
                     </div>
                 </div>

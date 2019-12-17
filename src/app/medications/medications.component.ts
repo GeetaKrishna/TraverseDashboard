@@ -5,6 +5,7 @@ import { MedicationService } from '../_services/medication.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AddMedComponent } from '../add-med/add-med.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-medications',
@@ -122,20 +123,73 @@ export class MedicationsComponent implements OnInit {
         console.log(err);
       })
   }
-
-  saveNewData(medicationDetail) {
-    console.log('clicked');
+  saveCancelled() {
+    this.flag = false;
+  }
+  saveNewData(medicationDetail, index) {
+    console.log(medicationDetail);
+    console.log(this.apps[index])
     this.newData = {
       "dosage": medicationDetail.dosage,
       "id": medicationDetail.id,
-      "instruction": medicationDetail.instruction,
+      "instruction": this.medIntake.value,
       "medicationId": medicationDetail.medicationId,
       "pid": medicationDetail.pid,
-      "endDate": this.endTime.value,
-      "startDate": this.startTime.value,
+      "endDate": moment(this.endTime.value).format("YYYY-MM-DD"),
+      "startDate": moment(this.startTime.value).format("YYYY-MM-DD")
     }
+
+    // console.log(moment(this.endTime.value).format("YYYY-MM-DD"))
+    // console.log(new Date(this.endTime.value).toISOString())
+
+    // console.log(new Date(this.endTime.value).toISOString().split('T')[0])
+
+
+    this.medicationService.editPrescription(this.newData).subscribe((data) => {
+      console.log(data, 'after updating');
+      // .replace('/', '-')
+      this.apps[index].startDate = moment(this.startTime.value).format("YYYY-MM-DD")
+      this.apps[index].endDate = moment(this.endTime.value).format("YYYY-MM-DD"),
+        this.apps[index].instruction = this.medIntake.value
+
+      // this.apps['index'].id = medicationDetail.dosage,
+      // this.apps['index'].dosage = medicationDetail.dosage,
+      // this.apps['index'].dosage = medicationDetail.dosage,
+      // this.apps['index'].dosage = medicationDetail.dosage,
+    }, (err) => {
+      console.log(err, 'error after updating');
+    })
+    this.flag = false;
     console.log(this.newData, 'newData');
-    
+  }
+
+  //Method to edit the form
+  editMedication(medicationDetail) {
+    console.log(medicationDetail, "details");
+    this.flag = !this.flag;
+    // dosage: "23"
+    // endDate: "2020-01-02"
+    // id: 4
+    // instruction: "Twice"
+    // medicationId: 4
+    // pid: 1
+    // startDate: "2020-02-01"
+    // if (!this.flag) {
+    //   console.log(medicationDetail, 'medData');
+    //   this.medicationService.editPrescription({
+    //     "dosage": medicationDetail.dosage,
+    //     "endDate": medicationDetail.endDate,
+    //     "id": medicationDetail.id,
+    //     "instruction": medicationDetail.instruction,
+    //     "medicationId": medicationDetail.medicationId,
+    //     "pid": medicationDetail.pid,
+    //     "startDate": medicationDetail.startDate
+    //   }).subscribe((data) => {
+    //     console.log(data, "after updating");
+    //   }, (err) => {
+    //   })
+    // }
+
   }
 
   openDialog(): void {
@@ -286,37 +340,7 @@ export class MedicationsComponent implements OnInit {
     return blob;
   }
 
-  //Method to edit the form
-  editMedication(medicationDetail) {
-    console.log(medicationDetail, "details");
-    this.flag = !this.flag;
-    // dosage: "23"
-    // endDate: "2020-01-02"
-    // id: 4
-    // instruction: "Twice"
-    // medicationId: 4
-    // pid: 1
-    // startDate: "2020-02-01"
 
-    if (!this.flag) {
-
-      console.log(medicationDetail, 'medData');
-
-      //   this.medicationService.editPrescription({
-      //     "dosage": medicationDetail.dosage,
-      //     "endDate": medicationDetail.endDate,
-      //     "id": medicationDetail.id,
-      //     "instruction": medicationDetail.instruction,
-      //     "medicationId": medicationDetail.medicationId,
-      //     "pid": medicationDetail.pid,
-      //     "startDate": medicationDetail.startDate
-      //   }).subscribe((data) => {
-      //     console.log(data, "after updating");
-      //   }, (err) => {
-      //   })
-    }
-
-  }
   test(test) {
     console.log(test, this.medName);
     this.description = test.description;

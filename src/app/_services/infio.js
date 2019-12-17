@@ -13,14 +13,14 @@
 
 
 
-Change, ahead of choose image from object to filename.
-Edit med, Make form similar to new med, Change edit similar to Four COrners
-Add date search for documents
-endDate > currentDate > StartDate, then prescription count.
-Modify Health Connect, 
-// Calendar
+// Change, ahead of choose image from object to filename.
+// Edit med, Make form similar to new med, Change edit similar to Four COrners
+// Add date search for documents
+// endDate > currentDate > StartDate, then prescription count.
+// Modify Health Connect, 
+// // Calendar
 
-Modify BP logic so that down and up arrow works.
+// Modify BP logic so that down and up arrow works.
 
 // redirect to login after signup. -- DONE -- Need to test
 // Change datepicker in Medication -- already datepicker is there
@@ -35,3 +35,10 @@ Modify BP logic so that down and up arrow works.
 
 // integrate dpocument API's
 // reduce height of card in medical conditions screen
+
+
+// header Opace #5c9a9238
+
+card background transparency #00000024
+
+login rgba(95, 84, 84, 0.38)

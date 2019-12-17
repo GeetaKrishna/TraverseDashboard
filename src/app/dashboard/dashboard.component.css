@@ -2,6 +2,14 @@
   font-size: 50px !important;
 }
 
+.card-header {
+  background-color: #00000024;
+}
+
+.card {
+  background-color: #00000024;
+}
+
 .title {
   font-size: 20px !important;
   font-weight: bold;
@@ -11,6 +19,11 @@
 
 .black {
   color: rgb(255, 255, 255)
+}
+
+.card-bodyy {
+  /* opacity: 0.4; */
+  background-color: transparent !important;
 }
 
 .cardHead {
@@ -24,8 +37,8 @@
 }
 
 .ch-1 {
-  background-color: #d7dce2;
-  color: black;
+  background-color: #00000024;
+  color: white;
 }
 
 .ch-3 {
