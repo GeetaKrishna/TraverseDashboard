@@ -79,10 +79,10 @@
               class="col-md-3 font-weight-bold data {{colorClassForBP}} text-left" [textContent]="currentLBP"
               (input)="currentLBP=$event.target.textContent">{{currentLBP}}
             </div>
-            <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable3"><span
+            <!-- <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable3"><span
                 class="fa fa-arrow-down text-center" style="color: red"></span>
               <span class="fa fa-arrow-up text-center" *ngIf="false" style="color: green"></span>
-            </div>
+            </div> -->
             <div>
               <button *ngIf="contenteditable3" class="btn btn-success" (click)="toggleContenteditableBlood()"
                 style="margin-left: 30px;margin-top: 20px;"><i class="fa fa-check"></i></button>

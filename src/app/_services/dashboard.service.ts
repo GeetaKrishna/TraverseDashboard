@@ -61,9 +61,7 @@ export class DashboardService {
 
   //add Glucose
   sendGlucose(jsonObject) {
-    this.http.post(this.url + '/fc/gl/add', jsonObject).toPromise().then((data) => {
-      console.log("returned object" + JSON.stringify(data));
-    })
+    return this.http.post(this.url + '/fc/gl/add', jsonObject)
   }
 
   getGlucoses() {
@@ -82,9 +80,7 @@ export class DashboardService {
 
   // add cholesterol
   sendCholesterol(jsonObject) {
-    this.http.post(this.url + '/fc/cl/add', jsonObject).toPromise().then((data) => {
-      console.log("returned object" + JSON.stringify(data));
-    })
+   return this.http.post(this.url + '/fc/cl/add', jsonObject)
   }
   getCholesterols() {
     return this.http.get(this.url + `/fc/cl/avg/${this.patientId}/${this.year}`);
@@ -99,9 +95,7 @@ export class DashboardService {
   // Blood funcs
 
   postBloodPressure(jsonObject) {
-    this.http.post(this.url + '/fc/bp/add', jsonObject).toPromise().then((data) => {
-      console.log("returned object" + JSON.stringify(data));
-    })
+    return this.http.post(this.url + '/fc/bp/add', jsonObject)
   }
   getBloodPressures() {
     return this.http.get(this.url + `/fc/bp/avg/${this.patientId}/${this.year}`);

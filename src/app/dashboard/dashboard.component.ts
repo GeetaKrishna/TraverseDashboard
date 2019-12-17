@@ -165,13 +165,20 @@ export class DashboardComponent implements OnInit {
         // console.log(this.WeightDate)
         this.currentWeight = res['currentWeight'];
 
-        this.dashboardService.getPatientsTopTwoWeights().subscribe((data) => {
+        this.dashboardService.getPatientsTopTwoWeights().subscribe((data: []) => {
           console.log(data);
-          if (data[0].weight > data[1].weight) {
+          if (data.length > 1) {
+            let i = 0;
+
+            if (data[i]['weight'] > data[i + 1]['weight']) {
+              this.weightCompare = true;
+            }
+            else {
+              this.weightCompare = false;
+            }
+
+          } else {
             this.weightCompare = true;
-          }
-          else {
-            this.weightCompare = false;
           }
 
         }, (error) => {
@@ -197,13 +204,18 @@ export class DashboardComponent implements OnInit {
         this.glucoseDate = this.getDifferenceInDays(res['glDate'])
 
         this.currentGlucose = res['glucoseLevel'];
-        this.dashboardService.getPatientsTopTwoGL().subscribe((data) => {
+        this.dashboardService.getPatientsTopTwoGL().subscribe((data: []) => {
           console.log(data);
-          if (data[0].glucoseLevel > data[1].glucoseLevel) {
+          let i = 0;
+          if (data.length > 1) {
+            if (data[i]['glucoseLevel'] > data[i + 1]['glucoseLevel']) {
+              this.glucoseCompare = true;
+            }
+            else {
+              this.glucoseCompare = false;
+            }
+          } else {
             this.glucoseCompare = true;
-          }
-          else {
-            this.glucoseCompare = false;
           }
 
         }, (error) => {
@@ -227,13 +239,19 @@ export class DashboardComponent implements OnInit {
         }
         this.cholesterolDate = this.getDifferenceInDays(res['clDate'])
         this.currentCholesterol = res['chLevel'];
-        this.dashboardService.getPatientsTopTwoCL().subscribe((data) => {
+        this.dashboardService.getPatientsTopTwoCL().subscribe((data: []) => {
           console.log(data);
-          if (data[0].chLevel > data[1].chLevel) {
+          let i = 0;
+
+          if (data.length > 1) {
+            if (data[i]['chLevel'] > data[i + 1]['chLevel']) {
+              this.clCompare = true;
+            }
+            else {
+              this.clCompare = false;
+            }
+          } else {
             this.clCompare = true;
-          }
-          else {
-            this.clCompare = false;
           }
 
         }, (error) => {
@@ -313,7 +331,7 @@ export class DashboardComponent implements OnInit {
     // hbp 121 to 140, lbp 81 to 90 ==> PRE-HYPERtENSION
     // hbp 141 to 160, lbp 91 to 100 ==> Hypertension Stage-1, Consult Doctor
     // hbp >= 161, lbp > 100 ==> Hypertension Stage -2,  Consult Doctor Immediately
-    
+
 
 
     if (currentHBP <= 90 && currentLBP <= 60) {
@@ -322,24 +340,25 @@ export class DashboardComponent implements OnInit {
       this.presentedInfo = 'fa-exclamation-triangle'
 
     }
-    else if(currentHBP <= 120 && currentHBP >= 91 && currentLBP >= 61 && currentLBP < 80 ){
+    else if (currentHBP <= 120 && currentHBP >= 91 && currentLBP >= 61 && currentLBP < 80) {
       this.dangerStatement = "Normal";
       this.colorClassForBP = 'green'
       this.presentedInfo = 'fa-check-circle'
+      //   this.colorPresentedInfo = this.colorClassForBP
     }
-    else if(currentHBP <= 140 && currentHBP >= 121 && currentLBP >= 81 && currentLBP < 90 ){
+    else if (currentHBP <= 140 && currentHBP >= 121 && currentLBP >= 81 && currentLBP < 90) {
       this.dangerStatement = "Pre-Hypertension";
       this.colorClassForBP = 'orange'
       this.presentedInfo = 'fa-exclamation-triangle'
     }
-    else if(currentHBP <= 160 && currentHBP >= 141 && currentLBP >= 91 && currentLBP < 100 ){
+    else if (currentHBP <= 160 && currentHBP >= 141 && currentLBP >= 91 && currentLBP < 100) {
       this.dangerStatement = "Hypertension Stage-1, Consult Doctor";
-      this.colorClassForBP = 'dark-red'
+      this.colorClassForBP = 'darkRed'
       this.presentedInfo = 'fa-exclamation-triangle'
     }
-    else if(currentHBP >= 161 && currentLBP > 100 ){
+    else if (currentHBP >= 161 && currentLBP > 100) {
       this.dangerStatement = "Hypertension Stage -2,  Consult Doctor Immediately";
-      this.colorClassForBP = 'dark-red'
+      this.colorClassForBP = 'darkRed'
       this.presentedInfo = 'fa-exclamation-triangle'
     }
 
@@ -641,7 +660,9 @@ export class DashboardComponent implements OnInit {
     }
 
     console.log(json);
-    this.dashboardService.sendCholesterol(json);
+    this.dashboardService.sendCholesterol(json).subscribe((data) => {
+
+    });
   }
 
   toggleContenteditableWeight(): void {
@@ -695,7 +716,9 @@ export class DashboardComponent implements OnInit {
     }
 
     console.log(json1);
-    this.dashboardService.sendGlucose(json1);
+    this.dashboardService.sendGlucose(json1).subscribe((data) => {
+
+    })
   }
 
   toggleContenteditableBlood(): void {
