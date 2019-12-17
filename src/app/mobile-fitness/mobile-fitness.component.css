@@ -1,9 +1,16 @@
-.ch-1 {
+/* .ch-1 {
     background-color: #d7dce2;
     color: black;
-}
+} */
 
 .fitLogo{
     height: 45px;
     width: 45px;
+}.card {
+    background-color: #00000024;
+}
+
+.ch-1 {
+    background-color: #00000024;
+    color: white;
 }

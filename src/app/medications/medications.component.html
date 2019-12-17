@@ -19,8 +19,7 @@
                     <div class="col-md-3 m-4" *ngFor="let app of apps; let i = index">
                         <div [ngClass]="['card', 'h-100', app.color]">
                             <!-- <div class="card h-100" [style.background-color]="app.color"> -->
-                            <div class="card-header font-weight-bold ch-1"
-                                style="background-color:whitesmoke; display:flex;">
+                            <div class="card-header font-weight-bold ch-1" style="display:flex;">
                                 <div style="width: 100%" [attr.contenteditable]="flag" [textContent]="app.name">
                                     {{app.name}}
                                     <span style="float: right;" *ngIf="app.medicationIndication === 'warn'"><i
@@ -49,7 +48,7 @@
                                     </div>
                                 </div>
                                 <div *ngIf="flag">
-                                    <mat-form-field style="color: black;">
+                                    <mat-form-field style="color: black;" required>
                                         <input matInput [matDatepicker]="pickerStart" placeholder="Start Date"
                                             [formControl]="startTime">
                                         <mat-datepicker-toggle matSuffix [for]="pickerStart">
@@ -57,7 +56,7 @@
                                         <mat-datepicker #pickerStart disabled="false"></mat-datepicker>
                                     </mat-form-field>
 
-                                    <mat-form-field style="color: black;">
+                                    <mat-form-field style="color: black;" required>
                                         <input matInput [matDatepicker]="pickerEnd" placeholder="End Date"
                                             [formControl]="endTime ">
                                         <mat-datepicker-toggle matSuffix [for]="pickerEnd">
@@ -65,7 +64,7 @@
                                         <mat-datepicker #pickerEnd disabled="false"></mat-datepicker>
                                     </mat-form-field>
 
-                                    <mat-form-field style="width:115px;">
+                                    <mat-form-field style="width:115px;" required>
                                         <mat-label>Schedule/day</mat-label>
                                         <mat-select [formControl]="medIntake">
                                             <mat-option value="once">Once</mat-option>
@@ -75,13 +74,14 @@
                                             <mat-option value="five">Five</mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                    <button mat-icon-button color="primary" (click)="saveNewData(app, i)"
-                                        aria-label="Example icon-button with a heart icon">
+                                    <button mat-icon-button color="primary" style="cursor: pointer;"
+                                        (click)="saveNewData(app, i)" aria-label="Example icon-button with a heart icon"
+                                        [disabled]="medIntake.value == '' || endTime.value =='' || startTime.value == ''">
                                         <mat-icon [ngStyle]="{'color':'green'}">check_circle_outline
                                         </mat-icon>
                                     </button>
-                                    <button mat-icon-button color="primary" (click)="saveCancelled()"
-                                        aria-label="Example icon-button with a heart icon">
+                                    <button mat-icon-button color="primary" class="cursor-pointer"
+                                        (click)="saveCancelled()" aria-label="Example icon-button with a heart icon">
                                         <mat-icon [ngStyle]="{'color':'red'}">highlight_off</mat-icon>
                                     </button>
                                     <!-- style="margin-left: 30px;margin-top: 20px;" 
@@ -134,7 +134,7 @@
                                                 <td style=" display: flex; font-size: 14px; height: 30px;">
                                                     <p><i class=" fas fa-spider-web"></i> <a
                                                             href="http://www.google.com"
-                                                            style="font-size: 14px; color: rgb(0, 0, 0) !important; text-decoration: none;"><i
+                                                            style="font-size: 14px; text-decoration: none; color: white;"><i
                                                                 class="fa fa-external-link" aria-hidden="true"></i>
                                                             Learn
                                                             More </a></p>

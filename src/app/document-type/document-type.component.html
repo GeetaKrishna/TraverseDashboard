@@ -1,9 +1,9 @@
   <div>
       <div class="input-group md-form form-sm form-2 pl-0">
-          <input class="form-control my-0 py-1" [(ngModel)]="searchText" type="text" placeholder="Find document by name, date, type, etc..."
-              aria-label="Search">
+          <input class="form-control my-0 py-1" [(ngModel)]="searchText" type="text"
+              placeholder="Find document by name, date, type, etc..." aria-label="Search">
           <div class="input-group-append">
-              <span class="input-group-text cyan lighten-2"><i class="fa fa-search" aria-hidden="true"></i></span>
+              <span class="input-group-text "><i class="fa fa-search" aria-hidden="true"></i></span>
           </div>
       </div>
       <!-- <button class="btn btn-unique btn-rounded btn-sm my-0" type="submit">Search</button> -->
@@ -12,7 +12,7 @@
           <mat-card class="example-card m-2">
               <div class="dragDrop">
                   <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" accept="image/*"
-                      (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" multiple="true" >
+                      (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" multiple="true">
                       <!-- <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
                         Drag and Drop Files here.
                           <i class="fa fa-arrows-alt"></i>
@@ -21,7 +21,8 @@
                       </ng-template> -->
                       <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
                           <!-- Drag and Drop Files here. -->
-                          <button type="button" class="btn" (click)="openFileSelector()">Drag and Drop here Or Choose</button>
+                          <button type="button" class="btn bgWhite" (click)="openFileSelector()">Drag and Drop here Or
+                              Choose</button>
                       </ng-template>
                   </ngx-file-drop>
                   <div *ngFor="let item of files; let i=index" class="fileContent">
@@ -31,14 +32,15 @@
                   </div>
               </div>
               <mat-card-content (click)="addRecord(state)" class="btn cursor-pointer">
-                  <p class="mt-2">
+                  <p class="mt-2 bgWhite">
                       Add Record
                   </p>
               </mat-card-content>
           </mat-card>
           <div *ngIf="state == 'Insurance'">
               <div style="display: flex;">
-                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForInsurance | searchDocuments: searchText"
+                  <mat-card class="example-card m-2"
+                      *ngFor="let file of availableDocsForInsurance | searchDocuments: searchText"
                       style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                       <div class="CardImage">
                           <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
@@ -61,7 +63,8 @@
           </div>
           <div *ngIf="state == 'Travel'">
               <div style="display: flex;">
-                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForTravel | searchDocuments: searchText"
+                  <mat-card class="example-card m-2"
+                      *ngFor="let file of availableDocsForTravel | searchDocuments: searchText"
                       style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                       <div class="CardImage">
                           <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
@@ -85,7 +88,8 @@
           </div>
           <div *ngIf="state == 'Family'">
               <div style="display: flex;">
-                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForFamily | searchDocuments: searchText"
+                  <mat-card class="example-card m-2"
+                      *ngFor="let file of availableDocsForFamily | searchDocuments: searchText"
                       style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                       <div class="CardImage">
                           <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
@@ -108,7 +112,8 @@
           </div>
           <div *ngIf="state == 'Personal'">
               <div style="display: flex;">
-                  <mat-card class="example-card m-2" *ngFor="let file of availableDocsForPersonal | searchDocuments: searchText"
+                  <mat-card class="example-card m-2"
+                      *ngFor="let file of availableDocsForPersonal | searchDocuments: searchText"
                       style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                       <div class="CardImage">
                           <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">

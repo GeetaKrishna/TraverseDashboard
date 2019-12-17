@@ -93,7 +93,7 @@ export class MyHeartComponent implements OnInit {
       "details": "2 Miles",
       "version": "1.0v",
       "appName": "Distance",
-      "url": "assets/myHeart/bluedistance.png",
+      "url": "assets/runn.png",
       "time": "yesterday"
     },
   ]

@@ -1,3 +1,5 @@
+import { basename } from "path"
+
 // mediInstructions in prescription table == Schedule
 // Add dosage to the screen, remove image and description.
 // Get medicine id and description based on Medicine Name. Need to add new column Medicine Name in Medication table.
@@ -42,3 +44,14 @@
 card background transparency #00000024
 
 login rgba(95, 84, 84, 0.38)
+
+transparency done for 
+- fitness tracker
+- four corners of health
+- health knowledge base
+- calendar -- geeta check
+- myHeart
+- my medications
+- Health Documents
+- Insurance central
+

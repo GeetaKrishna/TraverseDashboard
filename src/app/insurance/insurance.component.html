@@ -7,7 +7,8 @@
                 </p>
             </div>
             <div class="col justify-content-end">
-                <img src="../../assets/newhealthIns.png" style="height: 35px; width: 35px; float: right; mix-blend-mode: multiply" />
+                <img src="../../assets/newhealthIns.png"
+                    style="height: 35px; width: 35px; float: right; mix-blend-mode: multiply" />
             </div>
         </div>
     </div>
@@ -15,8 +16,10 @@
         <table style="width:100%; height:100%">
             <tr>
                 <td>
-                    Your {{date}} Plan Summary
-                    <hr size="20" color="#b3cbdd" style="height:0.5em; background-color: #4d4d4d;">
+                    <p class="bgWhite">
+                        Your {{date}} Plan Summary
+                    </p>
+                    <hr size="20" color="#b3cbdd" style="height:0.5em; background-color: #4d4d4d6b;">
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="card" style="height: 100%">
@@ -90,8 +93,10 @@
             </div>
             <tr>
                 <td>
-                    Your Claims Data
-                    <hr size="20" color="#b3cbdd" style="height:0.5em; background-color: #4d4d4d;">
+                    <p class="bgWhite">
+                        Your Claims Data
+                    </p>
+                    <hr size="20" color="#b3cbdd" style="height:0.5em; background-color: #4d4d4d6b">
                     <!-- <div class="row claim" style="width: 75%; float: left">
                         <div class="col-sm-3">
                             <div class="card" style="height: 100%">
@@ -193,11 +198,14 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="row">
-                                <div class="col-sm-3"  style="align-self: center" *ngFor="let patient of patientsListAll; let i = index">
-                                    <div class="text-center "><a><i (click)="setRow(i, patient)" [ngClass]="{'highlight': selectedIndex === i}" class="fa fa-user fa-2x" aria-hidden="true" style="cursor: pointer;"></i></a></div>
+                                <div class="col-sm-3" style="align-self: center"
+                                    *ngFor="let patient of patientsListAll; let i = index">
+                                    <div class="text-center "><a><i (click)="setRow(i, patient)"
+                                                [ngClass]="{'highlight': selectedIndex === i}" class="fa fa-user fa-2x"
+                                                aria-hidden="true" style="cursor: pointer;"></i></a></div>
                                     <!-- <div class="inner2" style="padding-right: 1px"></div> -->
                                     <div class="inner2" *ngIf="patient.pid == patientId; else others">You</div>
-                                     <ng-template #others>
+                                    <ng-template #others>
                                         <div class="inner2">
                                             {{patient.patientName.split(" ")[0]}}
                                         </div>
@@ -206,11 +214,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-3" style="align-self: center">
-                                        <mat-form-field>
-                                                <input matInput [matDatepicker]="picker" placeholder="Year to Date" (dateChange)="dateInput($event.value)" [formControl]="dateFormControl">
-                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                                <mat-datepicker #picker></mat-datepicker>
-                                            </mat-form-field>
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="picker" placeholder="Year to Date"
+                                            (dateChange)="dateInput($event.value)" [formControl]="dateFormControl">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
                                 </div>
                             </div>
                         </div>

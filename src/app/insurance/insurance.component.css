@@ -7,10 +7,10 @@
     float: left;
 }
 
-.ch-1 {
+/* .ch-1 {
     background-color: #d7dce2;
     color: black;
-}
+} */
 
 .cardHead {
     font-size: 24px;
@@ -25,4 +25,15 @@
 
 .highlight {
     color: rgb(58, 171, 241)
+}
+
+.ch-1 {
+    background-color: #00000024;
+    color: white;
+}
+.card {
+    background-color: #00000024;
+}
+.bgWhite{
+    color: white;
 }

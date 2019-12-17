@@ -1,20 +1,27 @@
 .data {
   font-size: 50px !important;
 }
-
+/* 
 .card-header {
   background-color: #00000024;
-}
+} */
 
 .card {
   background-color: #00000024;
 }
-
+/* 
 .title {
   font-size: 20px !important;
   font-weight: bold;
   background: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
+} */
+
+.title {
+  font-size: 20px !important;
+  font-weight: bold;
+  background-color: #00000024;
+  color: rgb(255, 255, 255);
 }
 
 .black {

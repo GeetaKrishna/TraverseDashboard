@@ -4,10 +4,17 @@
     /* background-color: gray; */
     height: 100%;
 }
+.bgWhite{
+    color: white;
+}
 
-.ch-1 {
+/* .ch-1 {
     background-color: #d7dce2;
     color: black;
+} */
+.ch-1 {
+    background-color: #00000024;
+    color: white;
 }
 
 .cardHead {
@@ -15,6 +22,9 @@
     margin-bottom: 0 !important;
 }
 
+.card {
+    background-color: #00000024;
+}
 
 .col-sm-10 {
     border-left: 12px solid RGB(84, 120, 168);
@@ -68,10 +78,15 @@ td {
 }
 
 .activeClass {
-    color: #2b82d3
+    color: #bdd2f3
 }
 
 .activeClassText {
-    color: #2b82d3;
+    color: #bdd2f3;
     font-weight: bolder;
+    text-decoration:none;
 }
+
+/* .fa{
+    color: rgb(221, 195, 195);
+} */
