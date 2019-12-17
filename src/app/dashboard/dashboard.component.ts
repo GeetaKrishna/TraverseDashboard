@@ -675,6 +675,7 @@ export class DashboardComponent implements OnInit {
   toggleSubmitWeight(): void {
     this.contenteditable1 = false;
     this.details = this.currentWeight;
+console.log(localStorage.getItem("patientId"), "patientId");
 
     let json = {
       "pid": localStorage.getItem("patientId"),

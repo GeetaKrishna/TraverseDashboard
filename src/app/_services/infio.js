@@ -10,7 +10,7 @@
 // blood pressure, glucose level, Cholesterol, time information not updating after recent data is entered, working fine when we get data from API.
 // need API for up and down arrows
 
-
+// make text in 4 corners to white or visible
 
 
 // Change, ahead of choose image from object to filename.
