@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { GetAppsService } from '../_services/get-apps.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, Validators } from '@angular/forms';
+import { DashboardService } from '../_services/dashboard.service';
 
 @Component({
   selector: 'app-app-info',
@@ -33,7 +34,9 @@ export class AppInfoComponent implements OnInit {
   ]);
   ngOnInit() {
   }
-  constructor(private route: Router, private toast: ToastrService, private getApp: GetAppsService, private _bottomSheetRef: MatBottomSheetRef<AppInfoComponent>, @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
+  constructor(private route: Router, private dashboardService: DashboardService,
+    private toast: ToastrService, private getApp: GetAppsService,
+    private _bottomSheetRef: MatBottomSheetRef<AppInfoComponent>, @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
     console.log(data, 'recievedData');
     this.app = data;
   }
@@ -104,8 +107,57 @@ export class AppInfoComponent implements OnInit {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/fitnessTracker/fitbit')
       } else if (id == 2) {
-        this._bottomSheetRef.dismiss();
-        this.route.navigateByUrl('admin/dashboard')
+        let cholesterol =
+        {
+          chLevel: this.cholesterolFormControl.value,
+          clDate: new Date().toISOString(),
+          modifiedBy: parseInt(localStorage.getItem("userId")),
+          pid: localStorage.getItem("patientId")
+        };
+        let weight =
+        {
+          "pid": localStorage.getItem("patientId"),
+          "weight": this.weightFormControl.value,
+          modifiedBy: parseInt(localStorage.getItem("userId")),
+          "weightDate": new Date().toISOString()
+        }
+        let glucose =
+        {
+          glDate: new Date().toISOString(),
+          glucoseLevel: this.glucoseFormControl.value,
+          modifiedBy: parseInt(localStorage.getItem("userId")),
+          pid: localStorage.getItem("patientId")
+        }
+        let bp =
+        {
+          pid: parseInt(localStorage.getItem("patientId")),
+          highBP: parseInt(this.highBPFormControl.value),
+          lowBP: parseInt(this.lowBPFormControl.value),
+          modifiedBy: parseInt(localStorage.getItem("userId")),
+          bpDate: new Date().toISOString()
+        }
+
+        this.dashboardService.postWeight(weight).subscribe((data) => {
+          this.dashboardService.sendCholesterol(cholesterol).subscribe((data) => {
+            this.dashboardService.postBloodPressure(bp).subscribe((data) => {
+              this.dashboardService.sendGlucose(glucose).subscribe((data) => {
+                this._bottomSheetRef.dismiss();
+                this.route.navigateByUrl('admin/dashboard')
+              })
+            })
+          })
+
+        }, (err) => {
+
+        })
+
+
+
+
+
+
+
+
       } else if (id == 3) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/healthKnowledgeBase/healthKnowledgeContent')
