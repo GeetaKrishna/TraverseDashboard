@@ -21,3 +21,15 @@ p {
 td {
   width: 134px;
 }
+
+.card {
+  background-color: #00000024;
+}
+
+.ch-1 {
+  background-color: #00000024;
+  color: white;
+}
+.bgwhite{
+  color: white;
+}

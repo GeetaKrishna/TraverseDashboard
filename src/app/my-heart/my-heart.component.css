@@ -14,10 +14,19 @@
     color: white;
 }
 
+.card {
+    background-color: #00000024;
+}
+
 .ch-1 {
+    background-color: #00000024;
+    color: white;
+}
+
+/* .ch-1 {
     background-color: #d7dce2;
     color: black;
-}
+} */
 
 .ch-3 {
     background-color: rgb(96, 107, 117);

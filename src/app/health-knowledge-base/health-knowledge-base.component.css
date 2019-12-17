@@ -1,6 +1,17 @@
 .ch-1 {
-    background-color: #d7dce2;
-    color: black;
+    /* background-color: #d7dce2;
+    color: black; */
+    background-color: #00000024;
+    color: white;
+}
+
+.card-header {
+    background-color: #00000024;
+}
+
+
+.card {
+    background-color: #00000024;
 }
 
 .fitLogo {
@@ -10,7 +21,7 @@
 }
 
 .topic {
-    background-color: #62b3e2;
+    background-color: #00000024;
     color: white;
     padding: 4px;
     width: 154px;
@@ -28,7 +39,8 @@
     font-size: 14px;
     font-weight: bold;
 }
-.vertical{
+
+.vertical {
     border-right: 4px solid grey;
     height: auto;
 }

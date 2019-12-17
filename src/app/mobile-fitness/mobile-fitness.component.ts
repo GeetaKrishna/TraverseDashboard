@@ -18,7 +18,7 @@ export class MobileFitnessComponent implements OnInit {
       "appDetails": "This is App Store Logo",
       "version": "1.0v",
       "appName": "FitBit",
-      "url": "assets/fitbit.png",
+      "url": "assets/newfitbit.png",
       "userTable": [],
       "rating": 2.5,
       "routeScreen": 'fitbit'
@@ -28,7 +28,7 @@ export class MobileFitnessComponent implements OnInit {
       "appDetails": "This is App Store Logo",
       "version": "1.0v",
       "appName": "Strava",
-      "url": "assets/strava.png",
+      "url": "assets/newstrava.png",
       "userTable": [],
       "rating": 2.5,
       "routeScreen": 'fitbit'
@@ -38,7 +38,7 @@ export class MobileFitnessComponent implements OnInit {
       "appDetails": "This is App Store Logo",
       "version": "1.0v",
       "appName": "Garmin",
-      "url": "assets/garmin.jpeg",
+      "url": "assets/newGarmin.png",
       "userTable": [],
       "rating": 2.5,
       "routeScreen": 'fitbit'
@@ -48,7 +48,7 @@ export class MobileFitnessComponent implements OnInit {
       "appDetails": "This is App Store Logo",
       "version": "1.0v",
       "appName": "Sleep Cycle",
-      "url": "assets/sleepCycle.jpg",
+      "url": "assets/newSleepcycle.png",
       "userTable": [],
       "rating": 2.5,
       "routeScreen": 'fitbit'
