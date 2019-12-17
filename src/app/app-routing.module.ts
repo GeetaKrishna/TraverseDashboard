@@ -34,6 +34,7 @@ import { LabReportTypeComponent } from './lab-report-type/lab-report-type.compon
 import { InsuranceProvComponent } from './insurance-prov/insurance-prov.component';
 import { RecordsProviderComponent } from './records-provider/records-provider.component';
 import { RecordsProvTypeComponent } from './records-prov-type/records-prov-type.component';
+import { MedsComponent } from './meds/meds.component';
 
 const routes: Routes = [
 
@@ -48,6 +49,7 @@ const routes: Routes = [
       { path: 'calendar', component: CalendarComponent },
       { path: 'myHeart', component: MyHeartComponent },
       { path: 'medication', component: MedicationsComponent },
+      { path: 'meds', component: MedsComponent },
       { path: 'insurance', component: InsuranceComponent },
       {
         path: 'document', component: DocumentComponent,

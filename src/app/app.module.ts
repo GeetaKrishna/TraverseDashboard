@@ -66,6 +66,7 @@ import { RecordsProviderComponent } from './records-provider/records-provider.co
 import { RecordsProvTypeComponent } from './records-prov-type/records-prov-type.component';
 import { SearchDocumentsPipe } from './_pipes/search-documents.pipe';
 import { AddMedComponent } from './add-med/add-med.component';
+import { MedsComponent } from './meds/meds.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { AddMedComponent } from './add-med/add-med.component';
     SearchDocumentsPipe,
     AddMedComponent,
     AddPatientComponent,
+    MedsComponent,
   ],
   imports: [
     BrowserModule,

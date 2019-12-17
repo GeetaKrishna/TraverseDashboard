@@ -5,7 +5,15 @@
     height: 100%;
 }
 
+.ch-1 {
+    background-color: #d7dce2;
+    color: black;
+}
 
+.cardHead {
+    font-size: 24px;
+    margin-bottom: 0 !important;
+}
 
 .col-sm-10 {
     border-left: 12px solid RGB(84, 120, 168);
@@ -128,10 +136,12 @@ td {
 :host {
     width: 80%;
 }
+
 .activeClass {
     /* background-color: rgb(23, 24, 24); */
     color: #2b82d3;
 }
+
 .activeClassText {
     /* background-color: rgb(23, 24, 24); */
     color: #2b82d3;
