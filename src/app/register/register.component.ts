@@ -80,9 +80,9 @@ export class RegisterComponent implements OnInit {
       // this.usernameAvialable = false;
       // this.userNameTaken = false;
 
-if(this.userNameTaken == true || this.userNameTaken == false){
-  this.userNameTaken = "True";
-}
+      if (this.userNameTaken == true || this.userNameTaken == false) {
+        this.userNameTaken = "True";
+      }
 
       this.refresh = true;
     })
@@ -187,7 +187,7 @@ if(this.userNameTaken == true || this.userNameTaken == false){
       console.log(data);
       this.toast.success('Registration was Successful.')
       this.signUpSuccess = false
-      this.router.navigateByUrl('/login')
+      this.router.navigateByUrl('/')
     }, (error) => {
       this.signUpSuccess = false;
     })

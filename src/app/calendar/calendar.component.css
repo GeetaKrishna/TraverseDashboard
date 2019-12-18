@@ -4,7 +4,7 @@
 }
 
 .card {
-  background-color: #00000024;  
+  background-color: #00000024;
 }
 
 h3 {
@@ -47,3 +47,16 @@ pre {
 ::-webkit-scrollbar {
   width: 1px;
 }
+
+::ng-deep .cal-month-view {
+  background-color: #ffffff05 !important;
+}
+
+::ng-deep .cal-month-view .cal-cell-row:hover {
+  background-color: #fafafa00 !important;
+}
+
+/* ::ng-deep .cal-month-view .cal-cell-row .cal-cell:hover,
+.cal-month-view .cal-cell.cal-has-events.cal-open {
+  background-color: #ededed !important;
+} */
