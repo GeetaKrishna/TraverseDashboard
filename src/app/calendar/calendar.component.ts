@@ -36,12 +36,12 @@ const colors: any = {
     secondary: '#FAE3E3'
   },
   blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
+    primary: 'rgb(0, 128, 255)',
+    secondary: 'rgb(0, 128, 255)'
   },
   yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
+    primary: '#ffbf00',
+    secondary: '#ffbf00'
   }
 };
 
