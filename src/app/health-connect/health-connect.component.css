@@ -8,6 +8,15 @@
   background: #eee;
 }
 
+.card {
+  background-color: #00000024;
+}
+
+.ch-1 {
+  background-color: #00000024;
+  color: white;
+}
+
 .test :hover {
   background-color: aliceblue
 }

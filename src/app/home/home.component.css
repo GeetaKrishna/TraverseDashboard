@@ -36,12 +36,25 @@
  .example-card {
    max-width: 200px;
    margin-left: 7px;
+   background-color: #00000024;
+ }
 
+ /* .ch-1 {
+   background-color: #d7dce2;
+   color: black
+ } */
+ .card {
+   background-color: #00000024;
+   color: white;
  }
 
  .ch-1 {
-   background-color: #d7dce2;
-   color: black
+   background-color: #00000024;
+   color: white;
+ }
+
+ .bgWhite {
+   color: white;
  }
 
  .example-full-width {

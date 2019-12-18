@@ -23,3 +23,7 @@ mat-icon {
 mat-input-element {
   color: black !important;
 }
+
+.mat-card {
+  background-color: #ececec7a;
+}

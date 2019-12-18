@@ -2,7 +2,7 @@
     <!--Recommended apps Begin-->
     <div class="col-md-12">
         <div class="card h-100">
-            <div class="card-header ch-0">
+            <div class="card-header ch-1">
                 <div class="row">
                     <div class="col" style="font-size: 24px; margin-bottom: 0 !important;">
                         Medical Conditions
@@ -16,8 +16,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-3 m-4" *ngFor="let app of apps; let i = index">
                     <div [ngClass]="['card', 'h-100', app.color]">
-                        <div class="card-header font-weight-bold cardHeader"
-                            style="background-color:whitesmoke; display:flex;">
+                        <div class="card-header font-weight-bold ch-1" style="display:flex;">
                             <div style="width: 100%" [attr.contenteditable]="flag" [textContent]="app.Condition_Name"
                                 (input)="app.Condition_Name=$event.target.textContent">
                                 {{app.Condition_Name}}
@@ -96,37 +95,12 @@
                                         <mat-form-field style="color: black;">
                                             <input matInput placeholder="Triggers" [formControl]="triggers" required>
                                         </mat-form-field>
-                                        <!-- <mat-form-field style="color: black;">
-                                            <input matInput placeholder="Before/After Meal" [formControl]="medMeal"
-                                                required>
-                                        </mat-form-field> -->
-                                        <!-- <input type="file" [formControl]='medImage' (change)="imageInput($event)"> -->
                                         <button (click)="fileInput.click()">
                                             <span>Upload an image</span>
                                             <input #fileInput type="file" (change)="imageInput($event)"
                                                 style="display:none;" />
                                         </button>
-                                        <!-- <mat-form-field>
-                                            <mat-label>Schedule / day</mat-label>
-                                            <mat-select [formControl]="medIntake">
-                                                <mat-option value="once">Once</mat-option>
-                                                <mat-option value="twice">Twice</mat-option>
-                                                <mat-option value="thrice">Thrice</mat-option>
-                                                <mat-option value="four">Four</mat-option>
-                                                <mat-option value="five">Five</mat-option>
-                                            </mat-select>
-                                        </mat-form-field> -->
-                                        <!-- <mat-form-field>
-                                            <input matInput type="file" >
-                                        </mat-form-field> -->
                                         <div style="text-align: center; width: 190px;">
-                                            <!-- <span  class="cursor-pointer">
-                                                <i class="fa fa-check mr-2" aria-hidden="true" style="font-size: 22px; color: green;" >
-                                                </i>
-                                            </span>
-                                            <span  class="cursor-pointer">
-                                                <i class="fa fa-times-circle-o mr-2" aria-hidden="true" style="font-size: 22px; color: red;"></i>
-                                            </span> -->
                                             <button mat-icon-button color="primary" (click)="successAdding()"
                                                 [disabled]="triggers.errors || severity.errors || Diagnosed.errors || conditionName.errors"
                                                 aria-label="Example icon-button with a heart icon">
@@ -138,7 +112,6 @@
                                                 <mat-icon>highlight_off</mat-icon>
                                             </button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

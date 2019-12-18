@@ -5,6 +5,24 @@
     height: 100%;
 }
 
+.mat-card,
+.card {
+    background-color: #00000024;
+}
+
+.ch-1 {
+    background-color: #00000024;
+    color: white;
+}
+
+.bgWhite {
+    color: white;
+}
+
+.cardHead {
+    font-size: 24px;
+    margin-bottom: 0 !important;
+}
 
 
 .col-sm-10 {
@@ -128,12 +146,23 @@ td {
 :host {
     width: 80%;
 }
-.activeClass {
-    /* background-color: rgb(23, 24, 24); */
+
+/* .activeClass {
+    /* background-color: rgb(23, 24, 24); 
     color: #2b82d3;
 }
+
 .activeClassText {
-    /* background-color: rgb(23, 24, 24); */
+    /* background-color: rgb(23, 24, 24); 
     color: #2b82d3;
     font-weight: bolder;
+} */
+.activeClass {
+    color: #bdd2f3
+}
+
+.activeClassText {
+    color: #bdd2f3;
+    font-weight: bolder;
+    text-decoration: none;
 }

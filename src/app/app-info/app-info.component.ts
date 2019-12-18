@@ -70,6 +70,12 @@ export class AppInfoComponent implements OnInit {
     } else if (id == 7) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/document')
+    } else if (id == 8) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/healthconnect')
+    } else if (id == 9) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/insurance')
     } else if (id == 10) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/electronicHealth/Visits')
@@ -150,14 +156,6 @@ export class AppInfoComponent implements OnInit {
         }, (err) => {
 
         })
-
-
-
-
-
-
-
-
       } else if (id == 3) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/healthKnowledgeBase/healthKnowledgeContent')
@@ -170,6 +168,12 @@ export class AppInfoComponent implements OnInit {
       } else if (id == 7) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/document')
+      } else if (id == 8) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/healthconnect')
+      } else if (id == 9) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/insurance')
       } else if (id == 10) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/electronicHealth/Visits')

@@ -46,6 +46,7 @@ card background transparency #00000024
 login rgba(95, 84, 84, 0.38)
 
 transparency done for 
+- app store
 - fitness tracker
 - four corners of health
 - health knowledge base
@@ -54,4 +55,7 @@ transparency done for
 - my medications
 - Health Documents
 - Insurance central
+- health connect
+- electronic health records
+- 
 

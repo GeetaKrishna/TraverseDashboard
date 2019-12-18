@@ -9,6 +9,16 @@
 .card {
   background-color: #00000024;
 }
+
+.ch-1 {
+  background-color: #00000024;
+  color: white;
+}
+
+.bgWhite{
+  color: white;
+}
+
 /* 
 .title {
   font-size: 20px !important;
@@ -43,10 +53,6 @@
   color: white;
 }
 
-.ch-1 {
-  background-color: #00000024;
-  color: white;
-}
 
 .ch-3 {
   background-color: rgb(96, 107, 117);

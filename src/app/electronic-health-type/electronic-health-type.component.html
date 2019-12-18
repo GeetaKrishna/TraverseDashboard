@@ -1,10 +1,16 @@
 <div>
     <div class="input-group md-form form-sm form-2 pl-0">
-        <input class="form-control my-0 py-1" type="text" [(ngModel)]='searchText' placeholder="Find record, doctor, image, hospital, etc..."
+        <!-- <input class="form-control my-0 py-1" type="text" [(ngModel)]='searchText' placeholder="Find record, doctor, image, hospital, etc..."
             aria-label="Search">
         <div class="input-group-append">
             <span class="input-group-text cyan lighten-2"><i class="fa fa-search" aria-hidden="true"></i></span>
-        </div>
+        </div> -->
+        <mat-form-field style="width: 100%;">
+            <input matInput type="text" placeholder="Find document by name, date, type, etc..." [formControl]="findType">
+            <button mat-button matSuffix mat-icon-button  (click)="findSearch()">
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
     </div>
     <div style="display: flex;">
         <mat-card class="example-card m-2">
@@ -12,7 +18,9 @@
                 <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
                     (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
                     <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                        Drag and Drop Files here.
+                        <!-- Drag and Drop Files here. -->
+                        <button type="button" class="btn bgWhite" (click)="openFileSelector()">Drag and Drop here Or
+                            Choose</button>
                         <!-- <button type="button" class="btn" (click)="openFileSelector()">Browse</button> -->
                     </ng-template>
                 </ngx-file-drop>
@@ -23,7 +31,7 @@
                 </div>
             </div>
             <mat-card-content (click)="addRecord(state)" class="btn cursor-pointer">
-                <p class="mt-2">
+                <p class="mt-2 bgWhite">
                     Add Record
                 </p>
             </mat-card-content>

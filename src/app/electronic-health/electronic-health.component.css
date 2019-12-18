@@ -5,10 +5,19 @@
     height: 100%;
 }
 
+.card {
+    background-color: #00000024;
+}
+
 .ch-1 {
+    background-color: #00000024;
+    color: white;
+}
+
+/* .ch-1 {
     background-color: #d7dce2;
     color: black;
-}
+} */
 
 .cardHead {
     font-size: 24px;
@@ -137,13 +146,26 @@ td {
     width: 80%;
 }
 
-.activeClass {
-    /* background-color: rgb(23, 24, 24); */
+/* .activeClass {
+    /* background-color: rgb(23, 24, 24); 
     color: #2b82d3;
+} */
+
+/* .activeClassText {
+    /* background-color: rgb(23, 24, 24); 
+    color: #2b82d3;
+    font-weight: bolder;
+} */
+
+.activeClass {
+    color: #bdd2f3
 }
 
 .activeClassText {
-    /* background-color: rgb(23, 24, 24); */
-    color: #2b82d3;
+    color: #bdd2f3;
     font-weight: bolder;
+    text-decoration:none;
+}
+.bgWhite{
+    color: white;
 }

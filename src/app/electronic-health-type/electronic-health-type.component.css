@@ -5,6 +5,15 @@
     height: 100%;
 }
 
+.mat-card {
+    background-color: #00000024;
+    color: white;
+}
+
+.bgWhite {
+    color: white;
+}
+
 .col-sm-10 {
     border-left: 12px solid RGB(84, 120, 168);
     padding-top: 1%;
@@ -127,7 +136,25 @@ td {
 :host {
     width: 80%;
 }
+
 .example-card {
     width: 212px;
     text-align: center;
+}
+
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: rgb(255, 255, 255) !important;
+}
+
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: rgb(255, 255, 255) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: rgb(255, 255, 255) !important;
+    ;
 }

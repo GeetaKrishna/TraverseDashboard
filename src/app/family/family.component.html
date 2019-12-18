@@ -1,5 +1,5 @@
 <div class="card mt-5 mb-5">
-    <div class="card-header">
+    <div class="card-header ch-1">
         <div class="row ">
             <div class="col justify-content-start">
                 <p class="cardHead" style="font-size: 24px; margin-bottom: 0 !important;">
@@ -20,11 +20,12 @@
                         <tbody>
                             <tr *ngFor="let p of persons; let i = index">
                                 <td [ngClass]="{'highlight': selectedIndex === i}">
-                                    <a>
-                                        <img src="{{p.image}}" (click)="testFamily(p, i)" alt="Image not available"
-                                            style="height: 100px; width: 100px;">
-                                        <br />{{p.name}}
-                                    </a>
+                                    <img src="{{p.image}}" (click)="testFamily(p, i)" alt="Image not available"
+                                        style="height: 100px; width: 100px;">
+                                    <br />
+                                    <p class="bgWhite" style="margin: 0 !important;">
+                                        {{p.name}}
+                                    </p>
                                 </td>
                             </tr>
                         </tbody>
@@ -32,7 +33,7 @@
                 </div>
                 <div class="col-sm-10" *ngIf="switchMember">
                     <div>
-                        <p>Health Summary for {{switchMember.name}}</p>
+                        <p class="bgWhite">Health Summary for {{switchMember.name}}</p>
                     </div>
                     <div class="verLine"></div>
 
