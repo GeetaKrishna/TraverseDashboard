@@ -16,8 +16,11 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule, MatTooltipModule, MatExpansionModule, MatCardModule, MatNativeDateModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatListModule, MatBottomSheetModule, MatMenuModule, MatIconModule } from '@angular/material';
-// import {MatDatepickerModule} from '@angular/material/datepicker';
+import {
+  MatSliderModule, MatTooltipModule, MatExpansionModule, MatCardModule, MatNativeDateModule,
+  MatDatepickerModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule,
+  MatListModule, MatBottomSheetModule, MatMenuModule, MatIconModule, MatCheckboxModule
+} from '@angular/material';
 
 import { JwtModule } from "@auth0/angular-jwt";
 
@@ -67,6 +70,7 @@ import { RecordsProvTypeComponent } from './records-prov-type/records-prov-type.
 import { SearchDocumentsPipe } from './_pipes/search-documents.pipe';
 import { AddMedComponent } from './add-med/add-med.component';
 import { MedsComponent } from './meds/meds.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +116,7 @@ import { MedsComponent } from './meds/meds.component';
     AddMedComponent,
     AddPatientComponent,
     MedsComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,6 +142,7 @@ import { MedsComponent } from './meds/meds.component';
     MatIconModule,
     MatSliderModule,
     MatExpansionModule,
+    MatCheckboxModule,
     AvatarModule,
     // CalendarModule.forRoot({
     //   provide: DateAdapter,
@@ -169,7 +175,7 @@ import { MedsComponent } from './meds/meds.component';
     DatePipe,
     MatDatepickerModule
   ],
-  entryComponents: [AppInfoComponent, HomeComponent, AddMedComponent, AddPatientComponent],
+  entryComponents: [AppInfoComponent, HomeComponent, AddMedComponent, AddPatientComponent, ForgotPasswordComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

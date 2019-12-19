@@ -1,6 +1,7 @@
 
 // this component completley depends upon https://mattlewis92.github.io/angular-calendar/
 // https://mattlewis92.github.io/angular-calendar/#/custom-templates
+// https://mattlewis92.github.io/angular-calendar/#/group-similar-events
 import { FormControl } from '@angular/forms';
 
 import {
@@ -27,8 +28,8 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
-import { start } from 'repl';
-// import { start } from 'repl';
+import { MedicationService } from '../_services/medication.service';
+import { CalendarService } from '../_services/calendar.service';
 
 const colors: any = {
   red: {
@@ -59,9 +60,67 @@ export class CalendarComponent {
   existingEvents: any;
   clickedDate: Date;
   selectedIndex: number = 0;
-  constructor(private modal: NgbModal) { }
 
-  ngOnInit() { }
+  constructor(private modal: NgbModal, private prescriptionService: MedicationService,
+    private calendarService: CalendarService) { }
+
+  ngOnInit() {
+    this.prescriptionService.getPrescriptions().subscribe((prescriptionList: []) => {
+
+      prescriptionList.map((e) => {
+
+        this.events = [...this.events, {
+          id: "Medication",
+          start: new Date(e['startDate']),
+          end: new Date(e['endDate']),
+          title: e['instruction'] + ' a day',
+          color: colors.blue,
+          actions: this.actions,
+          allDay: true,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true
+          },
+          draggable: true,
+          meta: e
+        }];
+        console.log(this.events);
+        this.refresh.next()
+      })
+    }, (err) => {
+      console.log(err);
+    });
+
+    this.calendarService.getAppointments().subscribe((appointmentList: []) => {
+console.log(appointmentList);
+
+      appointmentList.map((e) => {
+
+        // this.events = [...this.events, {
+        //   id: "Medication",
+        //   start: new Date(e['startDate']),
+        //   end: new Date(e['endDate']),
+        //   title: e['instruction'] + ' a day',
+        //   color: colors.blue,
+        //   actions: this.actions,
+        //   allDay: true,
+        //   resizable: {
+        //     beforeStart: true,
+        //     afterEnd: true
+        //   },
+        //   draggable: true,
+        //   meta: e
+        // }];
+        console.log(this.events);
+        this.refresh.next()
+      })
+    }, (err) => {
+      console.log(err);
+    });
+
+
+
+  }
 
   view: CalendarView = CalendarView.Month;
 
@@ -76,6 +135,8 @@ export class CalendarComponent {
 
   AppointmentDetails = new FormControl()
   AppointmentName = new FormControl()
+  Location = new FormControl()
+  allDay = new FormControl(true)
   editAppointmentDetails = new FormControl()
   editAppointmentName = new FormControl()
 
@@ -122,7 +183,7 @@ export class CalendarComponent {
   events: CalendarEvent[] = [
     {
       id: "Medication",
-      start: subDays(startOfDay(new Date()), 1),
+      start: subDays(startOfDay(new Date()), 0),
       end: addDays(new Date(), 1),
       title: 'Take your medicine daily.',
       color: colors.blue,
@@ -209,8 +270,8 @@ export class CalendarComponent {
       this.editAppointmentName.setValue(event.start)
       this.modal.open(this.editApponitment, { centered: true })
     }
-    else if(action == "Deleted"){
-      
+    else if (action == "Deleted") {
+
     }
     else {
       this.modal.open(this.tesst, { centered: true })
@@ -238,7 +299,7 @@ export class CalendarComponent {
 
   openEvents(e) {
     this.existingEvents = e;
-    this.modal.open(this.tesst, { centered: true, size: 'lg', windowClass: "tesst" })
+    this.modal.open(this.tesst, { centered: true, size: 'lg', windowClass: "" })
   }
 
   close(k) {

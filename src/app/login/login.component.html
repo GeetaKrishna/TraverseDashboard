@@ -93,15 +93,22 @@
                     </mat-form-field><br>
                     <button class="btn btn-primary" [disabled]="!(emailFormControl.valid && passwordFormControl.valid)"
                         (click)="onSubmit($event)">
-                        Login <div *ngIf="loginSuccess" class="spinner-grow spinner-grow-sm" role="status">
+                        Login
+                        <div *ngIf="loginSuccess" class="spinner-grow spinner-grow-sm" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
                     </button>
+                    <div class="text-center cursor-pointer" >
+                        <!-- <span style="font-size:style="color: rgb(14, 54, 233);" 20px;">Don't have an Account? </span> -->
+                        <a (click)="forgotPassword()" style="font-size: 16px; color: rgb(14, 54, 233);">Forgot Password?</a>
+                        <!-- <a href=""  style="font-weight: bold;font-size: 20px;">Forgot Password</a> -->
+                        <!-- <button  class="btn btn-secondary" [routerLink]="['/signUp']">Sign Up</button> -->
+                    </div>
                 </div>
                 <div>
                     <div class="text-center" style="margin-top: 120px; color: rgb(0, 0, 0);">
                         <span style="font-size: 20px;">Don't have an Account? </span>
-                        <a href="" [routerLink]="['/signUp']" style="font-weight: bold;font-size: 20px;">Sign Up</a>
+                        <a [routerLink]="['/signUp']" style="font-weight: bold;font-size: 20px;">Sign Up</a>
                         <!-- <button  class="btn btn-secondary" [routerLink]="['/signUp']">Sign Up</button> -->
                     </div>
                 </div>

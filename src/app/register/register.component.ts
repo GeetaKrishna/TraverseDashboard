@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
   subject: Subject<any> = new Subject();
+  subjectEmail: Subject<any> = new Subject();
   signUpForm: FormGroup;
   signUpSuccess: boolean = false;
   loading = false;
@@ -59,6 +60,8 @@ export class RegisterComponent implements OnInit {
   ]);
   userNameTaken: any;
   usernameAvialable: boolean;
+  emailTaken: boolean;
+  refreshEmail: boolean;
   constructor(
     private toast: ToastrService,
     private formBuilder: FormBuilder,
@@ -87,6 +90,18 @@ export class RegisterComponent implements OnInit {
       this.refresh = true;
     })
 
+    this.emailFormControl.valueChanges.subscribe((data) => {
+      console.log(data);
+      // this.usernameAvialable = false;
+      // this.userNameTaken = false;
+
+      if (this.emailTaken == true || this.emailTaken == false) {
+        this.userNameTaken = "True";
+      }
+
+      this.refreshEmail = true;
+    })
+
     this.signUpForm = this.formBuilder.group({
       fname: ['', Validators.required],
       lname: ['', Validators.required],
@@ -99,7 +114,9 @@ export class RegisterComponent implements OnInit {
       .pipe(debounceTime(3000))
       .subscribe((k) => {
         console.log(k);
+
         this.refresh = false;
+
         this.authenticationService.verifyUserName(k).subscribe((data: boolean) => {
           let usernameTake: Boolean
           console.log(data);
@@ -109,12 +126,20 @@ export class RegisterComponent implements OnInit {
           //   this.userNameTaken = false;
           // }
           // else {
-          //   this.usernameAvialable = false
+            // this.usernameAvialable = false
           //   this.userNameTaken = true
           // }
         })
-      }
-      );
+      })
+    this.subjectEmail
+      .pipe(debounceTime(3000))
+      .subscribe((k) => {
+        this.authenticationService.verifyMailId(k).subscribe((data: boolean) => {
+          this.refreshEmail = false;
+          console.log(data);
+          this.emailTaken = data;
+        })
+      });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
@@ -126,6 +151,12 @@ export class RegisterComponent implements OnInit {
     console.log(username);
     this.refresh = true;
     this.subject.next(username);
+  }
+
+  emailValidation(email) {
+    console.log(email);
+    this.refreshEmail = true;
+    this.subjectEmail.next( email);
   }
 
   changeClient(value) {
