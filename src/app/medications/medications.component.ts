@@ -59,12 +59,14 @@ export class MedicationsComponent implements OnInit {
   sliderValue = 0;
   animal: string;
   name: string;
+  colors = ['ch-1',
+    'ch-2',
+    'ch-3',
+    'ch-4',
+    'ch-0'];
+
   ngOnInit() {
-    let colors = ['ch-1',
-      'ch-2',
-      'ch-3',
-      'ch-4',
-      'ch-0']
+
     this.medicationService.getPrescriptions().subscribe(
       (pres: []) => {
         this.medicationService.getMedications().subscribe(
@@ -82,7 +84,7 @@ export class MedicationsComponent implements OnInit {
                   if (index % 2 == 0) {
                     t['medicationIndication'] = 'warn'
                   }
-                  t['color'] = colors[index];
+                  t['color'] = this.colors[index];
                   t['name'] = e['name'];
                   t['image'] = e['image'];
                   t['description'] = e['description'];
@@ -129,6 +131,7 @@ export class MedicationsComponent implements OnInit {
   saveNewData(medicationDetail, index) {
     console.log(medicationDetail);
     console.log(this.apps[index])
+
     this.newData = {
       "dosage": medicationDetail.dosage,
       "id": medicationDetail.id,
@@ -139,15 +142,10 @@ export class MedicationsComponent implements OnInit {
       "startDate": moment(this.startTime.value).format("YYYY-MM-DD")
     }
 
-    // console.log(moment(this.endTime.value).format("YYYY-MM-DD"))
-    // console.log(new Date(this.endTime.value).toISOString())
-
-    // console.log(new Date(this.endTime.value).toISOString().split('T')[0])
-
-
     this.medicationService.editPrescription(this.newData).subscribe((data) => {
       console.log(data, 'after updating');
       // .replace('/', '-')
+
       this.apps[index].startDate = moment(this.startTime.value).format("YYYY-MM-DD")
       this.apps[index].endDate = moment(this.endTime.value).format("YYYY-MM-DD"),
         this.apps[index].instruction = this.medIntake.value
@@ -237,71 +235,53 @@ export class MedicationsComponent implements OnInit {
   }
 
   successAdding() {
-    // switch (this.medIntake.value) {
-    //   case 'once': {
-    //     this.medIntake.setValue("Once a Day")
-    //     break;
-    //   }
-    //   case 'twice': {
-    //     this.medIntake.setValue("Twice a Day")
-    //     break;
-    //   }
-    //   case 'thrice': {
-    //     this.medIntake.setValue("Thrice a Day")
-    //     break;
-    //   }
-    //   case 'four': {
-    //     this.medIntake.setValue("Four times a Day")
-    //     break;
-    //   }
-    //   case 'five': {
-    //     this.medIntake.setValue("Five times a Day")
-    //     break;
-    //   }
-    // }
-    // {
-    //   "dosage": this.sliderValue.toString(),
-    //   "endDate": this.endTime.value,
-    //   "instruction": this.medIntake.value,
-    //   "medicationId": this.medName.value.id,
-    //   "pid": localStorage.getItem("patientId"),
-    //   "startDate": this.startTime.value
-    // }
-    // const formData = new FormData();
-    // formData.append('instruction', this.medIntake.value);
-    // formData.append('medicationId', this.medName.value.id);
-    // formData.append('pid', localStorage.getItem("patientId"));
-    // formData.append('startDate', this.startTime.value);
-    // formData.append('endDate', this.endTime.value);
-    // formData.append('dosage', this.sliderValue.toString());
-
-
-    this.medicationService.addPrescription({
+    let prescription = {
       "dosage": this.sliderValue.toString(),
       "endDate": this.endTime.value,
       "instruction": this.medIntake.value,
       "medicationId": this.medName.value.id,
       "pid": localStorage.getItem("patientId"),
       "startDate": this.startTime.value
-    }).subscribe((data) => {
-      console.log(data);
+    }
+    console.log(moment(this.startTime.value).format('YYYY-MM-DD'));
+    console.log(moment(this.endTime.value).format('YYYY-MM-DD'));
 
-      // let t = {};
-      // t['id'] = data['medid']
-      // t['medicationSchedule'] = data['medschedule'];
-      // t['medicationDetails'] = data['description'];
-      // t['medication'] = data['medname'];
-      // t['image'] = data['medimage']
-      // t['medicationImage'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${data['medimage']}`);
-      // this.apps.push(t);
+
+    this.medicationService.addPrescription(prescription).subscribe((data) => {
+      console.log(data);
+      this.medicationDetails.map((e, index) => {
+        if (e['id'] === prescription['medicationId']) {
+          prescription.startDate = moment(this.startTime.value).format('YYYY-MM-DD');
+          prescription.endDate = moment(this.endTime.value).format('YYYY-MM-DD');
+
+          let t = {};
+          t = prescription;
+          t['id'] = data['id'];
+          // if (index % 2 == 0) {
+          //   t['medicationIndication'] = 'warn'
+          // }
+          t['color'] = this.colors[index];
+          t['name'] = e['name'];
+          t['image'] = e['image'];
+          t['description'] = e['description'];
+          t['image'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${t['image']}`);
+          console.log(t);
+          this.apps.push(t);
+        }
+      })
 
     }, (err) => {
       console.log(err, "err");
     })
     console.log(this.startTime, this.endTime);
-    // this.medName.setValue('')
-    // this.medIntake.setValue('')
+    this.medName.reset()
+    this.medIntake.reset()
     this.addMedicationToggle = !this.addMedicationToggle
+
+    // plan how to reset these values;
+
+    // this.endTime.setValue("")
+    // this.startTime.setValue("")
   }
 
   cancelAdding() {
