@@ -11,3 +11,22 @@
     float: left;
     clear: left;
 }
+
+.cardHead {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0 !important;
+}
+
+.ch-1 {
+    background-color: #00000024;
+    color: white;
+}
+
+.card {
+    background-color: #00000024;
+}
+
+.bgWhite {
+    color: white;
+}

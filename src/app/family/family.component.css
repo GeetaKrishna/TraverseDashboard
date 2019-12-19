@@ -12,6 +12,12 @@
     padding-right: 3%;
 }
 
+.cardHead {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0 !important;
+}
+
 .row [class*="col-"] {
     margin-bottom: -99999px;
     padding-bottom: 99999px;
@@ -56,29 +62,29 @@ td {
     text-align: center;
 }
 
-.verLine{
-    border-bottom:solid 10px rgb(87, 85, 85);
+.verLine {
+    border-bottom: solid 10px rgb(87, 85, 85);
     width: 100%;
 }
 
-.alert-orange{
+.alert-orange {
     background-color: rgb(240, 183, 109);
     color: rgb(83, 60, 29);
 }
+
 .highlight {
     background-color: #bcc3c734;
 }
 
 .card {
     background-color: #00000024;
-  }
-  
-  .ch-1 {
+}
+
+.ch-1 {
     background-color: #00000024;
     color: white;
-  }
-  
-  .bgWhite{
+}
+
+.bgWhite {
     color: white;
-  }
-  
+}

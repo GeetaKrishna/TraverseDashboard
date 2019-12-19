@@ -1,10 +1,24 @@
-.ch-1 {
+/* .ch-1 {
     background-color: #d7dce2;
     color: black;
+} */
+
+.bgWhite {
+    color: white;
+}
+
+.ch-1 {
+    background-color: #00000024;
+    color: white;
+}
+
+.card {
+    background-color: #00000024;
 }
 
 .cardHead {
     font-size: 24px;
+    font-weight: bold;
     margin-bottom: 0 !important;
 }
 

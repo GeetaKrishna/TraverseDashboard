@@ -71,6 +71,8 @@ import { SearchDocumentsPipe } from './_pipes/search-documents.pipe';
 import { AddMedComponent } from './add-med/add-med.component';
 import { MedsComponent } from './meds/meds.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ForgotPasswordPage2Component } from './forgot-password-page2/forgot-password-page2.component';
+import { ForgotPasswordPage3Component } from './forgot-password-page3/forgot-password-page3.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +119,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     AddPatientComponent,
     MedsComponent,
     ForgotPasswordComponent,
+    ForgotPasswordPage2Component,
+    ForgotPasswordPage3Component,
   ],
   imports: [
     BrowserModule,

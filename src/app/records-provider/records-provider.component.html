@@ -1,6 +1,19 @@
 <div class="card mt-5">
-    <div class="card-header">
+    <!-- <div class="card-header">
         <h5>Records - Provider</h5>
+    </div>-->
+    <div class="card-header ch-1">
+        <div class="row ">
+            <div class="col justify-content-start">
+                <p class="cardHead">
+                    Records - Provider
+                </p>
+            </div>
+            <div class="col justify-content-end">
+                <img src="../../assets/icons-home/records.png"
+                    style="height: 35px; width: 35px; float: right; mix-blend-mode: multiply" />
+            </div>
+        </div>
     </div>
     <div class="card-body">
         <table class="table table-borderless">
@@ -10,28 +23,28 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <a [routerLink]='["Visits"]'><i class="fa fa-user-md fa-4x"
+                                    <a [routerLink]='["Visits"]' class="bgWhite"><i class="fa fa-user-md fa-4x"
                                             routerLinkActive="activeClass" aria-hidden="true"></i><br /><span
                                             routerLinkActive="activeClassText">Visits</span></a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a [routerLink]='["Imaging"]'><i class="fa fa-file-image-o fa-4x"
+                                    <a [routerLink]='["Imaging"]' class="bgWhite"><i class="fa fa-file-image-o fa-4x"
                                             routerLinkActive="activeClass" aria-hidden="true"></i><br /><span
                                             routerLinkActive="activeClassText">Imaging</span></a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a [routerLink]='["Labs"]'><i class="fa fa-flask fa-4x"
+                                    <a [routerLink]='["Labs"]' class="bgWhite"><i class="fa fa-flask fa-4x"
                                             routerLinkActive="activeClass" aria-hidden="true"></i><br /><span
                                             routerLinkActive="activeClassText">Labs</span></a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a [routerLink]='["Records"]'><i class="fa fa-book fa-4x"
+                                    <a [routerLink]='["Records"]' class="bgWhite"><i class="fa fa-book fa-4x"
                                             routerLinkActive="activeClass" aria-hidden="true"></i><br /><span
                                             routerLinkActive="activeClassText">Records</span></a>
                                 </td>
@@ -43,7 +56,6 @@
                     <router-outlet>
                     </router-outlet>
                 </div>
-
             </div>
         </table>
     </div>

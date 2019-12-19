@@ -98,10 +98,12 @@
                             <span class="sr-only">Loading...</span>
                         </div>
                     </button>
-                    <div class="text-center cursor-pointer" >
+                    <div class="text-center cursor-pointer">
                         <!-- <span style="font-size:style="color: rgb(14, 54, 233);" 20px;">Don't have an Account? </span> -->
-                        <a (click)="forgotPassword()" style="font-size: 16px; color: rgb(14, 54, 233);">Forgot Password?</a>
-                        <!-- <a href=""  style="font-weight: bold;font-size: 20px;">Forgot Password</a> -->
+                        <a style="font-size: 16px; color: rgb(14, 54, 233);" [routerLink]="['/forgotPassword']">Forgot
+                            Password?</a>
+                        <!--(click)="forgotPassword()"
+                             <a href=""  style="font-weight: bold;font-size: 20px;">Forgot Password</a> -->
                         <!-- <button  class="btn btn-secondary" [routerLink]="['/signUp']">Sign Up</button> -->
                     </div>
                 </div>

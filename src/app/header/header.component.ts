@@ -43,6 +43,11 @@ export class HeaderComponent implements OnInit {
     reader.readAsDataURL(k.files[0]);//attempts to read the file in question.
     console.log(localStorage)
   }
+
+  viewProfile() {
+    console.log('write the code here to view Profile()');
+
+  }
   logOut() {
     console.log('logged out');
     this.authentication.logout()
@@ -85,12 +90,12 @@ export class AddPatientComponent {
   patientProfile(patientName, height, weight) {
     console.log(patientName, height, weight);
     console.log(this.selected)
-// let body = new FormData()
-// body.append('height', height.value)
-// body.append('weight', weight.value)
-// body.append('patientName', patientName.value)
-// body.append('relation', this.selected)
-// body.append(userId, height.value)
+    // let body = new FormData()
+    // body.append('height', height.value)
+    // body.append('weight', weight.value)
+    // body.append('patientName', patientName.value)
+    // body.append('relation', this.selected)
+    // body.append(userId, height.value)
 
     this.userService.registerPatient({
       "height": parseFloat(height.value),

@@ -348,7 +348,7 @@ export class HomeComponent implements OnInit {
       "APP_DETAILS": "YOU CAN SEARCH FOR ARTICLES FROM ONLINE",
       "VERSION": "1.0v",
       "APPNAME": "Health Knowledge Base",
-      "URL": "assets/icons-home/healthKnowledgeBase.jpeg",
+      "URL": "assets/newhealth.png",
       "userTable": [],
       "RATING": 1.5,
       "ROUTESCREEN": 'admin/healthKnowledgeBase/healthKnowledgeContent',
