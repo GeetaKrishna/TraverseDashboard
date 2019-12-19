@@ -92,33 +92,31 @@ export class CalendarComponent {
     });
 
     this.calendarService.getAppointments().subscribe((appointmentList: []) => {
-console.log(appointmentList);
+      console.log(appointmentList);
 
       appointmentList.map((e) => {
 
-        // this.events = [...this.events, {
-        //   id: "Medication",
-        //   start: new Date(e['startDate']),
-        //   end: new Date(e['endDate']),
-        //   title: e['instruction'] + ' a day',
-        //   color: colors.blue,
-        //   actions: this.actions,
-        //   allDay: true,
-        //   resizable: {
-        //     beforeStart: true,
-        //     afterEnd: true
-        //   },
-        //   draggable: true,
-        //   meta: e
-        // }];
+        this.events = [...this.events, {
+          id: "Medication",
+          start: new Date(e['startDate']),
+          end: new Date(e['endDate']),
+          title: e['instruction'] + ' a day',
+          color: colors.yellow,
+          actions: this.actions,
+          allDay: true,
+          resizable: {
+            beforeStart: true,
+            afterEnd: true
+          },
+          draggable: true,
+          meta: e
+        }];
         console.log(this.events);
         this.refresh.next()
       })
     }, (err) => {
       console.log(err);
     });
-
-
 
   }
 
@@ -139,6 +137,8 @@ console.log(appointmentList);
   allDay = new FormControl(true)
   editAppointmentDetails = new FormControl()
   editAppointmentName = new FormControl()
+  startDateFormControl = new FormControl()
+  endDateFormControl = new FormControl()
 
   actions: CalendarEventAction[] = [
     {
@@ -160,25 +160,6 @@ console.log(appointmentList);
   ];
 
   refresh: Subject<any> = new Subject();
-
-  sampleEvent = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'Take your medicine daily.',
-      type: "Medication",
-    }, {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'Make an appointment for your EKG',
-      type: "Appointment",
-    }, {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'Reschedule the appointment',
-      type: "Appointment",
-    },
-  ]
 
   events: CalendarEvent[] = [
     {
@@ -308,6 +289,21 @@ console.log(appointmentList);
     console.log(this.AppointmentDetails.value);
 
     if (k === "Add") {
+     let t = {
+        "allDay": true,
+        "description": "string",
+        "endTime": "2019-12-19T12:41:09.293Z",
+        "pid": parseInt(localStorage.getItem("patientId")),
+        "startTime": "2019-12-19T12:41:09.293Z",
+        "title": "string",
+        "userId": parseInt(localStorage.getItem("userId"))
+      }
+      this.calendarService.createAppoinments({}).subscribe((data) => {
+
+      }, (err) => {
+
+      })
+
       this.events = [
         ...this.events,
         {
@@ -360,7 +356,8 @@ console.log(appointmentList);
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter(event => event !== eventToDelete);
-    this.activeDayIsOpen = !this.activeDayIsOpen
+    this.activeDayIsOpen = !this.activeDayIsOpen;
+    this.refresh.next()
   }
   removeEvent(eve, _index) {
     console.log(_index);

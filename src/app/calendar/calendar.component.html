@@ -161,12 +161,23 @@
                         <input matInput [formControl]="Location" placeholder="Location">
                       </mat-form-field>
                       <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
-
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="pickerStartReq" placeholder="Start Date"
+                          (dateChange)="dateInput($event.value)" [formControl]="startDateFormControl">
+                        <mat-datepicker-toggle matSuffix [for]="pickerStartReq"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerStartReq></mat-datepicker>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="pickerEndReq" placeholder="End Date"
+                          (dateChange)="dateInput($event.value)" [formControl]="endDateFormControl">
+                        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerEndReq></mat-datepicker>
+                      </mat-form-field>
                       <mat-form-field>
                         <textarea matInput [formControl]="AppointmentDetails"
                           placeholder="Appointment Details"></textarea>
                       </mat-form-field>
-              
+
                       <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
                       <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
 
@@ -177,7 +188,7 @@
               </mat-tab>
               <!-- <mat-tab label="Add Medication">
                 Add Medication Details -->
-                <!-- <div *ngFor="let k of [0,7,1,5]">
+              <!-- <div *ngFor="let k of [0,7,1,5]">
                   <div class="card-body hoverClass" style="padding: 10px !important;">
                     <div>
                       <p>{{k}}</p>
@@ -196,24 +207,34 @@
             Add an Appointment
           </div>
           <div class="card-body">
-              <div class="example-container">
-                <mat-form-field>
-                  <input matInput [formControl]="AppointmentName" placeholder="Title">
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput [formControl]="Location" placeholder="Location">
-                </mat-form-field>
-                <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput [formControl]="AppointmentName" placeholder="Title">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [formControl]="Location" placeholder="Location">
+              </mat-form-field>
+              <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerStart" placeholder="Start Date"
+                  (dateChange)="dateInput($event.value)" [formControl]="startDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStart></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerEnd" placeholder="End Date"
+                  (dateChange)="dateInput($event.value)" [formControl]="endDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEnd></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <textarea matInput [formControl]="AppointmentDetails" placeholder="Appointment Details"></textarea>
+              </mat-form-field>
 
-                <mat-form-field>
-                  <textarea matInput [formControl]="AppointmentDetails"
-                    placeholder="Appointment Details"></textarea>
-                </mat-form-field>
-        
-                <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
-                <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
+              <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
+              <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
 
-              </div>
+            </div>
           </div>
 
         </div>
@@ -227,9 +248,24 @@
           <div class="card-body">
             <div class="example-container">
               <mat-form-field>
-                <input matInput [formControl]="editAppointmentName" placeholder="Input">
+                <input matInput [formControl]="editAppointmentName" placeholder="Title">
               </mat-form-field>
-
+              <mat-form-field>
+                <input matInput [formControl]="Location" placeholder="Location">
+              </mat-form-field>
+              <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerStartEdit" placeholder="Start Date"
+                  (dateChange)="dateInput($event.value)" [formControl]="startDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="pickerStartEdit"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStartEdit></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerEndEdit" placeholder="End Date"
+                  (dateChange)="dateInput($event.value)" [formControl]="endDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="pickerEndEdit"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEndEdit></mat-datepicker>
+              </mat-form-field>
               <mat-form-field>
                 <textarea matInput [formControl]="editAppointmentDetails" placeholder="Appointment Details"></textarea>
               </mat-form-field>
