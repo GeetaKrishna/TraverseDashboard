@@ -18,7 +18,7 @@
           Weight <span class="float-right"><span class="fa {{weightpresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
-          <span class="fa {{measurementProviderForWeight}} text-muted cursor-pointer" style="font-size: 22px;"></span>
+          <span class="fa {{measurementProviderForWeight}} bgWhite cursor-pointer" style="font-size: 22px;"></span>
           <!-- <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span> -->
           <div class="row" [style.display]="!weight? 'none' : ''">
             <div [attr.contenteditable]="contenteditable1" class="col-md-4 font-weight-bold data text-right"
@@ -45,7 +45,7 @@
             <canvas id="canvas" height="80vh">{{ weightChart }}</canvas>
           </div>
 
-          <div class="medium text-muted mt-2">As of {{WeightDate['days']}} {{WeightDate['timer']}} ago</div>
+          <div class="medium  mt-2 bgWhite">As of {{WeightDate['days']}} {{WeightDate['timer']}} ago</div>
         </div>
         <div class="card-footer ch-0">
           <div class="float-right">
@@ -67,7 +67,7 @@
               class="fa {{presentedInfo}} {{colorPresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
-          <span class="fa {{measurementProviderForBP}} text-muted cursor-pointer" style="font-size: 22px;"></span>
+          <span class="fa {{measurementProviderForBP}} bgWhite cursor-pointer" style="font-size: 22px;"></span>
           <div class="row" *ngIf="bloodpressure">
             <div [attr.contenteditable]="contenteditable3"
               class="col-md-4 font-weight-bold data {{colorClassForBP}} text-right"
@@ -76,10 +76,10 @@
             </div>
             <div class="col-md-1 font-weight-normal data {{colorClassForBP}} text-center">/</div>
             <div [attr.contenteditable]="contenteditable3" [ngClass]="{'editTrue' : contenteditable3}"
-              class="col-md-3 font-weight-bold data {{colorClassForBP}} text-left" [textContent]="currentLBP"
+              class="col-md-4 font-weight-bold data {{colorClassForBP}} text-left" [textContent]="currentLBP"
               (input)="currentLBP=$event.target.textContent">{{currentLBP}}
             </div>
-            <!-- <div class="col-md-4 font-weight-bold data text-center" *ngIf="!contenteditable3"><span
+            <!-- <div class="col-md-3 font-weight-bold data text-center" *ngIf="!contenteditable3"><span
                 class="fa fa-arrow-down text-center" style="color: red"></span>
               <span class="fa fa-arrow-up text-center" *ngIf="false" style="color: green"></span>
             </div> -->
@@ -93,8 +93,8 @@
               [options]="lineChartOptions" [colors]="lineChartColors2" [chartType]="lineChartType"></canvas> -->
             <canvas #canvass id="canvass" height="80vh">{{ BPChart }}</canvas>
           </div>
-          <div class="medium text-muted">As of {{bpdate['days']}} {{bpdate['timer']}} ago</div>
-          <div  style="color: red; font-size: 16px; font-weight: 700;">
+          <div class="medium mt-2 bgWhite">As of {{bpdate['days']}} {{bpdate['timer']}} ago</div>
+          <div style="color: #dc1818; font-size: 16px; font-weight: 700;">
               {{dangerStatement}}
           </div>
         </div>
@@ -121,7 +121,7 @@
               class="fa {{glucoseweightpresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
-          <span class="fa {{measurementProviderForGL}} text-muted cursor-pointer" style="font-size: 22px;"></span>
+          <span class="fa {{measurementProviderForGL}} bgWhite cursor-pointer" style="font-size: 22px;"></span>
           <div class="row" *ngIf="glucose">
             <div [attr.contenteditable]="contenteditable2" [ngClass]="{'editTrue' : contenteditable2}"
               class="col-md-4 font-weight-bold data text-right" [textContent]="currentGlucose"
@@ -142,7 +142,7 @@
               [options]="lineChartOptions" [colors]="lineChartColors1" [chartType]="lineChartType"></canvas> -->
             <canvas id="canvasforGL" height="60vh">{{ glucoseChart }}</canvas>
           </div>
-          <div class="medium text-muted">As of {{glucoseDate['days']}} {{glucoseDate['timer']}} ago</div>
+          <div class="medium mt-2 bgWhite">As of {{glucoseDate['days']}} {{glucoseDate['timer']}} ago</div>
         </div>
         <div class="card-footer ch-3">
           <div class="float-right">
@@ -166,7 +166,7 @@
               class="fa {{cholesterolpresentedInfo}} cursor-pointer"></span></span>
         </div>
         <div class="card-body">
-          <span class="fa {{measurementProviderForCL}} text-muted cursor-pointer" style="font-size: 22px;"></span>
+          <span class="fa {{measurementProviderForCL}} bgWhite cursor-pointer" style="font-size: 22px;"></span>
           <div class="row" *ngIf="cholesterol">
             <div [attr.contenteditable]="contenteditable4" [ngClass]="{'editTrue' : contenteditable4}"
               class="col-md-4 font-weight-bold data text-right" [textContent]="currentCholesterol"
@@ -189,7 +189,7 @@
               [options]="lineChartOptions" [colors]="lineChartColors3" [chartType]="lineChartType"></canvas> -->
             <canvas id="canvasForCL" height="60vh">{{ cholesterolChart }}</canvas>
           </div>
-          <div class="medium text-muted">As of {{cholesterolDate['days']}} {{cholesterolDate['timer']}} ago</div>
+          <div class="medium mt-2 bgWhite">As of {{cholesterolDate['days']}} {{cholesterolDate['timer']}} ago</div>
           <!-- <button (click)="toggleContenteditable()">Edit Text Content</button> -->
         </div>
         <div class="card-footer ch-4">

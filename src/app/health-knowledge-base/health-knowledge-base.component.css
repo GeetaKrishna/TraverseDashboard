@@ -10,8 +10,16 @@
 }
 
 
+.bgWhite {
+    color: white;
+}
+
+
 .card {
     background-color: #00000024;
+}
+.mat-card {
+    background-color: #8a7d7d24;
 }
 
 .fitLogo {
@@ -28,6 +36,7 @@
     height: 30px;
     text-align: center;
     font-weight: 600;
+    font-size: 18px;
 }
 
 .cardHead {

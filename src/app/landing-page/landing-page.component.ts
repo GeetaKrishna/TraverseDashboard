@@ -179,7 +179,7 @@ export class LandingPageComponent implements OnInit {
       "APP_DETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
       "VERSION": "1.0v",
       "APPNAME": "Health Connect",
-      "URL": "assets/icons-home/motion09.jpeg",
+      "URL": "assets/newHealthconnect.png",
       "userTable": [],
       "RATING": 3,
       "ROUTESCREEN": 'admin/healthconnect',

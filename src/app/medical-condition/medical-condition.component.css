@@ -5,15 +5,27 @@
     font-weight: normal;
 }
 
-.ch-1 {
+/* .ch-1 {
     background-color: #9ba6b4;
+    color: white;
+} */
+.card {
+    background-color: #00000024;
+}
+
+.ch-1 {
+    background-color: #00000024;
     color: white;
 }
 
-.cardHeader {
+.bgWhite {
+    color: white;
+}
+
+/* .cardHeader {
     background-color: #d7dce2;
     color: black;
-}
+} */
 
 .ch-3 {
     background-color: rgb(96, 107, 117);

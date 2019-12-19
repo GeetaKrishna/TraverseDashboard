@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { ActivatedRoute } from '@angular/router';
 import { EhrService } from '../_services/ehr.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-electronic-health-type',
@@ -14,6 +15,7 @@ export class ElectronicHealthTypeComponent implements OnInit {
   availableDocsForImaging = [];
   availableDocsForLabs = [];
   availableDocsForRecords = [];
+  findType = new FormControl('');
   constructor(public ehrService: EhrService, public activatedRoute: ActivatedRoute) { }
   state;
   ngOnInit() {
@@ -63,6 +65,11 @@ export class ElectronicHealthTypeComponent implements OnInit {
       })
     });
   }
+
+  findSearch() {
+    console.log('findSearch', this.findType.value);
+  }
+
   public files: NgxFileDropEntry[] = [];
 
   dropped(files: NgxFileDropEntry[]) {

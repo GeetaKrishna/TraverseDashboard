@@ -2,6 +2,8 @@ import { Component, OnInit, } from '@angular/core';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { DocumentService } from '../_services/document.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
+
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 @Component({
@@ -15,8 +17,9 @@ export class DocumentTypeComponent implements OnInit {
   availableDocsForInsurance = [];
   availableDocsForFamily = [];
   availableDocsForTravel = [];
-
+  findType = new FormControl('');
   state;
+
   constructor(private docService: DocumentService, public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -43,13 +46,13 @@ export class DocumentTypeComponent implements OnInit {
       this.docService.getDocumentsByType(data['params']['id']).subscribe((document) => {
         // console.log(document['recordset'])
         console.log(document);
-//         documentType: "Personal"
-// fileName: "6_ft.png"
-// fileType: "image/png"
-// fileURI: "http://172.17.12.143:8302/downloadFile/6_ft.png"
-// id: 3
-// pid: 1
-// size: 102609
+        //         documentType: "Personal"
+        // fileName: "6_ft.png"
+        // fileType: "image/png"
+        // fileURI: "http://172.17.12.143:8302/downloadFile/6_ft.png"
+        // id: 3
+        // pid: 1
+        // size: 102609
         switch (this.state) {
           case 'Insurance': {
             this.availableDocsForInsurance = this.availableDocsForInsurance.concat(document)
@@ -74,6 +77,10 @@ export class DocumentTypeComponent implements OnInit {
         }
       })
     });
+  }
+
+  findSearch() {
+    console.log('findSearch', this.findType.value);
   }
 
   public files: NgxFileDropEntry[] = [];
@@ -107,7 +114,7 @@ export class DocumentTypeComponent implements OnInit {
 
   addDocToDB(type) {
 
-      console.log(this.files, "this fi;les");
+    console.log(this.files, "this fi;les");
 
     for (const droppedFile of this.files) {
       // Is it a file?

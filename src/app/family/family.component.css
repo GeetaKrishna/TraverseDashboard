@@ -66,5 +66,19 @@ td {
     color: rgb(83, 60, 29);
 }
 .highlight {
-    background-color: #c1d5e2;
+    background-color: #bcc3c734;
 }
+
+.card {
+    background-color: #00000024;
+  }
+  
+  .ch-1 {
+    background-color: #00000024;
+    color: white;
+  }
+  
+  .bgWhite{
+    color: white;
+  }
+  
