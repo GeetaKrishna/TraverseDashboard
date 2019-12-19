@@ -113,7 +113,7 @@
               <h3>{{ viewDate | date }}</h3>
             </div>
           </div>
-          <div class="card-body" style="height: 405px">
+          <div class="card-body" style="">
             <mat-tab-group>
               <mat-tab label="Events">
                 <div *ngFor="let event of existingEvents; let i=index">
@@ -155,20 +155,18 @@
                   <div class="card-body">
                     <div class="example-container">
                       <mat-form-field>
-                        <input matInput [formControl]="AppointmentName" placeholder="Input">
+                        <input matInput [formControl]="AppointmentName" placeholder="Title">
                       </mat-form-field>
+                      <mat-form-field>
+                        <input matInput [formControl]="Location" placeholder="Location">
+                      </mat-form-field>
+                      <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
 
                       <mat-form-field>
                         <textarea matInput [formControl]="AppointmentDetails"
                           placeholder="Appointment Details"></textarea>
                       </mat-form-field>
-                      <!-- 
-                      <mat-form-field>
-                        <mat-select placeholder="Select">
-                          <mat-option value="option">Option</mat-option>
-                        </mat-select>
-                      </mat-form-field> -->
-
+              
                       <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
                       <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
 
@@ -177,8 +175,8 @@
 
                 </div>
               </mat-tab>
-              <mat-tab label="Add Medication">
-                Add Medication Details
+              <!-- <mat-tab label="Add Medication">
+                Add Medication Details -->
                 <!-- <div *ngFor="let k of [0,7,1,5]">
                   <div class="card-body hoverClass" style="padding: 10px !important;">
                     <div>
@@ -186,7 +184,7 @@
                     </div>
                   </div>
                 </div> -->
-              </mat-tab>
+              <!-- </mat-tab> -->
             </mat-tab-group>
           </div>
         </div>
@@ -198,25 +196,24 @@
             Add an Appointment
           </div>
           <div class="card-body">
-            <div class="example-container">
-              <mat-form-field>
-                <input matInput [formControl]="AppointmentName" placeholder="Input">
-              </mat-form-field>
+              <div class="example-container">
+                <mat-form-field>
+                  <input matInput [formControl]="AppointmentName" placeholder="Title">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput [formControl]="Location" placeholder="Location">
+                </mat-form-field>
+                <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
 
-              <mat-form-field>
-                <textarea matInput [formControl]="AppointmentDetails" placeholder="Appointment Details"></textarea>
-              </mat-form-field>
-              <!-- 
-              <mat-form-field>
-                <mat-select placeholder="Select">
-                  <mat-option value="option">Option</mat-option>
-                </mat-select>
-              </mat-form-field> -->
+                <mat-form-field>
+                  <textarea matInput [formControl]="AppointmentDetails"
+                    placeholder="Appointment Details"></textarea>
+                </mat-form-field>
+        
+                <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
+                <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
 
-              <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
-              <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
-
-            </div>
+              </div>
           </div>
 
         </div>

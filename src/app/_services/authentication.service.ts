@@ -57,7 +57,11 @@ export class AuthenticationService {
     }
 
     verifyUserName(username){
-        return this.http.get(`${environment.apiUrl}/users/check/${username}`)
+        return this.http.get(`${environment.apiUrl}/users/check/u/${username}`)
+    }
+
+    verifyMailId(mailId){
+        return this.http.get(`${environment.apiUrl}/users/check/e/${mailId}`)
     }
 
     getUserId(username){

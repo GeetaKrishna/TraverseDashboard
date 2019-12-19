@@ -39,6 +39,7 @@ import { MedsComponent } from './meds/meds.component';
 const routes: Routes = [
 
   { path: '', component: LoginComponent },
+  { path: 'forgotPassword', component: LoginComponent },
   { path: 'signUp', component: RegisterComponent },
   {
     path: 'admin', component: AdminComponent,

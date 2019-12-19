@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../_services/authentication.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { MatDialog } from '@angular/material';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 
 @Component({
     templateUrl: 'login.component.html',
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        public jwtHelper: JwtHelperService
+        public jwtHelper: JwtHelperService,
+        private matDialog: MatDialog
     ) {
 
         // redirect to home if already logged in
@@ -128,6 +130,14 @@ export class LoginComponent implements OnInit {
                 });
 
     }
+
+    forgotPassword() {
+        this.matDialog.open(ForgotPasswordComponent, {
+            width: '400px',
+            height: '260px'
+        });
+    }
+
     signup() {
         console.log('heloo');
 
