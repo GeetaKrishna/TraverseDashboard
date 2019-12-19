@@ -91,6 +91,9 @@ export class AppInfoComponent implements OnInit {
     } else if (id == 15) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/patientBilling')
+    } else if (id == 17) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/recordsProvider/Visits')
     } else if (id == 19) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/emergency')
@@ -189,6 +192,9 @@ export class AppInfoComponent implements OnInit {
       } else if (id == 15) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/patientBilling')
+      } else if (id == 17) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/recordsProvider/Visits')
       } else if (id == 19) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/emergency')

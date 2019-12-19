@@ -3,14 +3,22 @@
     color: black;
 } */
 
-.fitLogo{
+.fitLogo {
     height: 45px;
     width: 45px;
-}.card {
+}
+
+.card {
     background-color: #00000024;
 }
 
 .ch-1 {
     background-color: #00000024;
     color: white;
+}
+
+.cardHead {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0 !important;
 }

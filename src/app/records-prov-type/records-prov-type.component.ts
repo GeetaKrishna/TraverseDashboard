@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { DocumentService } from '../_services/document.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-records-prov-type',
@@ -14,6 +15,7 @@ export class RecordsProvTypeComponent implements OnInit {
   availableDocsForImaging = [];
   availableDocsForLabs = [];
   availableDocsForRecords = [];
+  findType = new FormControl('')
   constructor(private docService: DocumentService, public activatedRoute: ActivatedRoute) { }
   state;
   ngOnInit() {
@@ -35,33 +37,39 @@ export class RecordsProvTypeComponent implements OnInit {
       this.availableDocsForLabs = [];
       this.availableDocsForRecords = [];
       this.state = data['params']['id']
-      this.docService.getDocumentsByType(data['params']['id']).subscribe((document) => {
-        console.log(document['recordset'])
-        switch (this.state) {
-          case 'Visits': {
-            this.availableDocsForVisits = this.availableDocsForVisits.concat(document['recordset'])
-            console.log(this.availableDocsForVisits, 'i');
-            break;
-          }
-          case 'Imaging': {
-            this.availableDocsForImaging = this.availableDocsForImaging.concat(document['recordset'])
-            console.log(this.availableDocsForImaging, 'f');
-            break;
-          }
-          case 'Labs': {
-            this.availableDocsForLabs = this.availableDocsForLabs.concat(document['recordset'])
-            console.log(this.availableDocsForLabs, 't');
-            break;
-          }
-          default: {
-            this.availableDocsForRecords = this.availableDocsForRecords.concat(document['recordset'])
-            console.log(this.availableDocsForRecords, 'p');
-            break;
-          }
-        }
-      })
+      // this.docService.getDocumentsByType(data['params']['id']).subscribe((document) => {
+      //   console.log(document['recordset'])
+      //   switch (this.state) {
+      //     case 'Visits': {
+      //       this.availableDocsForVisits = this.availableDocsForVisits.concat(document['recordset'])
+      //       console.log(this.availableDocsForVisits, 'i');
+      //       break;
+      //     }
+      //     case 'Imaging': {
+      //       this.availableDocsForImaging = this.availableDocsForImaging.concat(document['recordset'])
+      //       console.log(this.availableDocsForImaging, 'f');
+      //       break;
+      //     }
+      //     case 'Labs': {
+      //       this.availableDocsForLabs = this.availableDocsForLabs.concat(document['recordset'])
+      //       console.log(this.availableDocsForLabs, 't');
+      //       break;
+      //     }
+      //     default: {
+      //       this.availableDocsForRecords = this.availableDocsForRecords.concat(document['recordset'])
+      //       console.log(this.availableDocsForRecords, 'p');
+      //       break;
+      //     }
+      //   }
+      // })
     });
   }
+
+  findSearch() {
+    console.log(this.findType.value, ' clicked');
+
+  }
+
   public files: NgxFileDropEntry[] = [];
 
   dropped(files: NgxFileDropEntry[]) {

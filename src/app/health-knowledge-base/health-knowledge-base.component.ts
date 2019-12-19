@@ -19,7 +19,8 @@ export class HealthKnowledgeBaseComponent implements OnInit {
       "appDetails": "This is App Store Logo",
       "version": "1.0v",
       "appName": "Recommended",
-      "url": "assets/icons-healthKnowledge/star.png",
+      // "url": "assets/icons-healthKnowledge/star.png",
+      "url": "assets/newRecomend.png",
       "userTable": [],
       "rating": 2.5,
       "routeScreen": 'healthKnowledgeContent'
@@ -39,7 +40,8 @@ export class HealthKnowledgeBaseComponent implements OnInit {
       "appDetails": "This is App Store Logo",
       "version": "1.0v",
       "appName": "Heart",
-      "url": "assets/icons-healthKnowledge/heart.jpg",
+      // "url": "assets/icons-healthKnowledge/heart.jpg",
+      "url": "assets/newHeartforknowledgebase.png",
       "userTable": [],
       "rating": 2.5,
       "routeScreen": 'healthKnowledgeContent'
@@ -59,7 +61,8 @@ export class HealthKnowledgeBaseComponent implements OnInit {
       "appDetails": "This is App Store Logo",
       "version": "1.0v",
       "appName": "Fitness",
-      "url": "assets/icons-home/motion02.png",
+      // "url": "assets/icons-home/motion02.png",
+      "url": "assets/newFitness.png",
       "userTable": [],
       "rating": 2.5,
       "routeScreen": 'healthKnowledgeContent'

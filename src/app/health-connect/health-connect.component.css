@@ -8,6 +8,12 @@
   background: #eee;
 }
 
+.cardHead {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0 !important;
+}
+
 .card {
   background-color: #00000024;
 }

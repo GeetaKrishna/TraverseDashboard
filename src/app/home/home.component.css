@@ -29,9 +29,10 @@
  }
 
  .cardHead {
-   font-size: 24px;
-   margin-bottom: 0 !important;
- }
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0 !important;
+}
 
  .example-card {
    max-width: 200px;

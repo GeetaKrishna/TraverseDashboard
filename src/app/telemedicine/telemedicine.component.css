@@ -1,56 +1,76 @@
 .example-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background: #eee;
-  }
-  
-  .test :hover {
-    background-color: aliceblue
-  }
-  
-  /* enable absolute positioning */
-  .inner-addon {
-    position: relative;
-  }
-  
-  /* style icon */
-  .inner-addon .fa {
-    position: absolute;
-    padding: 10px;
-    pointer-events: none;
-  }
-  
-  .vertical {
-    border-right: solid 2px black;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  
-  /* align icon */
-  .left-addon .fa {
-    left: 0px;
-  }
-  
-  .right-addon .fa {
-    right: 0px;
-  }
-  
-  /* add padding  */
-  .left-addon input {
-    padding-left: 30px;
-  }
-  
-  .right-addon input {
-    padding-right: 30px;
-  }
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: #eee;
+}
 
-  .example-card {
-    max-width: 400px;
-  }
-  .test :hover {
-    background-color: aliceblue
-  }
+.card {
+  background-color: #00000024;
+}
+
+.cardHead {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0 !important;
+}
+
+.ch-1 {
+  background-color: #00000024;
+  color: white;
+}
+
+.bgWhite {
+  color: white;
+}
+
+.test :hover {
+  background-color: aliceblue
+}
+
+/* enable absolute positioning */
+.inner-addon {
+  position: relative;
+}
+
+/* style icon */
+.inner-addon .fa {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.vertical {
+  border-right: solid 2px black;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* align icon */
+.left-addon .fa {
+  left: 0px;
+}
+
+.right-addon .fa {
+  right: 0px;
+}
+
+/* add padding  */
+.left-addon input {
+  padding-left: 30px;
+}
+
+.right-addon input {
+  padding-right: 30px;
+}
+
+.example-card {
+  max-width: 400px;
+}
+
+.test :hover {
+  background-color: aliceblue
+}
