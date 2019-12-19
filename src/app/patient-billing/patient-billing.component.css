@@ -5,6 +5,19 @@
     height: 100%;
 }
 
+.card {
+    background-color: #00000024;
+}
+
+.ch-1 {
+    background-color: #00000024;
+    color: white;
+}
+
+.bgWhite {
+    color: white;
+}
+
 .col-sm-10 {
     border-left: 12px solid RGB(84, 120, 168);
     padding-top: 1%;
@@ -56,12 +69,12 @@ td {
     text-align: center;
 }
 
-.verLine{
-    border-bottom:solid 10px rgb(87, 85, 85);
+.verLine {
+    border-bottom: solid 10px rgb(87, 85, 85);
     width: 100%;
 }
 
-.alert-orange{
+.alert-orange {
     background-color: rgb(240, 183, 109);
     color: rgb(83, 60, 29);
 }

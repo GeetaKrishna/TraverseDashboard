@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-patient-view',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-view.component.css']
 })
 export class PatientViewComponent implements OnInit {
+  findType = new FormControl('');
 
   constructor() { }
 
   ngOnInit() {
+  }
+  findSearch() {
+    console.log('findSearch', this.findType.value);
   }
   patientsDetails = [
     {

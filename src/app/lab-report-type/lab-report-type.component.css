@@ -131,3 +131,11 @@ td {
     width: 212px;
     text-align: center;
 }
+.mat-card {
+    background-color: #00000024;
+    color: white;
+}
+
+.bgWhite {
+    color: white;
+}

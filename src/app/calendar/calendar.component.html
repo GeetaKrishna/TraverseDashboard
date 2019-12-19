@@ -18,7 +18,7 @@
         <div>
           <div class="row">
             <div class="col-md-4">
-              <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+              <p class="bgWhite" style="font-size: 20px;">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</p>
             </div>
             <div class="col-md-4">
               <div class="btn-group" style="text-align:center">
@@ -26,7 +26,7 @@
                   (viewDateChange)="closeOpenMonthViewDay()">
                   Previous
                 </div>
-                <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                <div class="btn btn-light" mwlCalendarToday [(viewDate)]="viewDate">
                   Today
                 </div>
                 <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"

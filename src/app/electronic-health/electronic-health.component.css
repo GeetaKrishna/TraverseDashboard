@@ -157,7 +157,7 @@ td {
     font-weight: bolder;
 } */
 
-.activeClass {
+/* .activeClass {
     color: #bdd2f3
 }
 
@@ -165,7 +165,22 @@ td {
     color: #bdd2f3;
     font-weight: bolder;
     text-decoration:none;
+} */
+.activeClass {
+    color: #6b9ceb !important;
 }
-.bgWhite{
+
+.activeClassText {
+    color: #6b9ceb;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+
+.fa {
+    color: rgba(201, 195, 195, 0.726);
+}
+
+.bgWhite {
     color: white;
 }

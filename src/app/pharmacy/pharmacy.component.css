@@ -1,12 +1,27 @@
-.ch-1 {
+/* .ch-1 {
     background-color: #d7dce2;
     color: black;
-}
+} */
 
 .cardHead {
     font-size: 24px;
     margin-bottom: 0 !important;
 }
+
+
+.card {
+    background-color: #00000024;
+}
+
+.ch-1 {
+    background-color: #00000024;
+    color: white;
+}
+
+.bgWhite {
+    color: white;
+}
+
 
 .appName {
     font-size: 14px;
@@ -39,6 +54,6 @@ mat-input-element {
     color: black !important;
 }
 
-.icon{
+.icon {
     font-size: 20px;
 }

@@ -61,10 +61,15 @@ export class MedicationsComponent implements OnInit {
   name: string;
   ngOnInit() {
     let colors = ['ch-1',
-      'ch-2',
-      'ch-3',
-      'ch-4',
-      'ch-0']
+      'ch-1',
+      'ch-1',
+      'ch-1',
+      'ch-1']
+    // let colors = ['ch-1',
+    //   'ch-2',
+    //   'ch-3',
+    //   'ch-4',
+    //   'ch-0']
     this.medicationService.getPrescriptions().subscribe(
       (pres: []) => {
         this.medicationService.getMedications().subscribe(
@@ -167,6 +172,8 @@ export class MedicationsComponent implements OnInit {
   editMedication(medicationDetail) {
     console.log(medicationDetail, "details");
     this.flag = !this.flag;
+    // this.endTime = medicationDetail.endDate 
+    // this.startTime = medicationDetail.startDate 
     // dosage: "23"
     // endDate: "2020-01-02"
     // id: 4

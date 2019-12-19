@@ -16,7 +16,7 @@
         <table style="width:100%; height:100%">
             <tr>
                 <td>
-                    <p class="bgWhite">
+                    <p class="bgWhite font-weight-bold">
                         Your {{date}} Plan Summary
                     </p>
                     <hr size="20" style="height:0.5em; background-color: #4d4d4d6b;">
@@ -93,7 +93,7 @@
             </div>
             <tr>
                 <td>
-                    <p class="bgWhite">
+                    <p class="bgWhite font-weight-bold">
                         Your Claims Data
                     </p>
                     <hr size="20" style="height:0.5em; background-color: #4d4d4d6b">
@@ -153,18 +153,20 @@
                                 <div class="col-md-4" *ngFor="let claim of claims; index as i">
                                     <div class="card mt-2">
                                         <div class="card-header font-weight-bold text-center text-white"
-                                            style="background-color: #1a6dda; height: 3em;">
+                                            style="background-color: #1a6dda; height: 3em; ">
                                             {{claim.date | date: 'MMMM dd, yyyy'}}
                                         </div>
                                         <div class="card-body">
                                             <div class="text-center">
-                                                {{claim.hospital}}
-                                                <table style="align-self: center; width: 100%">
+                                                <p class="text-white">
+                                                    {{claim.hospital}}
+                                                </p>
+                                                <table style="align-self: center; width: 100%" class="text-white">
                                                     <tr style="width: 100%">
                                                         <td>
                                                             Total
                                                         </td>
-                                                        <td style="color: #1a6dda; ">
+                                                        <td style="color: #ffffff; ">
                                                             ${{claim.totalAmount}}
                                                         </td>
                                                     </tr>
@@ -181,13 +183,14 @@
                                             <table style="float: right">
                                                 <tr>
                                                     <td class="p-2">
-                                                        <i class="fa fa-share-alt-square "></i>
+                                                        <i class="fa fa-share-alt-square fa-x"
+                                                            style="color: rgb(15, 73, 233); font-size: 20px;"></i>
                                                     </td>
                                                     <td class="p-2">
-                                                        <i class="fa fa-file " aria-hidden="true"></i>
+                                                        <i class="fa fa-file fa-x" aria-hidden="true" style="color: rgb(181, 184, 192); font-size: 20px;"></i>
                                                     </td>
                                                     <td class="p-2">
-                                                        <i class="fa fa-comments "></i>
+                                                        <i class="fa fa-comments fa-2x" style="color: rgb(30, 218, 70); font-size: 20px;"></i>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -204,7 +207,8 @@
                                                 [ngClass]="{'highlight': selectedIndex === i}" class="fa fa-user fa-2x"
                                                 aria-hidden="true" style="cursor: pointer;"></i></a></div>
                                     <!-- <div class="inner2" style="padding-right: 1px"></div> -->
-                                    <div class="inner2" *ngIf="patient.pid == patientId; else others">You</div>
+                                    <div class="inner2 text-white font-weight-bold"
+                                        *ngIf="patient.pid == patientId; else others">You</div>
                                     <ng-template #others>
                                         <div class="inner2">
                                             {{patient.patientName.split(" ")[0]}}

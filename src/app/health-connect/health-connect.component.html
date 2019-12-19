@@ -20,10 +20,10 @@
                         <i class="fa fa-search"></i>
                         <input type="text" [(ngModel)]="searchText" class="form-control" />
                     </div>
-                    <mat-tab-group>
-                        <mat-tab label="Contacts">
+                    <mat-tab-group >
+                        <mat-tab label="Contacts" >
                             <mat-list class="test">
-                                <mat-list-item *ngFor="let message of contactsList | filter: searchText; let i = index">
+                                <mat-list-item *ngFor="let message of contactsList | filter: searchText; let i = index" style="color: white;">
                                     <ngx-avatar src="{{message.image}}" name="{{message.name}}" (click)="test('das')"
                                         size="30"></ngx-avatar>
                                     <h3 matLine (click)="test('fasf')"> {{message.from}} </h3>

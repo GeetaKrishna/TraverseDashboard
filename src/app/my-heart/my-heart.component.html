@@ -14,12 +14,14 @@
                     </div>
                 </div>
             </div>
+            <!--    [ngClass]="app.appName === 'Distance' ? 'ch-0' : app.appName === 'Steps / Activity' ? 'ch-1': app.appName === 'HeartRate' ? 'ch-2' : app.appName === 'Blood Pressure' ? 'ch-3': app.appName === 'Appointment' ? 'ch-4' : app.appName === 'EKG' ? 'cardNew': app.appName === 'Medication' ? 'ch-0': app.appName === 'Lab' ? 'ch-5': ''">
+ -->
             <div class="card-body">
                 <div class="row justify-content-center">
                     <div class="col-md-3 col-sm-6 p-4" *ngFor="let app of apps">
                         <div class="card h-100 bgbb" style="color: black !important;"
-                            [ngClass]="app.appName === 'Distance' ? 'ch-0' : app.appName === 'Steps / Activity' ? 'ch-1': app.appName === 'HeartRate' ? 'ch-2' : app.appName === 'Blood Pressure' ? 'ch-3': app.appName === 'Appointment' ? 'ch-4' : app.appName === 'EKG' ? 'ch-1': app.appName === 'Medication' ? 'ch-0': app.appName === 'Lab' ? 'ch-2': ''">
-                            <b class="p-2">
+                            [ngClass]="app.appName === 'Distance' ? 'ch-1' : app.appName === 'Steps / Activity' ? 'ch-1': app.appName === 'HeartRate' ? 'ch-1' : app.appName === 'Blood Pressure' ? 'ch-1': app.appName === 'Appointment' ? 'ch-1' : app.appName === 'EKG' ? 'ch-1': app.appName === 'Medication' ? 'ch-1': app.appName === 'Lab' ? 'ch-1': ''">
+                            <b class="p-2 bgWhite">
                                 {{app.appName}}
                             </b>
                             <div class="card-body">

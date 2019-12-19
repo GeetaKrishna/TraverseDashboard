@@ -1,0 +1,27 @@
+::ng-deep .mat-dialog-container {
+    background-color: #ffffff;
+}
+
+::ng-deep .mat-form-field {
+    color: #000000;
+}
+
+/* ::ng-deep .mat-dialog-container {
+    background-color: #ffffff;
+} */
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: rgb(0, 0, 0) !important;
+}
+
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: rgb(0, 0, 0) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: rgb(0, 0, 0) !important;
+    ;
+}

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MedicationService } from '../_services/medication.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-add-med',
@@ -9,12 +10,14 @@ import { MedicationService } from '../_services/medication.service';
 })
 
 export class AddMedComponent implements OnInit {
-  fileName: any;
 
   constructor(public dialogRef: MatDialogRef<AddMedComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private medicationService: MedicationService) { }
-  name: any;
-  description: any;
+
+  name = new FormControl('');
+  description = new FormControl('');
+
+  fileName: any;
   ngOnInit() {
   }
   onNoClick(): void {
@@ -31,11 +34,11 @@ export class AddMedComponent implements OnInit {
     console.log(this.name, this.description);
 
     const formData = new FormData();
-    formData.append('description', this.description);
+    formData.append('description', this.description.value);
     formData.append('image', this.data.image);
-    formData.append('name', this.name);
+    formData.append('name', this.name.value);
 
-    if (this.description && this.name && this.data.image) {
+    if (this.description.value && this.name.value && this.data.image) {
       this.medicationService.addMedication(formData).subscribe((data) => {
         console.log(data);
         this.dialogRef.close();

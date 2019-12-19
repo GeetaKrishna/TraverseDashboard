@@ -1,6 +1,10 @@
 .ch-1 {
   background-color: #0000005e;
-  /* color: white; */
+  color: white;
+}
+.bgWhite {
+  /* background-color: #0000005e; */
+  color: white;
 }
 
 .card {
@@ -49,11 +53,25 @@ pre {
 }
 
 ::ng-deep .cal-month-view {
-  background-color: #ffffff05 !important;
+  background-color: #ececec7a !important;
+  /* color: black;
+  font-weight: 900; */
+}
+::ng-deep .cal-day-number{
+  /* background-color: #ececec7a !important; */
+  color: black !important;
+  font-weight: 900 !important;
 }
 
 ::ng-deep .cal-month-view .cal-cell-row:hover {
-  background-color: #fafafa00 !important;
+  background-color: #ececec00 !important;
+}
+
+::ng-deep  .cal-cell:hover {
+  background-color: #8fafdab0 !important;
+}
+::ng-deep  .cal-month-view .cal-header {
+  background-color: #4a433ab5 !important;
 }
 
 /* ::ng-deep .cal-month-view .cal-cell-row .cal-cell:hover,

@@ -95,19 +95,26 @@
                                         <mat-form-field style="color: black;">
                                             <input matInput placeholder="Triggers" [formControl]="triggers" required>
                                         </mat-form-field>
-                                        <button (click)="fileInput.click()">
+                                        <!-- <button (click)="fileInput.click()">
                                             <span>Upload an image</span>
                                             <input #fileInput type="file" (change)="imageInput($event)"
                                                 style="display:none;" />
+                                        </button> -->
+                                        <button class="btn btn-secondary" (click)="fileInput.click()">
+                                            <span>Choose file</span>
+                                            <input #fileInput type="file" (change)="imageInput($event)" style="display:none;" />
                                         </button>
+                                        <span *ngIf="fileName">
+                                            {{fileName}}
+                                        </span>
                                         <div style="text-align: center; width: 190px;">
-                                            <button mat-icon-button color="primary" (click)="successAdding()"
+                                            <button mat-icon-button style="color: chartreuse;" (click)="successAdding()"
                                                 [disabled]="triggers.errors || severity.errors || Diagnosed.errors || conditionName.errors"
                                                 aria-label="Example icon-button with a heart icon">
                                                 <mat-icon>check_circle_outline
                                                 </mat-icon>
                                             </button>
-                                            <button mat-icon-button color="primary" (click)="cancelAdding()"
+                                            <button mat-icon-button style="color: red;" (click)="cancelAdding()"
                                                 aria-label="Example icon-button with a heart icon">
                                                 <mat-icon>highlight_off</mat-icon>
                                             </button>

@@ -30,6 +30,16 @@ td {
   background-color: #00000024;
   color: white;
 }
-.bgwhite{
+
+.bgwhite {
+  color: white;
+}
+
+.tabHead {
+  color: white;
+  font-weight: bold;
+}
+
+.tabData {
   color: white;
 }

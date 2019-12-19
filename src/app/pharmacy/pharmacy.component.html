@@ -15,32 +15,32 @@
     <div class="card-body ">
         <div style="display: flex;" class="row ml-2 mr-2">
             <div *ngFor="let app of apps" class="col-md-4" style="margin-bottom: 20px;">
-                <mat-card class="example-card"
+                <mat-card class="example-card ch-1"
                     style=" border-radius: 5px;box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;">
                     <mat-card-header>
-                        <mat-card-title>{{app.APP_NAME}}</mat-card-title>
+                        <mat-card-title class="font-weight-bold">{{app.APP_NAME}}</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                         <p>
-                            <span class="mr-2">
+                            <span class="mr-3">
                                 <i class="fa fa-map-marker icon "></i>
                             </span>
                             <span>{{app.APP_LOCATION}}</span>
                         </p>
                         <p>
-                            <span class="mr-2">
+                            <span class="mr-4">
                                 <i class="fa fa-clock-o icon"></i>
                             </span>
                             <span> {{app.APP_TIMINGS}}</span>
                         </p>
                         <p>
-                            <span class="mr-2">
+                            <span class="mr-4">
                                 <i class="fa fa-medkit icon "></i>
                             </span>
                             <span>{{app.APP_PRES}} Prescriptions</span>
                         </p>
                         <p>
-                            <span class="mr-2">
+                            <span class="mr-4">
                                 <i class="fa fa-hourglass-half icon"></i>
                             </span>
                             <span>{{app.APP_DURATION}}</span>
@@ -48,11 +48,11 @@
                     </mat-card-content>
                     <mat-card-actions style="margin-left:190px; ">
                         <button mat-icon-button aria-label="Example icon-button with a heart icon"
-                            (click)="shareCard(app.APPID)">
+                            (click)="shareCard(app.APPID)" class="bgWhite">
                             <mat-icon>refresh</mat-icon>
                         </button>
                         <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon"
-                            (click)="shareMessage(app.APPID)">
+                            (click)="shareMessage(app.APPID)" class="bgWhite">
                             <mat-icon>message</mat-icon>
                         </button>
                     </mat-card-actions>

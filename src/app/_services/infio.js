@@ -1,4 +1,3 @@
-import { basename } from "path"
 
 // mediInstructions in prescription table == Schedule
 // Add dosage to the screen, remove image and description.
@@ -12,7 +11,6 @@ import { basename } from "path"
 // blood pressure, glucose level, Cholesterol, time information not updating after recent data is entered, working fine when we get data from API.
 // need API for up and down arrows
 
-// make text in 4 corners to white or visible
 
 
 // Change, ahead of choose image from object to filename.
@@ -41,21 +39,29 @@ import { basename } from "path"
 
 // header Opace #5c9a9238
 
-card background transparency #00000024
+// card background transparency #00000024
 
-login rgba(95, 84, 84, 0.38)
+// login rgba(95, 84, 84, 0.38)
 
-transparency done for 
-- app store
-- fitness tracker
-- four corners of health
-- health knowledge base
-- calendar -- geeta check
-- myHeart
-- my medications
-- Health Documents
-- Insurance central
-- health connect
-- electronic health records
-- 
+// transparency done for 
+// - app store
+// - fitness tracker
+// - four corners of health
+// - health knowledge base
+// - calendar -- geeta check
+// - myHeart
+// - my medications
+// - Health Documents
+// - Insurance central
+// - health connect
+// - electronic health records
+// - 
 
+dec18-----
+fitness tracker -card head bold ---------------------
+values normal isWhiteSpace  ---------------------
+medications , when editing pres, dates should be auto populated in the fields
+field names white, 
+add medicine == text box for desc at end and choosefile before desc  ---------------------
+buttons at center(tick and cross)  ---------------------
+drag drop dotted line thick check docs --------------------

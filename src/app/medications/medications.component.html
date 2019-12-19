@@ -103,7 +103,9 @@
                                                         (input)="app.instruction=$event.target.textContent">
                                                         {{app.instruction}}
                                                     </p> &nbsp;
-                                                    <p> times a day</p>
+                                                    <p> <span *ngIf="app.instruction == 'four'|| app.instruction=='five'">
+                                                            times
+                                                        </span> a day</p>
                                                 </td>
 
                                             </tr>
@@ -183,7 +185,7 @@
                                     <div class=" align-items-center" *ngIf="addMedicationToggle">
                                         <div (click)="toggleMedication()">
                                             <i class="fa fa-plus-circle" aria-hidden="true"
-                                                style=" font-size: 50px; "></i>
+                                                style=" font-size: 50px; color: white; "></i>
                                         </div>
                                     </div>
                                     <div *ngIf="!addMedicationToggle" style="margin-left: 40px; margin-bottom: 50px;">
@@ -275,13 +277,13 @@
                                 </mat-form-field>
 
                                 <div style="text-align: center; width: 190px;">
-                                    <button mat-icon-button color="primary" (click)="successAdding()"
+                                    <button mat-icon-button style="color: chartreuse;" (click)="successAdding()"
                                         [disabled]="medMeal.errors || medName.errors || medDesc.errors || medIntake.value ==''"
                                         aria-label="Example icon-button with a heart icon">
                                         <mat-icon>check_circle_outline
                                         </mat-icon>
                                     </button>
-                                    <button mat-icon-button color="primary" (click)="cancelAdding()"
+                                    <button mat-icon-button style="color: red;" (click)="cancelAdding()"
                                         aria-label="Example icon-button with a heart icon">
                                         <mat-icon>highlight_off</mat-icon>
                                     </button>

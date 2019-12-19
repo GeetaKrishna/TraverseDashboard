@@ -1,14 +1,14 @@
-<h5 mat-dialog-title>Medicine</h5>
+<!-- <h5 mat-dialog-title>Medicine</h5> -->
+<p mat-dialog-title style="font-size: 18px; font-weight: bold;">Medicine</p>
 <div mat-dialog-content>
 
-    <mat-form-field style="color: black;">
-        <input matInput placeholder="Medicine Name" [(ngModel)]="name" required>
-    </mat-form-field> 
-    &nbsp;
-    <mat-form-field style="color: black;">
-        <input matInput placeholder="Description" [(ngModel)]="description" type="text">
+    <mat-form-field>
+        <input matInput placeholder="Medicine Name" [formControl]="name" required>
     </mat-form-field>
     &nbsp;
+    <!-- <mat-form-field>
+        <input matInput placeholder="Description" [formControl]="description" type="text" required>
+    </mat-form-field> -->
 
     <button class="btn btn-secondary" (click)="fileInput.click()">
         <span>Choose file</span>
@@ -17,11 +17,19 @@
     <span *ngIf="fileName">
         {{fileName}}
     </span>
+    <br>
+    <mat-form-field style="width: 100%;">
+        <textarea matInput placeholder="Description" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+            [formControl]="description" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" required></textarea>
+    </mat-form-field>
+    &nbsp;
 
 </div>
 <div mat-dialog-actions>
-    <div style="text-align: center; width: 190px;">
+    <div style="text-align: center; width: 100%;">
+        <!--  [disabled]="description.errors || name.errors || fileName == ''" -->
         <button mat-icon-button color="primary" (click)="successAdding()"
+            [disabled]="name.errors || description.errors || fileName.value ==''"
             aria-label="Example icon-button with a heart icon">
             <mat-icon [ngStyle]="{'color':'green'}">check_circle_outline
             </mat-icon>

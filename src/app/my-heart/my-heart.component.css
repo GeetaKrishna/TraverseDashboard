@@ -13,6 +13,10 @@
     background-color: rgb(235, 162, 52);
     color: white;
 }
+.bgWhite{
+    /* background-color: rgb(235, 162, 52); */
+    color: white;
+}
 
 .card {
     background-color: #00000024;
@@ -29,19 +33,33 @@
 } */
 
 .ch-3 {
-    background-color: rgb(96, 107, 117);
+    background-color: #4981c73b;
     color: white;
 
 }
 
+.cardNew{
+    background-color: #847b7b6e
+}
+
 .ch-2 {
-    background-color: rgb(65, 118, 168);
+    background-color: #8fa1b16b;
     color: white;
 
 }
 
 .ch-4 {
-    background-color: rgb(180, 80, 80);
+    background-color: #b34b4b42;
+    color: white;
+
+}
+.ch-5 {
+    background-color: #a3bbd063;
+    color: white;
+
+}
+.ch-4 {
+    background-color: #b34b4b42;
     color: white;
 
 }

@@ -12,13 +12,20 @@
   background-color: #00000024;
 }
 
+::ng-deep .mat-tab-label {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+
+}
+
 .ch-1 {
   background-color: #00000024;
   color: white;
 }
 
 .test :hover {
-  background-color: aliceblue
+  background-color: rgba(115, 117, 119, 0.507)
 }
 
 /* enable absolute positioning */
