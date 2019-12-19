@@ -132,10 +132,7 @@ export class LoginComponent implements OnInit {
     }
 
     forgotPassword() {
-        this.matDialog.open(ForgotPasswordComponent, {
-            width: '400px',
-            height: '260px'
-        });
+        this.matDialog.open(ForgotPasswordComponent);
     }
 
     signup() {

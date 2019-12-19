@@ -35,11 +35,16 @@ import { InsuranceProvComponent } from './insurance-prov/insurance-prov.componen
 import { RecordsProviderComponent } from './records-provider/records-provider.component';
 import { RecordsProvTypeComponent } from './records-prov-type/records-prov-type.component';
 import { MedsComponent } from './meds/meds.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ForgotPasswordPage2Component } from './forgot-password-page2/forgot-password-page2.component';
+import { ForgotPasswordPage3Component } from './forgot-password-page3/forgot-password-page3.component';
 
 const routes: Routes = [
 
   { path: '', component: LoginComponent },
-  { path: 'forgotPassword', component: LoginComponent },
+  { path: 'forgotPassword', component: ForgotPasswordComponent },
+  { path: 'pinPage', component: ForgotPasswordPage2Component },
+  { path: 'passwordChangePage', component: ForgotPasswordPage3Component },
   { path: 'signUp', component: RegisterComponent },
   {
     path: 'admin', component: AdminComponent,
