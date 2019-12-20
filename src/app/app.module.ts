@@ -76,6 +76,7 @@ import { ForgotPasswordPage3Component } from './forgot-password-page3/forgot-pas
 
 //remove is not works
 import {DpDatePickerModule} from 'ng2-date-picker';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -124,6 +125,7 @@ import {DpDatePickerModule} from 'ng2-date-picker';
     ForgotPasswordComponent,
     ForgotPasswordPage2Component,
     ForgotPasswordPage3Component,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -183,7 +185,7 @@ import {DpDatePickerModule} from 'ng2-date-picker';
     DatePipe,
     MatDatepickerModule
   ],
-  entryComponents: [AppInfoComponent, HomeComponent, AddMedComponent, AddPatientComponent, ForgotPasswordComponent],
+  entryComponents: [AppInfoComponent, HomeComponent, AddMedComponent, AddPatientComponent, ForgotPasswordComponent, ProfileComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
