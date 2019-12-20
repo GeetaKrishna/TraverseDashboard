@@ -1,174 +1,170 @@
-<div class="animated fadeIn mt-5 mb-5">
-    <!--Recommended apps Begin-->
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header ch-1">
-                <div class="row">
-                    <div class="col justify-content-start">
-                        <p class="cardHead">
-                            My Heart
-                        </p>
-                    </div>
-                    <div class="col justify-content-end">
-                        <img src="../../assets/newHeart.png" style="height: 35px; width: 35px; float: right;" />
-                    </div>
+<div class="card mt-3 mb-3" style="height: 600px;">
+    <div style="overflow-y: auto;">
+        <div class="card-header ch-1">
+            <div class="row">
+                <div class="col justify-content-start">
+                    <p class="cardHead">
+                        My Heart
+                    </p>
+                </div>
+                <div class="col justify-content-end">
+                    <img src="../../assets/newHeart.png" style="height: 35px; width: 35px; float: right;" />
                 </div>
             </div>
-            <!--    [ngClass]="app.appName === 'Distance' ? 'ch-0' : app.appName === 'Steps / Activity' ? 'ch-1': app.appName === 'HeartRate' ? 'ch-2' : app.appName === 'Blood Pressure' ? 'ch-3': app.appName === 'Appointment' ? 'ch-4' : app.appName === 'EKG' ? 'cardNew': app.appName === 'Medication' ? 'ch-0': app.appName === 'Lab' ? 'ch-5': ''">
- -->
-            <div class="card-body">
-                <div class="row justify-content-center">
-                    <div class="col-md-3 col-sm-6 p-4" *ngFor="let app of apps">
-                        <div class="card h-100 bgbb" style="color: black !important;"
-                            [ngClass]="app.appName === 'Distance' ? 'ch-1' : app.appName === 'Steps / Activity' ? 'ch-1': app.appName === 'HeartRate' ? 'ch-1' : app.appName === 'Blood Pressure' ? 'ch-1': app.appName === 'Appointment' ? 'ch-1' : app.appName === 'EKG' ? 'ch-1': app.appName === 'Medication' ? 'ch-1': app.appName === 'Lab' ? 'ch-1': ''">
-                            <b class="p-2 bgWhite">
-                                {{app.appName}}
-                            </b>
-                            <div class="card-body">
+        </div>
+        <!--    [ngClass]="app.appName === 'Distance' ? 'ch-0' : app.appName === 'Steps / Activity' ? 'ch-1': app.appName === 'HeartRate' ? 'ch-2' : app.appName === 'Blood Pressure' ? 'ch-3': app.appName === 'Appointment' ? 'ch-4' : app.appName === 'EKG' ? 'cardNew': app.appName === 'Medication' ? 'ch-0': app.appName === 'Lab' ? 'ch-5': ''">
+         -->
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-3 col-sm-6 p-4" *ngFor="let app of apps">
+                    <div class="card h-100 bgbb" style="color: black !important;"
+                        [ngClass]="app.appName === 'Distance' ? 'ch-1' : app.appName === 'Steps / Activity' ? 'ch-1': app.appName === 'HeartRate' ? 'ch-1' : app.appName === 'Blood Pressure' ? 'ch-1': app.appName === 'Appointment' ? 'ch-1' : app.appName === 'EKG' ? 'ch-1': app.appName === 'Medication' ? 'ch-1': app.appName === 'Lab' ? 'ch-1': ''">
+                        <b class="p-2 bgWhite">
+                            {{app.appName}}
+                        </b>
+                        <div class="card-body">
 
-                                <div [ngSwitch]="app.appName">
-                                    <div *ngSwitchCase="'HeartRate'">
-                                        <img mat-card-md-image src="{{app.url}}" height="50px"
-                                            style="border-radius: 50%; display: block; margin-left: auto; margin-right: auto;"
-                                            alt="Image Not Available">
-                                        <h2 style="text-align: center; font-weight: bold">
-                                            {{app.details}} BPM</h2>
-                                        <div class="row" style="font-size: x-small; margin-left: 122px;">
-                                            {{app.time}}
-                                        </div>
+                            <div [ngSwitch]="app.appName">
+                                <div *ngSwitchCase="'HeartRate'">
+                                    <img mat-card-md-image src="{{app.url}}" height="50px"
+                                        style="border-radius: 50%; display: block; margin-left: auto; margin-right: auto;"
+                                        alt="Image Not Available">
+                                    <h2 style="text-align: center; font-weight: bold">
+                                        {{app.details}} BPM</h2>
+                                    <div class="row" style="font-size: x-small; margin-left: 122px;">
+                                        {{app.time}}
                                     </div>
-                                    <div *ngSwitchCase="'Blood Pressure'">
-                                        <div class="row justify-content-center"
-                                            style=" font-size: xx-large;  font-weight: bold">
-                                            {{app.details}}
-                                        </div>
-                                        <div class="row justify-content-center"
-                                            style="color: goldenrod; font-size: xx-large; margin-top: 30%">
-                                            <i class="fa fa-exclamation-triangle"></i>
-                                        </div>
-                                    </div>
-                                    <div *ngSwitchCase="'Appointment'">
-                                        <div class="row justify-content-center">
-                                            {{app.details}}
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div style="float: right; bottom: 0px; position: relative">
-                                                    <span>
-                                                        <i class="fa fa-map-marker p-1" aria-hidden="true"></i>
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-clock-o p-1" aria-hidden="true"></i>
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-times-circle-o p-1" aria-hidden="true"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div *ngSwitchCase="'EKG'">
-                                        <div class="row justify-content-center">
-                                            <img src={{app.url}} width=100% height=auto
-                                                style="mix-blend-mode: multiply;" />
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div style="float: right; bottom: 0px; position: relative">
-                                                    <span>
-                                                        <a download="EKG.jpg" href={{app.url}} title="ImageName">
-                                                            <i class="fa fa-cloud-download p-1" aria-hidden="true"></i>
-                                                        </a>
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-share-alt-square p-1" aria-hidden="true"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div *ngSwitchCase="'Medication'">
-                                        <div class="row justify-content-center">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <img mat-card-md-image src="{{app.url}}" height="80px" width="100px"
-                                                        alt="Image Not Available">
-                                                </div>
-                                                <div class="col" style="width: 100%">
-                                                    <span>
-                                                        <i class="fa fa-clock-o" style="font-size: 50px; color: red; "
-                                                            aria-hidden="true"></i>
-                                                    </span>
-                                                    <span>
-                                                        <p style="font-size: 12px; height: 30px;">
-                                                            {{app.time}}
-                                                        </p>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 ">
-                                                {{app.text}}
-
-                                            </div>
-                                            <div class="col-md-12 " style="font-size: x-small">
-                                                {{app.content}}
-                                            </div>
-                                            <div class="col-md-12 " style="font-size: x-small; font-weight: bolder">
-                                                {{app.nature}}
-                                            </div>
-                                            <div class="col">
-                                                <div style="float: right;">
-                                                    <span>
-                                                        <i class="fa fa-refresh mr-2" aria-hidden="true"></i>
-                                                    </span>
-                                                    <span>
-                                                        <i class="fa fa-calendar-plus-o mr-2" aria-hidden="true"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div *ngSwitchCase="'Lab'">
-                                        <div class="row">
-                                            <div class="col mt-4">
-                                                <div style=" font-size: xx-large">
-                                                    <b>{{app.details}}</b>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 mt-4">
-                                                <div style="display: inline-flex">{{app.text}}</div>
-                                                <div style="font-size: xx-small;">{{app.time}}</div>
-                                            </div>
-
-                                            <div class="col mt-4 ml-2">
-                                                <img src={{app.url}} width="70%" style="mix-blend-mode: multiply;" />
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div *ngSwitchCase="'Distance'">
-                                        <div class="row justify-content-center">
-                                            <!-- <img src={{app.url}} height="auto" width="50%" style="mix-blend-mode: multiply;"/>  -->
-                                            <img src={{app.url}} style="mix-blend-mode: multiply; height: 134px;
-                                            width: 134px;" />
-                                            <div class="col">
-                                                <div class=""><b>{{app.details}}</b></div>
-                                                <div class="" style="font-size: xx-small;">{{app.time}}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div *ngSwitchCase="'Steps / Activity'">
-                                        <div class="row justify-content-center">
-                                            <img src={{app.url}} style="mix-blend-mode: multiply; height: 130px;
-                                            width: 82px;" />
-                                            <div class="row">
-                                                <div class="col-md-12" style="color: brown"><b>{{app.details}}</b></div>
-                                                <div class="col-md-12" style="font-size: xx-small;">{{app.time}}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div *ngSwitchDefault>One</div>
                                 </div>
+                                <div *ngSwitchCase="'Blood Pressure'">
+                                    <div class="row justify-content-center"
+                                        style=" font-size: xx-large;  font-weight: bold">
+                                        {{app.details}}
+                                    </div>
+                                    <div class="row justify-content-center"
+                                        style="color: goldenrod; font-size: xx-large; margin-top: 30%">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="'Appointment'">
+                                    <div class="row justify-content-center">
+                                        {{app.details}}
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div style="float: right; bottom: 0px; position: relative">
+                                                <span>
+                                                    <i class="fa fa-map-marker p-1" aria-hidden="true"></i>
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-clock-o p-1" aria-hidden="true"></i>
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-times-circle-o p-1" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="'EKG'">
+                                    <div class="row justify-content-center">
+                                        <img src={{app.url}} width=100% height=auto style="mix-blend-mode: multiply;" />
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div style="float: right; bottom: 0px; position: relative">
+                                                <span>
+                                                    <a download="EKG.jpg" href={{app.url}} title="ImageName">
+                                                        <i class="fa fa-cloud-download p-1" aria-hidden="true"></i>
+                                                    </a>
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-share-alt-square p-1" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="'Medication'">
+                                    <div class="row justify-content-center">
+                                        <div class="row">
+                                            <div class="col">
+                                                <img mat-card-md-image src="{{app.url}}" height="80px" width="100px"
+                                                    alt="Image Not Available">
+                                            </div>
+                                            <div class="col" style="width: 100%">
+                                                <span>
+                                                    <i class="fa fa-clock-o" style="font-size: 50px; color: red; "
+                                                        aria-hidden="true"></i>
+                                                </span>
+                                                <span>
+                                                    <p style="font-size: 12px; height: 30px;">
+                                                        {{app.time}}
+                                                    </p>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ">
+                                            {{app.text}}
+
+                                        </div>
+                                        <div class="col-md-12 " style="font-size: x-small">
+                                            {{app.content}}
+                                        </div>
+                                        <div class="col-md-12 " style="font-size: x-small; font-weight: bolder">
+                                            {{app.nature}}
+                                        </div>
+                                        <div class="col">
+                                            <div style="float: right;">
+                                                <span>
+                                                    <i class="fa fa-refresh mr-2" aria-hidden="true"></i>
+                                                </span>
+                                                <span>
+                                                    <i class="fa fa-calendar-plus-o mr-2" aria-hidden="true"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="'Lab'">
+                                    <div class="row">
+                                        <div class="col mt-4">
+                                            <div style=" font-size: xx-large">
+                                                <b>{{app.details}}</b>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mt-4">
+                                            <div style="display: inline-flex">{{app.text}}</div>
+                                            <div style="font-size: xx-small;">{{app.time}}</div>
+                                        </div>
+
+                                        <div class="col mt-4 ml-2">
+                                            <img src={{app.url}} width="70%" style="mix-blend-mode: multiply;" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="'Distance'">
+                                    <div class="row justify-content-center">
+                                        <!-- <img src={{app.url}} height="auto" width="50%" style="mix-blend-mode: multiply;"/>  -->
+                                        <img src={{app.url}} style="mix-blend-mode: multiply; height: 134px;
+                                                    width: 134px;" />
+                                        <div class="col">
+                                            <div class=""><b>{{app.details}}</b></div>
+                                            <div class="" style="font-size: xx-small;">{{app.time}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="'Steps / Activity'">
+                                    <div class="row justify-content-center">
+                                        <img src={{app.url}} style="mix-blend-mode: multiply; height: 130px;
+                                                    width: 82px;" />
+                                        <div class="row">
+                                            <div class="col-md-12" style="color: brown"><b>{{app.details}}</b></div>
+                                            <div class="col-md-12" style="font-size: xx-small;">{{app.time}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngSwitchDefault>One</div>
                             </div>
                         </div>
                     </div>
@@ -177,6 +173,7 @@
         </div>
     </div>
 </div>
+
 <!-- 
 <a href="{{app.routeScreen}}">
     </a> -->

@@ -24,7 +24,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   cancel() {
     // this.matDialog.closeAll();
-    this.route.navigateByUrl('/login')
+    this.route.navigateByUrl('/')
   }
 
 }

@@ -4,7 +4,8 @@
     /* background-color: gray; */
     height: 100%;
 }
-.bgWhite{
+
+.bgWhite {
     color: white;
 }
 
@@ -85,10 +86,10 @@ td {
 .activeClassText {
     color: #6b9ceb;
     font-weight: bolder;
-    text-decoration:none;
+    text-decoration: none;
 }
 
 
-.fa{
-    color: rgba(201, 195, 195, 0.726);
+.fa {
+    color: rgba(236, 226, 226, 0.726);
 }
