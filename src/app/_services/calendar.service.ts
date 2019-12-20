@@ -28,12 +28,11 @@ export class CalendarService {
   }
 
   editAppoinments(appointment) {
-    return this.http.put(`${environment.apiUrl}/calendar/appointments/${parseInt(localStorage.getItem("patientId"))}`, appointment)
+    return this.http.put(`${environment.apiUrl}/calendar/appointments/${appointment.pid}`, appointment)
   }
 
   deleteAppoinmentById(id) {
     return this.http.delete(`${environment.apiUrl}/calendar/appointments/${id}`)
   }
-
 
 }

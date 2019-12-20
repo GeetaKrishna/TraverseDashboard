@@ -83,6 +83,10 @@ export class LoginComponent implements OnInit {
         //     "roles": "string",
         //     "username": "string"
         // }
+
+        console.log('inside login');
+
+
         this.authenticationService.login(this.emailFormControl.value, this.passwordFormControl.value)
             // .pipe(first())
             .subscribe(
@@ -91,6 +95,7 @@ export class LoginComponent implements OnInit {
                         console.log(user.headers.get('authorization'))
                     }
                     this.loginSuccess = false;
+                    console.log(user, "test");
 
                     // if (user && user['token']) {
                     //     // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -122,7 +127,7 @@ export class LoginComponent implements OnInit {
                     // }
                 },
                 error => {
-                    console.log(error);
+                    console.log(error.status);
                     this.loginSuccess = false;
 
                     // this.error = error;

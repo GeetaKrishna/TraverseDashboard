@@ -211,6 +211,7 @@ export class RegisterComponent implements OnInit {
       "password": PWD.value,
       "phoneNumber": PHONENUMBER.value,
       "role": this.selectedVal,
+      "pin": 0,
       // "userId": 0,
       "userName": USERNAME.value
     }

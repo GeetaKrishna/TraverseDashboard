@@ -1,5 +1,4 @@
 <div class="animated fadeIn mt-5 mb-5">
-  <!--Recommended apps Begin-->
   <div class="col-md-12">
     <div class="card" style="height:auto;">
       <div class="card-header ch-1">
@@ -23,14 +22,14 @@
             <div class="col-md-4">
               <div class="btn-group" style="text-align:center">
                 <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-                  (viewDateChange)="closeOpenMonthViewDay()">
+                  >
                   Previous
                 </div>
                 <div class="btn btn-light" mwlCalendarToday [(viewDate)]="viewDate">
                   Today
                 </div>
                 <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-                  (viewDateChange)="closeOpenMonthViewDay()">
+                  >
                   Next
                 </div>
               </div>
@@ -42,70 +41,18 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-md-4"> -->
-          <!-- <div class="btn-group">
-              <div class="btn btn-primary" (click)="setView(CalendarView.Month)"
-                [class.active]="view === CalendarView.Month">
-                Month
-              </div>
-              <div class="btn btn-primary" (click)="setView(CalendarView.Week)"
-                [class.active]="view === CalendarView.Week">
-                Week
-              </div>
-              <div class="btn btn-primary" (click)="setView(CalendarView.Day)"
-                [class.active]="view === CalendarView.Day">
-                Day
-              </div>
-            </div>  *ngSwitchCase="CalendarView.Month"-->
-          <!-- </div> -->
         </div>
 
         <br />
         <div class="ch-1">
           <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [refresh]="refresh"
-            [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
-            (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"
-            [cellTemplate]="customTemplate">
+            (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)" [cellTemplate]="customTemplate">
           </mwl-calendar-month-view>
-          <!-- <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
-            [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-            (eventTimesChanged)="eventTimesChanged($event)">
-          </mwl-calendar-week-view> -->
-          <!-- <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
-            [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
-            (eventTimesChanged)="eventTimesChanged($event)">
-          </mwl-calendar-day-view> -->
+         
         </div>
       </div>
-      <ng-template #modalContent let-close="close">
-        <div class="modal-header">
-          <h5 class="modal-title">Event action occurred</h5>
-          <button type="button" class="close" (click)="close()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" *ngIf="modalData?.action != 'Edit' else testCase">
-          <div>
-            Action:
-            <pre>{{ modalData?.action }}</pre>
-          </div>
-          <div>
-            Event:
-            <pre>{{ modalData?.event | json }}</pre>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" (click)="close()">
-            OK
-          </button>
-        </div>
-      </ng-template>
-      <ng-template #testCase>
-        <div>
-          Event:
-          <pre>{{ modalData?.event | json }}</pre>
-        </div>
-      </ng-template>
+
       <ng-template #tesst>
         <div class="card">
           <div class="card-header">
@@ -113,7 +60,7 @@
               <h3>{{ viewDate | date }}</h3>
             </div>
           </div>
-          <div class="card-body" style="">
+          <div class="card-body">
             <mat-tab-group>
               <mat-tab label="Events">
                 <div *ngFor="let event of existingEvents; let i=index">
@@ -132,11 +79,12 @@
                         <div *ngIf="event.id != 'Medication' else Appointment">
                           <i class="fa fa-map-marker p-2" aria-hidden="true"></i>
                           <i class="fa fa-clock-o p-2" aria-hidden="true"></i>
-                          <i class="fa fa-times-circle-o p-2" aria-hidden="true"></i>
+                          <i class="fa fa-times-circle-o p-2" (click)="handleEvent('Deleted', event, i)"
+                            aria-hidden="true"></i>
                         </div>
                         <ng-template #Appointment>
                           <i class="fa fa-refresh p-2" aria-hidden="true"></i>
-                          <i class="fa fa-trash" (click)="removeEvent(event, i)" aria-hidden="true"></i>
+                          <i class="fa fa-trash" (click)="handleEvent('Deleted', event, i)" aria-hidden="true"></i>
                         </ng-template>
 
                       </div>
@@ -147,13 +95,15 @@
                 </div>
               </mat-tab>
               <mat-tab label="Request Appointment">
-                <!-- <ng-container *ngTemplateOutlet="newAppointment;"></ng-container> -->
                 <div class="card">
                   <div class="card-header">
                     Request an Appoinment
                   </div>
+
                   <div class="card-body">
+                    <dp-time-select [(ngModel)]="selectedDate" [config]="config"></dp-time-select>
                     <div class="example-container">
+
                       <mat-form-field>
                         <input matInput [formControl]="AppointmentName" placeholder="Title">
                       </mat-form-field>
@@ -163,10 +113,22 @@
                       <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
 
                       <mat-form-field>
+                        <input matInput [matDatepicker]="pickerStartReq" placeholder="Start Date"
+                          [formControl]="startDateFormControl">
+                        <mat-datepicker-toggle matSuffix [for]="pickerStartReq"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerStartReq></mat-datepicker>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="pickerEndReq" placeholder="End Date"
+                          [formControl]="endDateFormControl">
+                        <mat-datepicker-toggle matSuffix [for]="pickerEndReq"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerEndReq></mat-datepicker>
+                      </mat-form-field>
+                      <mat-form-field>
                         <textarea matInput [formControl]="AppointmentDetails"
                           placeholder="Appointment Details"></textarea>
                       </mat-form-field>
-              
+
                       <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
                       <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
 
@@ -175,16 +137,6 @@
 
                 </div>
               </mat-tab>
-              <!-- <mat-tab label="Add Medication">
-                Add Medication Details -->
-                <!-- <div *ngFor="let k of [0,7,1,5]">
-                  <div class="card-body hoverClass" style="padding: 10px !important;">
-                    <div>
-                      <p>{{k}}</p>
-                    </div>
-                  </div>
-                </div> -->
-              <!-- </mat-tab> -->
             </mat-tab-group>
           </div>
         </div>
@@ -196,24 +148,33 @@
             Add an Appointment
           </div>
           <div class="card-body">
-              <div class="example-container">
-                <mat-form-field>
-                  <input matInput [formControl]="AppointmentName" placeholder="Title">
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput [formControl]="Location" placeholder="Location">
-                </mat-form-field>
-                <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
+            <div class="example-container">
+              <mat-form-field>
+                <input matInput [formControl]="AppointmentName" placeholder="Title">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [formControl]="Location" placeholder="Location">
+              </mat-form-field>
+              <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerStart" placeholder="Start Date"
+                  [formControl]="startDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStart></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerEnd" placeholder="End Date" [formControl]="endDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEnd></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <textarea matInput [formControl]="AppointmentDetails" placeholder="Appointment Details"></textarea>
+              </mat-form-field>
 
-                <mat-form-field>
-                  <textarea matInput [formControl]="AppointmentDetails"
-                    placeholder="Appointment Details"></textarea>
-                </mat-form-field>
-        
-                <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
-                <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
+              <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
+              <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
 
-              </div>
+            </div>
           </div>
 
         </div>
@@ -227,9 +188,24 @@
           <div class="card-body">
             <div class="example-container">
               <mat-form-field>
-                <input matInput [formControl]="editAppointmentName" placeholder="Input">
+                <input matInput [formControl]="editAppointmentName" placeholder="Title">
               </mat-form-field>
-
+              <mat-form-field>
+                <input matInput [formControl]="Location" placeholder="Location">
+              </mat-form-field>
+              <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerStartEdit" placeholder="Start Date"
+                  [formControl]="startDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="pickerStartEdit"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStartEdit></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerEndEdit" placeholder="End Date"
+                  [formControl]="endDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="pickerEndEdit"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEndEdit></mat-datepicker>
+              </mat-form-field>
               <mat-form-field>
                 <textarea matInput [formControl]="editAppointmentDetails" placeholder="Appointment Details"></textarea>
               </mat-form-field>
@@ -255,8 +231,7 @@
     <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
     <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
   </div>
-  <!-- 
--->
+ 
   <div class="cal-events" *ngIf="day.events.length > 0">
     <div class="cal-event" *ngFor="let event of day.events; trackBy:trackByEventId"
       [style.backgroundColor]="event.color?.secondary" [ngClass]="event?.cssClass"
@@ -269,32 +244,3 @@
     </div>
   </div>
 </ng-template>
-<!-- <ng-template #customCellTemplate let-day="day" let-locale="locale">
-        <div class="cal-cell-top">
-          <span class="cal-day-badge" *ngIf="day.badgeTotal > 0"
-            >{{ day.badgeTotal }}</span
-          >
-          <span class="cal-day-number"
-            >{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span
-          >
-        </div>
-        <div
-        class="cal-event"
-        *ngFor="let event of day.events; trackBy:trackByEventId"
-        [style.backgroundColor]="event.color?.secondary"
-        [ngClass]="event?.cssClass"
-        (mouseenter)="highlightDay.emit({event: event})"
-        (mouseleave)="unhighlightDay.emit({event: event})"
-        [mwlCalendarTooltip]="event.title | calendarEventTitle:'monthTooltip':event"
-        [tooltipPlacement]="tooltipPlacement"
-        [tooltipEvent]="event"
-        [tooltipTemplate]="tooltipTemplate"
-        [tooltipAppendToBody]="tooltipAppendToBody"
-        mwlDraggable
-        [class.cal-draggable]="event.draggable"
-        dragActiveClass="cal-drag-active"
-        [dropData]="{event: event, draggedFrom: day}"
-        [dragAxis]="{x: event.draggable, y: event.draggable}"
-        (mwlClick)="eventClicked.emit({ event: event })">
-      </div>
-      </ng-template> -->
