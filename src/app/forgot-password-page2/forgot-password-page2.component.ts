@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-forgot-password-page2',
@@ -9,23 +10,41 @@ import { Router } from '@angular/router';
   styleUrls: ['./forgot-password-page2.component.css']
 })
 export class ForgotPasswordPage2Component implements OnInit {
+  mailId: string;
 
-  constructor(private matDialog: MatDialog, private route: Router) { }
+  constructor(private matDialog: MatDialog, private router: Router, private route: ActivatedRoute, private authenticationService: AuthenticationService) { }
 
   pinFormControl = new FormControl('', Validators.required);
 
   ngOnInit() {
+    this.mailId = this.route.snapshot.paramMap.get('data');
+    console.log(this.mailId)
   }
 
   onSubmit(event) {
     console.log(this.pinFormControl.value, 'pin');
-    this.route.navigateByUrl('/passwordChangePage')
+
+    this.authenticationService.verifyPIN(this.pinFormControl.value, this.mailId).subscribe((data: boolean) => {
+      console.log(data);
+      
+      if (data == true) {
+        this.router.navigate(['passwordChangePage', {data: this.mailId, pin: this.pinFormControl.value}] )
+      }
+      else {
+        //show an error, Invalid PIN
+        alert("Invalid PIN")
+      }
+    }, (err) => {
+      console.log(err);
+
+    })
+
 
     console.log(event);
   }
 
   cancel() {
     // this.matDialog.closeAll();
-    this.route.navigateByUrl('/')
+    this.router.navigateByUrl('/')
   }
 }

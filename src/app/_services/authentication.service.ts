@@ -14,7 +14,7 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient, private router: Router, public jwtHelper: JwtHelperService)  {
+    constructor(private http: HttpClient, private router: Router, public jwtHelper: JwtHelperService) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -26,7 +26,7 @@ export class AuthenticationService {
     login(username: string, password: string) {
         // return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
 
-        return this.http.post<any>(`${environment.apiUrl}/authenticate`, { username: username, password: password }, { 'headers': new HttpHeaders({ 'Content-Type': 'application/json' }), observe: 'response' } )
+        return this.http.post<any>(`${environment.apiUrl}/authenticate`, { username: username, password: password }, { 'headers': new HttpHeaders({ 'Content-Type': 'application/json' }), observe: 'response' })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 console.log(user)
@@ -35,10 +35,10 @@ export class AuthenticationService {
 
                     console.log(user.headers.get('authorization').split(" ")[1])
                     console.log(this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]))
-                    localStorage.setItem('currentUser', JSON.stringify({'token': user.headers.get('authorization').split(" ")[1]}));
+                    localStorage.setItem('currentUser', JSON.stringify({ 'token': user.headers.get('authorization').split(" ")[1] }));
                     localStorage.setItem('access_token', user.headers.get('authorization').split(" ")[1]);
                     localStorage.setItem('userName', this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]).sub);
-                    this.currentUserSubject.next({'token': user.headers.get('authorization').split(" ")[1]});
+                    this.currentUserSubject.next({ 'token': user.headers.get('authorization').split(" ")[1] });
                 }
 
                 return user;
@@ -56,19 +56,31 @@ export class AuthenticationService {
 
     }
 
-    verifyUserName(username){
+    verifyUserName(username) {
         return this.http.get(`${environment.apiUrl}/users/check/u/${username}`)
     }
 
-    verifyMailId(mailId){
+    verifyMailId(mailId) {
         return this.http.get(`${environment.apiUrl}/users/check/e/${mailId}`)
     }
 
-    getUserId(username){
+    verifyPIN(PIN, mailId) {
+        return this.http.get(`${environment.apiUrl}/users/check/p/${mailId}/${PIN}`)
+    }
+
+    setPIN(mailId) {
+        return this.http.get(`${environment.apiUrl}/users/check/setPin/${mailId}`, { responseType: 'text' })
+    }
+
+    updatePassword(body) {
+        return this.http.post(`${environment.apiUrl}/users/check/pwd`, body, { responseType: 'text' })
+    }
+
+    getUserId(username) {
         return this.http.get(`${environment.apiUrl}/users/name/${username}`)
     }
 
-    getPatientByUserId(userId){
+    getPatientByUserId(userId) {
         let relation = "Self";
         return this.http.get(`${environment.apiUrl}/patients/u/${parseInt(userId)}/${relation}`)
     }

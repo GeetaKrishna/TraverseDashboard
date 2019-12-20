@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MedicationService } from '../_services/medication.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { AddMedComponent } from '../add-med/add-med.component';
 import * as moment from 'moment';
 

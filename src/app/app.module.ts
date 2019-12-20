@@ -74,6 +74,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ForgotPasswordPage2Component } from './forgot-password-page2/forgot-password-page2.component';
 import { ForgotPasswordPage3Component } from './forgot-password-page3/forgot-password-page3.component';
 
+//remove is not works
+import {DpDatePickerModule} from 'ng2-date-picker';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -148,6 +151,7 @@ import { ForgotPasswordPage3Component } from './forgot-password-page3/forgot-pas
     MatExpansionModule,
     MatCheckboxModule,
     AvatarModule,
+    DpDatePickerModule,
     // CalendarModule.forRoot({
     //   provide: DateAdapter,
     //   useFactory: adapterFactory

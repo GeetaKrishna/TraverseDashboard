@@ -8,17 +8,13 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef
+  TemplateRef,
+  ChangeDetectorRef
 } from '@angular/core';
 import {
   startOfDay,
   endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
   isSameMonth,
-  addHours
 } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -26,10 +22,11 @@ import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
-  CalendarView
+  CalendarView,
 } from 'angular-calendar';
 import { MedicationService } from '../_services/medication.service';
 import { CalendarService } from '../_services/calendar.service';
+import * as moment from 'moment';
 
 const colors: any = {
   red: {
@@ -58,13 +55,12 @@ export class CalendarComponent {
   @ViewChild('editApponitment', { static: true }) editApponitment: TemplateRef<any>;
   @ViewChild('tesst', { static: true }) tesst: TemplateRef<any>;
   existingEvents: any;
-  clickedDate: Date;
-  selectedIndex: number = 0;
 
   constructor(private modal: NgbModal, private prescriptionService: MedicationService,
-    private calendarService: CalendarService) { }
+    private calendarService: CalendarService, private cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
+
     this.prescriptionService.getPrescriptions().subscribe((prescriptionList: []) => {
 
       prescriptionList.map((e) => {
@@ -81,7 +77,7 @@ export class CalendarComponent {
             beforeStart: true,
             afterEnd: true
           },
-          draggable: true,
+          draggable: false,
           meta: e
         }];
         console.log(this.events);
@@ -92,15 +88,14 @@ export class CalendarComponent {
     });
 
     this.calendarService.getAppointments().subscribe((appointmentList: []) => {
-      console.log(appointmentList);
 
       appointmentList.map((e) => {
 
         this.events = [...this.events, {
-          id: "Medication",
-          start: new Date(e['startDate']),
-          end: new Date(e['endDate']),
-          title: e['instruction'] + ' a day',
+          id: "Appointment",
+          start: new Date(e['startTime']),
+          end: new Date(e['endTime']),
+          title: e['title'],
           color: colors.yellow,
           actions: this.actions,
           allDay: true,
@@ -112,6 +107,8 @@ export class CalendarComponent {
           meta: e
         }];
         console.log(this.events);
+
+        // refresh inorder to update the events
         this.refresh.next()
       })
     }, (err) => {
@@ -119,6 +116,11 @@ export class CalendarComponent {
     });
 
   }
+  refresh: Subject<any> = new Subject();
+
+  events: CalendarEvent[] = [];
+
+  activeDayIsOpen: boolean = false;
 
   view: CalendarView = CalendarView.Month;
 
@@ -139,12 +141,14 @@ export class CalendarComponent {
   editAppointmentName = new FormControl()
   startDateFormControl = new FormControl()
   endDateFormControl = new FormControl()
+  startTimeControl = new FormControl()
+  endTimeControl = new FormControl()
 
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edit', event);
+        this.handleEvent('Edit', event, null);
       }
     },
     {
@@ -154,67 +158,14 @@ export class CalendarComponent {
         if (this.events.length <= 1) {
           this.activeDayIsOpen = !this.activeDayIsOpen
         }
-        this.handleEvent('Deleted', event);
+        this.handleEvent('Deleted', event, null);
       }
     }
   ];
-
-  refresh: Subject<any> = new Subject();
-
-  events: CalendarEvent[] = [
-    {
-      id: "Medication",
-      start: subDays(startOfDay(new Date()), 0),
-      end: addDays(new Date(), 1),
-      title: 'Take your medicine daily.',
-      color: colors.blue,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      id: "Medication",
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'Take medicine daily for 2 Months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      id: "Appointment",
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'Appointment to be Rescheduled',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
-
-  activeDayIsOpen: boolean = true;
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     console.log(date, events)
-    this.clickedDate = date;
     if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-        // this.addNewEvent(date)
-      } else {
-        this.activeDayIsOpen = true;
-      }
-
       this.viewDate = date;
     }
     if (events.length < 1) {
@@ -225,11 +176,23 @@ export class CalendarComponent {
     }
   }
 
+  //Called during Drag and Drop
   eventTimesChanged({
     event,
     newStart,
     newEnd
   }: CalendarEventTimesChangedEvent): void {
+
+    event.meta.startTime = moment(newStart).format("YYYY-MM-DD");
+    event.meta.endTime = moment(newEnd).format("YYYY-MM-DD");
+
+    this.calendarService.editAppoinments(event.meta).subscribe((data) => {
+      console.log(data);
+
+    }, (err) => {
+      console.log(err);
+
+    })
     this.events = this.events.map(iEvent => {
       if (iEvent === event) {
         return {
@@ -240,42 +203,29 @@ export class CalendarComponent {
       }
       return iEvent;
     });
-    this.handleEvent('Dropped or resized', event);
+    this.refresh.next();
+    this.handleEvent('Dropped or resized', event, null);
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+  handleEvent(action: string, event: CalendarEvent, _index): void {
     console.log('handling event', event);
     this.modalData = { event, action };
     if (action == "Edit") {
-      this.editAppointmentDetails.setValue(event.title)
-      this.editAppointmentName.setValue(event.start)
+      this.editAppointmentDetails.setValue(event.meta.description)
+      this.editAppointmentName.setValue(event.meta.title)
+      this.allDay.setValue(event.meta.allDay)
+      this.startDateFormControl.setValue(new Date(event.meta.startTime))
+      this.endDateFormControl.setValue(new Date(event.meta.endTime))
       this.modal.open(this.editApponitment, { centered: true })
     }
     else if (action == "Deleted") {
-
+      console.log('during deletion');
+      this.deleteEvent(event, _index);
     }
     else {
       this.modal.open(this.tesst, { centered: true })
     }
 
-  }
-
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        actions: this.actions,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true
-        }
-      }
-    ];
   }
 
   openEvents(e) {
@@ -289,27 +239,12 @@ export class CalendarComponent {
     console.log(this.AppointmentDetails.value);
 
     if (k === "Add") {
-     let t = {
-        "allDay": true,
-        "description": "string",
-        "endTime": "2019-12-19T12:41:09.293Z",
-        "pid": parseInt(localStorage.getItem("patientId")),
-        "startTime": "2019-12-19T12:41:09.293Z",
-        "title": "string",
-        "userId": parseInt(localStorage.getItem("userId"))
-      }
-      this.calendarService.createAppoinments({}).subscribe((data) => {
-
-      }, (err) => {
-
-      })
-
       this.events = [
         ...this.events,
         {
           title: this.AppointmentDetails.value,
-          start: startOfDay(this.clickedDate),
-          end: endOfDay(this.clickedDate),
+          start: startOfDay(this.viewDate),
+          end: endOfDay(this.viewDate),
           color: colors.red,
           actions: this.actions,
           draggable: true,
@@ -320,57 +255,82 @@ export class CalendarComponent {
         }
       ];
     }
+    this.refresh.next();
     this.modal.dismissAll();
     this.AppointmentName.reset()
     this.AppointmentDetails.reset()
-    // this.editAppointmentName.reset()
-    // this.editAppointmentDetails.reset()
-    // this.addNewEvent(new Date())
+    this.editAppointmentName.reset()
+    this.editAppointmentDetails.reset()
   }
 
   addNewEvent(startDate): void {
-
     this.modal.open(this.newAppointment, { centered: true }).result.then((data) => {
       console.log(data)
       if (data === 'Add') {
-        this.events = [
-          ...this.events,
-          {
-            title: this.AppointmentDetails.value,
-            start: startOfDay(startDate),
-            end: endOfDay(startDate),
-            color: colors.red,
-            actions: this.actions,
-            draggable: true,
-            resizable: {
-              beforeStart: true,
-              afterEnd: true
+        let t = {
+          "allDay": this.allDay.value,
+          "description": this.AppointmentDetails.value,
+          "endTime": moment(new Date(this.endDateFormControl.value)).format("YYYY-MM-DD"),
+          "pid": parseInt(localStorage.getItem("patientId")),
+          "startTime": moment(new Date(this.startDateFormControl.value)).format("YYYY-MM-DD"),
+          "title": this.AppointmentName.value,
+          "userId": parseInt(localStorage.getItem("userId"))
+        }
+
+        this.calendarService.createAppoinments(t).subscribe((data) => {
+          console.log(data);
+          this.events = [
+            ...this.events,
+            {
+              title: this.AppointmentDetails.value,
+              start: startOfDay(startDate),
+              end: endOfDay(startDate),
+              color: colors.red,
+              actions: this.actions,
+              draggable: true,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              },
+              meta: data
             }
-          }
-        ];
+          ];
+        }, (err) => {
+          console.log(err);
+        })
+
       }
+    })
+  }
+
+  deleteEvent(eventToDelete: CalendarEvent, _index) {
+   
+    this.calendarService.deleteAppoinmentById(eventToDelete['meta']['id']).subscribe((data) => {
+      if (this.existingEvents) {
+        this.removeEvent(eventToDelete, _index)
+      }
+      this.events = this.events.filter(event => {
+        return event !== eventToDelete
+      }
+      );
+      this.activeDayIsOpen = !this.activeDayIsOpen;
+      this.refresh.next()
+    }, (err) => {
+      console.log(err);
+
     })
 
   }
 
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter(event => event !== eventToDelete);
-    this.activeDayIsOpen = !this.activeDayIsOpen;
-    this.refresh.next()
-  }
   removeEvent(eve, _index) {
-    console.log(_index);
-    // 
     this.existingEvents = this.existingEvents.filter((value, index, arr) => {
-      return index != _index;
+      return value !== eve
     });
 
-    console.log(this.events);
-
-  }
-  setView(view: CalendarView) {
-    this.view = view;
+    this.refresh.next()
+    if (this.existingEvents.length == 0) {
+      this.modal.dismissAll();
+    }
   }
 
   closeOpenMonthViewDay() {
