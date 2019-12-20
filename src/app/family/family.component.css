@@ -6,7 +6,7 @@
 }
 
 .col-sm-10 {
-    border-left: 12px solid RGB(84, 120, 168);
+    border-left: 8px solid RGB(84, 120, 168);
     padding-top: 1%;
     padding-bottom: 1%;
     padding-right: 3%;
@@ -47,8 +47,8 @@ a {
 }
 
 td {
-    align-content: center;
-    text-align: center;
+    /* align-content: center;
+    text-align: center; */
 }
 
 .fileContent {
@@ -63,7 +63,7 @@ td {
 }
 
 .verLine {
-    border-bottom: solid 10px rgb(87, 85, 85);
+    border-bottom: solid 8px rgb(87, 85, 85);
     width: 100%;
 }
 

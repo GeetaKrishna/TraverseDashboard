@@ -1,16 +1,12 @@
-<div>
+<div style="height: 600px;">
     <div class="input-group md-form form-sm form-2 pl-0">
-        <!-- <input class="form-control my-0 py-1" type="text" [(ngModel)]='searchText' placeholder="Find record, doctor, image, hospital, etc..."
-            aria-label="Search">
-        <div class="input-group-append">
-            <span class="input-group-text cyan lighten-2"><i class="fa fa-search" aria-hidden="true"></i></span>
-        </div> -->
         <mat-form-field style="width: 100%;">
-            <input matInput type="text" placeholder="Find document by name, date, type, etc..." [formControl]="findType">
-            <button mat-button matSuffix mat-icon-button  (click)="findSearch()">
-              <mat-icon>search</mat-icon>
+            <input matInput type="text" placeholder="Find document by name, date, type, etc..."
+                [formControl]="findType">
+            <button mat-button matSuffix mat-icon-button (click)="findSearch()">
+                <mat-icon>search</mat-icon>
             </button>
-          </mat-form-field>
+        </mat-form-field>
     </div>
     <div style="display: flex;">
         <mat-card class="example-card m-2">
@@ -39,7 +35,8 @@
 
         <div *ngIf="state == 'Visits'">
             <div style="display: flex;">
-                <mat-card class="example-card m-2" *ngFor="let file of availableDocsForVisits | searchDocuments: searchText"
+                <mat-card class="example-card m-2"
+                    *ngFor="let file of availableDocsForVisits | searchDocuments: searchText"
                     style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                     <div class="CardImage">
                         <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
@@ -62,7 +59,8 @@
         </div>
         <div *ngIf="state == 'Imaging'">
             <div style="display: flex;">
-                <mat-card class="example-card m-2" *ngFor="let file of availableDocsForImaging | searchDocuments: searchText"
+                <mat-card class="example-card m-2"
+                    *ngFor="let file of availableDocsForImaging | searchDocuments: searchText"
                     style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                     <div class="CardImage">
                         <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
@@ -86,7 +84,8 @@
         </div>
         <div *ngIf="state == 'Labs'">
             <div style="display: flex;">
-                <mat-card class="example-card m-2" *ngFor="let file of availableDocsForLabs | searchDocuments: searchText"
+                <mat-card class="example-card m-2"
+                    *ngFor="let file of availableDocsForLabs | searchDocuments: searchText"
                     style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                     <div class="CardImage">
                         <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
@@ -109,7 +108,8 @@
         </div>
         <div *ngIf="state == 'Records'">
             <div style="display: flex;">
-                <mat-card class="example-card m-2" *ngFor="let file of availableDocsForRecords | searchDocuments: searchText"
+                <mat-card class="example-card m-2"
+                    *ngFor="let file of availableDocsForRecords | searchDocuments: searchText"
                     style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
                     <div class="CardImage">
                         <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
@@ -130,39 +130,5 @@
                 </mat-card>
             </div>
         </div>
-
-
-        <!-- <mat-card class="example-card m-2" *ngFor="let file of availableDocs"
-            style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
-            <div class="CardImage">
-                <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
-            </div>
-            <mat-card-content style="width: 200px; font-size: 14px; margin-top: 8px;">
-                <p>
-                    {{file.relativePath}}
-                </p>
-
-            </mat-card-content>
-            <mat-card-actions>
-                <span class="mr-2">
-                    <i class="fa fa-comments text-muted cursor-pointer"></i>
-                </span>
-                <span>
-                    <i class="fa fa-share-alt text-muted cursor-pointer"></i>
-                </span>
-            </mat-card-actions>
-        </mat-card>
-        </mat-card> -->
     </div>
-    <!-- <button class="btn btn-unique btn-rounded btn-sm my-0" type="submit">Search</button> -->
-    <!-- </form> -->
-    <!-- <p>This is a para. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                            sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce
-                            condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            This is a para. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                            sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce
-                            condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            This is a para. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                            sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce
-                            condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p> -->
 </div>

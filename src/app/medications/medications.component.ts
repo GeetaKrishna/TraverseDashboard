@@ -60,10 +60,10 @@ export class MedicationsComponent implements OnInit {
   animal: string;
   name: string;
   colors = ['ch-1',
-    'ch-2',
-    'ch-3',
-    'ch-4',
-    'ch-0'];
+    'ch-1',
+    'ch-1',
+    'ch-1',
+    'ch-1'];
 
   ngOnInit() {
     this.medicationService.getPrescriptions().subscribe(
