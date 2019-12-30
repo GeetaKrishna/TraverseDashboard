@@ -4,11 +4,8 @@ import { AuthenticationService } from '../_services/authentication.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from '../_services/user.service';
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+import { ForgotPasswordPage3Component } from '../forgot-password-page3/forgot-password-page3.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-header',
@@ -24,15 +21,21 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddPatientComponent, {
+
+  openDialog(param): void {
+    let component;
+    if (param == 'patient') {
+      component = AddPatientComponent;
+    }
+    else {
+      component = ForgotPasswordPage3Component;
+    }
+    const dialogRef = this.dialog.open(component, {
       width: '480px',
-      // data: {name: this.name, animal: this.animal}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
   backGroundImageChange(k) {
@@ -49,15 +52,18 @@ export class HeaderComponent implements OnInit {
 
   viewProfile() {
     console.log('write the code here to view Profile()');
-
+    this.dialog.open(ProfileComponent, {
+      width: '600px',
+      position: {
+        top: '0px',
+        right: '0px'
+      }
+    })
   }
+
   logOut() {
     console.log('logged out');
     this.authentication.logout()
-    // localStorage.clear()
-    // this.router.navigateByUrl('/');
-    // localStorage.clear()
-    // // [routerLink]="['/']"
   }
 }
 
@@ -81,8 +87,7 @@ export class AddPatientComponent {
 
   constructor(
     private userService: UserService,
-    public dialogRef: MatDialogRef<AddPatientComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    public dialogRef: MatDialogRef<AddPatientComponent>) { }
 
   onNoClick(): void {
     this.dialogRef.close();
