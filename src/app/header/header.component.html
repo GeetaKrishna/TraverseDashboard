@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar">
       <img src="../../assets/newmainLogo.png" [routerLink]="['landing']" class="img-center" alt="">
       <div style="text-align: center;">
@@ -8,7 +8,7 @@
         </p>
       </div>       
       <div style="text-align: center;">
-        <!-- <span (click)="viewProfile()">
+        <span (click)="viewProfile()">
           <img src="../../assets/newProfhead3.png" style="margin-right: 10px; font-size: 24px; cursor: pointer;"
             height="26px" width="26px">
         </span>
@@ -19,7 +19,7 @@
         <span (click)="logOut()">
           <img src="../../assets/newLogOutHeader2.webp" style="margin-right: 10px; font-size: 24px; cursor: pointer;"
             height="26px" width="26px">
-        </span>        -->
+        </span>       
       </div>
     </div>
   </div>
@@ -29,8 +29,8 @@
         <input type="file" (change)="backGroundImageChange($event.target)" required />
         <span>Set BackGround Image</span>
       </label></button>
-    <button mat-menu-item (click)="openDialog('password')">Change Password</button>
-    <button mat-menu-item (click)="openDialog('patient')">Add Patient Profile</button>
+    <button mat-menu-item>Other Settings</button>
+    <button mat-menu-item (click)="openDialog()">Add Patient Profile</button>
   </mat-menu>
   
 </div> 
