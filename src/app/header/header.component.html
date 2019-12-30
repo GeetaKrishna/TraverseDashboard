@@ -1,22 +1,14 @@
 <div class="wrapper">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar">
       <img src="../../assets/newmainLogo.png" [routerLink]="['landing']" class="img-center" alt="">
       <div style="text-align: center;">
         <p style=" font-weight:bolder; font-size: 26px; text-align:center; color: white;">
           MOTION
         </p>
-      </div>
-      <!--
-        <span style="color: rgb(24, 240, 71);">M</span>
-        <span style="color: rgb(0, 60, 255);">O</span>
-        <span style="color: rgb(208, 255, 0);">T</span>
-        <span style="color: rgb(132, 0, 255);">I</span>
-        <span style="color: rgb(0, 60, 255);">O</span>
-        <span style="color: rgb(0, 255, 115);">N</span> 
-      -->
+      </div>       
       <div style="text-align: center;">
-        <span (click)="viewProfile()">
+        <!-- <span (click)="viewProfile()">
           <img src="../../assets/newProfhead3.png" style="margin-right: 10px; font-size: 24px; cursor: pointer;"
             height="26px" width="26px">
         </span>
@@ -27,15 +19,7 @@
         <span (click)="logOut()">
           <img src="../../assets/newLogOutHeader2.webp" style="margin-right: 10px; font-size: 24px; cursor: pointer;"
             height="26px" width="26px">
-        </span>
-        <!-- <span class="fa fa-user cursor-pointer" style="margin-right: 10px; color: white; font-size: 24px;">
-        </span> -->
-        <!-- <span class="fa fa-gear cursor-pointer" mat-button [matMenuTriggerFor]="menu"
-          style="margin-right: 10px; color: white; font-size: 24px;">
-        </span> -->
-        <!-- <span (click)="logOut()" class="fa fa-sign-out cursor-pointer"
-          style="float: right; color: white; font-size: 24px;">
-        </span> -->
+        </span>        -->
       </div>
     </div>
   </div>
@@ -48,4 +32,6 @@
     <button mat-menu-item>Other Settings</button>
     <button mat-menu-item (click)="openDialog()">Add Patient Profile</button>
   </mat-menu>
-</div>
+  
+</div> 
+

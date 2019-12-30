@@ -18,7 +18,7 @@ export class PatientViewComponent implements OnInit {
   }
   patientsDetails = [
     {
-      "name": "Sophia Deleila",
+      "name": "Sophia Delia",
       "appointment": "No Appointment",
       "url": "../assets/familyView/Sophia.png",
       prespcriptions: 0

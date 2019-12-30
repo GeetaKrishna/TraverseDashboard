@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authentication: AuthenticationService) { }
 
   ngOnInit() {
+  }
+
+  viewProfile() {
+    console.log('write the code here to view Profile()');
+
+  }
+  logOut() {
+    console.log('logged out');
+    this.authentication.logout()
+    // localStorage.clear()
+    // this.router.navigateByUrl('/');
+    // localStorage.clear()
+    // // [routerLink]="['/']"
   }
 
 }

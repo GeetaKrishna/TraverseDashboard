@@ -1,5 +1,5 @@
-<div class="animated fadeIn mt-5 mb-5">
-  <div class="col-md-12">
+<div class="card mt-3 mb-3" style="height: 600px;">
+  <div style="overflow-y: auto;">
     <div class="card" style="height:auto;">
       <div class="card-header ch-1">
         <div class="row">
@@ -21,15 +21,13 @@
             </div>
             <div class="col-md-4">
               <div class="btn-group" style="text-align:center">
-                <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-                  >
+                <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
                   Previous
                 </div>
                 <div class="btn btn-light" mwlCalendarToday [(viewDate)]="viewDate">
                   Today
                 </div>
-                <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-                  >
+                <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
                   Next
                 </div>
               </div>
@@ -49,7 +47,7 @@
             (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)"
             (eventTimesChanged)="eventTimesChanged($event)" [cellTemplate]="customTemplate">
           </mwl-calendar-month-view>
-         
+
         </div>
       </div>
 
@@ -231,7 +229,7 @@
     <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
     <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
   </div>
- 
+
   <div class="cal-events" *ngIf="day.events.length > 0">
     <div class="cal-event" *ngFor="let event of day.events; trackBy:trackByEventId"
       [style.backgroundColor]="event.color?.secondary" [ngClass]="event?.cssClass"

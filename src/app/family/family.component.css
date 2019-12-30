@@ -46,10 +46,10 @@ a {
     margin: 0;
 }
 
-td {
-    /* align-content: center;
-    text-align: center; */
-}
+/* td {
+    align-content: center;
+    text-align: center;
+} */
 
 .fileContent {
     width: 160px;

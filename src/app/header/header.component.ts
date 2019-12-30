@@ -16,7 +16,10 @@ export interface DialogData {
   styleUrls: ['./header.component.less']
 })
 export class HeaderComponent implements OnInit {
-
+  events: string[] = [];
+  opened: boolean;
+  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+  
   constructor(private elementRef: ElementRef, private router: Router, private authentication: AuthenticationService, public dialog: MatDialog) { }
 
   ngOnInit() {

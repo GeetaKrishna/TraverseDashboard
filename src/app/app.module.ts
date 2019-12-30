@@ -17,13 +17,12 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
+  MatToolbarModule, MatSidenavModule,
   MatSliderModule, MatTooltipModule, MatExpansionModule, MatCardModule, MatNativeDateModule,
   MatDatepickerModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule,
   MatListModule, MatBottomSheetModule, MatMenuModule, MatIconModule, MatCheckboxModule
 } from '@angular/material';
-
 import { JwtModule } from "@auth0/angular-jwt";
-
 import { RatingModule } from 'ngx-rating';
 import { AppInfoComponent } from './app-info/app-info.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -38,10 +37,7 @@ import { AdminComponent } from './admin/admin.component';
 import { HealthKnowledgeBaseComponent } from './health-knowledge-base/health-knowledge-base.component';
 import { HealthKnowledgeContentComponent } from './health-knowledge-content/health-knowledge-content.component'; // for FullCalendar!
 import { MyHeartComponent } from './my-heart/my-heart.component'; // for FullCalendar!
-
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatSidenavModule } from '@angular/material/sidenav';
-
 import { InsuranceComponent } from './insurance/insurance.component';
 import { DatePipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
@@ -73,9 +69,9 @@ import { MedsComponent } from './meds/meds.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ForgotPasswordPage2Component } from './forgot-password-page2/forgot-password-page2.component';
 import { ForgotPasswordPage3Component } from './forgot-password-page3/forgot-password-page3.component';
-
 //remove is not works
-import {DpDatePickerModule} from 'ng2-date-picker';
+import { DpDatePickerModule } from 'ng2-date-picker';
+import { CustomMaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -164,7 +160,11 @@ import {DpDatePickerModule} from 'ng2-date-picker';
       useFactory: adapterFactory
     }),
     MatTabsModule,
+    MatToolbarModule,
     MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
     NgxFileDropModule,
     JwtModule.forRoot({
       config: {
@@ -174,8 +174,11 @@ import {DpDatePickerModule} from 'ng2-date-picker';
         // whitelistedDomains: ["example.com"],
         // blacklistedRoutes: ["example.com/examplebadroute/"]
       }
-    })
+    }),
     // FullCalendarModule
+    MatSidenavModule,
+    MatToolbarModule,
+    CustomMaterialModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,70 +1,65 @@
-<div class="card mt-5">
-    <!-- <div class="card-header row ch-1" style="display: flex;">
-        <h5>Patient View</h5>
-        <div style=" margin-left:780px;">
-            <span>
-                <i class="fa fa-user mr-2"></i>Ethan Cheng
-            </span>
-        </div>
-    </div> -->
-    <div class="card-header ch-1">
-        <div class="row">
-            <div class="col justify-content-start">
-                <p class="cardHead">
-                    Patient View
-                </p>
-            </div>
-            <div class="col justify-content-end">
-                <span style="float: right;">
-                    <i class="fa bgWhite fa-user mr-2" style="font-size: 22px; color: white;"></i>Ethan Cheng
-                </span>
-                <!-- <img src="../../assets/newfourC.png" style="height: 35px; width: 35px; float: right;" /> -->
-            </div>
-        </div>
-    </div>
-    <div class="card-body">
-        <table class="table table-borderless">
+<div class="card mt-3 mb-3" style="height: 600px;">
+    <div style="overflow-y: auto; overflow-x: hidden;">
+        <div class="card-header ch-1">
             <div class="row">
-                <div class="col-sm-2">
-                    <table class="table table-borderless">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <a [routerLink]='["MedicalRecords"]' class="bgWhite"><i
-                                            class="fa  fa-file-image-o fa-4x" routerLinkActive="activeClass"
-                                            aria-hidden="true"></i><br /><span
-                                            routerLinkActive="activeClassText">Medical Records </span></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a [routerLink]='["Imaging"]' class="bgWhite"><i class="fa fa-wheelchair fa-4x"
-                                            routerLinkActive="activeClass" aria-hidden="true"></i><br /><span
-                                            routerLinkActive="activeClassText">Imaging</span></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a [routerLink]='["Medications"]' class="bgWhite"><i class="fa fa-medkit fa-4x"
-                                            routerLinkActive="activeClass" aria-hidden="true"></i><br /><span
-                                            routerLinkActive="activeClassText">Medications</span></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a [routerLink]='["Labs"]' class="bgWhite"><i class="fa fa-flask fa-4x"
-                                            routerLinkActive="activeClass" aria-hidden="true"></i><br /><span
-                                            routerLinkActive="activeClassText">Labs</span></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="col justify-content-start">
+                    <p class="cardHead">
+                        Patient View
+                    </p>
                 </div>
-                <div class="col-sm-10">
-                    <router-outlet>
-                    </router-outlet>
+                <div class="col justify-content-end">
+                    <span style="float: right;">
+                        <i class="fa bgWhite fa-user mr-2" style="font-size: 22px; color: white;"></i>Ethan
+                        Cheng
+                    </span>
+                    <!-- <img src="../../assets/newfourC.png" style="height: 35px; width: 35px; float: right;" /> -->
                 </div>
             </div>
-        </table>
+        </div>
+        <div class="card-body">
+            <table class="table table-borderless">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a [routerLink]='["MedicalRecords"]' class="bgWhite"><i
+                                                class="fa  fa-file-image-o fa-4x" routerLinkActive="activeClass"
+                                                aria-hidden="true"></i><br /><span
+                                                routerLinkActive="activeClassText">Medical Records </span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a [routerLink]='["Imaging"]' class="bgWhite"><i class="fa fa-wheelchair fa-4x"
+                                                routerLinkActive="activeClass" aria-hidden="true"></i><br /><span
+                                                routerLinkActive="activeClassText">Imaging</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a [routerLink]='["Medications"]' class="bgWhite"><i class="fa fa-medkit fa-4x"
+                                                routerLinkActive="activeClass" aria-hidden="true"></i><br /><span
+                                                routerLinkActive="activeClassText">Medications</span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a [routerLink]='["Labs"]' class="bgWhite"><i class="fa fa-flask fa-4x"
+                                                routerLinkActive="activeClass" aria-hidden="true"></i><br /><span
+                                                routerLinkActive="activeClassText">Labs</span></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-10">
+                        <router-outlet>
+                        </router-outlet>
+                    </div>
+                </div>
+            </table>
+        </div>
     </div>
 </div>
