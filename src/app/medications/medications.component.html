@@ -10,7 +10,6 @@
                 <div class="col">
                     <img src="../../assets/newMedications.png" height="35px" width="35px" style="float: right"
                         alt="Image Not Available" (click)="openDialog()" />
-                    <!-- <i class="fa fa-plus" style="float: right" ></i> -->
                 </div>
             </div>
         </div>
@@ -18,7 +17,6 @@
             <div class="row justify-content-center">
                 <div class="col-md-3 m-4" *ngFor="let app of apps; let i = index">
                     <div [ngClass]="['card', 'h-100', app.color]">
-                        <!-- <div class="card h-100" [style.background-color]="app.color"> -->
                         <div class="card-header font-weight-bold ch-1" style="display:flex;">
                             <div style="width: 100%" [attr.contenteditable]="flag" [textContent]="app.name">
                                 {{app.name}}
@@ -84,14 +82,7 @@
                                     aria-label="Example icon-button with a heart icon">
                                     <mat-icon [ngStyle]="{'color':'red'}">highlight_off</mat-icon>
                                 </button>
-                                <!-- style="margin-left: 30px;margin-top: 20px;" 
-                                         <div>
-                                            <button class="btn btn-success" (click)="saveNewData(app)"><i
-                                                    class="fa fa-check"></i></button>
-                                            &nbsp;
-                                            <button class="btn btn-danger" (click)="saveCancelled()"><i
-                                                    class="fa fa-times"></i></button>
-                                    </div> -->
+
                             </div>
                             <div class="row mt-4" *ngIf="!flag">
                                 <div class="table-responsive">
@@ -99,7 +90,7 @@
                                         <tr>
                                             <td style="display: flex; font-size: 14px; height: 30px;">
                                                 <p style="font-weight: bolder;text-transform: capitalize"
-                                                    [attr.contenteditable]="flag" [textContent]="app.instruction"
+                                                    [textContent]="app.instruction"
                                                     (input)="app.instruction=$event.target.textContent">
                                                     {{app.instruction}}
                                                 </p> &nbsp;
@@ -111,16 +102,14 @@
                                         </tr>
                                         <tr>
                                             <td style=" display: flex; font-size: 14px; height: 30px;">
-                                                <p style="font-weight: bolder;" [attr.contenteditable]="flag"
-                                                    [textContent]="app.startDate"
+                                                <p style="font-weight: bolder;" [textContent]="app.startDate"
                                                     (input)="app.startDate=$event.target.textContent">
                                                     {{app.startDate | date: 'yyyy-mm-dd'}}
                                                 </p> &nbsp;
                                                 <p>
                                                     To
                                                 </p> &nbsp;
-                                                <p style="font-weight: bolder;" [attr.contenteditable]="flag"
-                                                    [textContent]="app.endDate"
+                                                <p style="font-weight: bolder;" [textContent]="app.endDate"
                                                     (input)="app.endDate=$event.target.textContent">
                                                     {{app.endDate | date: 'yyyy-mm-dd'}}
                                                 </p>
@@ -144,18 +133,7 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <!-- <div class="row " [attr.contenteditable]="flag"
-                                        style="font-size: 14px;  margin: auto;" [textContent]="app.description"
-                                        (input)="app.description=$event.target.textContent">
-                                        {{app.description}}
-                                    </div> -->
-                                <!-- <div class="row mt-2" style="  margin: auto; color: blue">
-                                        <i class="fas fa-spider-web"></i> <a href="http://www.google.com"
-                                            style="font-size: 12px; color: rgb(0, 0, 0) !important; text-decoration: none;"><i
-                                                class="fa fa-external-link" aria-hidden="true"></i>
-                                            Learn
-                                            More </a>
-                                    </div> -->
+
                             </div>
                         </div>
                         <div class="row" *ngIf="i != 0; ">

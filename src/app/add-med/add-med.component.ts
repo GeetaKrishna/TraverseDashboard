@@ -12,33 +12,38 @@ import { FormControl } from '@angular/forms';
 export class AddMedComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<AddMedComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private medicationService: MedicationService) { }
+    private medicationService: MedicationService) { }
 
   name = new FormControl('');
   description = new FormControl('');
+  image: any;
 
   fileName: any;
+
   ngOnInit() {
   }
-  onNoClick(): void {
+
+  cancel(): void {
     this.dialogRef.close();
   }
+
   imageInput(event) {
+
     let file = event.target.files[0];
-    this.data.image = file;
+    this.image = file;
     this.fileName = file.name;
 
-    console.log(this.data.image);
   }
-  successAdding() {
+
+  addMedication() {
     console.log(this.name, this.description);
 
     const formData = new FormData();
     formData.append('description', this.description.value);
-    formData.append('image', this.data.image);
+    formData.append('image', this.image);
     formData.append('name', this.name.value);
 
-    if (this.description.value && this.name.value && this.data.image) {
+    if (this.description.value && this.name.value && this.image) {
       this.medicationService.addMedication(formData).subscribe((data) => {
         console.log(data);
         this.dialogRef.close();
@@ -48,9 +53,4 @@ export class AddMedComponent implements OnInit {
       })
     }
   }
-}
-export interface DialogData {
-  medicineName: string;
-  description: string;
-  image: string;
 }

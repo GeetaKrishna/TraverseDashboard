@@ -69,9 +69,8 @@ import { MedsComponent } from './meds/meds.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ForgotPasswordPage2Component } from './forgot-password-page2/forgot-password-page2.component';
 import { ForgotPasswordPage3Component } from './forgot-password-page3/forgot-password-page3.component';
-//remove is not works
 import { CustomMaterialModule } from './material.module';
-import {DpDatePickerModule} from 'ng2-date-picker';
+import { DpDatePickerModule } from 'ng2-date-picker';
 import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
@@ -150,11 +149,6 @@ import { ProfileComponent } from './profile/profile.component';
     MatCheckboxModule,
     AvatarModule,
     DpDatePickerModule,
-    // CalendarModule.forRoot({
-    //   provide: DateAdapter,
-    //   useFactory: adapterFactory
-    // }),
-    // FullCalendarModule,
     NgbModalModule,
     ToastrModule.forRoot(),
     CalendarModule.forRoot({
@@ -177,7 +171,6 @@ import { ProfileComponent } from './profile/profile.component';
         // blacklistedRoutes: ["example.com/examplebadroute/"]
       }
     }),
-    // FullCalendarModule
     MatSidenavModule,
     MatToolbarModule,
     CustomMaterialModule

@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
     error = '';
     emailFormControl = new FormControl('', [
         Validators.required,
-        // Validators.email,
     ]);
     passwordFormControl = new FormControl('', [
         Validators.required,
@@ -35,10 +34,6 @@ export class LoginComponent implements OnInit {
         private matDialog: MatDialog
     ) {
 
-        // redirect to home if already logged in
-        // if (this.authenticationService.currentUserValue) {
-        //     this.router.navigate(['/']);
-        // }
     }
 
     ngOnInit() {
@@ -47,6 +42,11 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
+
+        // redirect to home if already logged in
+        if (this.authenticationService.currentUserValue) {
+            this.router.navigate(['/']);
+        }
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -67,28 +67,16 @@ export class LoginComponent implements OnInit {
 
         // stop here if form is invalid
 
-
         // if (this.loginForm.invalid) {
         //     return;
         // }
 
         // this.loading = true;
-        // this.loginData = {
-        //     "fname": "string",
-        //     "id": 0,
-        //     "lname": "string",
-        //     "passowrd": "string",
-        //     "password": "string",
-        //     "role": "string",
-        //     "roles": "string",
-        //     "username": "string"
-        // }
 
         console.log('inside login');
 
 
         this.authenticationService.login(this.emailFormControl.value, this.passwordFormControl.value)
-            // .pipe(first())
             .subscribe(
                 user => {
                     if (user.headers.get('authorization')) {
@@ -96,16 +84,6 @@ export class LoginComponent implements OnInit {
                     }
                     this.loginSuccess = false;
                     console.log(user, "test");
-
-                    // if (user && user['token']) {
-                    //     // store user details and jwt token in local storage to keep user logged in between page refreshes
-
-                    // localStorage.setItem('token', user.headers.get('authorization'));
-                    // console.log(this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]));
-
-                    // localStorage.setItem('userId', this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]).sub);
-                    // this.currentUserSubject.next(this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]).sub);
-                    // }
                     this.authenticationService.getUserId(localStorage.getItem('userName')).subscribe((data) => {
                         console.log(data);
                         localStorage.setItem('userId', data['userId'])
@@ -119,19 +97,10 @@ export class LoginComponent implements OnInit {
                         })
 
                     })
-                    // if (loginResponse.headers.get('authorization') != "") {
-
-                    //     this.router.navigate([this.returnUrl]);
-                    //     localStorage.setItem('token', loginResponse.headers.get('authorization'))
-                    //     console.log(loginResponse.headers.get('authorization'));
-                    // }
                 },
                 error => {
                     console.log(error.status);
                     this.loginSuccess = false;
-
-                    // this.error = error;
-                    // this.loading = false;
                 });
 
     }
@@ -142,7 +111,6 @@ export class LoginComponent implements OnInit {
 
     signup() {
         console.log('heloo');
-
         this.router.navigateByUrl('signUp');
     }
 }

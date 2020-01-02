@@ -24,7 +24,6 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        // return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
 
         return this.http.post<any>(`${environment.apiUrl}/authenticate`, { username: username, password: password }, { 'headers': new HttpHeaders({ 'Content-Type': 'application/json' }), observe: 'response' })
             .pipe(map(user => {

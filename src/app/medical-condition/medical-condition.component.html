@@ -1,5 +1,4 @@
 <div class="animated fadeIn mt-5 mb-5">
-    <!--Recommended apps Begin-->
     <div class="col-md-12">
         <div class="card h-100">
             <div class="card-header ch-1">
@@ -97,11 +96,7 @@
                                         <mat-form-field style="color: black;">
                                             <input matInput placeholder="Triggers" [formControl]="triggers" required>
                                         </mat-form-field>
-                                        <!-- <button (click)="fileInput.click()">
-                                            <span>Upload an image</span>
-                                            <input #fileInput type="file" (change)="imageInput($event)"
-                                                style="display:none;" />
-                                        </button> -->
+                                  
                                         <button class="btn btn-secondary" (click)="fileInput.click()">
                                             <span>Choose file</span>
                                             <input #fileInput type="file" (change)="imageInput($event)" style="display:none;" />

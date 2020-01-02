@@ -9,16 +9,6 @@ export class CalendarService {
 
   constructor(private http: HttpClient) { }
 
-  // {
-  //   "allDay": true,
-  //   "description": "string",
-  //   "endTime": "2019-12-19T12:41:09.293Z",
-  //   "id": 0,
-  //   "pid": 0,
-  //   "startTime": "2019-12-19T12:41:09.293Z",
-  //   "title": "string",
-  //   "userId": 0
-  // }
   createAppoinments(appointment) {
     return this.http.post(`${environment.apiUrl}/calendar/appointments/add`, appointment)
   }

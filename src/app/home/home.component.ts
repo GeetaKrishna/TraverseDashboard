@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { AppInfoComponent } from '../app-info/app-info.component';
 import { GetAppsService } from '../_services/get-apps.service';
-import { element } from 'protractor';
-
 
 @Component({
   selector: 'app-home',
@@ -151,29 +148,10 @@ export class HomeComponent implements OnInit {
       "ROUTESCREEN": 'admin/medicalCondition',
       "installed": false
     },
-    // {
-    //   "APP_ID": 11,
-    //   "APP_DETAILS": "MAINTAINS ALL MEDICAL RECORDS",
-    //   "VERSION": "1.0v",
-    //   "APPNAME": "EMR Manager",
-    //   "URL": "assets/hrt.png",
-    //   "userTable": [],
-    //   "RATING": 4,
-    //   "ROUTESCREEN": 'admin/**',
-    //   "installed": false
-    // }
-    // {
-    //   "APP_ID": 7,
-    //   "APP_DETAILS": "SAYS ABOUT THE MEDICATION DETAILS",
-    //   "VERSION": "1.0v",
-    //   "APPNAME": "MY MEDICATIONS",
-    //   "URL": "assets/icons-home/motion06.png",
-    //   "userTable": []
-    //   },
 
   ]
 
-  
+
   mapps: any[] = [
     {
       "APP_ID": 7,
@@ -253,17 +231,7 @@ export class HomeComponent implements OnInit {
       "ROUTESCREEN": 'admin/medicalCondition',
       "installed": false
     },
-    // {
-    //   "APP_ID": 11,
-    //   "APP_DETAILS": "MAINTAINS ALL MEDICAL RECORDS",
-    //   "VERSION": "1.0v",
-    //   "APPNAME": "EMR Manager",
-    //   "URL": "assets/hrt.png",
-    //   "userTable": [],
-    //   "RATING": 4,
-    //   "ROUTESCREEN": 'admin/**',
-    //   "installed": false
-    // }
+
   ]
   pApps: any[] = [
     {
@@ -356,13 +324,12 @@ export class HomeComponent implements OnInit {
     }
   ]
 
-  constructor(private roter: Router, private getApps: GetAppsService, private _bottomSheet: MatBottomSheet) { }
+  constructor(private getApps: GetAppsService, private _bottomSheet: MatBottomSheet) { }
 
   ngOnInit() {
 
     this.getApps.getAppStore(localStorage.getItem('userId')).subscribe((data: []) => {
       console.log(data, 'data 4, db')
-      // this.apps = this.apps.concat(data)
 
       data.map((k) => {
         this.apps.forEach((element) => {
@@ -378,8 +345,6 @@ export class HomeComponent implements OnInit {
       })
     })
 
-    // console.log(this.apps, this.mapps)
-
   }
 
   goTo(apps) {
@@ -389,23 +354,15 @@ export class HomeComponent implements OnInit {
     this.selectedVal = value
     console.log(value);
   }
-  // navigate(id) {
-  //   if (id == 3) {
-  //     this.roter.navigate(['admin/dashboard']);
-  //   }
-  // }
 
   openBottomSheet(app) {
     this._bottomSheet.open(AppInfoComponent, { data: app }).afterDismissed().subscribe((data) => {
       console.log(data);
       if (data) {
         this.apps.map((element, index) => {
-          // console.log('dsad', element.APP_ID)
-          // console.log('dsad',data)
+
           if (element.APP_ID === data.data) {
-            // console.log('dsad', element.APP_ID)
             this.apps[index].installed = !this.apps[index].installed;
-            // console.log('dsad', this.apps[index])
           }
         })
         console.log(this.apps);

@@ -24,7 +24,6 @@
                             style="font-size: 22px;"></span>
                         <div style="align-items: center; margin-left: 20px; "
                             [style.display]="!weight? 'none' : 'flex'">
-                            <!-- <p class="measurement">165</p>&nbsp;&nbsp;&nbsp;&nbsp; -->
                             <p [attr.contenteditable]="contenteditable1" class="font-weight-bold measurement"
                                 [textContent]="currentWeight" (input)="currentWeight=$event.target.textContent">
                                 {{currentWeight}}
@@ -68,7 +67,6 @@
                         <span class="fa {{  mesurementProvider }} text-muted cursor-pointer p-1"
                             style="font-size: 22px;"></span>
                         <div *ngIf="bloodpressure" style="display: flex; align-items: center; margin-left: 20px;">
-                            <!-- <p class="measurement">165</p>&nbsp;&nbsp;&nbsp;&nbsp; -->
                             <p [attr.contenteditable]="contenteditable3" class=" font-weight-bold {{colorClassForBP}}"
                                 [textContent]="currentHBP" (input)="currentHBP=$event.target.textContent"
                                 style="font-size: 54px;">{{currentHBP}}
@@ -84,8 +82,6 @@
                             </span>
                         </div>
                         <div [style.display]="bloodpressure ? 'none' : 'block'">
-                            <!-- <canvas height="80vh" baseChart [datasets]="lineChartData2" [labels]="lineChartLabels" [legend]="false"
-                                  [options]="lineChartOptions" [colors]="lineChartColors2" [chartType]="lineChartType"></canvas> -->
                             <canvas #canvass id="canvass" height="102vh">{{ BPChart }}</canvas>
                         </div>
                         <p class="timeText">As of {{bpdate['days']}} {{bpdate['timer']}} ago</p>
@@ -123,7 +119,6 @@
                         <span class="fa {{  mesurementProvider }} text-muted cursor-pointer p-1"
                             style="font-size: 22px;"></span>
                         <div *ngIf="glucose" style="display: flex; align-items: center; margin-left: 20px;">
-                            <!-- <p class="measurement">165</p>&nbsp;&nbsp;&nbsp;&nbsp; -->
                             <p [attr.contenteditable]="contenteditable2" class="measurement font-weight-bold"
                                 [textContent]="currentGlucose" (input)="currentGlucose=$event.target.textContent">
                                 {{currentGlucose}}</p>
@@ -134,8 +129,6 @@
                             </span>
                         </div>
                         <div [style.display]="glucose ? 'none' : 'block'">
-                            <!-- <canvas height="80vh" baseChart [datasets]="lineChartData1" [labels]="lineChartLabels" [legend]="false"
-                                  [options]="lineChartOptions" [colors]="lineChartColors1" [chartType]="lineChartType"></canvas> -->
                             <canvas id="canvasforGL" height="102vh">{{ glucoseChart }}</canvas>
                         </div>
                         <p class="timeText">As of {{glucoseDate['days']}} {{glucoseDate['timer']}} ago</p>
@@ -169,7 +162,6 @@
                         <span class="fa {{  mesurementProvider }} text-muted cursor-pointer p-1"
                             style="font-size: 22px;"></span>
                         <div *ngIf="cholesterol" style="display: flex; align-items: center; margin-left: 20px;">
-                            <!-- <p class="measurement">165</p>&nbsp;&nbsp;&nbsp;&nbsp; -->
                             <p [attr.contenteditable]="contenteditable4" class="measurement font-weight-bold"
                                 [textContent]="currentCholesterol"
                                 (input)="currentCholesterol=$event.target.textContent">

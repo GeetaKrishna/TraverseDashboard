@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Color, Label, MultiDataSet } from 'ng2-charts';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
+import { ChartDataSets, ChartOptions } from 'chart.js';
 import { DashboardService } from '../_services/dashboard.service';
 import { Details } from '../details';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Graph } from '../graph';
 import * as Chart from 'chart.js';
-import { GetAppsService } from '../_services/get-apps.service';
-import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-four-c',
   templateUrl: './four-c.component.html',
@@ -18,18 +16,7 @@ export class FourCComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    // this.dashboardService.getDashboard().subscribe(
-    //   (res) => {
-    //     // console.log(res);
-
-    //     this.WeightDate = this.getDifferenceInDays(res['TimeStamp'])
-    //     console.log(this.WeightDate)
-    //     this.currentWeight = res['currentWeight'];
-    //   },
-    //   err => {
-    //     console.log("error", err);
-    //   }
-    // );
+    
     // // // curent Glucose
     this.dashboardService.getGlucoseofPatient().subscribe(
       (res) => {
@@ -57,42 +44,15 @@ export class FourCComponent implements OnInit {
         console.log(res, 'ressssss');
         this.bpdate = this.getDifferenceInDays(res['TimeStamp'])
 
-        // console.log(res.highBP);
         this.currentHBP = res['highBp'];
         this.currentLBP = res['lowBp'];
         this.colorForBP(this.currentHBP, this.currentLBP)
-        // console.log(this.currentLBP);
-        // this.currentBlood = res.lowBP;
       },
       err => {
         console.log("error", err);
       }
     );
-    // // getWeightOfLoggedInUser()
-    // this.dashboardService.getWeightOfLoggedInUser().subscribe(
-    //   (res) => {
-    //     console.log(res, 'ressssss');
-    //   },
-    //   err => {
-    //     console.log("error", err);
-    //   }
-    // );
-
-    // this.getApp.getWeightProfile().subscribe(
-    //   (res) => {
-    //     console.log(res, 'res');
-    //   }, (err) => {
-    //     console.log(err);
-    //   }
-    // )
-
-    // this.getApp.getToken().subscribe(
-    //   (res) => {
-    //     console.log(res, 'res');
-    //   }, (err) => {
-    //     console.log(err);
-    //   }
-    // )
+  
   }
 
   getDifferenceInDays(date) {
@@ -231,53 +191,7 @@ export class FourCComponent implements OnInit {
     this.weight = !this.weight;
     let avgMonthforWeight = [];
     let avgWeight = [];
-    // this.dashboardService.getweight().subscribe((result: Graph[]) => {
-    //   console.log(result);
-    //   result.forEach(x => {
-    //     avgMonthforWeight.push(x.avgMonth);
-    //     avgWeight.push(x.avgWeight);
-    //   });
-    //   console.log(avgMonthforWeight, avgWeight)
-    //   this.weightCharts = new Chart('canvasss', {
-    //     type: 'line',
-    //     data: {
-    //       labels: avgMonthforWeight,
-    //       // labels: ["1", "2", "3", "4"],
-    //       datasets: [
-    //         {
-    //           // data: avgWeight,
-    //           data: [1, 2, 3, 4, 4],
-    //           backgroundColor: 'transparent',
-    //           borderColor: 'rgba(224,116,0,0.8)',
-    //           pointBackgroundColor: 'rgba(224,116,0,1)',
-    //           pointBorderColor: '#fff',
-    //           pointHoverBackgroundColor: '#fff',
-    //           pointHoverBorderColor: 'rgba(224,116,0,0.8)',
-    //         }
-    //       ]
-    //     },
-    //     options: {
-    //       responsive: false,
-
-    //       legend: {
-    //         display: false
-    //       },
-    //       scales: {
-    //         xAxes: [{
-    //           display: true
-    //         }],
-    //         yAxes: [{
-    //           display: true,
-    //           // ticks: {
-    //           //   max: 400,
-    //           //   min: 85,
-    //           //   stepSize: 70
-    //           // }
-    //         }],
-    //       }
-    //     }
-    //   });
-    // });
+   
   }
 
   toggleContenteditableWeight(): void {
@@ -361,14 +275,10 @@ export class FourCComponent implements OnInit {
 
   toggleSubmitBlood() {
     this.contenteditable3 = false;
-    // this.details=;
     this.details = this.currentHBP;
     this.details = this.currentLBP;
     console.log(this.details);
-    //   console.log(this.details);
-    // this.details = this.currentBlood1;
     let dataBP = {
-      // highBP : this.high,
       pId: "2",
       highBP: this.currentHBP,
       lowBP: this.currentLBP

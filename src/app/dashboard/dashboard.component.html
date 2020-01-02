@@ -20,7 +20,6 @@
             </div>
             <div class="card-body">
               <span class="fa {{measurementProviderForWeight}} bgWhite cursor-pointer" style="font-size: 22px;"></span>
-              <!-- <span class="fa {{mesurementProvider}} text-muted cursor-pointer" style="font-size: 22px;"></span> -->
               <div class="row" [style.display]="!weight? 'none' : ''">
                 <div [attr.contenteditable]="contenteditable1" class="col-md-4 font-weight-bold data text-right"
                   [textContent]="currentWeight" [ngClass]="{'editTrue' : contenteditable1}"
@@ -80,18 +79,14 @@
                   class="col-md-4 font-weight-bold data {{colorClassForBP}} text-left" [textContent]="currentLBP"
                   (input)="currentLBP=$event.target.textContent">{{currentLBP}}
                 </div>
-                <!-- <div class="col-md-3 font-weight-bold data text-center" *ngIf="!contenteditable3"><span
-                    class="fa fa-arrow-down text-center" style="color: red"></span>
-                  <span class="fa fa-arrow-up text-center" *ngIf="false" style="color: green"></span>
-                </div> -->
+               
                 <div>
                   <button *ngIf="contenteditable3" class="btn btn-success" (click)="toggleContenteditableBlood()"
                     style="margin-left: 30px;margin-top: 20px;"><i class="fa fa-check"></i></button>
                 </div>
               </div>
               <div [style.display]="bloodpressure ? 'none' : 'block'">
-                <!-- <canvas height="80vh" baseChart [datasets]="lineChartData2" [labels]="lineChartLabels" [legend]="false"
-                  [options]="lineChartOptions" [colors]="lineChartColors2" [chartType]="lineChartType"></canvas> -->
+       
                 <canvas #canvass id="canvass" height="80vh">{{ BPChart }}</canvas>
               </div>
               <div class="medium mt-2 bgWhite">As of {{bpdate['days']}} {{bpdate['timer']}} ago</div>
@@ -115,7 +110,6 @@
         </div>
     
         <div class="row my-4 justify-content-center">
-          <!-- <div class="col-md-6"> -->
           <div class="card shadow-sm mr-4 cardWidth">
             <div class="card-header title ">
               Glucose Level <span class="float-right"><span
@@ -139,8 +133,7 @@
                 </div>
               </div>
               <div [style.display]="glucose ? 'none' : 'block'">
-                <!-- <canvas height="80vh" baseChart [datasets]="lineChartData1" [labels]="lineChartLabels" [legend]="false"
-                  [options]="lineChartOptions" [colors]="lineChartColors1" [chartType]="lineChartType"></canvas> -->
+              
                 <canvas id="canvasforGL" height="60vh">{{ glucoseChart }}</canvas>
               </div>
               <div class="medium mt-2 bgWhite">As of {{glucoseDate['days']}} {{glucoseDate['timer']}} ago</div>
@@ -155,12 +148,10 @@
                 <span class="fa fa-plus-square black cursor-pointer" (click)="toggleContenteditableGlucose()"></span>
                 &nbsp;
                 <span class="fa fa-undo black cursor-pointer" (click)="glucoseToggle()"></span>
-                <!-- <span class="fa fa-arrow-right text-muted cursor-pointer" (click)="toggleSubmitGlucose()"></span> -->
               </div>
             </div>
           </div>
-          <!-- </div> -->
-          <!-- <div class="col-md-6"> -->
+          
           <div class="card shadow-sm cardWidth">
             <div class="card-header title ">
               Cholesterol <span class="float-right"><span
@@ -186,12 +177,9 @@
               </div>
               <div [style.display]="cholesterol ? 'none' : 'block'">
     
-                <!-- <canvas height="80vh" baseChart [datasets]="lineChartData3" [labels]="lineChartLabels" [legend]="false"
-                  [options]="lineChartOptions" [colors]="lineChartColors3" [chartType]="lineChartType"></canvas> -->
                 <canvas id="canvasForCL" height="60vh">{{ cholesterolChart }}</canvas>
               </div>
               <div class="medium mt-2 bgWhite">As of {{cholesterolDate['days']}} {{cholesterolDate['timer']}} ago</div>
-              <!-- <button (click)="toggleContenteditable()">Edit Text Content</button> -->
             </div>
             <div class="card-footer ch-4">
               <div class="float-right">
@@ -203,11 +191,9 @@
                 <span class="fa fa-plus-square black cursor-pointer" (click)="toggleContenteditableCholestrol()"></span>
                 &nbsp;
                 <span class="fa fa-undo black cursor-pointer" (click)="cholesterolToggle()"></span>
-                <!-- <span class="fa fa-arrow-right text-muted cursor-pointer" (click)="toggleSubmitCholestrol()"></span> -->
               </div>
             </div>
           </div>
-          <!-- </div> -->
         </div>
       </div>
     </div>

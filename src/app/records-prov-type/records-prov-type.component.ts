@@ -24,12 +24,6 @@ export class RecordsProvTypeComponent implements OnInit {
     this.availableDocsForLabs = [];
     this.availableDocsForRecords = [];
 
-    // this.docService.getDocuments().subscribe((data) => {
-    //   console.log(data);
-    // }, (err) => {
-    //   console.log(err);
-    // })
-
     this.activatedRoute.paramMap.subscribe((data) => {
       console.log(data['params']['id'])
       this.availableDocsForVisits = [];
@@ -37,31 +31,7 @@ export class RecordsProvTypeComponent implements OnInit {
       this.availableDocsForLabs = [];
       this.availableDocsForRecords = [];
       this.state = data['params']['id']
-      // this.docService.getDocumentsByType(data['params']['id']).subscribe((document) => {
-      //   console.log(document['recordset'])
-      //   switch (this.state) {
-      //     case 'Visits': {
-      //       this.availableDocsForVisits = this.availableDocsForVisits.concat(document['recordset'])
-      //       console.log(this.availableDocsForVisits, 'i');
-      //       break;
-      //     }
-      //     case 'Imaging': {
-      //       this.availableDocsForImaging = this.availableDocsForImaging.concat(document['recordset'])
-      //       console.log(this.availableDocsForImaging, 'f');
-      //       break;
-      //     }
-      //     case 'Labs': {
-      //       this.availableDocsForLabs = this.availableDocsForLabs.concat(document['recordset'])
-      //       console.log(this.availableDocsForLabs, 't');
-      //       break;
-      //     }
-      //     default: {
-      //       this.availableDocsForRecords = this.availableDocsForRecords.concat(document['recordset'])
-      //       console.log(this.availableDocsForRecords, 'p');
-      //       break;
-      //     }
-      //   }
-      // })
+
     });
   }
 
@@ -141,11 +111,6 @@ export class RecordsProvTypeComponent implements OnInit {
   }
   addRecord(state) {
     console.log('addRecord() clicked');
-    // this.files.forEach((f, index) => {
-    //   // console.log(f.relativePath);
-    //   this.availableDocs.push(f)
-    //   this.files.splice(index, 1)
-    // });
 
     switch (state) {
       case 'Visits': {
@@ -166,24 +131,9 @@ export class RecordsProvTypeComponent implements OnInit {
       }
     }
 
-    /**  // You could upload it like this:
-         const formData = new FormData()
-         formData.append('logo', file, relativePath)
- 
-         // Headers
-         const headers = new HttpHeaders({
-           'security-token': 'mytoken'
-         })
- 
-         this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-         .subscribe(data => {
-           // Sanitized logo returned from backend
-         })
-         **/
   }
   deleteFile(file) {
     this.files.splice(file, 1)
   }
-
 
 }

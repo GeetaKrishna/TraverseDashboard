@@ -206,15 +206,6 @@ export class AppInfoComponent implements OnInit {
         this.route.navigateByUrl('admin/medicalCondition')
       }
       this.toast.success('App installed Successfully.')
-      // if (JSON.parse(localStorage.getItem("apps"))) {
-      //   if (JSON.parse(localStorage.getItem("apps")).length > 0) {
-      //     console.log("inside")
-      //     this.appsToBePushed = this.appsToBePushed.concat(JSON.parse(localStorage.getItem("apps")))
-      //   }
-      // }
-      // this.appsToBePushed.push(this.data)
-      // console.log(new Set(this.appsToBePushed));
-      // localStorage.setItem('apps', JSON.stringify(this.appsToBePushed))
       this.stopInstall = false;
     }, (error) => {
       this.toast.error(`Could'nt install app, Please try later.`)

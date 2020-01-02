@@ -1,92 +1,4 @@
 <div class="container-fluid mt-5 mb-5">
-    <!-- <div class="row" style="margin-top: 200px;">
-        <div class="col">
-            <mat-card class="bgCard">
-                <mat-card-content>
-                    <h3>
-                        Sign Up
-                    </h3>
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                        popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of
-                        Lorem Ipsum.
-                    </p>
-                </mat-card-content>
-                <div style="float: right">
-                    <span>Already have an Account? </span>
-                    <button mat-raised-button class="btn-info" [routerLink]="['/']">Login</button>
-                </div>
-            </mat-card>
-        </div>
-        <div class="col">
-            <mat-card class="signUpCard">
-                <mat-card-content>
-                    <form class="example-form">
-                        <div class="row">
-                            <div class="col">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="First Name" [formControl]="firstNameFormControl">
-                                    <mat-error *ngIf="firstNameFormControl.hasError('required')">
-                                        First Name is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                            <div class="col">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Last Name" [formControl]="lastNameFormControl">
-                                    <mat-error *ngIf="lastNameFormControl.hasError('required')">
-                                        Last Name is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Email" [formControl]="emailFormControl">
-                            <mat-error
-                                *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                                Please enter a valid email address
-                            </mat-error>
-                            <mat-error *ngIf="emailFormControl.hasError('required')">
-                                Email is <strong>required</strong>
-                            </mat-error>
-                        </mat-form-field>
-                        <div class="row">
-                            <div class="col">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Password" type="password"
-                                        [formControl]="passwordFormControl">
-                                    <mat-error *ngIf="passwordFormControl.hasError('required')">
-                                        Password is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                            <div class="col">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Confirm Password" type="password"
-                                        [formControl]="cfpasswordFormControl">
-                                    <mat-error *ngIf="cfpasswordFormControl.hasError('required')">
-                                        Confirm Password is <strong>required</strong>
-                                    </mat-error>
-                                    <mat-error
-                                        *ngIf="passwordFormControl != cfpasswordFormControl && !cfpasswordFormControl.hasError('required')">
-                                        Passwords must be <strong>same</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                        </div>
-                        <div style="float: right; margin-top: 60px;">
-                            <button mat-raised-button class="btn-primary" [routerLink]="['/home']">Sign Up</button>
-                        </div>
-
-                    </form>
-                </mat-card-content>
-            </mat-card>
-        </div>
-    </div> -->
     <div>
         <div class="row text-center" style="display: flex; max-width: 68%; margin: auto;">
             <div class="twoCard" style="color: white; ">
@@ -113,7 +25,6 @@
                                             First Name is <strong>required</strong>
                                         </mat-error>
                                     </mat-form-field>
-                                    <!-- <br> -->
                                 </div>
                                 <div class="col-sm-6">
                                     <mat-form-field>
@@ -124,7 +35,6 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <!-- <br> -->
                             <div class="row">
                                 <div class="col-sm-6">
                                     <mat-form-field>
@@ -139,9 +49,7 @@
                                             matTooltip="Loading" style="color: black;"
                                             class="spinner-border spinner-border-sm">
                                             <mat-icon>refresh</mat-icon>
-                                            <!-- <div class="spinner-grow spinner-grow-sm" role="status">
-                                             
-                                            </div> -->
+
                                         </button>
                                         <button *ngIf="emailTaken == false && !refreshEmail" mat-button
                                             style="color: green" matSuffix mat-icon-button
@@ -158,7 +66,6 @@
                                             Email is <strong>required</strong>
                                         </mat-error>
                                     </mat-form-field>
-                                    <!-- <br> -->
                                 </div>
                                 <div class="col-sm-6">
                                     <mat-form-field>
@@ -173,35 +80,21 @@
                                             matTooltip="Loading" style="color: black;"
                                             class="spinner-border spinner-border-sm">
                                             <mat-icon>refresh</mat-icon>
-                                            <!-- <div class="spinner-grow spinner-grow-sm" role="status">
-                                             
-                                            </div> -->
+
                                         </button>
                                         <button *ngIf="userNameTaken == false" mat-button style="color: green" matSuffix
                                             mat-icon-button matTooltip="That username is available.">
                                             <mat-icon>check_circle</mat-icon>
                                         </button>
-                                        <!-- <button mat-button style="color: red" *ngIf="userNameTaken == true" matSuffix
+                                        <button mat-button style="color: red" *ngIf="userNameTaken == true" matSuffix
                                             mat-icon-button matTooltip="That username is taken. Try another.">
                                             <mat-icon>warning</mat-icon>
-                                        </button> -->
-                                        <!-- 
-                                                    <ng-template #usernameAvialable>
-                                                        <button mat-button style="color: green" matSuffix mat-icon-button
-                                                            matTooltip="That username is available.">
-                                                            <mat-icon>check_circle</mat-icon>
-                                                        </button>
-                                                    </ng-template> -->
+                                        </button>
+
                                         <mat-error *ngIf="!userNameFormControl.hasError('required')">
                                             Please enter a valid UserName
                                         </mat-error>
-                                        <!-- <mat-error *ngIf="userNameTaken">
-                                                        That username is taken. Try another.
-                                                    </mat-error> -->
-                                        <!-- class="alert alert-danger" -->
-                                        <!-- <div style="color: rgb(216, 18, 18); font-size: 8px;" *ngIf="userNameTaken">
-                                                            That username is taken. Try another.
-                                                        </div> -->
+
                                         <mat-error *ngIf="userNameFormControl.hasError('required')">
                                             UserName is <strong>required</strong>
                                         </mat-error>
@@ -211,10 +104,8 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <mat-form-field>
-                                        <!-- <span matPrefix>+1 &nbsp;</span> -->
                                         <input type="tel" matInput placeholder="Telephone"
                                             [formControl]="numberFormControl">
-                                        <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm-6">
@@ -224,10 +115,8 @@
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
-                                    <!-- <br> -->
                                 </div>
                             </div>
-                            <!-- <br> -->
                             <div class="row">
                                 <div class="col-sm-6">
                                     <mat-form-field>
@@ -238,7 +127,6 @@
                                             <mat-option value="other">Other</mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                    <!-- <br> -->
                                 </div>
                                 <div class="col-sm-6">
                                     <mat-form-field>
@@ -261,7 +149,6 @@
                                             Height is <strong>required</strong>
                                         </mat-error>
                                     </mat-form-field>
-                                    <!-- <br> -->
                                 </div>
                                 <div class="col-sm-6">
                                     <mat-form-field>
@@ -273,10 +160,7 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <!-- <br>
-                            <br> -->
 
-                            <!-- <br> -->
                             <div class="row">
                                 <div class="col-sm-6">
                                     <mat-form-field>
@@ -286,7 +170,6 @@
                                             Password is <strong>required</strong>
                                         </mat-error>
                                     </mat-form-field>
-                                    <!-- <br> -->
                                 </div>
                                 <div class="col-sm-6">
                                     <mat-form-field>
@@ -303,7 +186,6 @@
                                 </div>
                             </div>
 
-                            <!-- <br> -->
 
                             <br>
                             <div>
@@ -320,7 +202,6 @@
                     <div>
                         <div class="text-center mt-2" style="color: rgb(0, 0, 0);">
                             <span style="font-size: 20px;">Already have an Account? </span>
-                            <!-- <button mat-raised-button class="btn-secondary" [routerLink]="['/']">Login</button> -->
                             <a href="" [routerLink]="['/']" style="font-weight: bold; font-size: 20px;">Login</a>
 
                         </div>
@@ -330,62 +211,4 @@
         </div>
     </div>
 
-
-    <!-- <div class="card-body">
-            <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                    <label for="fname">First Name</label>
-                    <input type="text" formControlName="fname" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.fname.errors }" />
-                    <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
-                        <div *ngIf="f.fname.errors.required">First Name is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="lname">Last Name</label>
-                    <input type="text" formControlName="lname" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.lname.errors }" />
-                    <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
-                        <div *ngIf="f.lname.errors.required">Last Name is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" formControlName="email" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">Email Id is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" formControlName="password" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Password is required</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password">Confirm Password</label>
-                    <input type="password" formControlName="cfpassword" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.cfpassword.errors }" />
-                    <div *ngIf="submitted && f.cfpassword.errors" class="invalid-feedback">
-                        <div *ngIf="f.cfpassword.errors.required">Password is required</div>
-                        <div *ngIf="f.password != f.cfpassword">Passwords must be same</div>
-                    </div>
-                </div>
-                <button [disabled]="loading" type="submit" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Sign Up
-                </button>
-                <div style="float: right">
-                    <span style="font-size: 14px">Already have an Account?  </span>
-                    <button [disabled]="loading" type="button" [routerLink]="['/']"  class="btn btn-secondary">
-                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                        Login
-                    </button>
-                </div>
-                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-            </form> 
-         </div> -->
 </div>

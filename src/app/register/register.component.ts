@@ -1,17 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../_services/authentication.service';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { UserService } from '../_services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import * as _moment from 'moment';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+const moment = _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+// use Interface to reuse the code block
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'L',
+  },
+  display: {
+    dateInput: 'L',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'L',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class RegisterComponent implements OnInit {
   subject: Subject<any> = new Subject();
@@ -29,7 +56,6 @@ export class RegisterComponent implements OnInit {
   ]);
 
   // use updateOn for performance ;
-
   userNameFormControl = new FormControl('', {
     validators: Validators.required
   });
@@ -43,7 +69,7 @@ export class RegisterComponent implements OnInit {
   numberFormControl = new FormControl('', [
     Validators.required,
   ]);
-  dateFormControl = new FormControl('', [
+  dateFormControl = new FormControl(moment().format('MM/DD/YYYY'), [
     Validators.required,
   ]);
   heightFormControl = new FormControl('', [
@@ -58,6 +84,7 @@ export class RegisterComponent implements OnInit {
   cfpasswordFormControl = new FormControl('', [
     Validators.required,
   ]);
+
   userNameTaken: any;
   usernameAvialable: boolean;
   emailTaken: boolean;
@@ -80,9 +107,6 @@ export class RegisterComponent implements OnInit {
 
     this.userNameFormControl.valueChanges.subscribe((data) => {
       console.log(data);
-      // this.usernameAvialable = false;
-      // this.userNameTaken = false;
-
       if (this.userNameTaken == true || this.userNameTaken == false) {
         this.userNameTaken = "True";
       }
@@ -92,8 +116,6 @@ export class RegisterComponent implements OnInit {
 
     this.emailFormControl.valueChanges.subscribe((data) => {
       console.log(data);
-      // this.usernameAvialable = false;
-      // this.userNameTaken = false;
 
       if (this.emailTaken == true || this.emailTaken == false) {
         this.userNameTaken = "True";
@@ -118,17 +140,8 @@ export class RegisterComponent implements OnInit {
         this.refresh = false;
 
         this.authenticationService.verifyUserName(k).subscribe((data: boolean) => {
-          let usernameTake: Boolean
           console.log(data);
           this.userNameTaken = data;
-          // if (data) {
-          //   this.usernameAvialable = true
-          //   this.userNameTaken = false;
-          // }
-          // else {
-            // this.usernameAvialable = false
-          //   this.userNameTaken = true
-          // }
         })
       })
     this.subjectEmail
@@ -156,7 +169,7 @@ export class RegisterComponent implements OnInit {
   emailValidation(email) {
     console.log(email);
     this.refreshEmail = true;
-    this.subjectEmail.next( email);
+    this.subjectEmail.next(email);
   }
 
   changeClient(value) {
@@ -169,39 +182,12 @@ export class RegisterComponent implements OnInit {
     console.log(value);
   }
   dateInput(value) {
-    console.log(this.dateFormControl.value);
     this.selectedDate = new Date(value).toLocaleDateString().split("/").reverse().join('-')
     console.log(this.selectedDate);
-  }
-  // convenience getter for easy access to form fields
-  get f() { return this.signUpForm.controls; }
-
-  onSubmit() {
-    this.submitted = true;
-    // this.router.navigate(['login'])
-
-    // stop here if form is invalid
-
-    // if (this.loginForm.invalid) {
-    //     return;
-    // }
-
-    // this.loading = true;
-    // this.authenticationService.login(this.f.username.value, this.f.password.value)
-    //     .pipe(first())
-    //     .subscribe(
-    //         data => {
-    //             this.router.navigate([this.returnUrl]);
-    // },
-    //         error => {https://github.com/TeamWertarbyte/material-ui-chip-input/blob/master/src/ChipInput.js
-    //             this.error = error;
-    //             this.loading = false;
-    //         });
   }
 
   register(FNAME, LNAME, USERNAME, PHONENUMBER, EMAIL, PWD, HEIGHT, WEIGHT) {
     this.signUpSuccess = true;
-    // console.log(FNAME.value, LNAME.value, USERNAME.value, EMAIL.value, PWD.value, this.selectedVal);
     let registrationData = {
       "dob": this.selectedDate,
       "email": EMAIL.value,
@@ -212,7 +198,6 @@ export class RegisterComponent implements OnInit {
       "phoneNumber": PHONENUMBER.value,
       "role": this.selectedVal,
       "pin": 0,
-      // "userId": 0,
       "userName": USERNAME.value
     }
     this.registrationService.register(registrationData, HEIGHT.value, WEIGHT.value).subscribe((data) => {

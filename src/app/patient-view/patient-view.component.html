@@ -26,7 +26,6 @@
                                 {url: '../../assets/patientView/newMedLabs.png', name: 'Labs'}]">
                                     <td>
                                         <a href="#">
-                                            <!-- <i class="fa fa-flask" aria-hidden="true"></i> -->
                                             <img src="{{p.url}}" alt="Image not available"
                                                 style="height: 90px; width: 90px;">
                                             <br />
@@ -52,16 +51,11 @@
                                     </button>
                                 </mat-form-field>
                             </div>
-                            <!-- <div class="col-md-6 inner-addon right-addon">
-                            <i class="fa fa-search"></i>
-                            <input type="text" class="form-control" placeholder="Find Patient" [(ngModel)]="searchText"
-                                style="width:250px; float:right" />
-                        </div> -->
+                           
                         </div>
                         <div class="verLine"></div>
 
                         <div class="mt-2">
-                            <!-- | filter: searchText; let i = index -->
                             <div class="alert alert-primary text-center"
                                 *ngFor="let patient of patientsDetails | filter: searchText; let i = index"
                                 role="alert">
@@ -84,8 +78,7 @@
                                             {{patient.prespcriptions}} Prespcriptions
 
                                         </div>
-                                        <!-- <div class="row">
-                                    </div> -->
+                                        
                                     </div>
                                     <div class="col-md-1">
                                         <i class="fa fa-comments fa-stack-2x" style="color: black;"
@@ -94,40 +87,7 @@
                                 </div>
 
                             </div>
-                            <!-- <div class="alert alert-success text-center" role="alert">
-                            <i class="fa fa-2x fa-calendar " style="float: left;"></i>
-                            <span class="mr-5 ">
-                                Appointment with Dr.Stout on 06/23/19
-                            </span>
-                            <span style="float: right;">
-                                <i class="fa fa-map-marker mr-2"></i>
-                            </span>
-                            <span style="float: right;">
-                                <i class="fa fa-clock-o mr-2"></i>
-                            </span>
-                        </div>
-                        <div class="alert alert-orange text-center" role="alert">
-                            <i class="fa fa-2x fa-file" style="float: left;"></i>
-                            <span class="mr-5 ">
-                                Medical Record last updated on 02/03/19
-                            </span>
-                            <span style="float: right;">
-                                <i class="fa fa-cloud-download mr-2"></i>
-                            </span>
-                            <span style="float: right;">
-                                <i class="fa fa-eye mr-2"></i>
-                            </span>
-
-                        </div>
-                        <div class="alert alert-warning text-center" role="alert">
-                            <i class="fa fa-2x fa-plus" style="float: left;"></i>
-                            <span class="mr-5 ">
-                                Rx for Keflex on 01/12/19
-                            </span>
-                            <span style="float: right;">
-                                <i class="fa fa-question-circle mr-2"></i>
-                            </span>
-                        </div> -->
+                           
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
   <div style="height: 600px; width: 100% !important;">
       <div class="input-group md-form form-sm form-2 pl-0">
 
-        
           <mat-form-field style="width: 100%;">
               <input matInput type="text" placeholder="Find document by name, date, type, etc..."
                   [formControl]="findType">
@@ -15,12 +14,7 @@
               <div class="dragDrop">
                   <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" accept="image/*"
                       (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" multiple="true">
-                      <!-- <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                        Drag and Drop Files here.
-                          <i class="fa fa-arrows-alt"></i>
-                          <div style=" background-image: url('../assets/icons-home/motion01.png')"> </div> -->
-                      <!-- <button type="button" class="btn" (click)="openFileSelector()">Browse</button> 
-                      </ng-template> -->
+              
                       <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
                           <!-- Drag and Drop Files here. -->
                           <button type="button" class="btn bgWhite" (click)="openFileSelector()">Drag and Drop here Or
@@ -138,12 +132,3 @@
           </div>
       </div>
   </div>
-
-
-  <!-- <ng-template #test>
-      {{file.file_name}}
-  </ng-template>
-
-  <p *ngIf="file.relativePath; else test">
-      {{file.relativePath}}
-  </p> -->

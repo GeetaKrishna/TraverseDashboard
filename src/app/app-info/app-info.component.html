@@ -2,17 +2,10 @@
     <mat-nav-list>
         <h4>{{app.APPNAME}}</h4>
         <p class="text-justify" style="text-transform: uppercase;">
-            <!-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-            the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-            of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-            but also the leap into electronic typesetting, remaining essentially unchanged. It was
-            popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including versions of
-            Lorem Ipsum. -->
+            
             {{app.APP_DETAILS}}
         </p>
         <div *ngIf="app.APPNAME == 'Four Corners Of Health' && !app.installed">
-            <!-- <p>hi</p> -->
             <form action="">
                 <p>
                     Please enter the following details
@@ -54,15 +47,11 @@
 
             </form>
         </div>
-        <!-- <button mat-flat-button (click)="updateApp(id)">Update</button> &nbsp; -->
         <button (click)="installApp(app.APP_ID, app)" [disabled]="stopInstall" *ngIf="!app.installed"
             class="btn btn-secondary mr-2">Install</button>
         <div *ngIf="app.installed">
             <button class="btn btn-success mr-2" (click)="navigateToApp(app.APP_ID)">Open</button>
             <button class="btn btn-danger mr-2" (click)="uninstallApp(app.APP_ID)">Uninstall</button>
         </div>
-        <!-- <ng-template #uninstall>
-
-        </ng-template> -->
     </mat-nav-list>
 </div>

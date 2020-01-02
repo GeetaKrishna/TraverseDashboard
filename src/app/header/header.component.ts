@@ -1,7 +1,7 @@
-import { Component, OnInit, ElementRef, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { UserService } from '../_services/user.service';
 import { ForgotPasswordPage3Component } from '../forgot-password-page3/forgot-password-page3.component';
@@ -98,12 +98,6 @@ export class AddPatientComponent {
   patientProfile(patientName, height, weight) {
     console.log(patientName, height, weight);
     console.log(this.selected)
-    // let body = new FormData()
-    // body.append('height', height.value)
-    // body.append('weight', weight.value)
-    // body.append('patientName', patientName.value)
-    // body.append('relation', this.selected)
-    // body.append(userId, height.value)
 
     this.userService.registerPatient({
       "height": parseFloat(height.value),

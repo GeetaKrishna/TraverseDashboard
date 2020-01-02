@@ -1,16 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { MedicationService } from '../_services/medication.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatDialog } from '@angular/material';
+import { MatDialog, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
 import { AddMedComponent } from '../add-med/add-med.component';
 import * as moment from 'moment';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'L',
+  },
+  display: {
+    dateInput: 'L',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'L',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-medications',
   templateUrl: './medications.component.html',
-  styleUrls: ['./medications.component.css']
+  styleUrls: ['./medications.component.css'],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class MedicationsComponent implements OnInit {
 
@@ -20,45 +43,41 @@ export class MedicationsComponent implements OnInit {
       "medicationImage": "assets/icons-home/motion01.png",
       "color": "lightgrey"
     },
+
     // {
     //   "appId": 2,
     //   "medicationDetails": "This is Benazepril",
     //   "medication": "Benazepril",
     //   "medicationImage": "assets/medications/benazepril.jpg",
+    //   "startDate": new Date(),
+    //   "endDate": new Date(),
     //   "medicationIndication": "warn",// alerts user for potential contraindications
-    //   "medicationSchedule": "twice",
+    //   "instruction": "twice",
     //   "color": "lightblue"
     // },
   ]
 
   addMedicationToggle: boolean = true;
   medName = new FormControl('');
-  // new FormControl({value: 'Nancy', disabled: true}, Validators.required),
   startTime = new FormControl({ value: '', disabled: true });
   endTime = new FormControl({ value: '', disabled: true });
-  medImage = new FormControl('');
   medIntake = new FormControl('');
-  medDesc = new FormControl('');
-  medMeal = new FormControl('');
-  imageData: any;
   flag: boolean = false;
-  editedImageData: any;
-  setImageEditFlag: boolean = true;
-  showPres: boolean;
   medicationDetails: any;
   description: any;
   newData: {};
+  medicationDescription: any;
+
   constructor(
-    private http: HttpClient,
     private medicationService: MedicationService,
     private sanitizer: DomSanitizer, public dialog: MatDialog) { }
+
   max = 100;
   min = 0;
   step = 1;
   thumbLabel = true;
   sliderValue = 0;
-  animal: string;
-  name: string;
+
   colors = ['ch-1',
     'ch-1',
     'ch-1',
@@ -94,27 +113,6 @@ export class MedicationsComponent implements OnInit {
 
               })
             })
-            // res.forEach((element, index) => {
-            //   if (element['medid'] != 44) {
-            //     let colors = ['ch-1',
-            //       'ch-2',
-            //       'ch-3',
-            //       'ch-4',
-            //       'ch-0']
-            //     let t = {};
-            //     if (index % 2 == 0) {
-            //       t['medicationIndication'] = 'warn'
-            //     }
-            //     t['color'] = colors[index];
-            //     t['id'] = element['medid']
-            //     t['medicationSchedule'] = element['medschedule'];
-            //     t['medicationDetails'] = element['description'];
-            //     t['medication'] = element['medname'];
-            //     t['image'] = element['medimage']
-            //     t['medicationImage'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${element['medimage']}`);
-            //     this.apps.push(t);
-            //   }
-            // });
           },
           err => {
             console.log("error", err);
@@ -124,9 +122,11 @@ export class MedicationsComponent implements OnInit {
         console.log(err);
       })
   }
+
   saveCancelled() {
     this.flag = false;
   }
+
   saveNewData(medicationDetail, index) {
     console.log(medicationDetail);
     console.log(this.apps[index])
@@ -143,11 +143,10 @@ export class MedicationsComponent implements OnInit {
 
     this.medicationService.editPrescription(this.newData).subscribe((data) => {
       console.log(data, 'after updating');
-      // .replace('/', '-')
 
-      this.apps[index].startDate = moment(this.startTime.value).format("YYYY-MM-DD")
-      this.apps[index].endDate = moment(this.endTime.value).format("YYYY-MM-DD"),
-        this.apps[index].instruction = this.medIntake.value
+      this.apps[index].startDate = moment(this.startTime.value).format("YYYY-MM-DD");
+      this.apps[index].endDate = moment(this.endTime.value).format("YYYY-MM-DD");
+      this.apps[index].instruction = this.medIntake.value;
 
       // this.apps['index'].id = medicationDetail.dosage,
       // this.apps['index'].dosage = medicationDetail.dosage,
@@ -164,15 +163,16 @@ export class MedicationsComponent implements OnInit {
   editMedication(medicationDetail) {
     console.log(medicationDetail, "details");
     this.flag = !this.flag;
-    // this.endTime = medicationDetail.endDate 
-    // this.startTime = medicationDetail.startDate 
+    this.endTime.setValue(medicationDetail.endDate);
+    this.startTime.setValue(medicationDetail.startDate);
+    this.medIntake.setValue(medicationDetail.instruction);
     // dosage: "23"
     // endDate: "2020-01-02"
     // id: 4
     // instruction: "Twice"
     // medicationId: 4
     // pid: 1
-    // startDate: "2020-02-01"
+
     // if (!this.flag) {
     //   console.log(medicationDetail, 'medData');
     //   this.medicationService.editPrescription({
@@ -192,43 +192,11 @@ export class MedicationsComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddMedComponent, {
-      data: { name: this.name, animal: this.animal }
-    });
+    const dialogRef = this.dialog.open(AddMedComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
+      this.medicationDescription = result;
     });
-  }
-
-  imageInput(event) {
-    let file = event.target.files[0];
-    this.imageData = file;
-    console.log(this.imageData);
-  }
-
-  editImageInput(event, index, data) {
-    this.setImageEditFlag = false;
-    let file = event.target.files[0];
-    let reader = new FileReader();
-    this.editedImageData = file;
-    let oldImageValue = data[index].medicationImage;
-    reader.onload = function (e) {
-      console.log(e.target['result'])
-      data[index].medicationImage = e.target['result'];
-    }
-    reader.readAsDataURL(file);
-  }
-
-  processFile(theFile) {
-    return function (e) {
-      let fileByteArray = [];
-      var theBytes = e.target.result;
-      fileByteArray.push(theBytes);
-      for (var i = 0; i < fileByteArray.length; i++) {
-        document.getElementById('file').innerText += fileByteArray[i];
-      }
-    }
   }
 
   toggleMedication() {
@@ -300,27 +268,6 @@ export class MedicationsComponent implements OnInit {
       console.log(err);
     })
   }
-  //   dateInput(value, dateType){
-  // console.log(value, dateType, this.endTime, this.startTime);
-  //   }
-  //Function to convert base64 String to ByteArray
-
-  b64toBlob(b64Data, contentType = '', sliceSize = 512) {
-    const byteCharacters = atob(b64Data);
-    const byteArrays = [];
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      const slice = byteCharacters.slice(offset, offset + sliceSize);
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-    const blob = new Blob(byteArrays, { type: contentType });
-    return blob;
-  }
-
 
   test(test) {
     console.log(test, this.medName);

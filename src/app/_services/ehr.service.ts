@@ -21,4 +21,5 @@ getDocuments(){
    console.log(body.files);
    return this.http.post(`${environment.apiUrl}/ehr/records/uploadFile/${parseInt(localStorage.getItem("patientId"))}/${DocumentType}`, body)
  }
+
 }

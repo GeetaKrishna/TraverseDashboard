@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -27,7 +26,7 @@ export class InsuranceService {
     return this.http.get(this.url + `/insurance/claims/${patientId}`);
   }
 
-  getAllPatientsList(){
+  getAllPatientsList() {
     return this.http.get(this.url + `/patients/u/${localStorage.getItem("userId")}`);
   }
 

@@ -44,7 +44,6 @@ export class ForgotPasswordPage2Component implements OnInit {
   }
 
   cancel() {
-    // this.matDialog.closeAll();
     this.router.navigateByUrl('/')
   }
 }

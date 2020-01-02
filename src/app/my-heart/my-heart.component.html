@@ -12,8 +12,7 @@
                 </div>
             </div>
         </div>
-        <!--    [ngClass]="app.appName === 'Distance' ? 'ch-0' : app.appName === 'Steps / Activity' ? 'ch-1': app.appName === 'HeartRate' ? 'ch-2' : app.appName === 'Blood Pressure' ? 'ch-3': app.appName === 'Appointment' ? 'ch-4' : app.appName === 'EKG' ? 'cardNew': app.appName === 'Medication' ? 'ch-0': app.appName === 'Lab' ? 'ch-5': ''">
-         -->
+
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-md-3 col-sm-6 p-4" *ngFor="let app of apps">
@@ -145,7 +144,6 @@
                                 </div>
                                 <div *ngSwitchCase="'Distance'">
                                     <div class="row justify-content-center">
-                                        <!-- <img src={{app.url}} height="auto" width="50%" style="mix-blend-mode: multiply;"/>  -->
                                         <img src={{app.url}} style="mix-blend-mode: multiply; height: 134px;
                                                     width: 134px;" />
                                         <div class="col">
@@ -173,7 +171,3 @@
         </div>
     </div>
 </div>
-
-<!-- 
-<a href="{{app.routeScreen}}">
-    </a> -->

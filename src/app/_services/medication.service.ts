@@ -26,18 +26,6 @@ export class MedicationService {
     return this.http.post(`${environment.apiUrl}/medications/prescriptions/add`, prescription)
   }
 
-  addMedicationPP(jsonObject) {
-    this.http.post(`${environment.apiUrl}/api/medications/addPP`, jsonObject).toPromise().then((data) => {
-      console.log("returned object" + JSON.stringify(data));
-    })
-  }
-
-  addMedicationPPD(jsonObject) {
-    this.http.post(`${environment.apiUrl}/api/medications/addPPD`, jsonObject).toPromise().then((data) => {
-      console.log("returned object" + JSON.stringify(data));
-    })
-  }
-
   editMedications(id, description, name, schedule, body) {
     return this.http.put(`${environment.apiUrl}/api/medications/editmed/${id}?DESCRIPTION=${description}&MEDNAME=${name}&MEDSCHEDULE=${schedule}`, body);
   }

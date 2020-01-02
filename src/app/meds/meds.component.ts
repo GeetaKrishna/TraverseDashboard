@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { MedicationService } from '../_services/medication.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { AddMedComponent } from '../add-med/add-med.component';
 
 @Component({
@@ -12,7 +11,6 @@ import { AddMedComponent } from '../add-med/add-med.component';
   styleUrls: ['./meds.component.css']
 })
 export class MedsComponent implements OnInit {
-
 
   addMedicationToggle: boolean = true;
   medName = new FormControl('');
@@ -31,15 +29,6 @@ export class MedsComponent implements OnInit {
       "medicationImage": "assets/icons-home/motion01.png",
       "color": "lightgrey"
     },
-    // {
-    //   "appId": 2,
-    //   "medicationDetails": "This is Benazepril",
-    //   "medication": "Benazepril",
-    //   "medicationImage": "assets/medications/benazepril.jpg",
-    //   "medicationIndication": "warn",// alerts user for potential contraindications
-    //   "medicationSchedule": "twice",
-    //   "color": "lightblue"
-    // },
   ]
 
   constructor(public dialog: MatDialog, private medicationService: MedicationService, private sanitizer: DomSanitizer,) { }
@@ -92,7 +81,6 @@ export class MedsComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddMedComponent, {
-      // data: { name: this.name, animal: this.animal }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

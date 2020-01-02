@@ -7,7 +7,6 @@ import { Graph } from '../graph';
 import * as Chart from 'chart.js';
 import { GetAppsService } from '../_services/get-apps.service';
 import { DatePipe } from '@angular/common';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,7 +38,6 @@ export class DashboardComponent implements OnInit {
 
   currentHBP;
   currentLBP;
-  // currentBlood1;
   highBp;
   lowBp;
   response;
@@ -91,14 +89,6 @@ export class DashboardComponent implements OnInit {
     'June 2019',
   ];
   public lineChartColors: Color[] = [
-    /*{
-      backgroundColor: 'transparent',
-      borderColor: 'rgba(46,134,171,1)',
-      pointBackgroundColor: 'rgba(46,134,171,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(46,134,171,1)',
-    },*/
     {
       backgroundColor: 'transparent',
       borderColor: 'rgba(242,87,87,0.8)',
@@ -107,14 +97,7 @@ export class DashboardComponent implements OnInit {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(242,87,87,0.8)',
     },
-    /*{
-      backgroundColor: 'transparent',
-      borderColor: 'rgba(224,116,0,0.8)',
-      pointBackgroundColor: 'rgba(224,116,0,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(224,116,0,0.8)',
-    },*/
+    
   ];
 
   public lineChartData: ChartDataSets[] = [
@@ -333,69 +316,37 @@ export class DashboardComponent implements OnInit {
     // hbp >= 161, lbp > 100 ==> Hypertension Stage -2,  Consult Doctor Immediately
 
 
-
     if (currentHBP <= 90 && currentLBP <= 60) {
       this.dangerStatement = "Low, Consult Doctor Immediately";
       this.colorClassForBP = 'dark-red'
       this.presentedInfo = 'fa-exclamation-triangle'
-
+      this.colorPresentedInfo = this.colorClassForBP
     }
     else if (currentHBP <= 120 && currentHBP >= 91 && currentLBP >= 61 && currentLBP < 80) {
       this.dangerStatement = "Normal";
       this.colorClassForBP = 'green'
       this.presentedInfo = 'fa-check-circle'
-      //   this.colorPresentedInfo = this.colorClassForBP
+      this.colorPresentedInfo = this.colorClassForBP
     }
     else if (currentHBP <= 140 && currentHBP >= 121 && currentLBP >= 81 && currentLBP < 90) {
       this.dangerStatement = "Pre-Hypertension";
       this.colorClassForBP = 'orange'
       this.presentedInfo = 'fa-exclamation-triangle'
+      this.colorPresentedInfo = this.colorClassForBP
     }
     else if (currentHBP <= 160 && currentHBP >= 141 && currentLBP >= 91 && currentLBP < 100) {
       this.dangerStatement = "Hypertension Stage-1, Consult Doctor";
       this.colorClassForBP = 'darkRed'
       this.presentedInfo = 'fa-exclamation-triangle'
+      this.colorPresentedInfo = this.colorClassForBP
     }
     else if (currentHBP >= 161 && currentLBP > 100) {
       this.dangerStatement = "Hypertension Stage -2,  Consult Doctor Immediately";
       this.colorClassForBP = 'darkRed'
       this.presentedInfo = 'fa-exclamation-triangle'
+      this.colorPresentedInfo = this.colorClassForBP
     }
 
-
-    // if (currentHBP < 120 && currentLBP < 80) {
-    //   // Normal
-    //   this.colorClassForBP = 'green'
-    //   this.presentedInfo = 'fa-check-circle'
-
-    // } else if ((120 <= currentHBP && currentHBP < 129) && currentLBP < 80) {
-
-    //   this.colorClassForBP = 'yellow'
-    //   this.presentedInfo = 'fa-exclamation-triangle'
-    //   this.colorPresentedInfo = this.colorClassForBP
-    // } else if ((129 <= currentHBP && currentHBP < 139) || (80 <= currentLBP && currentLBP < 89)) {
-    //   this.colorClassForBP = 'darkYellow'
-    //   this.presentedInfo = 'fa-exclamation-triangle'
-    //   this.colorPresentedInfo = this.colorClassForBP
-
-    // } else if ((139 <= currentHBP && currentHBP < 180) || (90 <= currentLBP && currentLBP < 120)) {
-    //   this.colorClassForBP = 'red'
-    //   this.presentedInfo = 'fa-exclamation-triangle'
-    //   this.colorPresentedInfo = this.colorClassForBP
-
-    // } else if (currentHBP >= 180 && currentLBP > 120) {
-    //   this.colorClassForBP = 'darkRed'
-    //   this.presentedInfo = 'fa-exclamation-triangle'
-    //   this.colorPresentedInfo = this.colorClassForBP
-
-    // } else if (currentHBP >= 180 || currentLBP > 120) {
-    //   this.colorClassForBP = 'darkRed'
-    //   this.presentedInfo = 'fa-exclamation-triangle'
-    //   this.colorPresentedInfo = this.colorClassForBP
-
-    // } else {
-    //   this.colorClassForBP = 'grey'
-    // }
   }
 
   weightToggle() {
@@ -638,8 +589,6 @@ export class DashboardComponent implements OnInit {
     return true;
   }
 
-
-
   toggleContenteditableCholestrol(): void {
     this.contenteditable4 = !this.contenteditable4;
     if (!this.contenteditable4) {
@@ -675,7 +624,7 @@ export class DashboardComponent implements OnInit {
   toggleSubmitWeight(): void {
     this.contenteditable1 = false;
     this.details = this.currentWeight;
-console.log(localStorage.getItem("patientId"), "patientId");
+    console.log(localStorage.getItem("patientId"), "patientId");
 
     let json = {
       "pid": localStorage.getItem("patientId"),
@@ -684,11 +633,6 @@ console.log(localStorage.getItem("patientId"), "patientId");
       "weightDate": new Date().toISOString()
     }
     this.dashboardService.postWeight(json).subscribe((data) => {
-
-      // BMI: "Infinity"
-      // BMI status: "Normal Weight"
-      // TimeStamp: "2019-12-10T13:46:12.370+0000"
-      // currentWeight: 35
 
       console.log(data, 'dasssssssssssssh');
       this.WeightDate = this.getDifferenceInDays(data['weightDate'])

@@ -30,7 +30,7 @@ export class DashboardService {
 
   // get recent weight of patient
   getCurrentWeight() {
-    return this.http.get(`${environment.apiUrl}/fc/weight/current/${this.patientId}`);
+    return this.http.get(`${this.url}/fc/weight/current/${this.patientId}`);
   }
 
   //weights for current year
@@ -57,7 +57,7 @@ export class DashboardService {
     return this.http.get(this.url + `/fc/bp/top2/${this.patientId}`);
   }
 
-  // Glucose funcs
+  // Glucose 
 
   //add Glucose
   sendGlucose(jsonObject) {
@@ -76,7 +76,7 @@ export class DashboardService {
     return this.http.get(this.url + `/fc/gl/${this.patientId}`);
   }
 
-  // Cholesterol funcs
+  // Cholesterol 
 
   // add cholesterol
   sendCholesterol(jsonObject) {
@@ -92,7 +92,7 @@ export class DashboardService {
     return this.http.get(this.url + `/fc/cl/${this.patientId}`);
   }
 
-  // Blood funcs
+  // Blood Pressure
 
   postBloodPressure(jsonObject) {
     return this.http.post(this.url + '/fc/bp/add', jsonObject)

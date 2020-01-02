@@ -22,12 +22,6 @@ export class LabReportTypeComponent implements OnInit {
     this.availableDocsForLabs = [];
     this.availableDocsForMedications = [];
 
-    // this.docService.getDocuments().subscribe((data) => {
-    //   console.log(data);
-    // }, (err) => {
-    //   console.log(err);
-    // })
-
     this.activatedRoute.paramMap.subscribe((data) => {
       console.log(data['params']['id'])
       this.availableDocsForMedicalRecords = [];
@@ -107,7 +101,6 @@ export class LabReportTypeComponent implements OnInit {
             switch (type) {
               case 'MedicalRecords':
                 this.availableDocsForMedicalRecords.push(data)
-                //formdata
                 break;
               case 'Imaging':
                 this.availableDocsForImaging.push(data);
@@ -133,11 +126,6 @@ export class LabReportTypeComponent implements OnInit {
   }
   addRecord(state) {
     console.log('addRecord() clicked');
-    // this.files.forEach((f, index) => {
-    //   // console.log(f.relativePath);
-    //   this.availableDocs.push(f)
-    //   this.files.splice(index, 1)
-    // });
 
     switch (state) {
       case 'MedicalRecords': {
@@ -158,20 +146,6 @@ export class LabReportTypeComponent implements OnInit {
       }
     }
 
-    /**  // You could upload it like this:
-         const formData = new FormData()
-         formData.append('logo', file, relativePath)
- 
-         // Headers
-         const headers = new HttpHeaders({
-           'security-token': 'mytoken'
-         })
- 
-         this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-         .subscribe(data => {
-           // Sanitized logo returned from backend
-         })
-         **/
   }
   deleteFile(file) {
     this.files.splice(file, 1)

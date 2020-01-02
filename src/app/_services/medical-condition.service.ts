@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -19,8 +19,6 @@ export class MedicalConditionService {
   }
 
   editMedicalCondition(id,conditionName, linkToApi, severity, triggers, body) {
-
-    // return this.http.put(`${environment.apiUrl}/editmed/${id}`,{params: params}, body);
     return this.http.put(`${environment.apiUrl}/editmed/${id}?conditionName=${conditionName}&linkToApi=${linkToApi}&severity=${severity}&triggers=${triggers}`, body);
   }
 

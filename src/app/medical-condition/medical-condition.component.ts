@@ -19,24 +19,6 @@ export class MedicalConditionComponent implements OnInit {
       "color": "lightgrey"
     },
     // {
-    //   "appId": 2,
-    //   "medication": "Gout",
-    //   "medicationImage": "assets/medicalCondition/gout.jpg",
-    //   "diagnoised": "First Diagnosed 6/12/2016",
-    //   "severity": "Chronic",
-    //   "restrictions": "Diet based Triggers",
-    //   "color": "lightblue"
-    // },
-    // {
-    //   "appId": 4,
-    //   "medication": "Peanuts Allergy",
-    //   "medicationImage": "assets/medicalCondition/peanuts.png",
-    //   "diagnoised": "Since childhood",
-    //   "severity": "Mild, small quantities allowed",
-    //   "restrictions": "No other restrictions",
-    //   "color": "lightpink"
-    // },
-    // {
     //   "appId": 5,
     //   "medication": "High Blood Pressure",
     //   "medicationImage": "assets/medicalCondition/highBP.jpg",
@@ -86,7 +68,6 @@ export class MedicalConditionComponent implements OnInit {
           this.apps.push(t)
         })
 
-        // this.apps = this.apps.concat(res)
       },
       err => {
         console.log("error", err);
@@ -133,7 +114,6 @@ export class MedicalConditionComponent implements OnInit {
 
     reader.readAsDataURL(this.imageData);
 
-    // console.log(newMedicalCondition, 'data');
     let formDataa = new FormData();
     formDataa.append("conditionName", this.conditionName.value)
     formDataa.append("linkToApi", `http://www.google.com/${this.conditionName.value}`)

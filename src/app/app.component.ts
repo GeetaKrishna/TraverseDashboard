@@ -10,20 +10,10 @@ export class AppComponent {
   title = 'dashboard';
   show: boolean;
   constructor(public router: Router, public route: ActivatedRoute) {
-    // router.events
-    //   .filter(e => e instanceof NavigationEnd)
-    //   .forEach(e => {
-    //     this.title = route.root.firstChild.snapshot.data['PageName'];
-    // });
+
   }
   ngOnInit() {
-    // if (this.router.url == '/') {
-    //   console.log('yooooooo');
-    //   this.show = true;
 
-    // } else {
-    //   this.show = false
-    // }
   }
 
 
