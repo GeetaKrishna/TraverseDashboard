@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <div class="container">
+  <div class="container-fluid">
     <div class="navbar">
       <img src="../../assets/newmainLogo.png" [routerLink]="['landing']" class="img-center" alt="">
       <div style="text-align: center;">
@@ -17,8 +17,8 @@
         <input type="file" (change)="backGroundImageChange($event.target)" required />
         <span>Set BackGround Image</span>
       </label></button>
-    <button mat-menu-item (click)="openDialog('password')">Change Password</button>
-    <button mat-menu-item (click)="openDialog('patient')">Add Patient Profile</button>
+    <button mat-menu-item>Other Settings</button>
+    <button mat-menu-item (click)="openDialog()">Add Patient Profile</button>
   </mat-menu>
   
 </div> 

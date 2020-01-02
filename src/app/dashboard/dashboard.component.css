@@ -38,7 +38,9 @@
 .black {
   color: rgb(255, 255, 255)
 }
-
+/* ::-webkit-scrollbar {
+  width: 1px;
+} */
 .card-bodyy {
   /* opacity: 0.4; */
   background-color: transparent !important;
