@@ -27,6 +27,8 @@ export class InsuranceService {
   }
 
   getAllPatientsList() {
+    console.log('hiiiiiiiii');
+    
     return this.http.get(this.url + `/patients/u/${localStorage.getItem("userId")}`);
   }
 

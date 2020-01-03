@@ -43,8 +43,12 @@
                         </mat-form-field>
                         <br>
                         <div class="mt-4">
-                            <button mat-raised-button class="btn-secondary"
+                            <!-- *ngIf="addPatientButton" -->
+                            <button *ngIf="addPatientButton" mat-raised-button class="btn-secondary"
                                 (click)="patientProfile(patientNameFormControl, heightFormControl, weightFormControl)">Add
+                                Patient Profile</button>
+                            <button *ngIf="updatePatientButton" mat-raised-button class="btn-secondary"
+                                (click)="patientProfile(patientNameFormControl, heightFormControl, weightFormControl)">Update
                                 Patient Profile</button>
                             <!-- [disabled]="!(patientNameFormControl.valid)" -->
                             &nbsp;

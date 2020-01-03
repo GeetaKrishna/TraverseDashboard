@@ -1,5 +1,5 @@
-import { RuleFailurePosition } from "tslint"
-import { ClickDirective } from "angular-calendar/modules/common/click.directive"
+// import { RuleFailurePosition } from "tslint"
+// import { ClickDirective } from "angular-calendar/modules/common/click.directive"
 
 // Medication:         Dropdown for prescription(based on API), editable fields(only on calendar, don't affect original medications data),
 
@@ -34,10 +34,10 @@ import { ClickDirective } from "angular-calendar/modules/common/click.directive"
 
 // use rSchedule instead of RRUle
 
-// add patientsList to settings tab, patientName, Relation with delete(red) and edit(blue) button
 
+
+// add patientsList to settings tab, patientName, Relation with delete(red) and edit(blue) button - done
 // API's --> getAllPatientsList from insuranbce service to get patientlist
 // except self relation, remaining we need to show
 // edit ClickDirective, redirect to patient profike and change button to update profile
-
 // profile data from loxcalStorage, and line number 94 loginComponent.ts

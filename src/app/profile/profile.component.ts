@@ -33,6 +33,8 @@ export class ProfileComponent implements OnInit {
   weightFormControl = new FormControl();
 
   ngOnInit() {
+    console.log('ssssss');
+    
   }
   emailValidation(value) {
     console.log(value);
