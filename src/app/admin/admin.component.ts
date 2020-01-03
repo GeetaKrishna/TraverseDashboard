@@ -15,7 +15,10 @@ export class AdminComponent implements OnInit {
   @ViewChild('profileMenu', { static: true }) profile;
   @ViewChild('settingMenu', { static: true }) setting;
   @ViewChild('passwordMenu', { static: true }) password;
-  @ViewChild('', { static: true }) closeToggle;
+  @ViewChild('patientListMenu', { static: true }) patientlist;
+  addPatientButton: boolean;
+  updatePatientButton: boolean;
+  // @ViewChild('', { static: true }) closeToggle;
 
   constructor(private authentication: AuthenticationService, public dialog: MatDialog, private elementRef: ElementRef) { }
   ngOnInit() {
@@ -27,30 +30,48 @@ export class AdminComponent implements OnInit {
         if (this.profile.opened) {
           this.setting.close();
           this.password.close();
+          this.patientlist.close()
         }
-
-        console.log(this.profile.opened, 'logg');
-
       } else if (data == 'Setting') {
         this.setting.toggle();
+        this.authentication.testHTML('setPatientButtonTrue');
         if (this.setting.opened) {
           this.profile.close();
           this.password.close();
+          this.patientlist.close();
         }
       } else if (data == 'Password') {
         this.password.toggle()
         if (this.password.opened) {
-          this.setting.close()
-          this.profile.close()
+          this.setting.close();
+          this.profile.close();
+          this.patientlist.close()
+        }
+      } else if (data == 'PatientList') {
+        this.patientlist.toggle()
+        if (this.patientlist.opened) {
+          this.profile.close();
+          this.setting.close();
+          this.password.close();
+        }
+      } else if (data == 'editPatient') {
+        this.authentication.testHTML('setUpdatePatientButtonTrue');
+        this.setting.toggle()
+        if (this.patientlist.opened) {
+          this.profile.close();
+          this.patientlist.close();
+          this.password.close();
+          this.patientlist.close();
         }
       }
     })
     this.authentication.toggleEmitter.subscribe((data) => {
       console.log(data, 'data');
       if (data == 'close') {
-        this.setting.close()
-        this.profile.close()
-        this.password.close()
+        this.setting.close();
+        this.profile.close();
+        this.password.close();
+        this.patientlist.close();
       }
     })
 

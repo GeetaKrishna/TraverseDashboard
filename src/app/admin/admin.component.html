@@ -1,26 +1,30 @@
 <app-header></app-header>
 <div class="container-fluid">
     <!-- <div> -->
-        <!-- <button mat-icon-button style="float: right;">
+    <!-- <button mat-icon-button style="float: right;">
                 <mat-icon (click)="sideBarToggle();">menu</mat-icon>
             </button> -->
-        <!-- [hasBackdrop]="false"  rgb(48, 46, 46);-->
-        <mat-sidenav-container style="background: transparent; height: 639px;" autosize>
-            <div class="container">
-                <router-outlet></router-outlet>
-            </div>
-            <mat-sidenav #profileMenu mode="over" position="end" backdropClick="backdropClicked()"
-                style="background:#79a7ece6;">
-                <app-profile></app-profile>
-            </mat-sidenav>
-            <mat-sidenav #settingMenu mode="over" position="end" backdropClick="backdropClicked()"
-                style="background:#79a7ece6;">
-                <app-add-patient></app-add-patient>
-            </mat-sidenav>
-            <mat-sidenav #passwordMenu mode="over" position="end" backdropClick="backdropClicked()"
-                style="background:#79a7ece6;">
-                <app-change-password></app-change-password>
-            </mat-sidenav>
-        </mat-sidenav-container>
+    <!-- [hasBackdrop]="false"  rgb(48, 46, 46);-->
+    <mat-sidenav-container style="background: transparent; height: 639px;" autosize>
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+        <mat-sidenav #profileMenu mode="over" position="end" backdropClick="backdropClicked()"
+            style="background:#79a7ece6;">
+            <app-profile></app-profile>
+        </mat-sidenav>
+        <mat-sidenav #settingMenu mode="over" position="end" backdropClick="backdropClicked()"
+            style="background:#79a7ece6;">
+            <app-add-patient></app-add-patient>
+        </mat-sidenav>
+        <mat-sidenav #passwordMenu mode="over" position="end" backdropClick="backdropClicked()"
+            style="background:#79a7ece6;">
+            <app-change-password></app-change-password>
+        </mat-sidenav>
+        <mat-sidenav #patientListMenu mode="over" position="end" backdropClick="backdropClicked()"
+            style="background:#79a7ece6;">
+            <app-patient-list></app-patient-list>
+        </mat-sidenav>
+    </mat-sidenav-container>
     <!-- </div> -->
 </div>

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row" style="display: flex; margin: auto;">
+    <div class="text-center">
+      <div>
+        <div style="margin-top:20px;font-size: 22px; color: white;">
+          <h4>Patients</h4>
+        </div>
+        <div>
+          <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                      
+                        <ng-container matColumnDef="name">
+                          <th mat-header-cell *matHeaderCellDef> Name </th>
+                          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+                      
+                        <ng-container matColumnDef="relation">
+                          <th mat-header-cell *matHeaderCellDef> Relation </th>
+                          <td mat-cell *matCellDef="let element"> {{element.relation}} </td>
+                        </ng-container>
+                      
+                        <ng-container matColumnDef="actions">
+                          <th mat-header-cell *matHeaderCellDef> Actions </th>
+                          <td mat-cell *matCellDef="let element"> {{element.actions}} </td>
+                        </ng-container>
+                      
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table> -->
+          <table class="table mt-4">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Relation</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+
+            <!-- pid: 2
+userId: 2
+relation: "Self"
+patientName: "Geeta Krishna"
+height: 162
+weight: 49 -->
+            <tbody>
+              <tr *ngFor="let p of PatientData">
+                <td>{{p.patientName}}</td>
+                <td>{{p.relation}}</td>
+                <td> <button mat-icon-button (click)="editPatient(p.pid)" style="size: 18px;">
+                    <mat-icon style="color: rgb(49, 123, 219); font-size: 20px;">edit
+                    </mat-icon>
+                  </button>
+                  <button mat-icon-button (click)="removePatient(p.pid)">
+                    <mat-icon style="color: rgb(199, 51, 51); font-size: 20px;">restore_from_trash</mat-icon>
+                  </button></td>
+              </tr>
+              <!-- <tr>
+                <td>Jacob</td>
+                <td>Brother</td>
+                <td> <button mat-icon-button (click)="editPatient()" style="size: 18px;">
+                    <mat-icon style="color: rgb(49, 123, 219); font-size: 20px;">edit
+                    </mat-icon>
+                  </button>
+                  <button mat-icon-button (click)="removePatient()">
+                    <mat-icon style="color: rgb(199, 51, 51); font-size: 20px;">restore_from_trash</mat-icon>
+                  </button></td>
+              </tr>
+              <tr>
+                <td>Larry</td>
+                <td>Sister</td>
+                <td> <button mat-icon-button (click)="editPatient()" style="size: 18px;">
+                    <mat-icon style="color: rgb(49, 123, 219); font-size: 20px;">edit
+                    </mat-icon>
+                  </button>
+                  <button mat-icon-button (click)="removePatient()">
+                    <mat-icon style="color: rgb(199, 51, 51); font-size: 20px;">restore_from_trash</mat-icon>
+                  </button></td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

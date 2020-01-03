@@ -52,13 +52,18 @@ export class HeaderComponent implements OnInit {
     reader.onload = function (e) {
       t.nativeElement.ownerDocument.body.style.backgroundImage = 'url(' + reader.result + ')'
     }
-
     reader.readAsDataURL(k.files[0]);//attempts to read the file in question.
     console.log(localStorage)
   }
+
   closeAllToggles() {
     this.authentication.toggleEmit('close');
   }
+
+  patientList(){
+    this.authentication.testHTML("PatientList");
+  }
+
   viewProfile() {
     console.log('write the code here to view Profile()');
     // this.authentication.toggleEmit('close');

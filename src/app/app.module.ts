@@ -20,7 +20,7 @@ import {
   MatToolbarModule, MatSidenavModule,
   MatSliderModule, MatTooltipModule, MatExpansionModule, MatCardModule, MatNativeDateModule,
   MatDatepickerModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule,
-  MatListModule, MatBottomSheetModule, MatMenuModule, MatIconModule, MatCheckboxModule
+  MatListModule, MatBottomSheetModule, MatMenuModule, MatIconModule, MatCheckboxModule, MatTableModule
 } from '@angular/material';
 import { JwtModule } from "@auth0/angular-jwt";
 import { RatingModule } from 'ngx-rating';
@@ -74,6 +74,7 @@ import { DpDatePickerModule } from 'ng2-date-picker';
 import { ProfileComponent } from './profile/profile.component';
 import { AddPatientComponent } from './add-patient/add-patient.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { PatientListComponent } from './patient-list/patient-list.component';
 
 @NgModule({
   declarations: [
@@ -124,6 +125,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ForgotPasswordPage3Component,
     ProfileComponent,
     ChangePasswordComponent,
+    PatientListComponent,
   ],
   imports: [
     BrowserModule,
@@ -148,6 +150,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     MatMenuModule,
     MatIconModule,
     MatSliderModule,
+    MatTableModule,
     MatExpansionModule,
     MatCheckboxModule,
     AvatarModule,

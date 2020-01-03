@@ -21,9 +21,21 @@ export class AddPatientComponent implements OnInit {
     Validators.required,
   ]);
   selected: any;
+  addPatientButton: boolean;
+  updatePatientButton: boolean;
 
-  ngOnInit() { }
-
+  ngOnInit() {
+    this.authentication.testEmitter.subscribe((data) => {
+      console.log(data, 'buttondata');
+      if (data == 'setPatientButtonTrue') {
+        this.addPatientButton = true
+        this.updatePatientButton = false
+      } else if (data == 'setUpdatePatientButtonTrue') {
+        this.addPatientButton = false
+        this.updatePatientButton = true
+      }
+    })
+  }
   constructor(
     private userService: UserService,
     private authentication: AuthenticationService,
