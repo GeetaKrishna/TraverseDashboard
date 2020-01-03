@@ -16,8 +16,17 @@
 // user profile update: 
 
 // chnage password on mat tab for password, redirect to password reset page, directly, add logout in isSameDay. don't remove existing one
-// profile pic image makle or female based 
 
 // // Third page : TH --> Your account is verfied, please reset your password below. --> New password, Confirm Password --> Save --> redirect to login
 
 // API's for EHR sERVICE TO DELETE
+
+// Profile tab --> UserName(ReadOnly), FirstName, LastName, DOB, Gender, [PhNo], Email. Buttons Update and Cancel
+// Change Password and LOgOut
+// profile pic image makle or female based 
+
+//  BMI Calculation --> Add formula --> Four Corners, weight based BMI Calc
+
+// BMI = 703 * weight/(heights square in inches)
+
+// use rSchedule instead of RRUle

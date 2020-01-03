@@ -16,10 +16,12 @@ getDocuments(){
  getDocumentsByType(doc_type){
   return this.http.get(`${environment.apiUrl}/ehr/records/p/${parseInt(localStorage.getItem("patientId"))}/${doc_type}`)
  }
- 
+
  addDocuments(body, DocumentType){
    console.log(body.files);
    return this.http.post(`${environment.apiUrl}/ehr/records/uploadFile/${parseInt(localStorage.getItem("patientId"))}/${DocumentType}`, body)
  }
+
+// ${environment.apiUrl}/ehr/records/localStorage.getItem("Id") --> Delete API, delete httpmethod
 
 }

@@ -97,7 +97,7 @@ export class DashboardComponent implements OnInit {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(242,87,87,0.8)',
     },
-    
+
   ];
 
   public lineChartData: ChartDataSets[] = [
@@ -150,6 +150,9 @@ export class DashboardComponent implements OnInit {
 
         this.dashboardService.getPatientsTopTwoWeights().subscribe((data: []) => {
           console.log(data);
+          
+          // (w/h*h) * 703 = BMI
+          
           if (data.length > 1) {
             let i = 0;
 
@@ -633,7 +636,6 @@ export class DashboardComponent implements OnInit {
       "weightDate": new Date().toISOString()
     }
     this.dashboardService.postWeight(json).subscribe((data) => {
-
       console.log(data, 'dasssssssssssssh');
       this.WeightDate = this.getDifferenceInDays(data['weightDate'])
     }, (err) => {

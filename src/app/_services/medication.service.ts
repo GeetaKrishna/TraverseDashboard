@@ -12,6 +12,10 @@ export class MedicationService {
     return this.http.get(`${environment.apiUrl}/medications/med/`);
   }
 
+  getMedicationsById(id) {
+    return this.http.get(`${environment.apiUrl}/medications/med/${id}`);
+  }
+
   getPrescriptions() {
     return this.http.get(`${environment.apiUrl}/medications/prescriptions/p/${parseInt(localStorage.getItem("patientId"))}`);
   }

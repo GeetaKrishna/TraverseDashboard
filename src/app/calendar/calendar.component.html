@@ -43,7 +43,8 @@
 
         <br />
         <div class="ch-1">
-          <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+          <!-- (beforeViewRender)="updateCalendarEvents($event)" -->
+          <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [refresh]="refresh" 
             (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)"
             (eventTimesChanged)="eventTimesChanged($event)" [cellTemplate]="customTemplate">
           </mwl-calendar-month-view>
@@ -54,15 +55,21 @@
       <ng-template #tesst>
         <div class="card">
           <div class="card-header">
-            <div class="justify-content-center">
+            <div class="" style="display: flex;">
               <h3>{{ viewDate | date }}</h3>
+              <span style="float: right;">
+                <i class="fa fa-plus" style=" font-size: 20px;" (click)="addNewEvent()"></i>
+              </span>
             </div>
           </div>
           <div class="card-body">
             <mat-tab-group>
-              <mat-tab label="Events">
+              <mat-tab label="Appointments">
                 <div *ngFor="let event of existingEvents; let i=index">
-                  <div class="hoverClass">
+                  <!-- <div *ngIf="i == 0 ? false: true">
+                    No Appointments today, Add an appointment by clicking on the plus symbol above
+                  </div> -->
+                  <div class="hoverClass" *ngIf="event.id != 'Medication'">
                     <div class="row">
                       <div class="col-md-9">
                         <div>
@@ -74,17 +81,13 @@
                       </div>
 
                       <div class="col-md-3" style="display: block; float: right">
-                        <div *ngIf="event.id != 'Medication' else Appointment">
+                        <div *ngIf="event.id != 'Medication'">
+                          <i class="fa fa-pencil p-2" aria-hidden="true" (click)="handleEvent('Edit', event, i)"></i>
                           <i class="fa fa-map-marker p-2" aria-hidden="true"></i>
                           <i class="fa fa-clock-o p-2" aria-hidden="true"></i>
                           <i class="fa fa-times-circle-o p-2" (click)="handleEvent('Deleted', event, i)"
                             aria-hidden="true"></i>
                         </div>
-                        <ng-template #Appointment>
-                          <i class="fa fa-refresh p-2" aria-hidden="true"></i>
-                          <i class="fa fa-trash" (click)="handleEvent('Deleted', event, i)" aria-hidden="true"></i>
-                        </ng-template>
-
                       </div>
 
                     </div>
@@ -92,54 +95,97 @@
                   </div>
                 </div>
               </mat-tab>
-              <mat-tab label="Request Appointment">
-                <div class="card">
-                  <div class="card-header">
-                    Request an Appoinment
-                  </div>
-
-                  <div class="card-body">
-                    <dp-time-select [(ngModel)]="selectedDate" [config]="config"></dp-time-select>
-                    <div class="example-container">
-
-                      <mat-form-field>
-                        <input matInput [formControl]="AppointmentName" placeholder="Title">
-                      </mat-form-field>
-                      <mat-form-field>
-                        <input matInput [formControl]="Location" placeholder="Location">
-                      </mat-form-field>
-                      <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
-
-                      <mat-form-field>
-                        <input matInput [matDatepicker]="pickerStartReq" placeholder="Start Date"
-                          [formControl]="startDateFormControl">
-                        <mat-datepicker-toggle matSuffix [for]="pickerStartReq"></mat-datepicker-toggle>
-                        <mat-datepicker #pickerStartReq></mat-datepicker>
-                      </mat-form-field>
-                      <mat-form-field>
-                        <input matInput [matDatepicker]="pickerEndReq" placeholder="End Date"
-                          [formControl]="endDateFormControl">
-                        <mat-datepicker-toggle matSuffix [for]="pickerEndReq"></mat-datepicker-toggle>
-                        <mat-datepicker #pickerEndReq></mat-datepicker>
-                      </mat-form-field>
-                      <mat-form-field>
-                        <textarea matInput [formControl]="AppointmentDetails"
-                          placeholder="Appointment Details"></textarea>
-                      </mat-form-field>
-
-                      <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
-                      <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
-
+              <mat-tab label="Medications">
+                <div *ngFor="let event of existingEvents; let i=index">
+                  <div class="hoverClass" *ngIf="event.id == 'Medication'">
+                    <div class="row">
+                      <div class="col-md-9">
+                        <div>
+                          {{event.title}}
+                        </div>
+                        <div>
+                          {{event.meta.dosage}} mg
+                        </div>
+                        <div>
+                          <!-- {{event.end | date: "shortTime"}} -->
+                          {{event.meta.instruction}} a day
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
+                  </div>
                 </div>
               </mat-tab>
+
             </mat-tab-group>
           </div>
         </div>
       </ng-template>
 
+      <!-- Request Appointment -->
+      <!-- <mat-tab label="Request Appointment">
+        <div class="card">
+          <div class="card-header">
+            Request an Appoinment
+          </div>
+
+          <div class="card-body">
+            <dp-time-select [(ngModel)]="selectedDate" [config]="config"></dp-time-select>
+            <div class="example-container">
+
+              <mat-form-field>
+                <input matInput [formControl]="AppointmentName" placeholder="Title">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput [formControl]="Location" placeholder="Location">
+              </mat-form-field>
+              <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
+
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerStartReq" placeholder="Start Date"
+                  [formControl]="startDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="pickerStartReq"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStartReq></mat-datepicker>
+              </mat-form-field>
+        this.prescriptionService.getMedicationsById(e['medicationId']).subscribe((medicineName) => {
+          this.events = [...this.events, {
+            id: "Medication",
+            start: new Date(e['startDate']),
+            end: new Date(e['endDate']),
+            title: medicineName['name'],
+            color: colors.blue,
+            actions: this.actions,
+            allDay: true,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            },
+            draggable: false,
+            meta: e
+          }];
+          console.log(this.events);
+          this.refresh.next()
+        })
+
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerEndReq" placeholder="End Date"
+                  [formControl]="endDateFormControl">
+                <mat-datepicker-toggle matSuffix [for]="pickerEndReq"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEndReq></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                <textarea matInput [formControl]="AppointmentDetails"
+                  placeholder="Appointment Details"></textarea>
+              </mat-form-field>
+
+              <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
+              <button mat-button color="primary" (click)="close('Add')">Add Appointment</button>
+
+            </div>
+          </div>
+
+        </div>
+      </mat-tab> -->
       <ng-template #newAppointment let-close="close">
         <div class="card">
           <div class="card-header">
@@ -154,17 +200,100 @@
                 <input matInput [formControl]="Location" placeholder="Location">
               </mat-form-field>
               <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
-              <mat-form-field>
-                <input matInput [matDatepicker]="pickerStart" placeholder="Start Date"
-                  [formControl]="startDateFormControl">
-                <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
-                <mat-datepicker #pickerStart></mat-datepicker>
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput [matDatepicker]="pickerEnd" placeholder="End Date" [formControl]="endDateFormControl">
-                <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
-                <mat-datepicker #pickerEnd></mat-datepicker>
-              </mat-form-field>
+
+              <!-- <mat-checkbox color="warn" [formControl]="recurring">Recurring</mat-checkbox> -->
+
+              <div class="row">
+                <div class="col">
+
+                </div>
+
+                <div class="col">
+                </div>
+
+                <div class="col">
+
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <mat-form-field style="width: 110px;">
+                    <input matInput [matDatepicker]="pickerStart" placeholder="Start Date"
+                      [formControl]="startDateFormControl" [disabled]="disabledFlag">
+                    <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStart></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field style="width: 100px;">
+                    <mat-label>Start Time</mat-label>
+                    <mat-select [(value)]="startTime" (selectionChange)="changeStartTime($event.value)"
+                      [disabled]="disabledFlag">
+                      <mat-option *ngFor="let time of TimeList" [value]="time">{{time}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-2">
+                  <mat-form-field style="width: 60px;">
+                    <mat-label>Duration</mat-label>
+                    <mat-select [(value)]="startDuration" (selectionChange)="changeStartDuration($event.value)"
+                      [disabled]="disabledFlag">
+                      <mat-option *ngFor="let duration of DurationList" [value]="duration">{{duration}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-2">
+                  <mat-form-field style="width: 60px;">
+                    <mat-label>Meridian</mat-label>
+                    <mat-select [(value)]="startMeridian" (selectionChange)="changeStartMeridian($event.value)"
+                      [disabled]="disabledFlag">
+                      <mat-option *ngFor="let meridian of MeridianList" [value]="meridian">{{meridian}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <mat-form-field style="width: 110px;">
+                    <input matInput [matDatepicker]="pickerEnd" placeholder="End Date" [disabled]="disabledFlag"
+                      [formControl]="endDateFormControl">
+                    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEnd></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <mat-form-field style="width: 100px;">
+                    <mat-label>End Time</mat-label>
+                    <mat-select [(value)]="endTime" (selectionChange)="changeEndTime($event.value)"
+                      [disabled]="disabledFlag">
+                      <mat-option *ngFor="let time of TimeList" [value]="time">{{time}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-2">
+                  <mat-form-field style="width: 60px;">
+                    <mat-label>Duration</mat-label>
+                    <mat-select [(value)]="endDuration" (selectionChange)="changeEndDuration($event.value)"
+                      [disabled]="disabledFlag">
+                      <mat-option *ngFor="let duration of DurationList" [value]="duration">{{duration}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-2">
+
+                  <mat-form-field style="width: 60px;">
+                    <mat-label>Meridian</mat-label>
+                    <mat-select [(value)]="endMeridian" (selectionChange)="changeEndMeridian($event.value)"
+                      [disabled]="disabledFlag">
+                      <mat-option *ngFor="let meridian of MeridianList" [value]="meridian">{{meridian}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
               <mat-form-field>
                 <textarea matInput [formControl]="AppointmentDetails" placeholder="Appointment Details"></textarea>
               </mat-form-field>
