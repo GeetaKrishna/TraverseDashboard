@@ -41,3 +41,6 @@ import { ClickDirective } from "angular-calendar/modules/common/click.directive"
 // edit ClickDirective, redirect to patient profike and change button to update profile
 
 // profile data from loxcalStorage, and line number 94 loginComponent.ts
+
+// Tue Jan 21 2020 00:00:00 GMT+0530 (India Standard Time)
+// 21/01/2020 24:01:00 AM

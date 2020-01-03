@@ -107,9 +107,9 @@ export class CalendarComponent {
     Validators.required,
   ])
 
-  TimeList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+  TimeList = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11']
   MeridianList = ['AM', 'PM']
-  DurationList = [0, 15, 30, 45]
+  DurationList = ["00", "15", "30", "45"]
 
   startTime
   endTime
@@ -152,11 +152,11 @@ export class CalendarComponent {
         this.disabledFlag = false;
       }
       else {
-        this.startTime = 0;
-        this.endTime = 11;
-        this.startDuration = 0;
+        this.startTime = "00";
+        this.endTime = "11";
+        this.startDuration = "00";
         this.startMeridian = 'AM'
-        this.endDuration = 45;
+        this.endDuration = "45";
         this.endMeridian = 'PM'
         this.disabledFlag = true;
       }
@@ -193,9 +193,17 @@ export class CalendarComponent {
 
     this.calendarService.getAppointments().subscribe((appointmentList: []) => {
 
-      appointmentList.map((e) => {
+      appointmentList.map((e: any) => {
         console.log(new Date(e['startTime']), "startTime check");
-
+        // let t = e;
+        if(e['startTime']){
+          e['startHours'] = e['startTime'].split("T")[1].split('.')[0]
+        }
+        if(e['endTime']){
+          e['endHours'] = e['endTime'].split("T")[1].split('.')[0]
+        }
+        console.log(e);
+        
         this.events = [...this.events, {
           id: "Appointment",
           start: new Date(e['startTime']),
@@ -374,6 +382,42 @@ export class CalendarComponent {
     console.log('handling event', event);
     this.modalData = { event, action };
     if (action == "Edit") {
+
+      let endTime = parseInt((event.meta.endTime).split(":")[0]);
+      let startTime = parseInt((event.meta.startTime).split(":")[0]);
+
+      if (endTime > 11) {
+        this.endTime = (endTime - 12).toString();
+        this.endMeridian = 'PM';
+      } else {
+
+        if (endTime < 10) {
+          this.endTime = "0" + endTime.toString();
+        }
+        else {
+          this.endTime = endTime.toString();
+
+        }
+        this.endMeridian = 'AM';
+      }
+
+      if (startTime > 11) {
+        this.startTime = (startTime - 12).toString();
+        this.startMeridian = 'PM';
+      } else {
+        if (startTime < 10) {
+          this.startTime = "0" + startTime.toString();
+        }
+        else {
+          this.startTime = startTime.toString();
+
+        }
+        this.startMeridian = 'AM';
+      }
+
+      this.endDuration = (event.meta.endTime).split("T")[1].split(":")[1]
+      this.startDuration = (event.meta.startTime).split("T")[1].split(":")[1]
+
       this.editAppointmentDetails.setValue(event.meta.description)
       this.editAppointmentName.setValue(event.meta.title)
       this.allDay.setValue(event.meta.allDay)
@@ -442,14 +486,25 @@ export class CalendarComponent {
     // }
 
     this.modal.open(this.newAppointment, { centered: true }).result.then((data) => {
-      console.log(data)
+
+      if (this.endMeridian == 'PM') {
+        this.endTime = parseInt(this.endTime) + 12;
+      }
+
+      if (this.startMeridian == 'PM') {
+        this.startTime = parseInt(this.startTime) + 12;
+      }
+
+      console.log(moment(this.endDateFormControl.value).format("YYYY-MM-DD") + "T" + this.endTime + ":" + this.endDuration + ":" + "00" + ".882Z")
+      console.log(moment(this.startDateFormControl.value).format("YYYY-MM-DD") + "T" + this.startTime + ":" + this.startDuration + ":" + "59" + ".882Z")
+
       if (data === 'Add') {
         let t = {
           "allDay": this.allDay.value,
           "description": this.AppointmentDetails.value,
-          "endTime": moment(new Date(this.endDateFormControl.value)).format("YYYY-MM-DD"),
+          "endTime": moment(this.endDateFormControl.value).format("YYYY-MM-DD") + "T" + this.endTime + ":" + this.endDuration + ":" + "00",
           "pid": parseInt(localStorage.getItem("patientId")),
-          "startTime": moment(new Date(this.startDateFormControl.value)).format("YYYY-MM-DD"),
+          "startTime": moment(this.startDateFormControl.value).format("YYYY-MM-DD") + "T" + this.startTime + ":" + this.startDuration + ":" + "59",
           "title": this.AppointmentName.value,
           "userId": parseInt(localStorage.getItem("userId"))
         }
@@ -483,7 +538,6 @@ export class CalendarComponent {
   }
 
   deleteEvent(eventToDelete: CalendarEvent, _index) {
-
     this.calendarService.deleteAppoinmentById(eventToDelete['meta']['id']).subscribe((data) => {
       if (this.existingEvents) {
         this.removeEvent(eventToDelete, _index)

@@ -13,7 +13,7 @@
 }
 
 h3 {
-  margin: 0 0 10px;
+  margin: 0 !important;
 }
 
 pre {
@@ -86,3 +86,14 @@ pre {
 .cal-month-view .cal-cell.cal-has-events.cal-open {
   background-color: #ededed !important;
 } */
+
+::ng-deep .mat-tab-label {
+  /* color :black, */
+  background-color: #0062cc;
+  color: #ffffff;
+}
+
+::ng-deep .mat-tab-label-active {
+  background-color: darkblue;
+  color: #ffffff;
+}
