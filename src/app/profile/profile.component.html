@@ -2,23 +2,15 @@
     <div class="row" style="display: flex; margin: auto;">
         <div class="text-center">
             <div>
-                <div style="font-size: 22px; color: white;margin-top:20px;">
+                <div style="font-size: 22px; color: white;margin-top:10px;">
                     <h4>Profile</h4>
                 </div>
                 <div>
                     <form>
-                        <mat-form-field class="example-full-width">
-                            <input matInput placeholder="Email" [formControl]="emailFormControl"
-                                (keyup)="emailValidation(emailFormControl.value)">
-                            <mat-error
-                                *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                                Please enter a valid email address
-                            </mat-error>
-                        </mat-form-field>
-                        <br>
+                        <!-- <br> -->
                         <mat-form-field class="example-full-width">
                             <input matInput placeholder="Username" [formControl]="userNameFormControl"
-                                (keyup)="userNameValidation(userNameFormControl.value)">
+                                (keyup)="userNameValidation(userNameFormControl.value)" readonly>
                             <button mat-button style="color: red" *ngIf="userNameTaken == true" matSuffix
                                 mat-icon-button matTooltip="That username is taken. Try another.">
                                 <mat-icon>warning</mat-icon>
@@ -28,6 +20,35 @@
                             </mat-error>
                         </mat-form-field>
                         <br>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="FirstName" [formControl]="firstNameFormControl">
+                            <button mat-button style="color: red" *ngIf="userNameTaken == true" matSuffix
+                                mat-icon-button matTooltip="That username is taken. Try another.">
+                                <mat-icon>warning</mat-icon>
+                            </button>
+                            <mat-error *ngIf="firstNameFormControl.hasError('required')">
+                                FirstName is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Lastname" [formControl]="lastNameFormControl">
+                            <button mat-button style="color: red" *ngIf="userNameTaken == true" matSuffix
+                                mat-icon-button matTooltip="That username is taken. Try another.">
+                                <mat-icon>warning</mat-icon>
+                            </button>
+                            <mat-error *ngIf="lastNameFormControl.hasError('required')">
+                                LastName is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Email" [formControl]="emailFormControl"
+                                (keyup)="emailValidation(emailFormControl.value)" readonly>
+                        </mat-form-field>
+
+                        <br>
+
                         <mat-form-field class="example-full-width">
                             <input type="tel" matInput placeholder="Telephone" [formControl]="numberFormControl">
                         </mat-form-field>
@@ -41,7 +62,7 @@
                         <br>
                         <mat-form-field class="example-full-width">
                             <mat-label>Gender</mat-label>
-                            <mat-select [(value)]="selected" (selectionChange)="changeGender($event.value)">
+                            <mat-select [(value)]="selectedGender" (selectionChange)="changeGender($event.value)">
                                 <mat-option value="male">Male</mat-option>
                                 <mat-option value="female">Female</mat-option>
                                 <mat-option value="other">Other</mat-option>
@@ -50,13 +71,15 @@
                         <br>
                         <mat-form-field class="example-full-width">
                             <mat-label>Role</mat-label>
-                            <mat-select [(value)]="selectedd" (selectionChange)="changeClient($event.value)">
+                            <mat-select [(value)]="selectedRole" (selectionChange)="changeClient($event.value)"
+                                disabled="true">
                                 <mat-option value="Consumer">Consumer</mat-option>
                                 <mat-option value="Provider">Provider</mat-option>
                                 <mat-option value="StakeHolder">StakeHolder</mat-option>
                             </mat-select>
                         </mat-form-field>
                         <br>
+
                         <mat-form-field class="example-full-width">
                             <input matInput placeholder="Height" type="text" [formControl]="heightFormControl">
                             <mat-error *ngIf="heightFormControl.hasError('required')">
@@ -70,10 +93,13 @@
                                 Weight is <strong>required</strong>
                             </mat-error>
                         </mat-form-field>
+
+
+                        <!-- <br> -->
+
                         <br>
                         <div>
-                            <button mat-raised-button class="btn btn-primary"
-                                (click)="register( userNameFormControl, numberFormControl, emailFormControl, heightFormControl, weightFormControl)"
+                            <button mat-raised-button class="btn btn-primary" (click)="updateProfile()"
                                 [disabled]="!(emailFormControl.valid && userNameFormControl.valid)">Update Profile
                                 <div *ngIf="signUpSuccess" class="spinner-grow spinner-grow-sm" role="status">
                                     <span class="sr-only">Loading...</span>

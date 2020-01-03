@@ -15,6 +15,14 @@ export class UserService {
         return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
+    updateUserProfileById(body: Object) {
+        return this.http.put(`${environment.apiUrl}/users/`, body, { responseType: 'text' });
+    }
+
+    updatePatientProfileById(body: Object) {
+        return this.http.put(`${environment.apiUrl}/patients/`, body);
+    }
+
     register(registrationData, HEIGHT, WEIGHT) {
         const httpOptions = {
             headers: new HttpHeaders({

@@ -18,10 +18,14 @@
     width: 45%;
     margin-left: 25px;
 } */
+
 .example-full-width {
     width: 100%;
 }
 
+/* .example-full-widthh {
+    width: 100%;
+} */
 /* 
 ::ng-deep .mat-focused .mat-form-field-label .mat-form-field-label-wrapper .mat-form-field{
     color: rgb(255, 255, 255) !important;

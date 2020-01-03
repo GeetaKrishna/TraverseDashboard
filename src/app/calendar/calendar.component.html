@@ -56,17 +56,17 @@
         <div class="card">
           <div class="card-header">
             <div class="" style=" width: 100%;">
-              <h3 style="display: inline; margin: 0 !important;">{{ viewDate | date }}</h3>
+              <h3 style="display: inline; margin: 0 !important; color: #0095ff;">{{ viewDate | date }}</h3>
               <span>
-                <i class="fa fa-plus" style="display: inline; font-size: 20px;
-                margin-left: 580px;" (click)="addNewEvent()"></i>
+                <i class="fa fa-plus-circle" style="display: inline; font-size: 30px; color: green;
+                margin-left: 560px;" (click)="addNewEvent()"></i>
 
               </span>
             </div>
           </div>
           <div class="card-body">
-            <mat-tab-group>
-              <mat-tab label="Appointments">
+            <mat-tab-group mat-stretch-tabs class="example-stretched-tabs ">
+              <mat-tab label="Appointments" style="color: black;">
                 <div *ngFor="let event of existingEvents; let i=index">
                   <!-- <div *ngIf="i == 0 ? false: true">
                     No Appointments today, Add an appointment by clicking on the plus symbol above
@@ -81,10 +81,10 @@
 
                       <div class="col-md-3" style="display: block; float: right">
                         <div *ngIf="event.id != 'Medication'">
-                          <i class="fa fa-pencil p-2" aria-hidden="true" (click)="handleEvent('Edit', event, i)"></i>
-                          <i class="fa fa-map-marker p-2" aria-hidden="true"></i>
-                          <i class="fa fa-clock-o p-2" aria-hidden="true"></i>
-                          <i class="fa fa-trash p-2" (click)="handleEvent('Deleted', event, i)" aria-hidden="true"></i>
+                          <i class="fa fa-pencil p-2" style="color: blue;" aria-hidden="true" (click)="handleEvent('Edit', event, i)"></i>
+                          <!-- <i class="fa fa-map-marker p-2" aria-hidden="true"></i>
+                          <i class="fa fa-clock-o p-2" aria-hidden="true"></i> -->
+                          <i class="fa fa-trash p-2" style="color: red;" (click)="handleEvent('Deleted', event, i)" aria-hidden="true"></i>
                         </div>
                       </div>
 
@@ -318,7 +318,6 @@
               </mat-form-field>
               <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
 
-
               <div class="row">
                 <div class="col-sm-4">
                   <mat-form-field style="width: 110px;">
@@ -402,7 +401,7 @@
               </mat-form-field>
 
               <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
-              <button mat-button color="primary" (click)="close('Add')">Edit Appointment</button>
+              <button mat-button color="primary" (click)="close('Update'); handleEvent('Edit', $event.event)">Update</button>
 
             </div>
           </div>

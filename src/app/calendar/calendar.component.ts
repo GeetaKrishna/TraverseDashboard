@@ -385,6 +385,8 @@ export class CalendarComponent {
 
       let endTime = parseInt((event.meta.endTime).split(":")[0]);
       let startTime = parseInt((event.meta.startTime).split(":")[0]);
+console.log(endTime);
+console.log(startTime);
 
       if (endTime > 11) {
         this.endTime = (endTime - 12).toString();
@@ -410,8 +412,10 @@ export class CalendarComponent {
         }
         else {
           this.startTime = startTime.toString();
-
         }
+        console.log(this.startTime);
+        console.log(this.endTime);
+        
         this.startMeridian = 'AM';
       }
 
@@ -423,7 +427,10 @@ export class CalendarComponent {
       this.allDay.setValue(event.meta.allDay)
       this.startDateFormControl.setValue(moment(event.meta.startTime))
       this.endDateFormControl.setValue(event.meta.endTime)
-      this.modal.open(this.editApponitment, { centered: true })
+      this.modal.open(this.editApponitment, { centered: true }).result.then((data) => {
+        console.log(data, "after closing edit");
+        //API call to update
+      })
       console.log(this.startDateFormControl);
     }
     else if (action == "Deleted") {

@@ -45,13 +45,17 @@ weight: 49 -->
               <tr *ngFor="let p of PatientData">
                 <td>{{p.patientName}}</td>
                 <td>{{p.relation}}</td>
-                <td> <button mat-icon-button (click)="editPatient(p.pid)" style="size: 18px;">
-                    <mat-icon style="color: rgb(49, 123, 219); font-size: 20px;">edit
-                    </mat-icon>
-                  </button>
-                  <button mat-icon-button (click)="removePatient(p.pid)">
-                    <mat-icon style="color: rgb(199, 51, 51); font-size: 20px;">restore_from_trash</mat-icon>
-                  </button></td>
+                <td> 
+                  <!-- <button mat-icon-button  style="size: 18px;"> -->
+                    <!-- <mat-icon style="color: rgb(49, 123, 219); font-size: 20px;">edit
+                    </mat-icon> -->
+                    <i class="fa fa-pencil-square-o" (click)="editPatient(p.pid)" style="font-size: 24px; color:blue; cursor: pointer;"></i>
+                  <!-- </button>  -->
+                  &nbsp;
+                  <!-- <button mat-icon-button> -->
+                    <!-- <mat-icon style="color: rgb(199, 51, 51); font-size: 24px;">restore_from_trash</mat-icon> -->
+                    <i class="fa fa-trash" (click)="removePatient(p.pid)" style="color: red; font-size: 24px; cursor: pointer;"></i>
+                  <!-- </button></td> -->
               </tr>
               <!-- <tr>
                 <td>Jacob</td>
