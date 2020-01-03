@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,6 +14,9 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
+    public testEmitter = new EventEmitter();
+    public toggleEmitter = new EventEmitter();
+
     constructor(private http: HttpClient, private router: Router, public jwtHelper: JwtHelperService) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -21,6 +24,13 @@ export class AuthenticationService {
 
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
+    }
+
+    testHTML(data) {
+        this.testEmitter.emit(data);
+    }
+    toggleEmit(data:any){
+        this.toggleEmitter.emit(data);
     }
 
     login(username: string, password: string) {
