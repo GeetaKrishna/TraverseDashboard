@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HeaderComponent, AddPatientComponent } from './header/header.component';
+import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChartsModule } from 'ng2-charts';
@@ -72,6 +72,8 @@ import { ForgotPasswordPage3Component } from './forgot-password-page3/forgot-pas
 import { CustomMaterialModule } from './material.module';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { ProfileComponent } from './profile/profile.component';
+import { AddPatientComponent } from './add-patient/add-patient.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +123,7 @@ import { ProfileComponent } from './profile/profile.component';
     ForgotPasswordPage2Component,
     ForgotPasswordPage3Component,
     ProfileComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -181,7 +184,9 @@ import { ProfileComponent } from './profile/profile.component';
     DatePipe,
     MatDatepickerModule
   ],
-  entryComponents: [AppInfoComponent, HomeComponent, AddMedComponent, AddPatientComponent, ForgotPasswordComponent, ProfileComponent],
+  entryComponents: [ProfileComponent, ChangePasswordComponent,
+    AppInfoComponent, HomeComponent, AddMedComponent,
+    AddPatientComponent, ForgotPasswordComponent, ProfileComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

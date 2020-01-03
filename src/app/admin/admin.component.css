@@ -12,3 +12,8 @@
     overflow: auto;
     border: 1px solid #555;
 }
+
+
+::ng-deep .mat-drawer-content {
+    overflow: hidden !important;
+}

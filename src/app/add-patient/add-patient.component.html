@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row" style="display: flex; margin: auto;">
+        <div class="text-center">
+            <div>
+                <div style="margin-top:20px;font-size: 22px; color: white;">
+                    <h4>Patient Profile</h4>
+                </div>
+                <!-- <span style="float: right; cursor: pointer;" (click)="onNoClick()">
+                    <i class="fa fa-times"></i>
+                </span> -->
+                <div class="mt-4">
+                    <form>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="PatientName" [formControl]="patientNameFormControl" required>
+                            <mat-error *ngIf="patientNameFormControl.hasError('required')">
+                                Patient Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Relation</mat-label>
+                            <mat-select [(value)]="selected" (selectionChange)="changeRelation($event.value)">
+                                <mat-option value="Father">Father</mat-option>
+                                <mat-option value="Mother">Mother</mat-option>
+                                <mat-option value="Daughter">Daughter</mat-option>
+                                <mat-option value="Son">Son</mat-option>
+                                <mat-option value="Other">Other</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Height" type="text" [formControl]="heightFormControl" required>
+                            <mat-error *ngIf="heightFormControl.hasError('required')">
+                                Height is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Weight" type="text" [formControl]="weightFormControl" required>
+                            <mat-error *ngIf="weightFormControl.hasError('required')">
+                                Weight is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <br>
+                        <div class="mt-4">
+                            <button mat-raised-button class="btn-secondary"
+                                (click)="patientProfile(patientNameFormControl, heightFormControl, weightFormControl)">Add
+                                Patient Profile</button>
+                            <!-- [disabled]="!(patientNameFormControl.valid)" -->
+                            &nbsp;
+                            <button mat-raised-button class="btn-info" (click)="cancelEdit()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,36 +1,26 @@
 <app-header></app-header>
- <button mat-icon-button style="float: right;">
-    <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-</button>
-
-<mat-sidenav-container style="background: transparent; height: 639px;" autosize [hasBackdrop]="false">
-    <!-- added mode to stop backDrop event -->
-    <mat-sidenav #sidenav position="end" style="background: transparent;" >
-        <mat-nav-list>
-            <a mat-list-item (click)="viewProfile()">
-                <img src="../../assets/newProfhead3.png" style="margin-right: 10px; font-size: 24px; cursor: pointer;"
-                    height="26px" width="26px"></a>
-            <a mat-list-item [matMenuTriggerFor]="menu">
-                <img src="../../assets/newGearHeader2.png" style="margin-right: 10px; font-size: 24px; cursor: pointer;"
-                    height="26px" width="26px"></a>
-            <a mat-list-item (click)="logOut()">
-                <img src="../../assets/newLogOutHeader2.webp"
-                    style="margin-right: 10px; font-size: 24px; cursor: pointer;" height="26px" width="26px">
-            </a>
-        </mat-nav-list>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-                <label class="myLabel">
-                    <input type="file" (change)="backGroundImageChange($event.target)" required />
-                    <span>Set BackGround Image</span>
-                </label></button>
-            <button mat-menu-item>Other Settings</button>
-            <button mat-menu-item (click)="openDialog()">Add Patient Profile</button>
-        </mat-menu>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <div class="container">
-            <router-outlet></router-outlet>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="container-fluid">
+    <!-- <div> -->
+        <!-- <button mat-icon-button style="float: right;">
+                <mat-icon (click)="sideBarToggle();">menu</mat-icon>
+            </button> -->
+        <!-- [hasBackdrop]="false"  rgb(48, 46, 46);-->
+        <mat-sidenav-container style="background: transparent; height: 639px;" autosize>
+            <div class="container">
+                <router-outlet></router-outlet>
+            </div>
+            <mat-sidenav #profileMenu mode="over" position="end" backdropClick="backdropClicked()"
+                style="background:rgb(72, 66, 66);">
+                <app-profile></app-profile>
+            </mat-sidenav>
+            <mat-sidenav #settingMenu mode="over" position="end" backdropClick="backdropClicked()"
+                style="background:rgb(72, 66, 66);">
+                <app-add-patient></app-add-patient>
+            </mat-sidenav>
+            <mat-sidenav #passwordMenu mode="over" position="end" backdropClick="backdropClicked()"
+                style="background:rgb(72, 66, 66);">
+                <app-change-password></app-change-password>
+            </mat-sidenav>
+        </mat-sidenav-container>
+    <!-- </div> -->
+</div>

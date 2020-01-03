@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,7 +9,7 @@ import { FormControl } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authentication: AuthenticationService) { }
 
   emailFormControl = new FormControl();
   userNameFormControl = new FormControl();
@@ -19,5 +20,31 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
   }
+  emailValidation(value) {
+    console.log(value);
+  }
 
+  userNameValidation(value) {
+    console.log(value);
+  }
+
+  dateInput(value) {
+    console.log(value);
+  }
+
+  changeGender(value) {
+    console.log(value);
+  }
+
+  changeClient(value) {
+    console.log(value);
+  }
+
+  register(value) {
+    console.log(value);
+  }
+
+  cancelEdit() {
+    this.authentication.toggleEmit('close');    
+  }
 }
