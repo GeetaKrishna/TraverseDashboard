@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
                         localStorage.setItem('loggedInUser', JSON.stringify(data))
                         this.loginSuccess = false;
                         this.authenticationService.getPatientByUserId(localStorage.getItem('userId')).subscribe((patientData) => {
-                            console.log(patientData);
+                            console.log(patientData, 'heyyyyy');
                             localStorage.setItem('patientData', JSON.stringify(patientData))
                             localStorage.setItem('patientId', patientData['pid'])
                             this.router.navigate(['admin/landing'])
