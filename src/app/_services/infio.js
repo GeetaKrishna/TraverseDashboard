@@ -1,3 +1,6 @@
+import { RuleFailurePosition } from "tslint"
+import { ClickDirective } from "angular-calendar/modules/common/click.directive"
+
 // Medication:         Dropdown for prescription(based on API), editable fields(only on calendar, don't affect original medications data),
 
 // Option to delete an appointment.
@@ -30,3 +33,11 @@
 // BMI = 703 * weight/(heights square in inches)
 
 // use rSchedule instead of RRUle
+
+// add patientsList to settings tab, patientName, Relation with delete(red) and edit(blue) button
+
+// API's --> getAllPatientsList from insuranbce service to get patientlist
+// except self relation, remaining we need to show
+// edit ClickDirective, redirect to patient profike and change button to update profile
+
+// profile data from loxcalStorage, and line number 94 loginComponent.ts

@@ -1,11 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AuthenticationService } from '../_services/authentication.service';
+import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
+import * as _moment from 'moment';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { MY_FORMATS } from '../register/register.component';
+const moment = _moment;
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class ProfileComponent implements OnInit {
 
@@ -14,7 +28,7 @@ export class ProfileComponent implements OnInit {
   emailFormControl = new FormControl();
   userNameFormControl = new FormControl();
   numberFormControl = new FormControl();
-  dateFormControl = new FormControl();
+  dateFormControl = new FormControl(moment().format('MM/DD/YYYY'));
   heightFormControl = new FormControl();
   weightFormControl = new FormControl();
 
@@ -45,6 +59,6 @@ export class ProfileComponent implements OnInit {
   }
 
   cancelEdit() {
-    this.authentication.toggleEmit('close');    
+    this.authentication.toggleEmit('close');
   }
 }

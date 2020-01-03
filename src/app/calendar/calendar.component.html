@@ -257,16 +257,19 @@
 
               <div class="row">
                 <div class="col-sm-4">
-                  <mat-form-field style="width: 110px;">
+                  <mat-form-field style="width: 110px;">                    
                     <input matInput [matDatepicker]="pickerEnd" placeholder="End Date" [disabled]="disabledFlag"
                       [formControl]="endDateFormControl">
                     <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
                     <mat-datepicker #pickerEnd></mat-datepicker>
                   </mat-form-field>
                 </div>
+                <p>END TIME</p>
+
                 <div class="col-sm-4">
+<!-- <input type="datetime-local" placeholder="test"> -->
                   <mat-form-field style="width: 100px;">
-                    <mat-label>End Time</mat-label>
+                    <mat-label>HH</mat-label>
                     <mat-select [(value)]="endTime" (selectionChange)="changeEndTime($event.value)"
                       [disabled]="disabledFlag">
                       <mat-option *ngFor="let time of TimeList" [value]="time">{{time}}</mat-option>
@@ -275,7 +278,7 @@
                 </div>
                 <div class="col-sm-2">
                   <mat-form-field style="width: 60px;">
-                    <mat-label>Duration</mat-label>
+                    <mat-label>MM</mat-label>
                     <mat-select [(value)]="endDuration" (selectionChange)="changeEndDuration($event.value)"
                       [disabled]="disabledFlag">
                       <mat-option *ngFor="let duration of DurationList" [value]="duration">{{duration}}</mat-option>
