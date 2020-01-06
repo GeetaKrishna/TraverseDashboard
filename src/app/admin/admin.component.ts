@@ -14,6 +14,7 @@ import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 export class AdminComponent implements OnInit {
   @ViewChild('profileMenu', { static: true }) profile;
   @ViewChild('settingMenu', { static: true }) setting;
+  @ViewChild('settingExpandMenu', { static: true }) settingExpand;
   @ViewChild('passwordMenu', { static: true }) password;
   @ViewChild('patientListMenu', { static: true }) patientlist;
   addPatientButton: boolean;
@@ -33,12 +34,24 @@ export class AdminComponent implements OnInit {
           this.setting.close();
           this.password.close();
           this.patientlist.close()
+          this.settingExpand.close()
+        }
+      } else if (data == 'SettingExpand') {
+        this.settingExpand.toggle();
+        this.authentication.testHTML('setPatientButtonTrue');
+        if (this.setting.opened) {
+
+          this.profile.close();
+          this.setting.close();
+          this.password.close();
+          this.patientlist.close();
         }
       } else if (data == 'Setting') {
         this.setting.toggle();
         this.authentication.testHTML('setPatientButtonTrue');
         if (this.setting.opened) {
           this.profile.close();
+          this.settingExpand.close();
           this.password.close();
           this.patientlist.close();
         }
@@ -46,6 +59,7 @@ export class AdminComponent implements OnInit {
         this.password.toggle()
         if (this.password.opened) {
           this.setting.close();
+          this.settingExpand.close()
           this.profile.close();
           this.patientlist.close()
         }
@@ -54,6 +68,7 @@ export class AdminComponent implements OnInit {
         if (this.patientlist.opened) {
           this.profile.close();
           this.setting.close();
+          this.settingExpand.close()
           this.password.close();
         }
       } else if (data["testData"] == 'editPatient') {

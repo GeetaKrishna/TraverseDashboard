@@ -53,3 +53,5 @@
 // dynamic chNGE of profile pic event subscription
 // setting menu as side nav
 // selected icons in thick blue, remaining light blue
+// fourc floaing lables while installing check to balck
+// four c values restrict to 3 while editing

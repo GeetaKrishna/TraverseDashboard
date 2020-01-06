@@ -67,6 +67,7 @@ export class HeaderComponent implements OnInit {
   }
 
   closeAllToggles() {
+    this.authentication.testHTML("SettingExpand");
     this.authentication.toggleEmit('close');
   }
 

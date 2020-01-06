@@ -150,9 +150,9 @@ export class DashboardComponent implements OnInit {
 
         this.dashboardService.getPatientsTopTwoWeights().subscribe((data: []) => {
           console.log(data);
-          
+
           // (w/h*h) * 703 = BMI
-          
+
           if (data.length > 1) {
             let i = 0;
 
@@ -692,7 +692,13 @@ export class DashboardComponent implements OnInit {
 
     this.colorForBP(this.currentHBP, this.currentLBP)
     console.log("json1 " + JSON.stringify(dataBP));
-    this.dashboardService.postBloodPressure(dataBP);
+    this.dashboardService.postBloodPressure(dataBP).subscribe((data) => {
+      console.log(data);
+
+    }, (err) => {
+      console.log(err);
+
+    });
   }
 
   //this.dashboardService.postCholesterol(this.details).subscribe();

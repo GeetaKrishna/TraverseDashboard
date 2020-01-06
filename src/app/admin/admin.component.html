@@ -14,6 +14,10 @@
             <!-- style="background:#79a7ece6;"> -->
             <app-profile></app-profile>
         </mat-sidenav>
+        <mat-sidenav #settingExpandMenu mode="over" position="end" backdropClick="backdropClicked()"
+            style="background:#C1C1C1;">
+            <app-setting-menu></app-setting-menu>
+        </mat-sidenav>
         <mat-sidenav #settingMenu mode="over" position="end" backdropClick="backdropClicked()"
             style="background:#C1C1C1;">
             <app-add-patient></app-add-patient>

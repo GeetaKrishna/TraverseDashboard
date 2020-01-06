@@ -75,6 +75,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AddPatientComponent } from './add-patient/add-patient.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
+import { SettingMenuComponent } from './setting-menu/setting-menu.component';
 
 @NgModule({
   declarations: [
@@ -126,6 +127,7 @@ import { PatientListComponent } from './patient-list/patient-list.component';
     ProfileComponent,
     ChangePasswordComponent,
     PatientListComponent,
+    SettingMenuComponent,
   ],
   imports: [
     BrowserModule,
