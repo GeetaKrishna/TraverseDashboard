@@ -24,10 +24,19 @@ export class AddPatientComponent implements OnInit {
   selected: any;
   addPatientButton: boolean;
   updatePatientButton: boolean;
-
+  PatientData;
   ngOnInit() {
     this.authentication.testEmitter.subscribe((data) => {
       console.log(data, 'buttondata');
+      this.PatientData = data;
+      if (this.PatientData) {
+        console.log('hi');
+        this.patientNameFormControl.setValue(this.PatientData.patientName)
+        this.selected = this.PatientData.relation
+        this.heightFormControl.setValue(this.PatientData.height)
+        this.weightFormControl.setValue(this.PatientData.weight)
+        console.log('hi');
+      }
       if (data == 'setPatientButtonTrue') {
         this.addPatientButton = true
         this.updatePatientButton = false
@@ -36,6 +45,9 @@ export class AddPatientComponent implements OnInit {
         this.updatePatientButton = true
       }
     })
+
+
+
   }
   constructor(
     private toast: ToastrService,

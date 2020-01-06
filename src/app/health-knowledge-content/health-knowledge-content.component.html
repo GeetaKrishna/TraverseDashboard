@@ -1,4 +1,4 @@
-<div class="pl-2">
+<div class="pl-4">
   <div style="width: 100%">
     <mat-form-field class="example-form-field">
       <input matInput type="search" placeholder="Search" [(ngModel)]="searchVal">
@@ -11,8 +11,8 @@
     </mat-form-field>
   </div>
   <div style="display: flex;" class="row ml-2 mr-2">
-    <div *ngFor="let app of apps" class="col-md-6" style="margin-bottom: 20px;">
-      <mat-card class="example-card "
+    <div *ngFor="let app of apps" class="col-md-6" style="margin-bottom: 20px; padding: 0;">
+      <mat-card class="example-card"
         style=" border-radius: 5px;box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;">
         <img mat-card-md-image src="{{app.url}}">
         <mat-card-header style="float: right; width: 240px;">

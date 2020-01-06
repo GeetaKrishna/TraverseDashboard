@@ -45,7 +45,7 @@ export class HealthKnowledgeContentComponent implements OnInit {
   }
   clearValue() {
     this.searchVal = ''
-    console.log('clear val', this.searchValue);
+    console.log('clear val', this.searchVal);
   }
   shareCard(id) {
     console.log('share Clicked', id);
