@@ -19,7 +19,7 @@ export class UserService {
         return this.http.put(`${environment.apiUrl}/users/`, body, { responseType: 'text' });
     }
 
-    updatePatientProfileById(body: Object) {
+    updatePatientProfile(body: Object) {
         return this.http.put(`${environment.apiUrl}/patients/`, body);
     }
 

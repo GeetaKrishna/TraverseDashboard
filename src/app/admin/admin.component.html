@@ -10,19 +10,20 @@
             <router-outlet></router-outlet>
         </div>
         <mat-sidenav #profileMenu mode="over" position="end" backdropClick="backdropClicked()"
-            style="background:#79a7ece6;">
+            style="background:#C1C1C1;">
+            <!-- style="background:#79a7ece6;"> -->
             <app-profile></app-profile>
         </mat-sidenav>
         <mat-sidenav #settingMenu mode="over" position="end" backdropClick="backdropClicked()"
-            style="background:#79a7ece6;">
+            style="background:#C1C1C1;">
             <app-add-patient></app-add-patient>
         </mat-sidenav>
         <mat-sidenav #passwordMenu mode="over" position="end" backdropClick="backdropClicked()"
-            style="background:#79a7ece6;">
+            style="background:#C1C1C1;">
             <app-change-password></app-change-password>
         </mat-sidenav>
         <mat-sidenav #patientListMenu mode="over" position="end" backdropClick="backdropClicked()"
-            style="background:#79a7ece6;">
+            style="background:#C1C1C1;">
             <app-patient-list></app-patient-list>
         </mat-sidenav>
     </mat-sidenav-container>

@@ -26,10 +26,5 @@ export class InsuranceService {
     return this.http.get(this.url + `/insurance/claims/${patientId}`);
   }
 
-  getAllPatientsList() {
-    console.log('hiiiiiiiii');
-    
-    return this.http.get(this.url + `/patients/u/${localStorage.getItem("userId")}`);
-  }
 
 }

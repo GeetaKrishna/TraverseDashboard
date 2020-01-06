@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InsuranceService } from '../_services/insurance.service';
 import { FormControl, Validators } from '@angular/forms';
+import { PatientService } from '../_services/patient.service';
 
 @Component({
   selector: 'app-insurance',
@@ -11,7 +12,7 @@ export class InsuranceComponent implements OnInit {
   patientsListAll: Object;
   selectedIndex: number = 0;
 
-  constructor(private insuranceService: InsuranceService) { }
+  constructor(private insuranceService: InsuranceService, private patientService: PatientService) { }
 
   private plans: any;
 
@@ -90,7 +91,7 @@ export class InsuranceComponent implements OnInit {
         console.log(res);
         this.claims = res;
 
-        this.insuranceService.getAllPatientsList().subscribe((patientsList) => {
+        this.patientService.getAllPatientsList().subscribe((patientsList) => {
           console.log(patientsList);
           this.patientsListAll = patientsList;
         }, (error) => {

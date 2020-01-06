@@ -17,10 +17,20 @@ export class HeaderComponent implements OnInit {
   events: string[] = [];
   opened: boolean;
   shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+  imageUrl: string;
 
   constructor(private elementRef: ElementRef, private router: Router, private authentication: AuthenticationService, public dialog: MatDialog) { }
 
   ngOnInit() {
+
+    let userData = JSON.parse(localStorage.getItem('loggedInUser'))
+    console.log(userData.gender, 'gender');
+    if (userData.gender == 'male') {
+      this.imageUrl = '../../assets/newProfhead3.png'
+    } else {
+      this.imageUrl = '../../assets/headFemale.png'
+    }
+    
   }
   changePassword() {
     this.authentication.testHTML("Password");
@@ -60,7 +70,7 @@ export class HeaderComponent implements OnInit {
     this.authentication.toggleEmit('close');
   }
 
-  patientList(){
+  patientList() {
     this.authentication.testHTML("PatientList");
   }
 

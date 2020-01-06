@@ -46,3 +46,10 @@
 // Tue Jan 21 2020 00:00:00 GMT+0530 (India Standard Time)
 // 21/01/2020 24:01:00 AM
 // profile data from loxcalStorage, and line number 94 loginComponent.ts
+
+
+// api calling dyncamiclly
+// # and index in table patient list
+// dynamic chNGE of profile pic event subscription
+// setting menu as side nav
+// selected icons in thick blue, remaining light blue

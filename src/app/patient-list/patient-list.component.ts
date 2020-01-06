@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InsuranceService } from '../_services/insurance.service';
 import { AuthenticationService } from '../_services/authentication.service';
+import { PatientService } from '../_services/patient.service';
+import { TypeScriptEmitter } from '@angular/compiler';
 
 // export interface PeriodicElement {
 //   name: string;
@@ -21,31 +23,38 @@ import { AuthenticationService } from '../_services/authentication.service';
   styleUrls: ['./patient-list.component.css']
 })
 export class PatientListComponent implements OnInit {
-  PatientData: Object;
-  constructor(private insurance: InsuranceService, private authentication: AuthenticationService) { }
+  PatientData = [];
+  constructor(private insurance: InsuranceService, private patient: PatientService, private authentication: AuthenticationService) { }
   ngOnInit() {
-    this.insurance.getAllPatientsList().subscribe((data) => {
-      console.log(data, 'patientlist');
+
+    this.patient.getAllPatientsList().subscribe((data: []) => {
+      console.log(data, 'patientlist');      
       this.PatientData = data
     }, (err) => {
       console.log(err);
-
     })
   }
 
   editPatient(patientData) {
     console.log(patientData, 'id');
     patientData.testData = 'editPatient';
-    // let pData = JSON.stringify(patientData)
-    // this.authentication.testHTML('')
-    // console.log(pData, 'pdata');
     this.authentication.testHTML(patientData)
   }
 
-  removePatient(patientData) {
-    console.log(patientData, 'id');
+  removePatient(pid) {
+    console.log(pid, 'id');
+    this.patient.removePatient(pid).subscribe((data) => {
+      console.log(data, 'removed');
+      // this.PatientData = data
+      this.PatientData = this.PatientData.filter(e => e.pid !== pid);
+      this.authentication.toggleEmit('close');
+
+    }, (err) => {
+      console.log(err);
+
+    })
   }
-  
+
   // displayedColumns: string[] = ['relation', 'name', 'actions'];
   // dataSource = ELEMENT_DATA;
 }

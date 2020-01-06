@@ -26,12 +26,13 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                       </table> -->
-          <table class="table mt-4">
+          <table class="table mt-4 table-striped ">
             <thead>
               <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Relation</th>
-                <th scope="col">Actions</th>
+                <th scope="col">#</th>
+                <th scope="col">NAME</th>
+                <th scope="col">RELATION</th>
+                <th scope="col">ACTIONS</th>
               </tr>
             </thead>
 
@@ -42,10 +43,11 @@ patientName: "Geeta Krishna"
 height: 162
 weight: 49 -->
             <tbody>
-              <tr *ngFor="let p of PatientData">
-                <td>{{p.patientName}}</td>
-                <td>{{p.relation}}</td>
-                <td>
+              <tr *ngFor="let p of PatientData; let i = index">
+                <td *ngIf="p.relation!='Self'" style="text-transform: capitalize;">{{i}}</td>
+                <td *ngIf="p.relation!='Self'" style="text-transform: capitalize;">{{p.patientName}}</td>
+                <td *ngIf="p.relation!='Self'" style="text-transform: capitalize;">{{p.relation}}</td>
+                <td *ngIf="p.relation!='Self'">
                   <!-- <button mat-icon-button  style="size: 18px;"> -->
                   <!-- <mat-icon style="color: rgb(49, 123, 219); font-size: 20px;">edit
                     </mat-icon> -->
@@ -56,7 +58,7 @@ weight: 49 -->
                   &nbsp;
                   <!-- <button mat-icon-button> -->
                   <!-- <mat-icon style="color: rgb(199, 51, 51); font-size: 24px;">restore_from_trash</mat-icon> -->
-                  <span (click)="removePatient(p)">
+                  <span (click)="removePatient(p.pid)">
                     <i class="fa fa-trash" style="color: red; font-size: 24px; cursor: pointer;"></i>
                   </span>
                   <!-- </button></td> -->

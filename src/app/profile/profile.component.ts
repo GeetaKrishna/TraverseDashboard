@@ -110,18 +110,15 @@ export class ProfileComponent implements OnInit {
     this.userService.updateUserProfileById(updateUserData).subscribe((userData) => {
       // ADD toast messsage to show it's updated or failed
       console.log(userData);
-      this.userService.updatePatientProfileById(updatePatientData).subscribe((patientData) => {
+      this.userService.updatePatientProfile(updatePatientData).subscribe((patientData) => {
         console.log(patientData);
         localStorage.setItem("loggedInUser", JSON.stringify(updateUserData))
         localStorage.setItem("patientData", JSON.stringify(patientData))
         this.toast.success(userData)
-
         this.authentication.toggleEmit('close');
-
       }, (err) => {
         console.log(err);
         this.toast.error(err.messsage)
-
       })
     }, (err) => {
       console.log(err);

@@ -182,11 +182,18 @@ export class RegisterComponent implements OnInit {
     console.log(value);
   }
   dateInput(value) {
+
+    console.log(value);
+
+
     this.selectedDate = new Date(value).toLocaleDateString().split("/").reverse().join('-')
     console.log(this.selectedDate);
   }
 
   register(FNAME, LNAME, USERNAME, PHONENUMBER, EMAIL, PWD, HEIGHT, WEIGHT) {
+
+    this.selectedDate = moment(this.dateFormControl.value).format('L').split("/").reverse().join('-')
+    console.log(this.selectedDate);
     this.signUpSuccess = true;
     let registrationData = {
       "dob": this.selectedDate,
@@ -200,6 +207,11 @@ export class RegisterComponent implements OnInit {
       "pin": 0,
       "userName": USERNAME.value
     }
+    console.log(moment(this.dateFormControl.value).format('L'))
+
+
+    console.log(registrationData, 'regDAta');
+
     this.registrationService.register(registrationData, HEIGHT.value, WEIGHT.value).subscribe((data) => {
       console.log(data);
       this.toast.success('Registration was Successful.')

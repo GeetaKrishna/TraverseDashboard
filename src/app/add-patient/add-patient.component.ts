@@ -83,6 +83,30 @@ export class AddPatientComponent implements OnInit {
     })
   }
 
+  updatepatientProfile(patientName, height, weight){
+    // "height": 0,
+// "patientName": "string",
+// "pid": 0,
+// "relation": "string",
+// "userId": 0,
+// "weight": 0
+    this.userService.updatePatientProfile({
+      "height": parseFloat(height.value),
+      "patientName": patientName.value,
+      "pid":this.PatientData.pid,
+      "relation": this.selected,
+      "userId": localStorage.getItem("userId"),
+      "weight": parseFloat(weight.value)
+    }).subscribe((data) => {
+      console.log(data, "data during patient registration");
+      this.authentication.toggleEmit('close');
+      this.toast.success('Patient Added Successfully')
+    }, (err) => {
+      this.toast.error('Something went wrong, Please Try again.')
+      console.log(err, "error during patient registration");
+    })
+  }
+
   cancelEdit() {
     this.authentication.toggleEmit('close');
   }
