@@ -24,6 +24,8 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
     this.authentication.testEmitter.subscribe((data) => {
       console.log(data, "data from emitter");
+      // let pData = JSON.parse(data)
+      // console.log(pData , 'ppppppppp');
 
       if (data == 'Profile') {
         this.profile.toggle();
@@ -54,7 +56,7 @@ export class AdminComponent implements OnInit {
           this.setting.close();
           this.password.close();
         }
-      } else if (data == 'editPatient') {
+      } else if (data["testData"] == 'editPatient') {
         this.authentication.testHTML('setUpdatePatientButtonTrue');
         this.setting.toggle()
         if (this.patientlist.opened) {
