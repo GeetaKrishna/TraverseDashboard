@@ -35,7 +35,7 @@
             <div class="col-md-4" style="float:right">
               <div>
                 <i class="fa fa-circle p-2" aria-hidden="true" style="color: orange"></i> Appointment
-                <i class="fa fa-circle p-2" aria-hidden="true" style="color: skyblue"></i>Medications
+                <i class="fa fa-circle p-2" aria-hidden="true" style="color: #005aff"></i>Medications
               </div>
             </div>
           </div>
@@ -81,10 +81,12 @@
 
                       <div class="col-md-3" style="display: block; float: right">
                         <div *ngIf="event.id != 'Medication'">
-                          <i class="fa fa-pencil p-2" style="color: blue;" aria-hidden="true" (click)="handleEvent('Edit', event, i)"></i>
+                          <i class="fa fa-pencil p-2" style="color: blue;" aria-hidden="true"
+                            (click)="handleEvent('Edit', event, i)"></i>
                           <!-- <i class="fa fa-map-marker p-2" aria-hidden="true"></i>
                           <i class="fa fa-clock-o p-2" aria-hidden="true"></i> -->
-                          <i class="fa fa-trash p-2" style="color: red;" (click)="handleEvent('Deleted', event, i)" aria-hidden="true"></i>
+                          <i class="fa fa-trash p-2" style="color: red;" (click)="handleEvent('Deleted', event, i)"
+                            aria-hidden="true"></i>
                         </div>
                       </div>
 
@@ -195,22 +197,6 @@
                 <input matInput [formControl]="Location" placeholder="Location">
               </mat-form-field>
               <mat-checkbox color="warn" [formControl]="allDay">All Day</mat-checkbox>
-
-              <!-- <mat-checkbox color="warn" [formControl]="recurring">Recurring</mat-checkbox> -->
-
-              <div class="row">
-                <div class="col">
-
-                </div>
-
-                <div class="col">
-                </div>
-
-                <div class="col">
-
-                </div>
-              </div>
-
 
               <div class="row">
                 <div class="col-sm-4">
@@ -401,13 +387,31 @@
               </mat-form-field>
 
               <button mat-button color="warn" (click)="close()" ngbAutofocus>Cancel</button>
-              <button mat-button color="primary" (click)="close('Update'); handleEvent('Edit', $event.event)">Update</button>
+              <button mat-button color="primary" (click)="close('Update');">Update</button>
 
             </div>
           </div>
 
         </div>
       </ng-template>
+
+
+      <ng-template #editOrDeleteApponitment let-close="close">
+        <div class="card">
+          <div class="card-header">
+            Edit/Delete Appointment
+          </div>
+          <div class="card-body">
+            <p>This appointment is also registered with other dates. Do you want to continue to delete?</p>
+            <div class="example-container">
+              <button mat-button color="warn" (click)="close('Delete')" ngbAutofocus>Delete</button>
+              <button mat-button color="primary" (click)="close('Update');">Update</button>
+            </div>
+          </div>
+
+        </div>
+      </ng-template>
+
 
     </div>
   </div>

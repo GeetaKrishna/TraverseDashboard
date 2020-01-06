@@ -93,6 +93,7 @@ export class CalendarComponent {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('newAppointment', { static: true }) newAppointment: TemplateRef<any>;
   @ViewChild('editApponitment', { static: true }) editApponitment: TemplateRef<any>;
+  @ViewChild('editOrDeleteApponitment', { static: true }) editOrDeleteApponitment: TemplateRef<any>;
   @ViewChild('tesst', { static: true }) tesst: TemplateRef<any>;
   existingEvents: any;
   disabledFlag: boolean = false;
@@ -194,20 +195,17 @@ export class CalendarComponent {
     this.calendarService.getAppointments().subscribe((appointmentList: []) => {
 
       appointmentList.map((e: any) => {
-        console.log(new Date(e['startTime']), "startTime check");
-        // let t = e;
-        if(e['startTime']){
-          e['startHours'] = e['startTime'].split("T")[1].split('.')[0]
-        }
-        if(e['endTime']){
-          e['endHours'] = e['endTime'].split("T")[1].split('.')[0]
-        }
         console.log(e);
-        
+        console.log(new Date(e['startTime'].split(".")[0]));
+
+        e['startHours'] = e['startTime'].split("T")[1].split('.')[0]
+        e['endHours'] = e['endTime'].split("T")[1].split('.')[0]
+        console.log(e);
+
         this.events = [...this.events, {
           id: "Appointment",
-          start: new Date(e['startTime']),
-          end: new Date(e['endTime']),
+          start: new Date(e['startTime'].split(".")[0]),
+          end: new Date(e['endTime'].split(".")[0]),
           title: e['title'],
           color: colors.yellow,
           actions: this.actions,
@@ -353,46 +351,70 @@ export class CalendarComponent {
     newStart,
     newEnd
   }: CalendarEventTimesChangedEvent): void {
+    console.log(newStart, newEnd);
+    console.log(event);
+    console.log(newStart.toString().split(" ")[4]);
+    console.log(newEnd.toString().split(" ")[4]);
 
-    event.meta.startTime = moment(newStart).format("MM/DD/YYYY");
-    event.meta.endTime = moment(newEnd).format("MM/DD/YYYY");
+    event.meta.startHours = newStart.toString().split(" ")[4];
+    event.meta.endHours = newEnd.toString().split(" ")[4];
 
-    this.calendarService.editAppoinments(event.meta).subscribe((data) => {
+    let t = {
+      "allDay": event.allDay,
+      "description": event.meta.description,
+      "endTime": moment(newEnd).format("YYYY-MM-DD") + "T" + event.meta.endHours,
+      "pid": parseInt(localStorage.getItem("patientId")),
+      "startTime": moment(newStart).format("YYYY-MM-DD") + "T" + event.meta.startHours,
+      "title": event.title,
+      "id": event.meta.id,
+      "location": event.meta.location,
+      "userId": parseInt(localStorage.getItem("userId"))
+    }
+
+    console.log(t);
+
+    this.calendarService.editAppoinments(t).subscribe((data) => {
       console.log(data);
 
+      // let newStart = new Date(this.startDateFormControl.value);
+      // let newEnd = new Date(this.endDateFormControl.value)
+      this.events = this.events.map(iEvent => {
+        if (iEvent === event) {
+          return {
+            ...event,
+            start: newStart,
+            end: newEnd
+          };
+        }
+        return iEvent;
+      });
+      this.refresh.next();
+      this.modal.dismissAll()
     }, (err) => {
       console.log(err);
 
     })
-    this.events = this.events.map(iEvent => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd
-        };
-      }
-      return iEvent;
-    });
+
     this.refresh.next();
-    this.handleEvent('Dropped or resized', event, null);
+    // this.handleEvent('Dropped or resized', event, null);
   }
 
   handleEvent(action: string, event: CalendarEvent, _index): void {
     console.log('handling event', event);
     this.modalData = { event, action };
     if (action == "Edit") {
+      console.log(event.meta.endTime);
 
-      let endTime = parseInt((event.meta.endTime).split(":")[0]);
-      let startTime = parseInt((event.meta.startTime).split(":")[0]);
-console.log(endTime);
-console.log(startTime);
+      let endTime = parseInt((event.meta.endTime).split("T")[1].split('.')[0].split(":")[0]);
+      let startTime = parseInt((event.meta.startTime).split("T")[1].split('.')[0].split(":")[0]);
 
-      if (endTime > 11) {
+      if (endTime > 12) {
         this.endTime = (endTime - 12).toString();
+        if (this.startTime < 9) {
+          this.endTime = "0" + this.endTime.toString();
+        }
         this.endMeridian = 'PM';
       } else {
-
         if (endTime < 10) {
           this.endTime = "0" + endTime.toString();
         }
@@ -402,9 +424,13 @@ console.log(startTime);
         }
         this.endMeridian = 'AM';
       }
+      console.log(this.endTime);
 
       if (startTime > 11) {
         this.startTime = (startTime - 12).toString();
+        if (this.startTime < 9) {
+          this.startTime = "0" + this.startTime.toString();
+        }
         this.startMeridian = 'PM';
       } else {
         if (startTime < 10) {
@@ -415,7 +441,7 @@ console.log(startTime);
         }
         console.log(this.startTime);
         console.log(this.endTime);
-        
+
         this.startMeridian = 'AM';
       }
 
@@ -425,22 +451,76 @@ console.log(startTime);
       this.editAppointmentDetails.setValue(event.meta.description)
       this.editAppointmentName.setValue(event.meta.title)
       this.allDay.setValue(event.meta.allDay)
-      this.startDateFormControl.setValue(moment(event.meta.startTime))
-      this.endDateFormControl.setValue(event.meta.endTime)
+      this.startDateFormControl.setValue(moment(event.meta.startTime.split('+')[0]))
+      this.endDateFormControl.setValue(event.meta.endTime.split('+')[0])
+
+      this.Location.setValue(event.meta.location)
       this.modal.open(this.editApponitment, { centered: true }).result.then((data) => {
         console.log(data, "after closing edit");
-        //API call to update
+        if (data == 'Update') {
+          if (this.endMeridian == 'PM') {
+            this.endTime = parseInt(this.endTime) + 12;
+          }
+
+          if (this.startMeridian == 'PM') {
+            this.startTime = parseInt(this.startTime) + 12;
+          }
+
+          console.log(moment(this.endDateFormControl.value).format("YYYY-MM-DD") + "T" + this.endTime + ":" + this.endDuration + ":" + "00")
+          console.log(moment(this.startDateFormControl.value).format("YYYY-MM-DD") + "T" + this.startTime + ":" + this.startDuration + ":" + "59")
+
+          let t = {
+            "allDay": this.allDay.value,
+            "description": this.AppointmentDetails.value,
+            "endTime": moment(this.endDateFormControl.value).format("YYYY-MM-DD") + "T" + this.endTime + ":" + this.endDuration + ":" + "00",
+            "pid": parseInt(localStorage.getItem("patientId")),
+            "startTime": moment(this.startDateFormControl.value).format("YYYY-MM-DD") + "T" + this.startTime + ":" + this.startDuration + ":" + "59",
+            "title": this.AppointmentName.value,
+            "id": event.meta.id,
+            "location": event.meta.location,
+            "userId": parseInt(localStorage.getItem("userId"))
+          }
+
+          //API call to update
+          this.calendarService.editAppoinments(t).subscribe((data) => {
+            console.log(data);
+
+            let newStart = new Date(this.startDateFormControl.value);
+            let newEnd = new Date(this.endDateFormControl.value)
+            this.events = this.events.map(iEvent => {
+              if (iEvent === event) {
+                return {
+                  ...event,
+                  start: newStart,
+                  end: newEnd
+                };
+              }
+              return iEvent;
+            });
+            this.refresh.next();
+            this.modal.dismissAll()
+          }, (err) => {
+            console.log(err);
+
+          })
+        }
       })
       console.log(this.startDateFormControl);
     }
     else if (action == "Deleted") {
-      console.log('during deletion');
-      this.deleteEvent(event, _index);
+      console.log('before deletion');
+      this.modal.open(this.editOrDeleteApponitment).result.then((editDelete) => {
+        console.log(editDelete);
+        if (editDelete == 'Delete') {
+          this.deleteEvent(event, _index);
+        } else if (editDelete == 'Update') {
+          this.handleEvent('Edit', event, _index)
+        }
+      })
     }
     else {
       this.modal.open(this.tesst, { centered: true })
     }
-
   }
 
   openEvents(e) {
@@ -513,6 +593,7 @@ console.log(startTime);
           "pid": parseInt(localStorage.getItem("patientId")),
           "startTime": moment(this.startDateFormControl.value).format("YYYY-MM-DD") + "T" + this.startTime + ":" + this.startDuration + ":" + "59",
           "title": this.AppointmentName.value,
+          "location": this.Location.value,
           "userId": parseInt(localStorage.getItem("userId"))
         }
 
@@ -536,6 +617,8 @@ console.log(startTime);
             }
           ];
           this.refresh.next();
+          console.log(this.events);
+
         }, (err) => {
           console.log(err);
         })

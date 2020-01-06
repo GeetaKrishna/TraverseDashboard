@@ -18,7 +18,7 @@ export class CalendarService {
   }
 
   editAppoinments(appointment) {
-    return this.http.put(`${environment.apiUrl}/calendar/appointments/${appointment.pid}`, appointment)
+    return this.http.put(`${environment.apiUrl}/calendar/appointments/`, appointment)
   }
 
   deleteAppoinmentById(id) {
