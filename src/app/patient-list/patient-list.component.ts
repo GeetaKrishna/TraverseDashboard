@@ -32,14 +32,12 @@ export class PatientListComponent implements OnInit {
 
     })
   }
-  editPatient(id) {
-    console.log(id, 'id');
+  editPatient(patientData) {
+    console.log(patientData, 'id');
     this.authentication.testHTML('editPatient')
   }
-  removePatient(id) {
-    console.log(id, 'id');
-
-
+  removePatient(patientData) {
+    console.log(patientData, 'id');
   }
   // displayedColumns: string[] = ['relation', 'name', 'actions'];
   // dataSource = ELEMENT_DATA;

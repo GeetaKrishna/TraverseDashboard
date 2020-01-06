@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { UserService } from '../_services/user.service';
 import { MatDialogRef } from '@angular/material';
 import { AuthenticationService } from '../_services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-patient',
@@ -37,6 +38,7 @@ export class AddPatientComponent implements OnInit {
     })
   }
   constructor(
+    private toast: ToastrService,
     private userService: UserService,
     private authentication: AuthenticationService,
     @Optional() public dialogRef: MatDialogRef<AddPatientComponent>
@@ -61,7 +63,10 @@ export class AddPatientComponent implements OnInit {
       "weight": parseFloat(weight.value)
     }).subscribe((data) => {
       console.log(data, "data during patient registration");
+      this.authentication.toggleEmit('close');
+      this.toast.success('Patient Added Successfully')
     }, (err) => {
+      this.toast.error('Something went wrong, Please Try again.')
       console.log(err, "error during patient registration");
     })
   }
