@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MyHeartService } from '../_services/my-heart.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
+import { DomSanitizer } from '@angular/platform-browser';
+import { FormControl } from '@angular/forms';
+import { CalendarService } from '../_services/calendar.service';
+import { MedicationService } from '../_services/medication.service';
 
 @Component({
   selector: 'app-my-heart',
@@ -7,23 +13,75 @@ import { MyHeartService } from '../_services/my-heart.service';
   styleUrls: ['./my-heart.component.css']
 })
 export class MyHeartComponent implements OnInit {
+  imageData: any;
+  heartRate: any;
+  heartRateFormControl = new FormControl('');
+  flag: Boolean = false;
+  recentlyUpdatedTime: any;
+  compareDate = moment(new Date(), "YYYY-MM-DD");
 
-  constructor(private myHeartService: MyHeartService) { }
+  appointments = [];
+  timer: any;
+
+  constructor(private myHeartService: MyHeartService, private modal: NgbModal, private sanitizer: DomSanitizer,
+    private prescriptionService: MedicationService, private calendarService: CalendarService) { }
+  @ViewChild('createEKGTemplate', { static: true }) createEKGTemplate;
+  @ViewChild('createHRTemplate', { static: true }) createHRTemplate;
 
   ngOnInit() {
-    this.myHeartService.getHeartRateByPatientId().subscribe((data) => {
-      console.log(data);
 
+    this.timer = setInterval(() => {
+      this.apps[0].time = moment(this.recentlyUpdatedTime).fromNow();
+      console.log(this.apps[0].time);
+    }, 1000);
+
+    this.prescriptionService.getPrescriptions().subscribe((prescriptionList: []) => {
+      if (prescriptionList.length > 0) {
+        prescriptionList.map((e) => {
+          console.log(e);
+          // isBetween(start, end, 'limit', inclusivity/exclusivity)
+          if (this.compareDate.isBetween(moment(e['startDate'], '"YYYY-MM-DD"'), moment(e['endDate'], "YYYY-MM-DD"), "days", "[]")
+          ) {
+            this.appointments.push(e)
+          }
+        })
+      }
     }, (err) => {
       console.log(err);
+    });
 
+    this.calendarService.getAppointments().subscribe((appointmentList: []) => {
+      if (appointmentList.length > 0) {
+        appointmentList.map((e: any) => {
+          console.log(e);
+
+          if (this.compareDate.isBetween(moment(e['startTime'], '"YYYY-MM-DD"'), moment(e['endTime'], "YYYY-MM-DD"), 'days', '[]')
+          ) {
+            this.appointments.push(e)
+          }
+        })
+      }
+    }, (err) => {
+      console.log(err);
+    });
+
+    this.myHeartService.getHeartRate().subscribe((data: any) => {
+      console.log(data);
+      this.apps[0].appId = data.id;
+      this.apps[0].details = data.heartRate;
+      this.apps[0].time = moment(data.hrDate).fromNow();
+      this.recentlyUpdatedTime = data.hrDate;
+      console.log(moment(data.hrDate).fromNow())
+    }, (err) => {
+      console.log(err);
     })
-    this.myHeartService.getEkgByPatientId().subscribe((data) => {
-      console.log(data);
 
+    this.myHeartService.getEkg().subscribe((data) => {
+      console.log(data);
+      let t = {};
+      this.apps[3].url = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${data['image']}`);
     }, (err) => {
       console.log(err);
-
     })
 
   }
@@ -63,7 +121,7 @@ export class MyHeartComponent implements OnInit {
     },
     {
       "appId": 5,
-      "details": "KEEPS TRACK OF APPOITMENT",
+      "details": "KEEPS TRACK OF APPOINTMENT",
       "version": "1.0v",
       "appName": "Medication",
       "content": "20mg",
@@ -97,4 +155,86 @@ export class MyHeartComponent implements OnInit {
       "time": "yesterday"
     },
   ]
+
+  close() {
+    this.modal.dismissAll()
+  }
+
+  createEKG() {
+    this.modal.open(this.createEKGTemplate, { centered: true, size: 'lg', windowClass: "" })
+  }
+
+  createHR() {
+    this.modal.open(this.createHRTemplate, { centered: true, size: 'lg', windowClass: "" })
+  }
+
+  editHR(id) {
+    this.flag = !this.flag;
+    if (!this.flag) {
+      console.log(this.heartRate);
+      let body = {
+        "heartRate": parseInt(this.heartRate),
+        "hrDate": new Date().toISOString(),
+        "pid": parseInt(localStorage.getItem("patientId")),
+        "id": id
+      }
+
+      console.log(id, body);
+
+      this.myHeartService.updateHR(body).subscribe((data: any) => {
+        // this.apps[0].time
+        console.log(data);
+        this.apps[0].time = moment(data.hrDate).fromNow()
+        this.recentlyUpdatedTime = data.hrDate
+      }, (err) => {
+        console.log(err);
+      })
+    }
+  }
+
+  imageInput(event) {
+    console.log(event.target.files);
+    let file = event.target.files[0]
+    this.imageData = file;
+    console.log(this.imageData);
+  }
+
+  addHR() {
+
+    let body = {
+      "heartRate": parseInt(this.heartRateFormControl.value),
+      "hrDate": new Date().toISOString(),
+      "pid": localStorage.getItem("patientId")
+    }
+    console.log(body);
+
+    this.myHeartService.addHR(body).subscribe((data) => {
+      console.log(data);
+
+    }, (err) => {
+      console.log(err);
+
+    })
+
+  }
+
+  addEKG() {
+
+    let t = new FormData()
+
+    t.append('ekgDate', new Date().toISOString())
+    t.append('image', this.imageData)
+    t.append('pId', localStorage.getItem("patientId"))
+
+    this.myHeartService.addEkg(t).subscribe((data) => {
+      console.log(data);
+    }, (err) => {
+      console.log(err);
+    })
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.timer)
+  }
+
 }

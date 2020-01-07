@@ -9,12 +9,34 @@ export class MyHeartService {
 
   constructor(private http: HttpClient) { }
 
-  getHeartRateByPatientId(){
-    return this.http.get(`${environment.apiUrl}/myheart/hr/${parseInt(localStorage.getItem("patientId"))}`);
+  addHR(hr){
+    return this.http.post(`${environment.apiUrl}/myheart/hr/add`, hr);
   }
 
-  getEkgByPatientId(){
-    return this.http.get(`${environment.apiUrl}/myheart/ekg/${parseInt(localStorage.getItem("patientId"))}`);
+  updateHR(hr){
+    return this.http.put(`${environment.apiUrl}/myheart/hr/${parseInt(localStorage.getItem("patientId"))}`, hr);
   }
+
+  getHeartRate(){
+    return this.http.get(`${environment.apiUrl}/myheart/hr/current/${parseInt(localStorage.getItem("patientId"))}`);
+  }
+
+  getEkgs(){
+    return this.http.get(`${environment.apiUrl}/myheart/ekg/`);
+  }
+ 
+  getEkg(){
+    return this.http.get(`${environment.apiUrl}/myheart/ekg/current/${parseInt(localStorage.getItem("patientId"))}`);
+  }
+
+  addEkg(ekg){
+    return this.http.post(`${environment.apiUrl}/myheart/ekg/add`, ekg);
+  }
+  // getEkgByPatientId(){
+  //   return this.http.get(`${environment.apiUrl}/myheart/ekg/${parseInt(localStorage.getItem("patientId"))}`);
+  // }
+  // getEkgByPatientId(){
+  //   return this.http.get(`${environment.apiUrl}/myheart/ekg/${parseInt(localStorage.getItem("patientId"))}`);
+  // }
 
 }

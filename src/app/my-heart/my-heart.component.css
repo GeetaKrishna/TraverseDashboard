@@ -64,3 +64,9 @@
     color: white;
 
 }
+.card-footer{
+    background-color: rgba(0,0,0, 0) !important;
+}
+.editTrue {
+    border-bottom: 2px dotted black;
+  }
