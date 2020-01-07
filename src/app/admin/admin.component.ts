@@ -40,7 +40,6 @@ export class AdminComponent implements OnInit {
         this.settingExpand.toggle();
         this.authentication.testHTML('setPatientButtonTrue');
         if (this.setting.opened) {
-
           this.profile.close();
           this.setting.close();
           this.password.close();
@@ -64,6 +63,7 @@ export class AdminComponent implements OnInit {
           this.patientlist.close()
         }
       } else if (data == 'PatientList') {
+        // this.authentication.testHTML("PatientList");
         this.patientlist.toggle()
         if (this.patientlist.opened) {
           this.profile.close();

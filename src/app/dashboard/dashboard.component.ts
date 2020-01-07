@@ -623,7 +623,25 @@ export class DashboardComponent implements OnInit {
       this.toggleSubmitWeight();
     }
   }
-
+  public inputValidator(event: any) {
+    console.log(event.target.value);
+    const pattern = /^[0-9]*$/;
+    //let inputChar = String.fromCharCode(event.charCode)
+    if (!pattern.test(event.target.value)) {
+      // event.target.value = event.target.value.replace(/[^0-9]/g, "");
+      // invalid character, prevent input
+      return false
+    }
+  }
+  onKeyUp(event):boolean {
+    // console.log(event, 'event');
+    // console.log(event.target.innerHTML.length, 'event length');
+    if (event.target.innerHTML.length > 3) {
+      event.target.innerHTML = event.target.innerHTML.split('').splice(0,3).join('')
+      return true;
+    }
+   
+  }
   toggleSubmitWeight(): void {
     this.contenteditable1 = false;
     this.details = this.currentWeight;

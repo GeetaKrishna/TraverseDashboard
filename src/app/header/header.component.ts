@@ -7,6 +7,7 @@ import { UserService } from '../_services/user.service';
 import { ForgotPasswordPage3Component } from '../forgot-password-page3/forgot-password-page3.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { AddPatientComponent } from '../add-patient/add-patient.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -18,11 +19,19 @@ export class HeaderComponent implements OnInit {
   opened: boolean;
   shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
   imageUrl: string;
+  subscription: Subscription;
 
   constructor(private elementRef: ElementRef, private router: Router, private authentication: AuthenticationService, public dialog: MatDialog) { }
 
   ngOnInit() {
-
+    this.subscription = this.authentication.profImg$.subscribe((data) => {
+      console.log(data, 'subscriptionData');
+      if (data == 1) {
+        this.imageUrl = '../../assets/newProfhead3.png'
+      } else if (data == 2) {
+        this.imageUrl = '../../assets/headFemale.png'
+      }
+    })
     let userData = JSON.parse(localStorage.getItem('loggedInUser'))
     console.log(userData.gender, 'gender');
     if (userData.gender == 'male') {
@@ -30,22 +39,27 @@ export class HeaderComponent implements OnInit {
     } else {
       this.imageUrl = '../../assets/headFemale.png'
     }
-    
   }
+
+  ngOnDestroy() {
+    // prevent memory leak when component is destroyed
+    this.subscription.unsubscribe();
+  }
+
   changePassword() {
     this.authentication.testHTML("Password");
   }
+
   addPatientProfile(param): void {
     this.authentication.testHTML("Setting");
-
-    let component;
-    console.log(param);
-    if (param == 'patient') {
-      component = AddPatientComponent;
-    }
-    else {
-      component = ForgotPasswordPage3Component;
-    }
+    // let component;
+    // console.log(param);
+    // if (param == 'patient') {
+    //   component = AddPatientComponent;
+    // }
+    // else {
+    //   component = ForgotPasswordPage3Component;
+    // }
     // const dialogRef = this.dialog.open(component, {
     //   width: '480px',
     // });
@@ -65,7 +79,14 @@ export class HeaderComponent implements OnInit {
     reader.readAsDataURL(k.files[0]);//attempts to read the file in question.
     console.log(localStorage)
   }
-
+  mouseEnter(str) {
+    console.log(str);
+    this.closeAllToggles()
+  }
+  mouseLeave(str) {
+    console.log(str);
+    this.authentication.toggleEmit('close');
+  }
   closeAllToggles() {
     this.authentication.testHTML("SettingExpand");
     this.authentication.toggleEmit('close');

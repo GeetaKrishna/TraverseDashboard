@@ -26,14 +26,14 @@ export class PatientListComponent implements OnInit {
   PatientData = [];
   constructor(private insurance: InsuranceService, private patient: PatientService, private authentication: AuthenticationService) { }
   ngOnInit() {
-
-    this.patient.getAllPatientsList().subscribe((data: []) => {
-      console.log(data, 'patientlist');      
-      this.PatientData = data
-    }, (err) => {
-      console.log(err);
-    })
+    // this.patient.getAllPatientsList().subscribe((data: []) => {
+    //   console.log(data, 'patientlist');      
+    //   this.PatientData = data
+    // }, (err) => {
+    //   console.log(err);
+    // })
   }
+
 
   editPatient(patientData) {
     console.log(patientData, 'id');

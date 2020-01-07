@@ -8,6 +8,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 })
 export class SettingMenuComponent implements OnInit {
   imgUrl: any;
+  selected = 'pink';
 
   constructor(private authentication: AuthenticationService, private elementRef: ElementRef) { }
 
@@ -28,14 +29,15 @@ export class SettingMenuComponent implements OnInit {
   }
   BGImageChange(img) {
     console.log(img);
+    // img = this.selected
     var reader = new FileReader();
     var t = this.elementRef;
     if (img == 'pink') {
       this.imgUrl = '../assets/newBG.png';
       // t.nativeElement.ownerDocument.body.style.backgroundImage =
-    } else if (img == 'blue') {
-      this.imgUrl = '../assets/newBG2.jpg';
-    
+      // } else if (img == 'blue') {
+      //   this.imgUrl = '../assets/newBG2.jpg';
+
     } else if (img == 'rainbow') {
       this.imgUrl = '../assets/wall2.jpg';
     }

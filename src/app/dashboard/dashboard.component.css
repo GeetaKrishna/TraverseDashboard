@@ -6,6 +6,9 @@
 .card-header {
   background-color: #00000024;
 } */
+div#editable {
+  display: inline-block;
+}
 
 .card {
   background-color: #00000024;
@@ -38,6 +41,7 @@
 .black {
   color: rgb(255, 255, 255)
 }
+
 /* ::-webkit-scrollbar {
   width: 1px;
 } */

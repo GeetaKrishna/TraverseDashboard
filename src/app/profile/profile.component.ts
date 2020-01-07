@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
   lastNameFormControl: any = new FormControl();
   user: any;
   patient: any;
+  ProfileNumber: number;
 
   constructor(private toast: ToastrService, private authentication: AuthenticationService, private userService: UserService) { }
 
@@ -81,7 +82,6 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
-
     let updatePatientData = {
       "userId": parseInt(this.patient.userId),
       "pid": parseInt(this.patient.pid),
@@ -107,6 +107,13 @@ export class ProfileComponent implements OnInit {
     console.log(updatePatientData);
     console.log(updateUserData);
 
+    if (this.selectedGender == 'male') {
+      this.ProfileNumber = 1
+    }
+    else if (this.selectedGender == 'female') {
+      this.ProfileNumber = 2
+    }
+
     this.userService.updateUserProfileById(updateUserData).subscribe((userData) => {
       // ADD toast messsage to show it's updated or failed
       console.log(userData);
@@ -115,6 +122,7 @@ export class ProfileComponent implements OnInit {
         localStorage.setItem("loggedInUser", JSON.stringify(updateUserData))
         localStorage.setItem("patientData", JSON.stringify(patientData))
         this.toast.success(userData)
+        this.authentication.changeImage(this.ProfileNumber)
         this.authentication.toggleEmit('close');
       }, (err) => {
         console.log(err);
@@ -126,7 +134,10 @@ export class ProfileComponent implements OnInit {
 
     })
   }
-
+  // selectedNavItem(item: number) {
+  //   console.log('selected nav item ' + item);
+  //   this._navService.changeNav(item);
+  // }
   cancelEdit() {
     this.authentication.toggleEmit('close');
   }
