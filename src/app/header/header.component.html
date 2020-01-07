@@ -10,19 +10,30 @@
       <div style="text-align: center; display: flex;">
         <span>
           <a mat-list-item (click)="viewProfile();">
-            <img [src]='imageUrl' style="margin-right: 10px; font-size: 24px; cursor: pointer;"
-              height="26px" width="26px"></a>
+            <img class="imgg" [src]='imageUrl' style="margin-right: 10px; font-size: 24px; cursor: pointer;"
+              height="26px" width="26px">
+            <!-- <div class="imgg">
+                <div class="overlay"></div>
+              </div> -->
+            <!-- profile -->
+          </a>
         </span>
         <span>
           <!-- [matMenuTriggerFor]="menu"  -->
-          <a mat-list-item (click)="closeAllToggles();">
-            <img src="../../assets/newGearHeader2.png" style="margin-right: 10px; font-size: 24px; cursor: pointer;"
-              height="26px" width="26px"></a>
+          <a mat-list-item (mouseenter)="mouseEnter('div a')" (mouseleave)="mouseLeave('div A')"
+            (click)="closeAllToggles();">
+            <img class="imgg" src="../../assets/newGearHeader2.png"
+              style="margin-right: 10px; font-size: 24px; cursor: pointer;" height="26px" width="26px">
+            <!-- <div class="imgg">
+                <div class="overlay"></div>
+              </div>  -->
+            <!-- settings -->
+          </a>
         </span>
         <span>
           <a mat-list-item (click)="logOut()">
-            <img src="../../assets/newLogOutHeader2.webp" style="margin-right: 10px; font-size: 24px; cursor: pointer;"
-              height="26px" width="26px">
+            <img class="imgg" src="../../assets/newLogOutHeader2.webp"
+              style="margin-right: 10px; font-size: 24px; cursor: pointer;" height="26px" width="26px">
           </a>
         </span>
       </div>

@@ -51,7 +51,8 @@
 // api calling dyncamiclly
 // # and index in table patient list
 // dynamic chNGE of profile pic event subscription
-// setting menu as side nav
-// selected icons in thick blue, remaining light blue
-// fourc floaing lables while installing check to balck
-// four c values restrict to 3 while editing
+// setting menu as side nav -- D
+// themes to dropdown -- D
+// selected icons in thick blue, remaining light blue -- D
+// fourc floaing lables while installing check to balck -- D
+// four c values restrict to 3 while editing -- D

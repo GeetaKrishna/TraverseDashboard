@@ -158,7 +158,10 @@ import { SettingMenuComponent } from './setting-menu/setting-menu.component';
     AvatarModule,
     DpDatePickerModule,
     NgbModalModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      preventDuplicates: true,
+    }),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory

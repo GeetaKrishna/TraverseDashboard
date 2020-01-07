@@ -80,15 +80,20 @@ export class RegisterComponent implements OnInit {
   ]);
   passwordFormControl = new FormControl('', [
     Validators.required,
+    Validators.minLength(8),
+    Validators.maxLength(16),
+    Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
   ]);
   cfpasswordFormControl = new FormControl('', [
     Validators.required,
+    Validators.pattern(this.passwordFormControl.value)
   ]);
 
   userNameTaken: any;
   usernameAvialable: boolean;
   emailTaken: boolean;
   refreshEmail: boolean;
+  validPassword: boolean;
   constructor(
     private toast: ToastrService,
     private formBuilder: FormBuilder,
@@ -104,46 +109,33 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.userNameFormControl.valueChanges.subscribe((data) => {
       console.log(data);
       if (this.userNameTaken == true || this.userNameTaken == false) {
         this.userNameTaken = "True";
       }
-
       this.refresh = true;
     })
 
     this.emailFormControl.valueChanges.subscribe((data) => {
       console.log(data);
-
       if (this.emailTaken == true || this.emailTaken == false) {
         this.userNameTaken = "True";
       }
-
       this.refreshEmail = true;
     })
-
-    this.signUpForm = this.formBuilder.group({
-      fname: ['', Validators.required],
-      lname: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
-      password: ['', Validators.required],
-      cfpassword: ['', Validators.required]
-    });
 
     this.subject
       .pipe(debounceTime(3000))
       .subscribe((k) => {
         console.log(k);
-
         this.refresh = false;
-
         this.authenticationService.verifyUserName(k).subscribe((data: boolean) => {
           console.log(data);
           this.userNameTaken = data;
         })
       })
+
     this.subjectEmail
       .pipe(debounceTime(3000))
       .subscribe((k) => {
@@ -153,9 +145,11 @@ export class RegisterComponent implements OnInit {
           this.emailTaken = data;
         })
       });
+
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
+
   selectedVal: String = ''
   selectedGender: String = ''
   selectedDate: String = ''
@@ -182,12 +176,19 @@ export class RegisterComponent implements OnInit {
     console.log(value);
   }
   dateInput(value) {
-
     console.log(value);
-
-
     this.selectedDate = new Date(value).toLocaleDateString().split("/").reverse().join('-')
     console.log(this.selectedDate);
+  }
+  passwordValidation(pwd, cfpwd) {
+    console.log(pwd, cfpwd, 'v');
+    if (pwd == cfpwd) {
+      console.log(true);
+      this.validPassword = true;
+    }
+    // console.log(false);
+
+    // this.validPassword = false
   }
 
   register(FNAME, LNAME, USERNAME, PHONENUMBER, EMAIL, PWD, HEIGHT, WEIGHT) {

@@ -13,6 +13,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
+    private checkForProfImage = new BehaviorSubject<number>(0);
 
     public testEmitter = new EventEmitter();
     public toggleEmitter = new EventEmitter();
@@ -21,7 +22,12 @@ export class AuthenticationService {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
+    profImg$ = this.checkForProfImage.asObservable();
 
+    changeImage(number) {
+        this.checkForProfImage.next(number);
+    }
+    
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
     }
@@ -29,7 +35,7 @@ export class AuthenticationService {
     testHTML(data) {
         this.testEmitter.emit(data);
     }
-    toggleEmit(data:any){
+    toggleEmit(data: any) {
         this.toggleEmitter.emit(data);
     }
 
