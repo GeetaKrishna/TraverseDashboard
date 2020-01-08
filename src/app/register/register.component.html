@@ -164,8 +164,9 @@
                                         <input matInput placeholder="Password" type="password"
                                             [formControl]="passwordFormControl"
                                             >
+                                            <!-- passwordFormControl.touched && -->
                                         <button mat-button style="color: #3F524F;"
-                                            *ngIf="passwordFormControl.touched &&passwordFormControl.hasError('required')"
+                                            *ngIf="passwordFormControl.hasError('required')"
                                             matSuffix mat-icon-button matTooltip="Password is required">
                                             <mat-icon>info</mat-icon>
                                         </button>

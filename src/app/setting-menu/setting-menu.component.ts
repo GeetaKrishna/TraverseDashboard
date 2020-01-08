@@ -55,6 +55,8 @@ export class SettingMenuComponent implements OnInit {
   }
 
   patientList() {
+    this.authentication.callPatientList('invokePatientListApi')
+
     this.authentication.testHTML("PatientList");
   }
 
