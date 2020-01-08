@@ -3,6 +3,7 @@ import { InsuranceService } from '../_services/insurance.service';
 import { AuthenticationService } from '../_services/authentication.service';
 import { PatientService } from '../_services/patient.service';
 import { TypeScriptEmitter } from '@angular/compiler';
+import { Subscription } from 'rxjs';
 
 // export interface PeriodicElement {
 //   name: string;
@@ -24,14 +25,21 @@ import { TypeScriptEmitter } from '@angular/compiler';
 })
 export class PatientListComponent implements OnInit {
   PatientData = [];
+  subscription: Subscription;
   constructor(private insurance: InsuranceService, private patient: PatientService, private authentication: AuthenticationService) { }
   ngOnInit() {
-    // this.patient.getAllPatientsList().subscribe((data: []) => {
-    //   console.log(data, 'patientlist');      
-    //   this.PatientData = data
-    // }, (err) => {
-    //   console.log(err);
-    // })
+    this.subscription = this.authentication.patientListAPI$.subscribe((data) => {
+      console.log(data, 'subscriptionData');
+      if (data == 'invokePatientListApi') {
+        this.patient.getAllPatientsList().subscribe((data: []) => {
+          console.log(data, 'patientlist');
+          this.PatientData = data
+        }, (err) => {
+          console.log(err);
+        })
+      }
+    })
+
   }
 
 

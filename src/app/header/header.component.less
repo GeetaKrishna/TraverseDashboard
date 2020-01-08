@@ -31,67 +31,106 @@ label.myLabel input[type="file"] {
   background: #CCF;
 }
 
-// a:hover {
-//   background-color: rgb(5, 5, 5);
-//   padding-top: 5px;
-//   color: red;
-// }
-
-// a:active {
-//   background-color: darkblue;
-//   padding-top: 5px;
-//   color: yellow;
-// }
-
-// .imgg {
-//   // background: url('../../assets/newProfhead3.png');
-// background-image: url('http://cdn1.iconfinder.com/data/icons/round-simple-social-icons/58/facebook.png');
-//   margin-right: 10px;
-//   font-size: 24px;
-//   cursor: pointer;
-//   height: 26px;
-//   width: 26px
-// }
-
-.imgg:hover {
-  height: 26px;
-  width: 26px;
-  // position: absolute;
-  background-color: #000;
-  opacity: 0.4;
-  border-radius: 15px;
+.headerBackground {
+  // color: blue;
+  // color: #fff;
+  width: 140px;
+  background: linear-gradient(110deg, #ffeead 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #C5E7D7 34%, #88d8b0 34%);
+  background-size: 400%;
+  // -webkit-text-fill-color: transparent;
+  // -webkit-background-clip: text;
 }
 
-// .imgg:active {
-//   height: 26px;
-//   width: 26px;
-//   // position: absolute;
-//   background-color: #000;
-//   opacity: 0.9;
-//   border-radius: 15px;
-// }
-
-// .imgg:hover > .overlay {
-//   width: 100%;
-//   height: 100%;
-//   position: absolute;
-//   background-color: #000;
-//   opacity: 0.5;
-//   border-radius: 30px;
-// }
-
-::ng-deep .mat-focused .mat-form-field-label {
-  /*change color of label*/
-  color: rgb(10, 10, 10) !important;
+.headerTitle {
+  font-weight: bolder;
+  margin: 0 !important;
+  font-size: 26px;
+  text-align: center;
+  color: #636d11 ;
+  font-family: Pacifico !important;
 }
 
-::ng-deep.mat-form-field-underline {
-  /*change color of underline*/
-  background-color: rgb(10, 10, 10) !important;
+.headerBackground {
+  animation: Gradient 5s ease infinite;
+  -webkit-animation: Gradient 5s ease infinite;
+  -moz-animation: Gradient 5s ease infinite;
 }
 
-::ng-deep.mat-form-field-ripple {
-  /*change color of underline when focused*/
-  background-color: rgb(10, 10, 10) !important;
-  ;
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 30% 50%
+  }
+
+  50% {
+    background-position: 25% 50%
+  }
+
+  100% {
+    background-position: 30% 50%
+  }
 }
+
+  // a:hover {
+  //   background-color: rgb(5, 5, 5);
+  //   padding-top: 5px;
+  //   color: red;
+  // }
+
+  // a:active {
+  //   background-color: darkblue;
+  //   padding-top: 5px;
+  //   color: yellow;
+  // }
+
+  // .imgg {
+  //   // background: url('../../assets/newProfhead3.png');
+  // background-image: url('http://cdn1.iconfinder.com/data/icons/round-simple-social-icons/58/facebook.png');
+  //   margin-right: 10px;
+  //   font-size: 24px;
+  //   cursor: pointer;
+  //   height: 26px;
+  //   width: 26px
+  // }
+
+  .imgg:hover {
+    height: 26px;
+    width: 26px;
+    // position: absolute;
+    background-color: #000;
+    opacity: 0.4;
+    border-radius: 15px;
+  }
+
+  // .imgg:active {
+  //   height: 26px;
+  //   width: 26px;
+  //   // position: absolute;
+  //   background-color: #000;
+  //   opacity: 0.9;
+  //   border-radius: 15px;
+  // }
+
+  // .imgg:hover > .overlay {
+  //   width: 100%;
+  //   height: 100%;
+  //   position: absolute;
+  //   background-color: #000;
+  //   opacity: 0.5;
+  //   border-radius: 30px;
+  // }
+
+  ::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: rgb(10, 10, 10) !important;
+  }
+
+  ::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: rgb(10, 10, 10) !important;
+  }
+
+  ::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: rgb(10, 10, 10) !important;
+    ;
+  }
