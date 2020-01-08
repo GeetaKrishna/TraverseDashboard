@@ -10,7 +10,7 @@
     <!-- <button mat-menu-item (click)="BGImageChange('blue')"> <span>Wallpaper 2</span></button> -->
     <!-- <button mat-menu-item (click)="BGImageChange('rainbow')"> <span>Wallpaper 2</span></button> -->
 
-    <!-- <button mat-menu-item class="mt-2">
+    <button mat-menu-item class="mt-2">
         <mat-form-field>
             <mat-label>Theme</mat-label>
             <mat-select [(value)]="selected" (selectionChange)="BGImageChange(selected)">
@@ -18,13 +18,13 @@
                 <mat-option value="rainbow"> Wallpaper 2 </mat-option>
             </mat-select>
         </mat-form-field>
-    </button> -->
-    <button mat-menu-item [matMenuTriggerFor]="themes">Themes</button>
+    </button>
+    <!-- <button mat-menu-item [matMenuTriggerFor]="themes">Themes</button> -->
     <!-- xPosition="before" -->
-    <mat-menu #themes="matMenu" yPosition="below">
+    <!-- <mat-menu #themes="matMenu" yPosition="below">
         <button mat-menu-item (click)="BGImageChange('pink')">Wallpaper 1</button>
         <button mat-menu-item (click)="BGImageChange('rainbow')">Wallpaper 2</button>
-    </mat-menu>
+    </mat-menu> -->
     <button mat-menu-item (click)="changePassword()">Change Password</button>
     <button mat-menu-item (click)="patientList()">Patient's List </button>
     <button mat-menu-item (click)="addPatientProfile()">Add Patient </button>

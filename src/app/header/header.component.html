@@ -10,30 +10,36 @@
       <div style="text-align: center; display: flex;">
         <span>
           <a mat-list-item (click)="viewProfile();">
-            <img class="imgg" [src]='imageUrl' style="margin-right: 10px; font-size: 24px; cursor: pointer;"
-              height="26px" width="26px">
+            <!-- <img class="imgg" [src]='imageUrl' style="margin-right: 10px; font-size: 24px; cursor: pointer;"
+              height="26px" width="26px"> -->
+            <i class="fa fa-user  fa-2x fa-fw" style="color: rgb(0, 132, 255);"></i>
+            <span class="sr-only">Loading...</span>
             <!-- <div class="imgg">
                 <div class="overlay"></div>
               </div> -->
             <!-- profile -->
           </a>
-        </span>
+        </span>&nbsp;&nbsp;
         <span>
           <!-- [matMenuTriggerFor]="menu"  -->
           <a mat-list-item (mouseenter)="mouseEnter('div a')" (mouseleave)="mouseLeave('div A')"
             (click)="closeAllToggles();">
-            <img class="imgg" src="../../assets/newGearHeader2.png"
-              style="margin-right: 10px; font-size: 24px; cursor: pointer;" height="26px" width="26px">
+            <i class="fa fa-cog fa-spin fa-2x fa-fw" style="color: rgb(95, 93, 93);"></i>
+            <span class="sr-only">Loading...</span>
+            <!-- <img class="imgg" src="../../assets/newGearHeader2.png"
+              style="margin-right: 10px; font-size: 24px; cursor: pointer;" height="26px" width="26px"> -->
             <!-- <div class="imgg">
                 <div class="overlay"></div>
               </div>  -->
             <!-- settings -->
           </a>
-        </span>
+        </span> &nbsp;&nbsp;
         <span>
           <a mat-list-item (click)="logOut()">
-            <img class="imgg" src="../../assets/newLogOutHeader2.webp"
-              style="margin-right: 10px; font-size: 24px; cursor: pointer;" height="26px" width="26px">
+            <!-- <img class="imgg" src="../../assets/newLogOutHeader2.webp"
+              style="margin-right: 10px; font-size: 24px; cursor: pointer;" height="26px" width="26px"> -->
+            <i class="fa fa-sign-out fa-2x fa-fw" style="color: rgb(245, 58, 58)"></i>
+            <span class="sr-only">Loading...</span>
           </a>
         </span>
       </div>
