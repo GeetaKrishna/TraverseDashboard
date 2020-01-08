@@ -40,10 +40,18 @@ export class ChangePasswordComponent implements OnInit {
     console.log(password);
     console.log(cfpassword);
     // API Code Here
+    let MailId = localStorage.getItem('loggedInUser')
+    // console.log(localStorage.getItem('loggedInUser'));
 
+    // this.authentication.changePassword({
 
-    // after success, 
-    // this.authentication.toggleEmit('close');
+    // }).subscribe((data) => {
+    //   console.log(data, "data after password submission");
+    //   this.authentication.toggleEmit('close');
+
+    // }, (err) => {
+    //   console.log(err);
+    // })
 
   }
 

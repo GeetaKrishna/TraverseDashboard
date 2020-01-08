@@ -92,6 +92,10 @@ export class AuthenticationService {
         return this.http.post(`${environment.apiUrl}/users/check/pwd`, body, { responseType: 'text' })
     }
 
+    changePassword(body) {
+        return this.http.post(`${environment.apiUrl}/users/pwd/{userId}/{password}/{email}`, body, { responseType: 'text' })
+    }
+
     getUserId(username) {
         return this.http.get(`${environment.apiUrl}/users/name/${username}`)
     }
