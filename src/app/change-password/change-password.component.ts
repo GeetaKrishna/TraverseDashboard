@@ -8,18 +8,43 @@ import { AuthenticationService } from '../_services/authentication.service';
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent implements OnInit {
+  hide = true;
+  cfhide = true;
 
   constructor(private authentication: AuthenticationService) { }
 
   ngOnInit() {
+    this.cfpasswordFormControl.valueChanges.subscribe((data) => {
+      if (this.passwordFormControl.value == this.cfpasswordFormControl.value) {
+      } else {
+        this.cfpasswordFormControl.setErrors({ notSame: true })
+        if (this.cfpasswordFormControl.value == '') {
+          this.cfpasswordFormControl.setErrors({ notSame: true, required: true })
+        }
+      }
+    })
   }
 
-  passwordFormControl = new FormControl('', Validators.required);
-  cfpasswordFormControl = new FormControl('', Validators.required);
+  passwordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8),
+    Validators.maxLength(16),
+    Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
+  ]);
+  cfpasswordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(this.passwordFormControl.value)
+  ]);
 
   changePassword(password, cfpassword) {
     console.log(password);
     console.log(cfpassword);
+    // API Code Here
+
+
+    // after success, 
+    // this.authentication.toggleEmit('close');
+
   }
 
   cancelEdit() {

@@ -11,12 +11,34 @@ import { AuthenticationService } from '../_services/authentication.service';
 export class ForgotPasswordPage3Component implements OnInit {
   mailId: any;
   pin: string;
-  constructor(private matDialog: MatDialog, private router: Router, private route: ActivatedRoute, private authenticationService: AuthenticationService) { }
-
-  passwordFormControl = new FormControl('', Validators.required);
-  cfpasswordFormControl = new FormControl('', Validators.required);
+  hide = true;
+  cfhide = true;
+  passwordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8),
+    Validators.maxLength(16),
+    Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
+  ]);
+  cfpasswordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(this.passwordFormControl.value)
+  ]);
+  constructor(private matDialog: MatDialog,
+    private router: Router, private route: ActivatedRoute,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    // For Checking the Password and Confirm Password Validation
+    this.cfpasswordFormControl.valueChanges.subscribe((data) => {
+      if (this.passwordFormControl.value == this.cfpasswordFormControl.value) {
+      } else {
+        this.cfpasswordFormControl.setErrors({ notSame: true })
+        if (this.cfpasswordFormControl.value == '') {
+          this.cfpasswordFormControl.setErrors({ notSame: true, required: true })
+        }
+      }
+    })
+
     this.mailId = this.route.snapshot.paramMap.get('data');
     this.pin = this.route.snapshot.paramMap.get('pin');
     console.log(this.mailId)
