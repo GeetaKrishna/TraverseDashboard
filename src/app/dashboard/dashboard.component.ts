@@ -8,6 +8,8 @@ import * as Chart from 'chart.js';
 import { GetAppsService } from '../_services/get-apps.service';
 import { DatePipe } from '@angular/common';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -19,10 +21,12 @@ export class DashboardComponent implements OnInit {
   bloodPressureInfo: String = 'Blood Pressure is Normal'
   glucoseInfo: String = 'Glucose Levels are fine'
   cholesterolInfo: String = 'Cholestrol Levels are fine'
+
   weight = true;
   glucose = true;
   bloodpressure = true;
   cholesterol = true;
+
   currentWeight;
   currentGlucose;
   currentCholesterol;
@@ -46,12 +50,14 @@ export class DashboardComponent implements OnInit {
 
   weightChart: Chart;
   glucoseChart: Chart;
-  colorClassForBP: string;
+  colorClassForBP: string = 'green';
+  colorClassForCL: string = 'green';
+  colorClassForGL: string = 'green';
+  colorClassForWeight: string = 'green';
   colorPresentedInfo: any;
   getpatientWeight: Object;
   BPChart: Chart;
   cholesterolChart: Chart;
-
 
   public lineChartType = 'line';
 
@@ -103,23 +109,20 @@ export class DashboardComponent implements OnInit {
   public lineChartData: ChartDataSets[] = [
     { data: [65, 59, 300, 81, 56, 140], label: 'Weight' }
   ];
-  WeightDate = {
-    days: "",
-    timer: ""
-  };
-  glucoseDate = {
-    days: "",
-    timer: ""
-  };
-  cholesterolDate = {
-    days: "",
-    timer: ""
-  };
-  bpdate = {
-    days: "",
-    timer: ""
-  };
-  timer: string;
+
+  currentDate = moment(new Date(), "YYYY-DD-MM")
+
+  currentWeightDate: any;
+  currentglucoseDate: any;
+  currentcholesterolDate: any;
+  currentbpdate: any;
+
+  WeightDate: any;
+  glucoseDate: any;
+  cholesterolDate: any;
+  bpdate: any;
+
+  timer: any;
   weightCompare: boolean;
   clCompare: boolean;
   glucoseCompare: boolean;
@@ -132,6 +135,18 @@ export class DashboardComponent implements OnInit {
   contenteditable2: boolean = false;
   contenteditable4: boolean = false;
   ngOnInit() {
+
+    this.timer = setInterval(() => {
+      this.WeightDate = moment(this.currentWeightDate).fromNow();
+      this.glucoseDate = moment(this.currentglucoseDate).fromNow();
+      this.cholesterolDate = moment(this.currentcholesterolDate).fromNow();
+      this.bpdate = moment(this.currentbpdate).fromNow();
+
+      console.log(this.WeightDate);
+
+
+    }, 1000)
+
     // current weight
     this.dashboardService.getCurrentWeight().subscribe(
       (res) => {
@@ -143,9 +158,11 @@ export class DashboardComponent implements OnInit {
           this.measurementProviderForWeight = "fa-user-md"
         }
         console.log(this.measurementProviderForWeight);
+        console.log(res['TimeStamp']);
 
-        this.WeightDate = this.getDifferenceInDays(res['TimeStamp'])
-        // console.log(this.WeightDate)
+        this.currentWeightDate = res['TimeStamp'];
+
+        this.WeightDate = moment(res['TimeStamp']).fromNow()
         this.currentWeight = res['currentWeight'];
 
         this.dashboardService.getPatientsTopTwoWeights().subscribe((data: []) => {
@@ -166,7 +183,13 @@ export class DashboardComponent implements OnInit {
           } else {
             this.weightCompare = true;
           }
-
+          if (!this.weightCompare) {
+            this.colorClassForWeight = 'red';
+            this.weightpresentedInfo = 'fa-exclamation-triangle';
+          } else {
+            this.colorClassForGL = 'green';
+            this.weightpresentedInfo = 'fa-check-circle';
+          }
         }, (error) => {
           console.log(error);
 
@@ -177,6 +200,7 @@ export class DashboardComponent implements OnInit {
         console.log("error", err);
       }
     );
+
     //curent Glucose
     this.dashboardService.getGlucoseofPatient().subscribe(
       (res) => {
@@ -187,7 +211,10 @@ export class DashboardComponent implements OnInit {
         else {
           this.measurementProviderForGL = "fa-user-md"
         }
-        this.glucoseDate = this.getDifferenceInDays(res['glDate'])
+
+        this.currentglucoseDate = res['glDate'];
+
+        this.glucoseDate = moment(res['glDate']).fromNow()
 
         this.currentGlucose = res['glucoseLevel'];
         this.dashboardService.getPatientsTopTwoGL().subscribe((data: []) => {
@@ -203,7 +230,13 @@ export class DashboardComponent implements OnInit {
           } else {
             this.glucoseCompare = true;
           }
-
+          if (!this.glucoseCompare) {
+            this.colorClassForGL = 'red';
+            this.glucoseweightpresentedInfo = 'fa-exclamation-triangle';
+          } else {
+            this.colorClassForGL = 'green';
+            this.glucoseweightpresentedInfo = 'fa-check-circle';
+          }
         }, (error) => {
           console.log(error);
 
@@ -223,7 +256,11 @@ export class DashboardComponent implements OnInit {
         else {
           this.measurementProviderForCL = "fa-user-md"
         }
-        this.cholesterolDate = this.getDifferenceInDays(res['clDate'])
+
+        this.currentcholesterolDate = res['clDate'];
+
+        this.cholesterolDate = moment(res['clDate']).fromNow()
+
         this.currentCholesterol = res['chLevel'];
         this.dashboardService.getPatientsTopTwoCL().subscribe((data: []) => {
           console.log(data);
@@ -240,6 +277,14 @@ export class DashboardComponent implements OnInit {
             this.clCompare = true;
           }
 
+          if (!this.clCompare) {
+            this.colorClassForCL = 'red';
+            this.cholesterolpresentedInfo = 'fa-exclamation-triangle';
+          } else {
+            this.colorClassForCL = 'green';
+            this.cholesterolpresentedInfo = 'fa-check-circle';
+          }
+
         }, (error) => {
           console.log(error);
 
@@ -252,8 +297,10 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getBloodPressure().subscribe(
       (res) => {
         console.log(res, 'ressssss');
-        // console.log(res.highBP);
-        this.bpdate = this.getDifferenceInDays(res['bpDate'])
+        this.currentbpdate = res['bpDate'];
+
+        this.bpdate = moment(res['bpDate']).fromNow()
+
         if (parseInt(localStorage.getItem("userId")) == res['modifiedBy']) {
           this.measurementProviderForBP = "fa-user"
         }
@@ -283,31 +330,7 @@ export class DashboardComponent implements OnInit {
         console.log("error", err);
       }
     );
-    // // getWeightOfLoggedInUser()
-    // this.dashboardService.getWeightOfLoggedInUser().subscribe(
-    //   (res) => {
-    //     console.log(res, 'ressssss');
-    //   },
-    //   err => {
-    //     console.log("error", err);
-    //   }
-    // );
 
-    // this.getApp.getWeightProfile().subscribe(
-    //   (res) => {
-    //     console.log(res, 'res');
-    //   }, (err) => {
-    //     console.log(err);
-    //   }
-    // )
-
-    // this.getApp.getToken().subscribe(
-    //   (res) => {
-    //     console.log(res, 'res');
-    //   }, (err) => {
-    //     console.log(err);
-    //   }
-    // )
   }
 
   colorForBP(currentHBP: Number, currentLBP) {
@@ -317,7 +340,6 @@ export class DashboardComponent implements OnInit {
     // hbp 121 to 140, lbp 81 to 90 ==> PRE-HYPERtENSION
     // hbp 141 to 160, lbp 91 to 100 ==> Hypertension Stage-1, Consult Doctor
     // hbp >= 161, lbp > 100 ==> Hypertension Stage -2,  Consult Doctor Immediately
-
 
     if (currentHBP <= 90 && currentLBP <= 60) {
       this.dangerStatement = "Low, Consult Doctor Immediately";
@@ -613,6 +635,38 @@ export class DashboardComponent implements OnInit {
 
     console.log(json);
     this.dashboardService.sendCholesterol(json).subscribe((data) => {
+      console.log(data, 'dasssssssssssssh');
+      this.currentcholesterolDate = data['clDate'];
+      this.cholesterolDate = moment(data['clDate']).fromNow()
+
+      this.dashboardService.getPatientsTopTwoCL().subscribe((data: []) => {
+        console.log(data);
+        let i = 0;
+
+        if (data.length > 1) {
+          if (data[i]['chLevel'] > data[i + 1]['chLevel']) {
+            this.clCompare = true;
+          }
+          else {
+            this.clCompare = false;
+          }
+        } else {
+          this.clCompare = true;
+        }
+
+        if (!this.clCompare) {
+          this.colorClassForCL = 'red';
+          this.cholesterolpresentedInfo = 'fa-exclamation-triangle';
+        } else {
+          this.colorClassForCL = 'green';
+          this.cholesterolpresentedInfo = 'fa-check-circle';
+        }
+
+      }, (error) => {
+        console.log(error);
+
+      })
+
 
     });
   }
@@ -633,14 +687,14 @@ export class DashboardComponent implements OnInit {
       return false
     }
   }
-  onKeyUp(event):boolean {
+  onKeyUp(event): boolean {
     // console.log(event, 'event');
     // console.log(event.target.innerHTML.length, 'event length');
     if (event.target.innerHTML.length > 3) {
-      event.target.innerHTML = event.target.innerHTML.split('').splice(0,3).join('')
+      event.target.innerHTML = event.target.innerHTML.split('').splice(0, 3).join('')
       return true;
     }
-   
+
   }
   toggleSubmitWeight(): void {
     this.contenteditable1 = false;
@@ -655,7 +709,41 @@ export class DashboardComponent implements OnInit {
     }
     this.dashboardService.postWeight(json).subscribe((data) => {
       console.log(data, 'dasssssssssssssh');
-      this.WeightDate = this.getDifferenceInDays(data['weightDate'])
+
+      this.currentWeightDate = data['weightDate'];
+
+      this.WeightDate = moment(data['weightDate']).fromNow()
+
+      this.dashboardService.getPatientsTopTwoWeights().subscribe((data: []) => {
+        console.log(data);
+
+        // (w/h*h) * 703 = BMI
+
+        if (data.length > 1) {
+          let i = 0;
+
+          if (data[i]['weight'] > data[i + 1]['weight']) {
+            this.weightCompare = true;
+          }
+          else {
+            this.weightCompare = false;
+          }
+
+        } else {
+          this.weightCompare = true;
+        }
+        if (!this.weightCompare) {
+          this.colorClassForWeight = 'red';
+          this.weightpresentedInfo = 'fa-exclamation-triangle';
+        } else {
+          this.colorClassForGL = 'green';
+          this.weightpresentedInfo = 'fa-check-circle';
+        }
+      }, (error) => {
+        console.log(error);
+
+      })
+
     }, (err) => {
 
     })
@@ -682,6 +770,35 @@ export class DashboardComponent implements OnInit {
 
     console.log(json1);
     this.dashboardService.sendGlucose(json1).subscribe((data) => {
+      console.log(data, 'dasssssssssssssh');
+      this.currentglucoseDate = data['glDate'];
+
+      this.glucoseDate = moment(data['glDate']).fromNow()
+
+      this.dashboardService.getPatientsTopTwoGL().subscribe((data: []) => {
+        console.log(data);
+        let i = 0;
+        if (data.length > 1) {
+          if (data[i]['glucoseLevel'] > data[i + 1]['glucoseLevel']) {
+            this.glucoseCompare = true;
+          }
+          else {
+            this.glucoseCompare = false;
+          }
+        } else {
+          this.glucoseCompare = true;
+        }
+        if (!this.glucoseCompare) {
+          this.colorClassForGL = 'red';
+          this.glucoseweightpresentedInfo = 'fa-exclamation-triangle';
+        } else {
+          this.colorClassForGL = 'green';
+          this.glucoseweightpresentedInfo = 'fa-check-circle';
+        }
+      }, (error) => {
+        console.log(error);
+
+      })
 
     })
   }
@@ -711,49 +828,19 @@ export class DashboardComponent implements OnInit {
     this.colorForBP(this.currentHBP, this.currentLBP)
     console.log("json1 " + JSON.stringify(dataBP));
     this.dashboardService.postBloodPressure(dataBP).subscribe((data) => {
-      console.log(data);
+      console.log(data, 'dasssssssssssssh');
 
+      this.currentbpdate = data['bpDate'];
+
+      this.bpdate = moment(data['bpDate']).fromNow()
     }, (err) => {
       console.log(err);
 
     });
   }
 
-  //this.dashboardService.postCholesterol(this.details).subscribe();
-  // this.details = new Details();
-
-
-
-  // this.dashboardService.postCholesterol.
-  // this.currentCholesterol.value = ;
-
-  getDifferenceInDays(date) {
-    let difference = new Date().getTime() - new Date(date).getTime();
-    let days;
-
-    if (difference / 1000 < 60) {
-      days = difference / 1000
-      console.log(days.toFixed())
-      return { days: days.toFixed(), timer: "seconds" };
-    }
-    else if (difference / 1000 >= 60 && difference / 1000 < 3600) {
-      days = difference / (1000 * 60)
-      console.log(days.toFixed())
-
-      return { days: days.toFixed(), timer: "minutes" };
-    }
-    else if (difference / 1000 >= 3600 && difference / 1000 < 3600 * 24) {
-      days = difference / (1000 * 3600)
-      console.log(days.toFixed())
-
-      return { days: days.toFixed(), timer: "hours" };
-    }
-    else if (difference / 1000 >= 3600 * 24) {
-      days = difference / (1000 * 3600 * 24)
-      console.log(days.toFixed())
-      return { days: days.toFixed(), timer: "days" };
-    }
-
+  ngOnDestroy() {
+    clearInterval(this.timer)
   }
 
 }
