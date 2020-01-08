@@ -19,6 +19,30 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit() {
   }
 
+  verifyMailId() {
+    this.authenticationService.verifyMailId(this.emailFormControl.value).subscribe((data: boolean) => {
+      console.log(data);
+      this.refreshEmail = false;
+      this.emailTaken = data;
+      if (this.emailTaken == false) {
+
+      }
+      else {
+        //   this.authenticationService.setPIN(this.emailFormControl.value).subscribe((pin) => {
+        //     console.log(pin, "pin");
+
+        //   }, (err) => {
+        //     console.log(err, "error during getting pin");
+
+        //   })
+        //   this.route.navigate(['pinPage', { data: this.emailFormControl.value }])
+        // }
+      }
+    }, (err) => {
+
+    })
+  }
+
   onSubmit(event) {
     console.log(event);
     this.refreshEmail = true;

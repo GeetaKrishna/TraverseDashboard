@@ -162,57 +162,40 @@
                                     <mat-form-field>
                                         <input matInput placeholder="Password" type="password"
                                             [formControl]="passwordFormControl">
-                                        <!-- passwordFormControl.touched && -->
-                                        <button mat-button style="color: #3F524F;"
+                                        <button mat-button style="color: #556e6d;"
                                             *ngIf="passwordFormControl.hasError('required')" matSuffix mat-icon-button
                                             matTooltip="Password is required">
                                             <mat-icon>info</mat-icon>
                                         </button>
-                                        <button mat-button style="color: #3F524F;"
+                                        <button mat-button style="color: #556e6d;"
                                             *ngIf="passwordFormControl.hasError('minlength')" matSuffix mat-icon-button
                                             matTooltip=" Password must be at least 8 characters long.">
                                             <mat-icon>info</mat-icon>
                                         </button>
-                                        <button mat-button style="color: #3F524F;"
+                                        <button mat-button style="color: #556e6d;"
                                             *ngIf="passwordFormControl.hasError('maxlength')" matSuffix mat-icon-button
                                             matTooltip="  Password can be max 16 characters long.">
                                             <mat-icon>info</mat-icon>
                                         </button>
-                                        <button mat-button style="color: #3F524F;"
+                                        <button mat-button style="color: #556e6d;"
                                             *ngIf="!passwordFormControl.hasError('minlength') && passwordFormControl.hasError('pattern')"
                                             matSuffix mat-icon-button
                                             matTooltip="Password must contain one small letter, one capital letter and one number.">
                                             <mat-icon>info</mat-icon>
                                         </button>
-                                        <!-- <mat-error *ngIf="passwordFormControl.hasError('required')">
-                                            Password is <strong>required</strong>
-                                        </mat-error>
-                                        <mat-error *ngIf="passwordFormControl.hasError('minlength')">
-                                            Password must be at least <strong>8 characters</strong> long.
-                                        </mat-error>
-                                        <mat-error *ngIf="passwordFormControl.hasError('maxlength')">
-                                            Password can be max <strong>16 characters</strong> long.
-                                        </mat-error>
-                                        <mat-error *ngIf="passwordFormControl.hasError('pattern')">
-                                            Password must contain one small letter, once capital letter and one number.
-                                        </mat-error> -->
-                                        <!--  <strong>16 characters</strong> long. -->
+
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm-6">
                                     <mat-form-field>
                                         <input matInput placeholder="Confirm Password" type="password"
-                                            [formControl]="cfpasswordFormControl"
-                                            (keypress)="passwordValidation(passwordFormControl.value, cfpasswordFormControl.value)">
+                                            [formControl]="cfpasswordFormControl">
                                         <mat-error *ngIf="cfpasswordFormControl.hasError('required')">
                                             Confirm Password is <strong>required</strong>
                                         </mat-error>
-                                        <mat-error *ngIf="cfpasswordFormControl.hasError('pattern')">
+                                        <mat-error *ngIf="cfpasswordFormControl.hasError('notSame')">
                                             Passwords must be <strong>same</strong>
                                         </mat-error>
-                                        <!-- <mat-error *ngIf="validPassword == false">
-                                            Passwords must be <strong>same</strong>
-                                        </mat-error> -->
                                     </mat-form-field>
                                 </div>
                             </div>

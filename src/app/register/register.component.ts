@@ -93,7 +93,7 @@ export class RegisterComponent implements OnInit {
   usernameAvialable: boolean;
   emailTaken: boolean;
   refreshEmail: boolean;
-  validPassword: boolean;
+  validPassword: boolean = false;
   constructor(
     private toast: ToastrService,
     private formBuilder: FormBuilder,
@@ -109,6 +109,17 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.cfpasswordFormControl.valueChanges.subscribe((data) => {
+      if (this.passwordFormControl.value == this.cfpasswordFormControl.value) {
+      } else {
+        this.cfpasswordFormControl.setErrors({ notSame: true })
+        if (this.cfpasswordFormControl.value == '') {
+          this.cfpasswordFormControl.setErrors({ notSame: true, required: true })
+        }
+      }
+    })
+
     this.userNameFormControl.valueChanges.subscribe((data) => {
       console.log(data);
       if (this.userNameTaken == true || this.userNameTaken == false) {
@@ -179,16 +190,6 @@ export class RegisterComponent implements OnInit {
     console.log(value);
     this.selectedDate = new Date(value).toLocaleDateString().split("/").reverse().join('-')
     console.log(this.selectedDate);
-  }
-  passwordValidation(pwd, cfpwd) {
-    console.log(pwd, cfpwd, 'v');
-    if (pwd == cfpwd) {
-      console.log(true);
-      this.validPassword = true;
-    }
-    // console.log(false);
-
-    // this.validPassword = false
   }
 
   register(FNAME, LNAME, USERNAME, PHONENUMBER, EMAIL, PWD, HEIGHT, WEIGHT) {
