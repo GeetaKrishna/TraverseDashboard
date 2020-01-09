@@ -27,11 +27,14 @@
                                     <img mat-card-md-image [src]="app.url" height="50px"
                                         style="border-radius: 50%; display: block; margin-left: auto; margin-right: auto;"
                                         alt="Image Not Available">
-
                                     <span
                                         style="display:flex;font-size:14px; height: 30px;margin-left: 16px;text-align: center; font-weight: bold">
 
                                         <h2>
+                                            <div *ngIf="!hrData">
+                                                Please add data by clicking on Plus symbol
+                                            </div>
+
                                             <div [attr.contenteditable]="flag" [textContent]="app.details"
                                                 [ngClass]="{'editTrue' : flag}"
                                                 (input)="heartRate=$event.target.textContent">
@@ -41,20 +44,33 @@
                                         &nbsp;
                                         <h2 [ngClass]="{'editFlag': flag}">BPM</h2>
                                     </span>
-
-                                    <div class="row" style="font-size: 12px; margin-left: 122px;">
+                                    <div class="row" style="font-size: 12px; float: right; ">
                                         {{app.time}}
                                     </div>
-
                                 </div>
                                 <div *ngSwitchCase="'Blood Pressure'">
+
                                     <div class="row justify-content-center"
-                                        style=" font-size: xx-large;  font-weight: bold">
-                                        {{app.details}}
+                                        style=" font-size: xx-large;  font-weight: bold; padding-bottom: 10%;">
+
+                                        <div [attr.contenteditable]="bpflag" [textContent]="currentHBP"
+                                            [ngClass]="{'editTrue' : bpflag}"
+                                            (input)="currentHBP = highBPFormControl =$event.target.textContent">
+                                            {{currentHBP}}
+                                        </div>
+                                        /
+                                        <div [attr.contenteditable]="bpflag" [textContent]="currentLBP"
+                                            [ngClass]="{'editTrue' : bpflag}"
+                                            (input)="currentLBP=$event.target.textContent">
+                                            {{currentLBP}}
+                                        </div>
                                     </div>
-                                    <div class="row justify-content-center"
-                                        style="color: goldenrod; font-size: xx-large; margin-top: 30%">
-                                        <i class="fa fa-exclamation-triangle"></i>
+                                    <div class="row justify-content-center" *ngIf='!bpData'>
+                                        Please add Data by clicking on plus symbol
+                                    </div>
+                                    <div class="row justify-content-center" *ngIf='bpData'
+                                        style="color: goldenrod; font-size: xx-large; padding-top: 10%">
+                                        <i class="fa fa-exclamation-triangle "></i>
                                     </div>
                                 </div>
                                 <div *ngSwitchCase="'Appointment'">
@@ -69,14 +85,21 @@
                                 </div>
                                 <div *ngSwitchCase="'EKG'">
                                     <div class="row justify-content-center">
+                                        <div *ngIf="!heartData">
+                                            Please upload data by clicking on Plus symbol
+                                        </div>
                                         <img [src]=app.url width=100% height=auto style="mix-blend-mode: multiply;" />
                                     </div>
                                 </div>
                                 <div *ngSwitchCase="'Medication'">
-                                    <div class="row justify-content-center">
+                                    <ng-template #noMedications>
+                                        No Medications available for today
+                                    </ng-template>
+                                    <div class="row justify-content-center"
+                                        *ngIf="medications.length > 0; else noMedications">
                                         <div class="row">
                                             <div class="col">
-                                                <img mat-card-md-image src="{{app.url}}" height="80px" width="100px"
+                                                <img mat-card-md-image [src]=app.url height="80px" width="100px"
                                                     alt="Image Not Available">
                                             </div>
                                             <div class="col" style="width: 100%">
@@ -145,10 +168,25 @@
                                 <div *ngSwitchDefault>One</div>
                             </div>
                         </div>
-                        <div class="card-footer border-0" *ngIf="app.appName != 'Blood Pressure'">
+                        <div class="card-footer border-0" *ngIf="app.appName != 'Distance'">
                             <!-- *ngIf="(app.appName != 'Blood Pressure') || (app.appName != 'Lab') || (app.appName != 'Steps / Activity') || (app.appName != 'Distance' )"> -->
                             <div class="row float-right">
 
+                                <!-- 'Blood Pressure' -->
+                                <div class="col" *ngSwitchCase="'Blood Pressure'">
+                                    <div>
+                                        <span>
+                                            <i class="fa fa-plus p-1" (click)="createBP()" aria-hidden="true"></i>
+                                        </span>
+                                        <span>
+                                            <i class="fa fa-pencil p-1" (click)="editBP(app.appId)"
+                                                aria-hidden="true"></i>
+                                        </span>
+                                        <span>
+                                            <i class="fa fa-share-alt-square p-1" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
                                 <!-- Appointment -->
                                 <div class="col" *ngSwitchCase="'Appointment'">
                                     <div>
@@ -218,6 +256,17 @@
         </div>
     </div>
 </div>
+
+<ng-template #createBPTemplate>
+    <mat-form-field style="color: black;" required>
+        <input matInput placeholder="High BP" [(ngModel)]="currentHBP">
+    </mat-form-field>
+    <mat-form-field style="color: black;" required>
+        <input matInput placeholder="Low BP" [(ngModel)]="currentLBP">
+    </mat-form-field>
+    <button class="btn btn-primary" (click)="addBP()"> SUBMIT </button>
+    <button class="btn btn-primary" (click)="close()"> CANCEL </button>
+</ng-template>
 
 <ng-template #createHRTemplate>
     <mat-form-field style="color: black;" required>

@@ -64,6 +64,9 @@ export class AppInfoComponent implements OnInit {
     } else if (id == 4) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/calendar')
+    } else if (id == 5) {
+      this._bottomSheetRef.dismiss();
+      this.route.navigateByUrl('admin/myHeart')
     } else if (id == 6) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/medication')
@@ -165,6 +168,9 @@ export class AppInfoComponent implements OnInit {
       } else if (id == 4) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/calendar')
+      } else if (id == 5) {
+        this._bottomSheetRef.dismiss();
+        this.route.navigateByUrl('admin/myHeart')
       } else if (id == 6) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/medication')
@@ -216,6 +222,8 @@ export class AppInfoComponent implements OnInit {
   }
 
   uninstallApp(id) {
+    console.log(id);
+    
     this.getApp.deleteApp(id).subscribe((res) => {
       console.log(res);
       this.toast.success(`App uninstalled successfully.`)

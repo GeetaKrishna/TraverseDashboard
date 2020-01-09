@@ -1,9 +1,10 @@
-  <div class="row mt-5 mb-5" >
+  <div class="row mt-5 mb-5">
     <!-- style="background-color: #cfdae6c0; border-radius: 5px;" -->
-    <div class="col-md-3 col-sm-6 mt-5 mb-5" *ngFor="let app of userApps">
+    <div class="col-md-3 col-sm-6 mt-5 mb-5" *ngFor="let app of userApps" [contextMenu]="basicMenu"
+      [contextMenuSubject]="app">
       <div class="card" style="background: transparent; text-align: center; border: none;">
         <div (click)="nav(app.ROUTESCREEN)">
-          <a >
+          <a>
             <img src="{{app.URL}}"
               style="height: 80px !important; width: 80px !important; background-color: transparent; mix-blend-mode: multiply"
               alt="Image Not Available">
@@ -15,5 +16,15 @@
         </div>
       </div>
     </div>
-
+    <context-menu>
+      <li>
+        <ng-template contextMenuItem (execute)="showMessage($event.item, 'open')">
+          Open
+        </ng-template>
+        <ng-template contextMenuItem divider="true"></ng-template>
+        <ng-template contextMenuItem let-item (execute)="showMessage($event.item, 'uninstall')">
+          Uninstall
+        </ng-template>
+      </li>
+    </context-menu>
   </div>
