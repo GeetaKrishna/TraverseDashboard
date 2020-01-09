@@ -49,6 +49,8 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  hide = true;
+  cfhide = true;
   refresh: boolean = false;
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -110,6 +112,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
 
+    // For Checking the Password and Confirm Password Validation
     this.cfpasswordFormControl.valueChanges.subscribe((data) => {
       if (this.passwordFormControl.value == this.cfpasswordFormControl.value) {
       } else {

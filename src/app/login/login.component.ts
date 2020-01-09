@@ -12,19 +12,18 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    loginForm: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
     loginSuccess: boolean = false;
     error = '';
+    hide = true;
     emailFormControl = new FormControl('', [
         Validators.required,
     ]);
     passwordFormControl = new FormControl('', [
         Validators.required,
     ]);
-    loginData: { "fname": string; "id": number; "lname": string; "passowrd": string; "password": string; "role": string; "roles": string; "username": string; };
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -32,50 +31,30 @@ export class LoginComponent implements OnInit {
         private authenticationService: AuthenticationService,
         public jwtHelper: JwtHelperService,
         private matDialog: MatDialog
-    ) {
-
-    }
+    ) { }
 
     ngOnInit() {
-
-        this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
             this.router.navigate(['/']);
         }
-
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
-
     onSubmit(event) {
         this.loginSuccess = true
         event.preventDefault();
-
         console.log(this.emailFormControl.value);
         console.log(this.passwordFormControl.value);
-
         this.submitted = true;
         // this.router.navigate(['admin/landing'])
-
         // stop here if form is invalid
-
         // if (this.loginForm.invalid) {
         //     return;
         // }
-
         // this.loading = true;
-
         console.log('inside login');
-
-
         this.authenticationService.login(this.emailFormControl.value, this.passwordFormControl.value)
             .subscribe(
                 user => {
@@ -96,14 +75,12 @@ export class LoginComponent implements OnInit {
                             localStorage.setItem('patientId', patientData['pid'])
                             this.router.navigate(['admin/landing'])
                         })
-
                     })
                 },
                 error => {
                     console.log(error.status);
                     this.loginSuccess = false;
                 });
-
     }
 
     forgotPassword() {

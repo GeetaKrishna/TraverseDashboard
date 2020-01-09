@@ -46,14 +46,12 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-
         return this.http.post<any>(`${environment.apiUrl}/authenticate`, { username: username, password: password }, { 'headers': new HttpHeaders({ 'Content-Type': 'application/json' }), observe: 'response' })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 console.log(user)
                 if (user && user.headers.get('authorization')) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-
                     console.log(user.headers.get('authorization').split(" ")[1])
                     console.log(this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]))
                     localStorage.setItem('currentUser', JSON.stringify({ 'token': user.headers.get('authorization').split(" ")[1] }));
@@ -61,7 +59,6 @@ export class AuthenticationService {
                     localStorage.setItem('userName', this.jwtHelper.decodeToken(user.headers.get('authorization').split(" ")[1]).sub);
                     this.currentUserSubject.next({ 'token': user.headers.get('authorization').split(" ")[1] });
                 }
-
                 return user;
             }));
 
@@ -72,9 +69,7 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
         localStorage.clear()
         this.currentUserSubject.next(null);
-
         this.router.navigateByUrl('/');
-
     }
 
     verifyUserName(username) {
@@ -95,6 +90,10 @@ export class AuthenticationService {
 
     updatePassword(body) {
         return this.http.post(`${environment.apiUrl}/users/check/pwd`, body, { responseType: 'text' })
+    }
+
+    changePassword(uId, pwd, email) {
+        return this.http.post(`${environment.apiUrl}/users/pwd/${uId}/${pwd}/${email}`, { responseType: 'text' })
     }
 
     getUserId(username) {

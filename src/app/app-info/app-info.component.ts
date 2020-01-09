@@ -72,7 +72,7 @@ export class AppInfoComponent implements OnInit {
       this.route.navigateByUrl('admin/medication')
     } else if (id == 7) {
       this._bottomSheetRef.dismiss();
-      this.route.navigateByUrl('admin/document')
+      this.route.navigateByUrl('admin/document/Personal')
     } else if (id == 8) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/healthconnect')
@@ -176,7 +176,7 @@ export class AppInfoComponent implements OnInit {
         this.route.navigateByUrl('admin/medication')
       } else if (id == 7) {
         this._bottomSheetRef.dismiss();
-        this.route.navigateByUrl('admin/document')
+        this.route.navigateByUrl('admin/document/Personal')
       } else if (id == 8) {
         this._bottomSheetRef.dismiss();
         this.route.navigateByUrl('admin/healthconnect')
