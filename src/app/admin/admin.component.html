@@ -4,29 +4,29 @@
     <!-- <button mat-icon-button style="float: right;">
                 <mat-icon (click)="sideBarToggle();">menu</mat-icon>
             </button> -->
-    <!-- [hasBackdrop]="false"  rgb(48, 46, 46);-->
-    <mat-sidenav-container style="background: transparent; height: 700px;" autosize>
+    <!-- [hasBackdrop]="false" (keydown.escape)="backdropClicked()"  rgb(48, 46, 46);-->
+    <mat-sidenav-container style="background: transparent; height: 700px;" autosize (backdropClick)="backdropClicked()">
         <div class="container">
             <router-outlet></router-outlet>
         </div>
-        <mat-sidenav #profileMenu mode="over" position="end" backdropClick="backdropClicked()"
+        <mat-sidenav #profileMenu mode="over" position="end" (backdropClick)="backdropClicked()"
             style="background:#C1C1C1;">
             <!-- style="background:#79a7ece6;"> -->
             <app-profile></app-profile>
         </mat-sidenav>
-        <mat-sidenav #settingExpandMenu mode="over" position="end" backdropClick="backdropClicked()"
+        <mat-sidenav #settingExpandMenu mode="over" position="end" (backdropClick)="backdropClicked()"
             style="background:#C1C1C1;">
             <app-setting-menu></app-setting-menu>
         </mat-sidenav>
-        <mat-sidenav #settingMenu mode="over" position="end" backdropClick="backdropClicked()"
+        <mat-sidenav #settingMenu mode="over" position="end" (backdropClick)="backdropClicked()"
             style="background:#C1C1C1;">
             <app-add-patient></app-add-patient>
         </mat-sidenav>
-        <mat-sidenav #passwordMenu mode="over" position="end" backdropClick="backdropClicked()"
+        <mat-sidenav #passwordMenu mode="over" position="end" (backdropClick)="backdropClicked()"
             style="background:#C1C1C1;">
             <app-change-password></app-change-password>
         </mat-sidenav>
-        <mat-sidenav #patientListMenu mode="over" position="end" backdropClick="backdropClicked()"
+        <mat-sidenav #patientListMenu mode="over" position="end" (backdropClick)="backdropClicked()"
             style="background:#C1C1C1;">
             <app-patient-list></app-patient-list>
         </mat-sidenav>

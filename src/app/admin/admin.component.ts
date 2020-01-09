@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { AuthenticationService } from '../_services/authentication.service';
 // import { AddPatientComponent } from '../header/header.component';
 import { ForgotPasswordPage3Component } from '../forgot-password-page3/forgot-password-page3.component';
@@ -19,8 +19,7 @@ export class AdminComponent implements OnInit {
   @ViewChild('patientListMenu', { static: true }) patientlist;
   addPatientButton: boolean;
   updatePatientButton: boolean;
-  // @ViewChild('', { static: true }) closeToggle;
-
+ 
   constructor(private authentication: AuthenticationService, public dialog: MatDialog, private elementRef: ElementRef) { }
   ngOnInit() {
     this.authentication.testEmitter.subscribe((data) => {
@@ -95,6 +94,7 @@ export class AdminComponent implements OnInit {
   }
   backdropClicked() {
     this.setting.close();
+    this.patientlist.close();
     this.profile.close();
     this.password.close();
   }

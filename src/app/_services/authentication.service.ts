@@ -15,6 +15,7 @@ export class AuthenticationService {
     public currentUser: Observable<User>;
     private checkForProfImage = new BehaviorSubject<number>(0);
     private callForPatientList = new BehaviorSubject<string>('');
+    private callforBGImage = new BehaviorSubject<string>('');
 
     public testEmitter = new EventEmitter();
     public toggleEmitter = new EventEmitter();
@@ -25,6 +26,7 @@ export class AuthenticationService {
     }
     profImg$ = this.checkForProfImage.asObservable();
     patientListAPI$ = this.callForPatientList.asObservable();
+    mainBGImage$ = this.callforBGImage.asObservable();
 
     changeImage(number) {
         this.checkForProfImage.next(number);
@@ -32,6 +34,10 @@ export class AuthenticationService {
 
     callPatientList(str) {
         this.callForPatientList.next(str);
+    }
+    
+    changeMainBGImage(str) {
+        this.callforBGImage.next(str);
     }
 
     public get currentUserValue(): User {

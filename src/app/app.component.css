@@ -1,0 +1,5 @@
+.bgImage {
+    background-image: url('../assets/newBG.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
