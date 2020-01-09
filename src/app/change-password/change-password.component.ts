@@ -10,6 +10,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 export class ChangePasswordComponent implements OnInit {
   hide = true;
   cfhide = true;
+  user: any;
 
   constructor(private authentication: AuthenticationService) { }
 
@@ -40,18 +41,17 @@ export class ChangePasswordComponent implements OnInit {
     console.log(password);
     console.log(cfpassword);
     // API Code Here
-    let MailId = localStorage.getItem('loggedInUser')
-    // console.log(localStorage.getItem('loggedInUser'));
+    this.user = JSON.parse(localStorage.getItem("loggedInUser"));
+    let userId = parseInt(localStorage.getItem('userId'))
+    let email = this.user.email
+    let newpassword = password
 
-    // this.authentication.changePassword({
-
-    // }).subscribe((data) => {
-    //   console.log(data, "data after password submission");
-    //   this.authentication.toggleEmit('close');
-
-    // }, (err) => {
-    //   console.log(err);
-    // })
+    this.authentication.changePassword(userId, email, newpassword).subscribe((data) => {
+      console.log(data, "data after password submission");
+      this.authentication.toggleEmit('close');
+    }, (err) => {
+      console.log(err);
+    })
 
   }
 
