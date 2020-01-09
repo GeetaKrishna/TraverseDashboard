@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { CalendarService } from '../_services/calendar.service';
 import { MedicationService } from '../_services/medication.service';
+import { DashboardService } from '../_services/dashboard.service';
 
 @Component({
   selector: 'app-my-heart',
@@ -16,17 +17,27 @@ export class MyHeartComponent implements OnInit {
   imageData: any;
   heartRate: any;
   heartRateFormControl = new FormControl('');
+  highBPFormControl = new FormControl('');
+  lowBPFormControl = new FormControl('');
   flag: Boolean = false;
   recentlyUpdatedTime: any;
   compareDate = moment(new Date(), "YYYY-MM-DD");
 
   appointments = [];
   timer: any;
+  heartData: boolean = false;
+  hrData: boolean = false;
+  currentHBP: any;
+  currentLBP: any;
+  bpData: boolean = false;
+  bpflag: boolean = false;
+  medications: any = [];
 
   constructor(private myHeartService: MyHeartService, private modal: NgbModal, private sanitizer: DomSanitizer,
-    private prescriptionService: MedicationService, private calendarService: CalendarService) { }
+    private prescriptionService: MedicationService, private calendarService: CalendarService, private dashboardService: DashboardService, ) { }
   @ViewChild('createEKGTemplate', { static: true }) createEKGTemplate;
   @ViewChild('createHRTemplate', { static: true }) createHRTemplate;
+  @ViewChild('createBPTemplate', { static: true }) createBPTemplate;
 
   ngOnInit() {
 
@@ -36,19 +47,73 @@ export class MyHeartComponent implements OnInit {
     }, 1000);
 
     this.prescriptionService.getPrescriptions().subscribe((prescriptionList: []) => {
+      console.log(prescriptionList);
+
       if (prescriptionList.length > 0) {
-        prescriptionList.map((e) => {
-          console.log(e);
-          // isBetween(start, end, 'limit', inclusivity/exclusivity)
-          if (this.compareDate.isBetween(moment(e['startDate'], '"YYYY-MM-DD"'), moment(e['endDate'], "YYYY-MM-DD"), "days", "[]")
-          ) {
-            this.appointments.push(e)
-          }
+
+        this.prescriptionService.getMedications().subscribe((data: []) => {
+          data.map((meds, index) => {
+
+            prescriptionList.map((e: any) => {
+              console.log(e);
+              // isBetween(start, end, 'limit', inclusivity/exclusivity)
+              console.log(this.compareDate.isBetween(moment(new Date(e['startDate']), '"YYYY-MM-DD"'), moment(new Date(e['endDate']), "YYYY-MM-DD"), "days", "[]"));
+              if (this.compareDate.isBetween(moment(new Date(e['startDate']), '"YYYY-MM-DD"'), moment(new Date(e['endDate']), "YYYY-MM-DD"), "days", "[]")
+              ) {
+                console.log(e);
+                if (meds['id'] === e['medicationId']) {
+                  console.log(meds);
+
+                  e.startDate = moment(new Date(e.startDate)).format('YYYY-MM-DD');
+                  e.endDate = moment(new Date(e.endDate)).format('YYYY-MM-DD');
+                  let t = {};
+                  t = e;
+                  t['name'] = meds['name'];
+                  t['image'] = meds['image'];
+                  t['description'] = meds['description'];
+                  t['image'] = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${t['image']}`);
+                  console.log(t);
+                  this.medications.push(t)
+                  console.log(this.medications);
+
+                }
+              }
+            })
+            if (index == data.length - 1) {
+              this.apps[4].url = this.medications[this.medications.length - 1].image
+              this.apps[4].text = this.medications[this.medications.length - 1].name
+              this.apps[4].nature = this.medications[this.medications.length - 1].description
+              this.apps[4].content = this.medications[this.medications.length - 1].dosage
+              this.apps[4].time = this.medications[this.medications.length - 1].instruction + ' a day'
+            }
+          })
+        }, (err) => {
+
         })
+
       }
     }, (err) => {
       console.log(err);
     });
+
+    this.dashboardService.getBloodPressure().subscribe(
+      (res) => {
+        console.log(res, 'ressssss');
+        if (res != null) {
+          this.bpData = true;
+          this.apps[1].details = res['highBP'] + '/' + res['lowBP'];
+          this.highBPFormControl.setValue(res['highBP'])
+          this.lowBPFormControl.setValue(res['lowBP'])
+          this.currentHBP = res['highBP'];
+          this.currentLBP = res['lowBP'];
+        } else {
+          this.bpData = false;
+        }
+      },
+      err => {
+        console.log("error", err);
+      }
+    );
 
     this.calendarService.getAppointments().subscribe((appointmentList: []) => {
       if (appointmentList.length > 0) {
@@ -67,19 +132,30 @@ export class MyHeartComponent implements OnInit {
 
     this.myHeartService.getHeartRate().subscribe((data: any) => {
       console.log(data);
-      this.apps[0].appId = data.id;
-      this.apps[0].details = data.heartRate;
-      this.apps[0].time = moment(data.hrDate).fromNow();
-      this.recentlyUpdatedTime = data.hrDate;
+      if (data != null) {
+        this.hrData = true;
+        this.apps[0].appId = data.id;
+        this.apps[0].details = data.heartRate;
+        this.apps[0].time = moment(data.hrDate).fromNow();
+        this.recentlyUpdatedTime = data.hrDate;
+      } else {
+        this.hrData = false;
+      }
       console.log(moment(data.hrDate).fromNow())
     }, (err) => {
       console.log(err);
+      this.hrData = false;
+
     })
 
     this.myHeartService.getEkg().subscribe((data) => {
       console.log(data);
-      let t = {};
-      this.apps[3].url = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${data['image']}`);
+      if (data != null) {
+        this.heartData = true;
+        this.apps[3].url = this.sanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${data['image']}`);
+      } else {
+        this.heartData = false;
+      }
     }, (err) => {
       console.log(err);
     })
@@ -89,15 +165,15 @@ export class MyHeartComponent implements OnInit {
   apps: any[] = [
     {
       "appId": 1,
-      "details": 78,
+      "details": 0,
       "version": "1.0v",
       "appName": "HeartRate",
       "url": "assets/myHeart/myheartlogo.jpg",
-      "time": "2 days ago"
+      "time": ""
     },
     {
       "appId": 2,
-      "details": "147/93",
+      "details": "",
       "version": "1.0v",
       "appName": "Blood Pressure",
       "url": "assets/icons-home/motion02.png",
@@ -168,6 +244,10 @@ export class MyHeartComponent implements OnInit {
     this.modal.open(this.createHRTemplate, { centered: true, size: 'lg', windowClass: "" })
   }
 
+  createBP() {
+    this.modal.open(this.createBPTemplate, { centered: true, size: 'lg', windowClass: "" })
+  }
+
   editHR(id) {
     this.flag = !this.flag;
     if (!this.flag) {
@@ -182,7 +262,6 @@ export class MyHeartComponent implements OnInit {
       console.log(id, body);
 
       this.myHeartService.updateHR(body).subscribe((data: any) => {
-        // this.apps[0].time
         console.log(data);
         this.apps[0].time = moment(data.hrDate).fromNow()
         this.recentlyUpdatedTime = data.hrDate
@@ -216,6 +295,36 @@ export class MyHeartComponent implements OnInit {
 
     })
 
+  }
+
+  addBP() {
+
+    let dataBP = {
+      pid: parseInt(localStorage.getItem("patientId")),
+      highBP: parseInt(this.currentHBP),
+      lowBP: parseInt(this.currentLBP),
+      modifiedBy: parseInt(localStorage.getItem("userId")),
+      bpDate: new Date().toISOString()
+    }
+    console.log(dataBP);
+    this.dashboardService.postBloodPressure(dataBP).subscribe((data) => {
+      console.log(data, 'dasssssssssssssh');
+      this.bpData = true;
+      this.currentHBP = dataBP.highBP;
+      this.currentLBP = dataBP.lowBP;
+
+      this.apps[1].details = dataBP.highBP + '/' + dataBP.lowBP;
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+
+  editBP() {
+    this.bpflag = !this.bpflag;
+    if (!this.bpflag) {
+      this.addBP()
+    }
   }
 
   addEKG() {

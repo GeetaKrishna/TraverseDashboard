@@ -95,8 +95,10 @@ export class MedicationsComponent implements OnInit {
             res.map((e) => {
               pres.map((press: any, index) => {
                 if (e['id'] === press['medicationId']) {
-                  press.startDate = press.startDate.split("T")[0];
-                  press.endDate = press.endDate.split("T")[0];
+                  console.log(moment(new Date(press.startDate)).format('YYYY-MM-DD'));
+                  
+                  press.startDate = moment(new Date(press.startDate)).format('YYYY-MM-DD');
+                  press.endDate = moment(new Date(press.endDate)).format('YYYY-MM-DD');
                   let t = {};
                   t = press;
                   if (index % 2 == 0) {
@@ -220,8 +222,8 @@ export class MedicationsComponent implements OnInit {
       console.log(data);
       this.medicationDetails.map((e, index) => {
         if (e['id'] === prescription['medicationId']) {
-          prescription.startDate = moment(this.startTime.value).format('YYYY-MM-DD');
-          prescription.endDate = moment(this.endTime.value).format('YYYY-MM-DD');
+          prescription.startDate = moment(new Date(this.startTime.value)).format('YYYY-MM-DD');
+          prescription.endDate = moment(new Date(this.endTime.value)).format('YYYY-MM-DD');
 
           let t = {};
           t = prescription;

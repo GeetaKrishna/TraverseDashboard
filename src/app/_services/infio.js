@@ -1,7 +1,7 @@
 // import { RuleFailurePosition } from "tslint"
 // import { ClickDirective } from "angular-calendar/modules/common/click.directive"
 
-// Medication:         Dropdown for prescription(based on API), editable fields(only on calendar, don't affect original medications data),
+// Medication: Dropdown for prescription(based on API), editable fields(only on calendar, don't affect original medications data),
 
 // Option to delete an appointment.
 
@@ -34,8 +34,6 @@
 
 // use rSchedule instead of RRUle
 
-
-
 // add patientsList to settings tab, patientName, Relation with delete(red) and edit(blue) button - done
 // API's --> getAllPatientsList from insuranbce service to get patientlist
 // except self relation, remaining we need to show
@@ -58,4 +56,10 @@
 // four c values restrict to 3 while editing -- D
 
 // dont send data via url
+
 // password change page --> validations for passwords and confirm password
+
+// BP in myHeart
+// Medication top most --> No Medicaiotn avilable if no med, 
+
+// health documents screen similar style to ehr health docs --> Harish

@@ -1,7 +1,10 @@
-import { Component, OnInit, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, ViewChild } from '@angular/core';
 import { GetAppsService } from '../_services/get-apps.service';
 import { Router } from '@angular/router';
-
+import { ContextMenuComponent } from 'ngx-contextmenu';
+import { AppInfoComponent } from '../app-info/app-info.component';
+import { ToastrService } from 'ngx-toastr';
+// import { AppInfoComponent } from './'
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
@@ -9,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
   @Input() test;
+  @ViewChild(ContextMenuComponent, { static: true }) public basicMenu: ContextMenuComponent;
 
   apps: any[] = [
 
@@ -33,7 +37,7 @@ export class LandingPageComponent implements OnInit {
       "RATING": 3.5,
       "ROUTESCREEN": 'admin/dashboard',
       "installed": false
-      
+
     },
     {
       "APP_ID": 3,
@@ -158,7 +162,7 @@ export class LandingPageComponent implements OnInit {
     "RATING": 2.5,
     "ROUTESCREEN": 'admin/home'
   },];
-  constructor(private getApps: GetAppsService, private route: Router) { }
+  constructor(private getApps: GetAppsService, private route: Router, private getApp: GetAppsService, private toast: ToastrService) { }
   nav(routes) {
     this.route.navigateByUrl(routes)
   }
@@ -177,9 +181,35 @@ export class LandingPageComponent implements OnInit {
 
       console.log(this.userApps);
 
-
     })
 
   }
 
+  showMessage(message, action) {
+    if (action == 'open') {
+      alert('open App')
+    }
+    else {
+      console.log('uninstall', message)
+
+      this.getApp.deleteApp(message.APP_ID).subscribe((res) => {
+        console.log(res);
+        this.userApps = this.userApps.filter((e) => {
+          return e.APP_ID != message.APP_ID
+        })
+        console.log(this.userApps);
+
+        this.toast.success(`App uninstalled successfully.`)
+      }, (err) => {
+        this.toast.error(`Couldn't uninstall app, Please try later.`)
+        console.log(err);
+      })
+    }
+    console.log(message)
+  }
+
+  showInstall() {
+    alert('test')
+    return false;
+  }
 }

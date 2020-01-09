@@ -294,6 +294,7 @@ export class DashboardComponent implements OnInit {
         console.log("error", err);
       }
     );
+    
     this.dashboardService.getBloodPressure().subscribe(
       (res) => {
         console.log(res, 'ressssss');

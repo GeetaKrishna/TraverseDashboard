@@ -77,6 +77,10 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { PatientListComponent } from './patient-list/patient-list.component';
 import { SettingMenuComponent } from './setting-menu/setting-menu.component';
 
+//to show context menu on right click
+import { ContextMenuModule } from 'ngx-contextmenu';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -184,7 +188,8 @@ import { SettingMenuComponent } from './setting-menu/setting-menu.component';
     }),
     MatSidenavModule,
     MatToolbarModule,
-    CustomMaterialModule
+    CustomMaterialModule,
+    ContextMenuModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
