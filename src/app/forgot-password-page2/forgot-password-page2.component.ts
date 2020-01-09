@@ -17,6 +17,10 @@ export class ForgotPasswordPage2Component implements OnInit {
   pinFormControl = new FormControl('', Validators.required);
 
   ngOnInit() {
+    console.log(this.router.getCurrentNavigation().extras, 'extras');
+    
+    console.log(history.state, 'state');
+    
     this.mailId = this.route.snapshot.paramMap.get('data');
     console.log(this.mailId)
   }

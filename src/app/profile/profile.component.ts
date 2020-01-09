@@ -46,10 +46,7 @@ export class ProfileComponent implements OnInit {
     console.log(localStorage.getItem("loggedInUser"))
     this.user = JSON.parse(localStorage.getItem("loggedInUser"));
     this.patient = JSON.parse(localStorage.getItem("patientData"));
-    // "{"userId":2,"userName":"Geet","firstName":"Geeta","lastName":"Krishna",
-    // "dob":"2019-12-11T00:00:00.000+0000","gender":"male","phoneNumber":9676509456,
-    // "email":"gadhikari@miraclesoft.com","role":"Consumer","pin":0}"
-    // "{"pid":2,"userId":2,"relation":"Self","patientName":"Geeta Krishna","height":162,"weight":49}"
+    
     this.emailFormControl.setValue(this.user.email);
     this.userNameFormControl.setValue(this.user.userName); //ReadOnly
     this.firstNameFormControl.setValue(this.user.firstName); //

@@ -62,4 +62,4 @@
 // BP in myHeart
 // Medication top most --> No Medicaiotn avilable if no med, 
 
-// health documents screen similar style to ehr health docs --> Harish
+// drag not working

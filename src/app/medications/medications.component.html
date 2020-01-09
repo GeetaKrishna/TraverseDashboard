@@ -193,9 +193,9 @@
                                                 <mat-option value="five">Five</mat-option>
                                             </mat-select>
                                         </mat-form-field>
-                                        <h6>Dosage : {{sliderValue}}</h6>
-                                        <mat-slider class="example-margin" max="100" min="0" step="1" thumbLabel="true"
-                                            tickInterval="true" [(ngModel)]="sliderValue">
+                                        <h6>Dosage : {{sliderValue.value}}</h6>
+                                        <mat-slider class="example-margin" max="100" min="0" thumbLabel [displayWith]="formatLabel"
+                                            tickInterval="1000" [formControl]="sliderValue" >
                                         </mat-slider>
                                         <mat-form-field style="color: black;">
                                             <input matInput [matDatepicker]="pickerStart" placeholder="Start Date"

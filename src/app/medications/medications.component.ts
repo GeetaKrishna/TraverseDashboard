@@ -76,7 +76,7 @@ export class MedicationsComponent implements OnInit {
   min = 0;
   step = 1;
   thumbLabel = true;
-  sliderValue = 0;
+  sliderValue = new FormControl(0);
 
   colors = ['ch-1',
     'ch-1',
@@ -85,6 +85,7 @@ export class MedicationsComponent implements OnInit {
     'ch-1'];
 
   ngOnInit() {
+    
     this.medicationService.getPrescriptions().subscribe(
       (pres: []) => {
         this.medicationService.getMedications().subscribe(
@@ -207,7 +208,7 @@ export class MedicationsComponent implements OnInit {
 
   successAdding() {
     let prescription = {
-      "dosage": this.sliderValue.toString(),
+      "dosage": this.sliderValue.value.toString(),
       "endDate": this.endTime.value,
       "instruction": this.medIntake.value,
       "medicationId": this.medName.value.id,
@@ -276,4 +277,13 @@ export class MedicationsComponent implements OnInit {
     this.description = test.description;
 
   }
+
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+    // this.sliderValue = value;
+    return value;
+  }
+
 }

@@ -61,7 +61,7 @@ export class ForgotPasswordComponent implements OnInit {
           console.log(err, "error during getting pin");
 
         })
-        this.route.navigate(['pinPage', { data: this.emailFormControl.value }])
+        this.route.navigate(['pinPage', { data: this.emailFormControl.value }, {state: 'test'}])
       }
 
     }, (err) => {

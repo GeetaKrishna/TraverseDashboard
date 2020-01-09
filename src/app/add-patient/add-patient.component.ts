@@ -100,7 +100,7 @@ export class AddPatientComponent implements OnInit {
     }).subscribe((data) => {
       console.log(data, "data during patient registration");
       this.authentication.toggleEmit('close');
-      this.toast.success('Patient Added Successfully')
+      this.toast.success('Patient Updated Successfully')
     }, (err) => {
       this.toast.error('Something went wrong, Please Try again.')
       console.log(err, "error during patient registration");

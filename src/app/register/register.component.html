@@ -165,23 +165,21 @@
                                         <mat-icon matSuffix (click)="hide = !hide" style="font-size: 16px;">
                                             {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                     </mat-form-field>
-                                    <mat-icon matSuffix matTooltip="Password is required"
-                                        *ngIf="passwordFormControl.hasError('required')"
-                                        style="color: #556e6d;font-size: 16px;">
-                                        info </mat-icon>
-                                    <mat-icon matSuffix matTooltip="Password must be at least 8 characters long."
-                                        *ngIf="passwordFormControl.hasError('minlength')"
-                                        style="color: #556e6d;font-size: 16px;">
-                                        info </mat-icon>
-                                    <mat-icon matSuffix matTooltip="Password can be max 16 characters long."
-                                        *ngIf="passwordFormControl.hasError('maxlength')"
-                                        style="color: #556e6d;font-size: 16px;">
-                                        info </mat-icon>
                                     <mat-icon matSuffix
-                                        matTooltip="Password must contain one small letter, one capital letter and one number."
-                                        *ngIf="!passwordFormControl.hasError('minlength') && passwordFormControl.hasError('pattern')"
+                                        matTooltip="Password must contain one small letter, one capital letter and one number with minimum of 8 characters and maximum of 16 ."
                                         style="color: #556e6d;font-size: 16px;">
                                         info </mat-icon>
+                                    <!-- *ngIf="!passwordFormControl.hasError('minlength') || passwordFormControl.hasError('pattern') && passwordFormControl.hasError('minlength') || passwordFormControl.hasError('maxlength')" -->
+
+                                    <mat-error *ngIf="passwordFormControl.hasError('required')">
+                                        Password is required
+                                    </mat-error>
+                                    <!-- matTooltip="Password must be at least 8 characters long." -->
+                                    <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+                                        Password must be at least 8 characters long </mat-error>
+                                    <mat-error *ngIf="passwordFormControl.hasError('maxlength')">
+                                        Password can be max 16 characters long. </mat-error>
+
                                     <!-- <span style="color: #556e6d; font-size: 16px;"
                                         *ngIf="passwordFormControl.hasError('required')" matSuffix
                                         matTooltip="Password is required">
@@ -206,10 +204,11 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <mat-form-field>
-                                        <input matInput placeholder="Confirm Password"
-                                            [type]="cfhide ? 'password' : 'text'" [formControl]="cfpasswordFormControl">
-                                        <mat-icon matSuffix (click)="cfhide = !cfhide" style="font-size: 16px;">
-                                            {{cfhide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                        <input matInput placeholder="Confirm Password" type="password"
+                                            [formControl]="cfpasswordFormControl">
+                                        <!-- [type]="cfhide ? 'password' : 'text'" [formControl]="cfpasswordFormControl"> -->
+                                        <!-- <mat-icon matSuffix (click)="cfhide = !cfhide" style="font-size: 16px;">
+                                            {{cfhide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
                                         <mat-error *ngIf="cfpasswordFormControl.hasError('required')">
                                             Confirm Password is <strong>required</strong>
                                         </mat-error>
