@@ -10,19 +10,23 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./electronic-health-type.component.css']
 })
 export class ElectronicHealthTypeComponent implements OnInit {
-
+  // 
   availableDocs = [];
   availableDocsForVisits = [];
   availableDocsForImaging = [];
   availableDocsForLabs = [];
   availableDocsForRecords = [];
   findType = new FormControl('');
+  description = '';
+  dynamicHeight: number;
 
   constructor(public ehrService: EhrService, public activatedRoute: ActivatedRoute) { }
-  
+
   state;
 
   ngOnInit() {
+    console.log(window.innerHeight, 'height of ehrType');
+    // this.dynamicHeight = window.innerHeight;
     this.availableDocsForVisits = [];
     this.availableDocsForImaging = [];
     this.availableDocsForLabs = [];
@@ -105,7 +109,7 @@ export class ElectronicHealthTypeComponent implements OnInit {
           console.log(droppedFile.relativePath, file);
           const formData = new FormData()
           formData.append('file', file, droppedFile.relativePath)
-          this.ehrService.addDocuments(formData, type).subscribe((data) => {
+          this.ehrService.addDocuments(formData, type, this.description).subscribe((data) => {
             console.log(data);
             data['fileName'] = data['fileName']
             switch (type) {

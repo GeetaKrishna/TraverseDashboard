@@ -9,6 +9,8 @@ export class ElectronicHealthComponent implements OnInit {
 
   constructor() { }
   ngOnInit() {
+    console.log(window.innerHeight, 'height of ehr');
+    
   }
 
 }

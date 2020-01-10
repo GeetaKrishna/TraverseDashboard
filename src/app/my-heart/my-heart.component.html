@@ -1,256 +1,263 @@
-<div class="card mt-3 mb-3" style="height: 600px;">
-    <div style="overflow-y: auto;">
-        <div class="card-header ch-1">
-            <div class="row">
-                <div class="col justify-content-start">
-                    <p class="cardHead">
-                        My Heart
-                    </p>
-                </div>
-                <div class="col justify-content-end">
-                    <img src="../../assets/newHeart.png" style="height: 35px; width: 35px; float: right;" />
-                </div>
+<div class="card mt-3 mb-3" style="height: 100%;">
+    <div class="card-header ch-1">
+        <div class="row">
+            <div class="col justify-content-start">
+                <p class="cardHead">
+                    My Heart
+                </p>
+            </div>
+            <div class="col justify-content-end">
+                <img src="../../assets/newHeart.png" style="height: 35px; width: 35px; float: right;" />
             </div>
         </div>
+    </div>
 
-        <div class="card-body">
-            <div class="row justify-content-center">
-                <div class="col-md-3 col-sm-6 p-4" *ngFor="let app of apps">
-                    <div class="card h-100 bgbb" style="color: black !important;" [ngSwitch]="app.appName"
-                        [ngClass]="app.appName === 'Distance' ? 'ch-1' : app.appName === 'Steps / Activity' ? 'ch-1': app.appName === 'HeartRate' ? 'ch-1' : app.appName === 'Blood Pressure' ? 'ch-1': app.appName === 'Appointment' ? 'ch-1' : app.appName === 'EKG' ? 'ch-1': app.appName === 'Medication' ? 'ch-1': app.appName === 'Lab' ? 'ch-1': ''">
-                        <b class="p-2 bgWhite">
-                            {{app.appName}}
-                        </b>
-                        <div class="card-body">
-                            <div>
-                                <div *ngSwitchCase="'HeartRate'">
-                                    <img mat-card-md-image [src]="app.url" height="50px"
-                                        style="border-radius: 50%; display: block; margin-left: auto; margin-right: auto;"
-                                        alt="Image Not Available">
-                                    <span
-                                        style="display:flex;font-size:14px; height: 30px;margin-left: 16px;text-align: center; font-weight: bold">
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-3 col-sm-6 p-4" *ngFor="let app of apps">
+                <div class="card h-100 bgbb" style="color: black !important;" [ngSwitch]="app.appName"
+                    [ngClass]="app.appName === 'Distance' ? 'ch-1' : app.appName === 'Steps / Activity' ? 'ch-1': app.appName === 'HeartRate' ? 'ch-1' : app.appName === 'Blood Pressure' ? 'ch-1': app.appName === 'Appointment' ? 'ch-1' : app.appName === 'EKG' ? 'ch-1': app.appName === 'Medication' ? 'ch-1': app.appName === 'Lab' ? 'ch-1': ''">
+                    <b class="p-2 bgWhite">
+                        {{app.appName}}
+                    </b>
+                    <div class="card-body">
+                        <div>
+                            <div *ngSwitchCase="'HeartRate'">
+                                <img mat-card-md-image [src]="app.url" height="50px"
+                                    style="border-radius: 50%; display: block; margin-left: auto; margin-right: auto; margin-bottom: 10% ;"
+                                    alt="Image Not Available">
+                                <span
+                                    style="display:flex;font-size:14px; height: 30px;margin-left: 16px;text-align: center; font-weight: bold">
 
-                                        <h2>
-                                            <!-- <div *ngIf="!hrData">
+                                    <h2>
+                                        <!-- <div *ngIf="!hrData">
                                                 Please add data by clicking on Plus symbol
                                             </div> -->
 
-                                            <div [attr.contenteditable]="flag" [textContent]="app.details"
-                                                [ngClass]="{'editTrue' : flag}"
-                                                (input)="heartRate=$event.target.textContent">
-                                                {{app.details}} BPM
-                                            </div>
-                                        </h2>
-                                        &nbsp;
-                                        <h4 [ngClass]="{'editFlag': flag}">BPM</h4>
-                                    </span>
-                                    <div class="row" style="font-size: 12px; float: right; ">
-                                        {{app.time}}
-                                    </div>
+                                        <div [attr.contenteditable]="flag" [textContent]="app.details"
+                                            [ngClass]="{'editTrue' : flag}" style="font-weight: bolder;"
+                                            (input)="heartRate=$event.target.textContent">
+                                            {{app.details}} BPM
+                                        </div>
+                                    </h2>
+                                    &nbsp;
+                                    <h4 style="color: antiquewhite;" [ngClass]="{'editFlag': flag}">BPM</h4>
+                                </span>
+                                <div class="row" style="font-size: 14px; float: right; ">
+                                    {{app.time}}
                                 </div>
-                                <div *ngSwitchCase="'Blood Pressure'">
-
-                                    <div class="row justify-content-center"
-                                        style=" font-size: xx-large;  font-weight: bold; padding-bottom: 10%;">
-
-                                        <div [attr.contenteditable]="bpflag" [textContent]="currentHBP"
-                                            [ngClass]="{'editTrue' : bpflag}"
-                                            (input)="currentHBP = highBPFormControl =$event.target.textContent">
-                                            {{currentHBP}}
-                                        </div>
-                                        /
-                                        <div [attr.contenteditable]="bpflag" [textContent]="currentLBP"
-                                            [ngClass]="{'editTrue' : bpflag}"
-                                            (input)="currentLBP=$event.target.textContent">
-                                            {{currentLBP}}
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-center" *ngIf='!bpData'>
-                                        Please add Data by clicking on plus symbol
-                                    </div>
-                                    <div class="row justify-content-center" *ngIf='bpData'
-                                        style="color: goldenrod; font-size: xx-large; padding-top: 10%">
-                                        <i class="fa fa-exclamation-triangle "></i>
-                                    </div>
-                                </div>
-                                <div *ngSwitchCase="'Appointment'">
-                                    <div class="row justify-content-center"
-                                        *ngIf="appointments.length > 0; else noAppointments">
-                                        You have {{appointments.length}} Appointments coming up, Please check your
-                                        calendar.
-                                    </div>
-                                    <ng-template #noAppointments>
-                                        No Appointments available for today
-                                    </ng-template>
-                                </div>
-                                <div *ngSwitchCase="'EKG'">
-                                    <div class="row justify-content-center">
-                                        <div *ngIf="!heartData">
-                                            Please upload data by clicking on Plus symbol
-                                        </div>
-                                        <img [src]=app.url width=100% height=auto style="mix-blend-mode: multiply;" />
-                                    </div>
-                                </div>
-                                <div *ngSwitchCase="'Medication'">
-                                    <ng-template #noMedications>
-                                        No Medications available for today
-                                    </ng-template>
-                                    <div class="row justify-content-center"
-                                        *ngIf="medications.length > 0; else noMedications">
-                                        <div class="row">
-                                            <div class="col">
-                                                <img mat-card-md-image [src]=app.url height="80px" width="100px"
-                                                    alt="Image Not Available">
-                                            </div>
-                                            <div class="col" style="width: 100%">
-                                                <span>
-                                                    <i class="fa fa-clock-o" style="font-size: 50px; color: red; "
-                                                        aria-hidden="true"></i>
-                                                </span>
-                                                <span>
-                                                    <p style="font-size: 12px; height: 30px;">
-                                                        {{app.time}}
-                                                    </p>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 ">
-                                            {{app.text}}
-
-                                        </div>
-                                        <div class="col-md-12 " style="font-size: x-small">
-                                            {{app.content}}
-                                        </div>
-                                        <div class="col-md-12 " style="font-size: x-small; font-weight: bolder">
-                                            {{app.nature}}
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div *ngSwitchCase="'Lab'">
-                                    <div class="row">
-                                        <div class="col mt-4">
-                                            <div style=" font-size: xx-large">
-                                                <b>{{app.details}}</b>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mt-4">
-                                            <div style="display: inline-flex">{{app.text}}</div>
-                                            <div style="font-size: xx-small;">{{app.time}}</div>
-                                        </div>
-
-                                        <div class="col mt-4 ml-2">
-                                            <img src={{app.url}} width="70%" style="mix-blend-mode: multiply;" />
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div *ngSwitchCase="'Distance'">
-                                    <div class="row justify-content-center">
-                                        <img src={{app.url}} style="mix-blend-mode: multiply; height: 134px;
-                                                    width: 134px;" />
-                                        <div class="col">
-                                            <div class=""><b>{{app.details}}</b></div>
-                                            <div class="" style="font-size: xx-small;">{{app.time}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div *ngSwitchCase="'Steps / Activity'">
-                                    <div class="row justify-content-center">
-                                        <img src={{app.url}} style="mix-blend-mode: multiply; height: 130px;
-                                                    width: 82px;" />
-                                        <div class="row">
-                                            <div class="col-md-12" style="color: brown"><b>{{app.details}}</b></div>
-                                            <div class="col-md-12" style="font-size: xx-small;">{{app.time}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div *ngSwitchDefault>One</div>
+                                <!-- <button *ngIf="flag" class="btn btn-success" (click)="editHR()"
+                                        style="margin-left: 30px;margin-top: 20px;"><i class="fa fa-check"></i></button> -->
                             </div>
-                        </div>
-                        <div class="card-footer border-0" *ngIf="app.appName != 'Distance'">
-                            <!-- *ngIf="(app.appName != 'Blood Pressure') || (app.appName != 'Lab') || (app.appName != 'Steps / Activity') || (app.appName != 'Distance' )"> -->
-                            <div class="row float-right">
+                            <div *ngSwitchCase="'Blood Pressure'">
 
-                                <!-- 'Blood Pressure' -->
-                                <div class="col" *ngSwitchCase="'Blood Pressure'">
-                                    <div>
-                                        <!-- <span>
+                                <div class="row justify-content-center"
+                                    style=" font-size: xx-large;  font-weight: bold; padding-bottom: 10%;">
+
+                                    <div [attr.contenteditable]="bpflag" [textContent]="currentHBP"
+                                        [ngClass]="{'editTrue' : bpflag}"
+                                        (input)="currentHBP =$event.target.textContent">
+                                        {{currentHBP}}
+                                    </div>
+                                    /
+                                    <div [attr.contenteditable]="bpflag" [textContent]="currentLBP"
+                                        [ngClass]="{'editTrue' : bpflag}"
+                                        (input)="currentLBP=$event.target.textContent">
+                                        {{currentLBP}}
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center" *ngIf='!bpData'>
+                                    Please add Data by clicking on plus symbol
+                                </div>
+                                <div class="row justify-content-center" *ngIf='bpData'
+                                    style="color: goldenrod; font-size: xx-large; padding-top: 10%">
+                                    <i class="fa fa-exclamation-triangle "></i>
+                                </div>
+                                <!-- <button *ngIf="bpflag" class="btn btn-success" (click)="editBP()"
+                                        style="margin-left: 30px;margin-top: 20px;"><i class="fa fa-check"></i></button> -->
+                            </div>
+                            <div *ngSwitchCase="'Appointment'">
+                                <div class="row justify-content-center"
+                                    *ngIf="appointments.length > 0; else noAppointments">
+                                    You have {{appointments.length}} Appointments coming up, Please check your
+                                    calendar.
+                                </div>
+                                <ng-template #noAppointments>
+                                    No Appointments available for today
+                                </ng-template>
+                            </div>
+                            <div *ngSwitchCase="'EKG'">
+                                <div class="row justify-content-center">
+                                    <div *ngIf="!heartData">
+                                        Please upload data by clicking on Plus symbol
+                                    </div>
+                                    <img [src]=app.url width=100% height=auto style="mix-blend-mode: multiply;" />
+                                </div>
+                            </div>
+                            <div *ngSwitchCase="'Medication'">
+                                <ng-template #noMedications>
+                                    No Medications available for today
+                                </ng-template>
+                                <div class="row justify-content-center"
+                                    *ngIf="medications.length > 0; else noMedications">
+                                    <div class="row">
+                                        <div class="col">
+                                            <img mat-card-md-image [src]=app.url height="80px" width="100px"
+                                                alt="Image Not Available">
+                                        </div>
+                                        <div class="col" style="width: 100%">
+                                            <span>
+                                                <i class="fa fa-clock-o" style="font-size: 50px; color: red; "
+                                                    aria-hidden="true"></i>
+                                            </span>
+                                            <span>
+                                                <p style="font-size: 12px; height: 30px;">
+                                                    {{app.time}}
+                                                </p>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 ">
+                                        {{app.text}}
+
+                                    </div>
+                                    <div class="col-md-12 " style="font-size: x-small">
+                                        {{app.content}}
+                                    </div>
+                                    <div class="col-md-12 " style="font-size: x-small; font-weight: bolder">
+                                        {{app.nature}}
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div *ngSwitchCase="'Lab'">
+                                <div class="row">
+                                    <div class="col mt-4">
+                                        <div style=" font-size: xx-large">
+                                            <b>{{app.details}}</b>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-4">
+                                        <div style="display: inline-flex">{{app.text}}</div>
+                                        <div style="font-size: xx-small;">{{app.time}}</div>
+                                    </div>
+
+                                    <div class="col mt-4 ml-2">
+                                        <img src={{app.url}} width="70%" style="mix-blend-mode: multiply; height: 70px;
+                                            width: 70px;" />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div *ngSwitchCase="'Distance'">
+                                <div class="row justify-content-center">
+                                    <img src={{app.url}} style="mix-blend-mode: multiply; height: 134px;
+                                                    width: 134px;" />
+                                    <div class="col">
+                                        <div class=""><b>{{app.details}}</b></div>
+                                        <div class="" style="font-size: xx-small;">{{app.time}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngSwitchCase="'Steps / Activity'">
+                                <div class="row justify-content-center">
+                                    <img src={{app.url}} style="mix-blend-mode: multiply; height: 130px;
+                                                    width: 82px;" />
+                                    <div class="row">
+                                        <div class="col-md-12" style="color: brown"><b>{{app.details}}</b></div>
+                                        <div class="col-md-12" style="font-size: xx-small;">{{app.time}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngSwitchDefault>One</div>
+                        </div>
+                    </div>
+                    <div class="card-footer border-0" *ngIf="app.appName != 'Distance'">
+                        <!-- *ngIf="(app.appName != 'Blood Pressure') || (app.appName != 'Lab') || (app.appName != 'Steps / Activity') || (app.appName != 'Distance' )"> -->
+                        <div class="row float-right">
+
+                            <!-- 'Blood Pressure' -->
+                            <div class="col" *ngSwitchCase="'Blood Pressure'">
+                                <div>
+                                    <!-- <span>
                                             <i class="fa fa-plus p-1" (click)="createBP()" aria-hidden="true"></i>
                                         </span> -->
-                                        <span>
-                                            <i class="fa fa-plus-square p-1" (click)="editBP(app.appId)"
-                                                aria-hidden="true"></i>
-                                        </span>
-                                        <span>
-                                            <i class="fa fa-share-alt-square p-1" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
+                                    <span>
+                                        <i *ngIf="bpflag" aria-hidden="true" class="fa fa-check-square p-1"
+                                            (click)="editBP(app.appId)" style="color: green"></i>
+                                        <i *ngIf="!bpflag" class="fa fa-plus-square p-1" (click)="editBP(app.appId)"
+                                            aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-share-alt-square p-1" aria-hidden="true"></i>
+                                    </span>
                                 </div>
-                                <!-- Appointment -->
-                                <div class="col" *ngSwitchCase="'Appointment'">
-                                    <div>
-                                        <span>
-                                            <a [routerLink]="['/admin/calendar']">
-                                                <i class="fa fa-map-marker p-1" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                        <span>
-                                            <i class="fa fa-clock-o p-1" aria-hidden="true"></i>
-                                        </span>
-                                        <span>
-                                            <i class="fa fa-times-circle-o p-1" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
+                            </div>
+                            <!-- Appointment -->
+                            <div class="col" *ngSwitchCase="'Appointment'">
+                                <div>
+                                    <span>
+                                        <a [routerLink]="['/admin/calendar']">
+                                            <i class="fa fa-map-marker p-1" aria-hidden="true"></i>
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-clock-o p-1" aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-times-circle-o p-1" aria-hidden="true"></i>
+                                    </span>
                                 </div>
-                                <!-- Medication -->
-                                <div class="col" *ngSwitchCase="'Medication'">
-                                    <div>
-                                        <span>
-                                            <i class="fa fa-refresh mr-2" aria-hidden="true"></i>
-                                        </span>
-                                        <span>
-                                            <i class="fa fa-calendar-plus-o mr-2" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
+                            </div>
+                            <!-- Medication -->
+                            <div class="col" *ngSwitchCase="'Medication'">
+                                <div>
+                                    <span>
+                                        <i class="fa fa-refresh mr-2" aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-calendar-plus-o mr-2" aria-hidden="true"></i>
+                                    </span>
                                 </div>
+                            </div>
 
-                                <!-- for EKG -->
-                                <div class="col" *ngSwitchCase="'EKG'">
-                                    <div>
-                                        <span>
-                                            <i class="fa fa-plus p-1" (click)="createEKG()" aria-hidden="true"></i>
-                                        </span>
-                                        <span>
-                                            <a download="EKG.jpg" [href]=app.url title="ImageName">
-                                                <i class="fa fa-cloud-download p-1" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                        <span>
-                                            <i class="fa fa-share-alt-square p-1" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
+                            <!-- for EKG -->
+                            <div class="col" *ngSwitchCase="'EKG'">
+                                <div>
+                                    <span>
+                                        <i class="fa fa-plus p-1" (click)="createEKG()" aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <a download="EKG.jpg" [href]=app.url title="ImageName">
+                                            <i class="fa fa-cloud-download p-1" aria-hidden="true"></i>
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-share-alt-square p-1" aria-hidden="true"></i>
+                                    </span>
                                 </div>
+                            </div>
 
-                                <!-- for HR -->
-                                <div class="col" *ngSwitchCase="'HeartRate'">
-                                    <div>
-                                        <span>
-                                            <!-- <i class="fa fa-plus p-1" (click)="createHR()" aria-hidden="true"></i> -->
-                                        </span>
-                                        <span>
-                                            <i class="fa fa-plus-square p-1" (click)="editHR(app.appId)"
-                                                aria-hidden="true"></i>
-                                        </span>
-                                        <span>
-                                            <i class="fa fa-share-alt-square p-1" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
+                            <!-- for HR -->
+                            <div class="col" *ngSwitchCase="'HeartRate'">
+                                <div>
+                                    <span>
+                                        <!-- <i class="fa fa-plus p-1" (click)="createHR()" aria-hidden="true"></i> -->
+                                    </span>
+                                    <span>
+                                        <i *ngIf="flag" aria-hidden="true" class="fa fa-check-square p-1"
+                                            (click)="editHR(app.appId)" style="color: green"></i>
+                                        <i *ngIf="!flag" class="fa fa-plus-square p-1" (click)="editHR(app.appId)"
+                                            aria-hidden="true"></i>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-share-alt-square p-1" aria-hidden="true"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
         </div>
@@ -276,11 +283,32 @@
     <button class="btn btn-primary" (click)="close()"> CANCEL </button>
 </ng-template>
 
-<ng-template #createEKGTemplate>
-    <button class="btn btn-secondary" (click)="fileInput.click()">
-        <span>Choose file</span>
-        <input #fileInput type="file" (change)="imageInput($event)" style="display:none;" />
-    </button>
-    <button class="btn btn-primary" (click)="addEKG()"> SUBMIT </button>
-    <button class="btn btn-primary" (click)="close()"> CANCEL </button>
+
+<ng-template #createEKGTemplate let-close="close">
+    <div class="card">
+        <div class="card-header">
+            Upload an EKG File
+        </div>
+        <div class="card-body">
+            <!-- <p>This appointment is also registered with other dates. Do you want to continue to delete?</p> -->
+            <div class="example-container justify-content-center">
+                <button class="btn btn-secondary" (click)="fileInput.click()">
+                    <span>Choose file</span>
+                    <input #fileInput type="file" (change)="imageInput($event)" style="display:none;" />
+
+                </button>
+                {{imageDataName}}
+                <br>
+                &nbsp;
+                <div class="row justify-content-center" style="padding: 5%;">
+                    <button mat-button color="primary" (click)="addEKG('Update');" ngbAutofocus>SUBMIT</button>
+                </div>
+                <div class="row justify-content-center">
+                    <button mat-button color="warn" (click)="close('')">CANCEL</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 </ng-template>

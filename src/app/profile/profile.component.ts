@@ -79,15 +79,19 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
+    //for [patient/family data]
     let updatePatientData = {
       "userId": parseInt(this.patient.userId),
       "pid": parseInt(this.patient.pid),
       "relation": this.patient.relation,
+      "gender": this.selectedGender,
       "patientName": this.firstNameFormControl.value + " " + this.lastNameFormControl.value,
       "height": this.heightFormControl.value,
       "weight": this.weightFormControl.value
     }
     console.log(this.dateFormControl.value);
+
+    //for user data
     let updateUserData = {
       "userId": parseInt(this.user.userId),
       "dob": this.dateFormControl.value,

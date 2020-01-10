@@ -50,45 +50,44 @@ export class AppInfoComponent implements OnInit {
     console.log('update clicked');
   }
 
-
   navigateToApp(id) {
-    if (id == 1) {
+    if (id == 11) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/fitnessTracker/fitbit')
-    } else if (id == 2) {
+    } else if (id == 1) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/dashboard')
-    } else if (id == 3) {
+    } else if (id == 8) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/healthKnowledgeBase/healthKnowledgeContent')
     } else if (id == 4) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/calendar')
-    } else if (id == 5) {
+    } else if (id == 3) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/myHeart')
-    } else if (id == 6) {
+    } else if (id == 2) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/medication')
-    } else if (id == 7) {
+    } else if (id == 5) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/document/Personal')
-    } else if (id == 8) {
+    } else if (id == 12) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/healthconnect')
-    } else if (id == 9) {
+    } else if (id == 10) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/insurance')
-    } else if (id == 10) {
+    } else if (id == 6) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/electronicHealth/Visits')
     } else if (id == 16) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/pharmacy')
-    } else if (id == 13) {
+    } else if (id == 14) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/labReports/Labs')
-    } else if (id == 14) {
+    } else if (id == 13) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/patientView')
     } else if (id == 15) {
@@ -100,10 +99,10 @@ export class AppInfoComponent implements OnInit {
     } else if (id == 19) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/emergency')
-    } else if (id == 11) {
+    } else if (id == 7) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/family')
-    } else if (id == 12) {
+    } else if (id == 9) {
       this._bottomSheetRef.dismiss();
       this.route.navigateByUrl('admin/medicalCondition')
     }
@@ -114,9 +113,9 @@ export class AppInfoComponent implements OnInit {
     console.log('install clicked', appDetails);
     this.stopInstall = true;
 
-    if (id == 1) {
+    if (id == 11) {
       this.Install(id, 'admin/fitnessTracker/fitbit')
-    } else if (id == 2) {
+    } else if (id == 1) {
       let cholesterol =
       {
         chLevel: this.cholesterolFormControl.value,
@@ -162,27 +161,27 @@ export class AppInfoComponent implements OnInit {
       }, (err) => {
 
       })
-    } else if (id == 3) {
+    } else if (id == 8) {
       this.Install(id, 'admin/healthKnowledgeBase/healthKnowledgeContent')
     } else if (id == 4) {
       this.Install(id, 'admin/calendar')
-    } else if (id == 5) {
+    } else if (id == 3) {
       this.Install(id, 'admin/myHeart')
-    } else if (id == 6) {
+    } else if (id == 2) {
       this.Install(id, 'admin/medication')
-    } else if (id == 7) {
+    } else if (id == 5) {
       this.Install(id, 'admin/document/Personal')
-    } else if (id == 8) {
+    } else if (id == 12) {
       this.Install(id, 'admin/healthconnect')
-    } else if (id == 9) {
-      this.Install(id, 'admin/insurance')
     } else if (id == 10) {
+      this.Install(id, 'admin/insurance')
+    } else if (id == 6) {
       this.Install(id, 'admin/electronicHealth/Visits')
     } else if (id == 16) {
       this.Install(id, 'admin/pharmacy')
-    } else if (id == 13) {
-      this.Install(id, 'admin/labReports/Labs')
     } else if (id == 14) {
+      this.Install(id, 'admin/labReports/Labs')
+    } else if (id == 13) {
       this.Install(id, 'admin/patientView')
     } else if (id == 15) {
       this.Install(id, 'admin/patientBilling')
@@ -193,10 +192,10 @@ export class AppInfoComponent implements OnInit {
     } else if (id == 19) {
       this.Install(id, 'admin/emergency')
 
-    } else if (id == 11) {
+    } else if (id == 7) {
       this.Install(id, 'admin/family')
 
-    } else if (id == 12) {
+    } else if (id == 9) {
       this.Install(id, 'admin/medicalCondition')
     }
 

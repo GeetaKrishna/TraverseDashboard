@@ -38,9 +38,12 @@ export class ForgotPasswordPage3Component implements OnInit {
         }
       }
     })
+    console.log(history.state);
 
-    this.mailId = this.route.snapshot.paramMap.get('data');
-    this.pin = this.route.snapshot.paramMap.get('pin');
+    // this.mailId = this.route.snapshot.paramMap.get('data');
+    // this.pin = this.route.snapshot.paramMap.get('pin');
+    this.mailId = history.state.data;
+    this.pin = history.state.pin;
     console.log(this.mailId)
   }
 

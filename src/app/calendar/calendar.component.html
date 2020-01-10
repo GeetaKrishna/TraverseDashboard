@@ -1,4 +1,4 @@
-<div class="card mt-3 mb-3" style="height: 600px;">
+<div class="card mt-3 mb-3" style="height: 100%;">
   <div style="overflow-y: auto;">
     <div class="card" style="height:auto;">
       <div class="card-header ch-1">
@@ -227,7 +227,7 @@
                 </div>
                 <div class="col-sm-2">
                   <mat-form-field style="width: 60px;">
-                    <mat-label>Meridian</mat-label>
+                    <mat-label>AM</mat-label>
                     <mat-select [(value)]="startMeridian" (selectionChange)="changeStartMeridian($event.value)"
                       [disabled]="disabledFlag">
                       <mat-option *ngFor="let meridian of MeridianList" [value]="meridian">{{meridian}}</mat-option>
@@ -267,7 +267,7 @@
                 <div class="col-sm-2">
 
                   <mat-form-field style="width: 60px;">
-                    <mat-label>Meridian</mat-label>
+                    <mat-label>AM</mat-label>
                     <mat-select [(value)]="endMeridian" (selectionChange)="changeEndMeridian($event.value)"
                       [disabled]="disabledFlag">
                       <mat-option *ngFor="let meridian of MeridianList" [value]="meridian">{{meridian}}</mat-option>
@@ -333,7 +333,7 @@
                 </div>
                 <div class="col-sm-2">
                   <mat-form-field style="width: 60px;">
-                    <mat-label>Meridian</mat-label>
+                    <mat-label>AM</mat-label>
                     <mat-select [(value)]="startMeridian" (selectionChange)="changeStartMeridian($event.value)"
                       [disabled]="disabledFlag">
                       <mat-option *ngFor="let meridian of MeridianList" [value]="meridian">{{meridian}}</mat-option>
@@ -373,7 +373,7 @@
                 <div class="col-sm-2">
 
                   <mat-form-field style="width: 60px;">
-                    <mat-label>Meridian</mat-label>
+                    <mat-label>AM</mat-label>
                     <mat-select [(value)]="endMeridian" (selectionChange)="changeEndMeridian($event.value)"
                       [disabled]="disabledFlag">
                       <mat-option *ngFor="let meridian of MeridianList" [value]="meridian">{{meridian}}</mat-option>

@@ -46,7 +46,7 @@ export class AddMedComponent implements OnInit {
     if (this.description.value && this.name.value && this.image) {
       this.medicationService.addMedication(formData).subscribe((data) => {
         console.log(data);
-        this.dialogRef.close();
+        this.dialogRef.close(data);
       }, (err) => {
         console.log(err);
 

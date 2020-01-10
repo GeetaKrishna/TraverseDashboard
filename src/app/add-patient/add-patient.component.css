@@ -1,19 +1,24 @@
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/
-  color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0) !important;
 }
 
 ::ng-deep.mat-form-field-underline {
   /*change color of underline*/
-  background-color: rgb(255, 255, 255) !important;
+  background-color: rgb(112, 172, 212) !important;
 }
 
 ::ng-deep.mat-form-field-ripple {
   /*change color of underline when focused*/
-  background-color: rgb(255, 255, 255) !important;
-  ;
+  background-color: rgb(112, 172, 212) !important;
+  
 }
-
+::ng-deep .mat-select-content{
+  width:2000px !important;
+  background-color: red !important;
+  color: red !important;
+  font-size: 10px !important;   
+}
 .example-full-width {
   width: 100%;
 }

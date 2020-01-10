@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter, Input, ViewChild } from '@angular/core
 import { GetAppsService } from '../_services/get-apps.service';
 import { Router } from '@angular/router';
 import { ContextMenuComponent } from 'ngx-contextmenu';
-import { AppInfoComponent } from '../app-info/app-info.component';
 import { ToastrService } from 'ngx-toastr';
 // import { AppInfoComponent } from './'
 @Component({
@@ -15,20 +14,8 @@ export class LandingPageComponent implements OnInit {
   @ViewChild(ContextMenuComponent, { static: true }) public basicMenu: ContextMenuComponent;
 
   apps: any[] = [
-
     {
       "APP_ID": 1,
-      "APP_DETAILS": "This is Android Fitbit tracker which is used to track your fitness details.",
-      "VERSION": "1.0v",
-      "APPNAME": "Fitness Tracker",
-      "URL": "assets/newfitness.png",
-      "userTable": [],
-      "RATING": 2.5,
-      "ROUTESCREEN": 'admin/fitnessTracker/fitbit',
-      "installed": false
-    },
-    {
-      "APP_ID": 2,
       "APP_DETAILS": "KEEPS TRACK OF WEIGHT, GLUCOSE LEVEL, ETC",
       "VERSION": "1.0v",
       "APPNAME": "Four Corners Of Health",
@@ -37,17 +24,28 @@ export class LandingPageComponent implements OnInit {
       "RATING": 3.5,
       "ROUTESCREEN": 'admin/dashboard',
       "installed": false
+    },
+    {
+      "APP_ID": 2,
+      "APP_DETAILS": "SAYS ABOUT THE MEDICATION DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "My Medications",
+      "URL": "assets/newMedications.png",
+      "userTable": [],
+      "RATING": 3.5,
+      "ROUTESCREEN": 'admin/medication',
+      "installed": false
 
     },
     {
       "APP_ID": 3,
-      "APP_DETAILS": "YOU CAN SEARCH FOR ARTICLES FROM ONLINE",
+      "APP_DETAILS": "HELPS TO TRACK INSURANCE DETAILS AND CLAIMS",
       "VERSION": "1.0v",
-      "APPNAME": "Health Knowledge Base",
-      "URL": "assets/newhealth.png",
+      "APPNAME": "My Heart",
+      "URL": "assets/newHeart.png",
       "userTable": [],
-      "RATING": 1.5,
-      "ROUTESCREEN": 'admin/healthKnowledgeBase/healthKnowledgeContent',
+      "RATING": 5,
+      "ROUTESCREEN": 'admin/myHeart',
       "installed": false
     },
     {
@@ -63,29 +61,6 @@ export class LandingPageComponent implements OnInit {
     },
     {
       "APP_ID": 5,
-      "APP_DETAILS": "HELPS TO TRACK INSURANCE DETAILS AND CLAIMS",
-      "VERSION": "1.0v",
-      "APPNAME": "My Heart",
-      "URL": "assets/newHeart.png",
-      "userTable": [],
-      "RATING": 5,
-      "ROUTESCREEN": 'admin/myHeart',
-      "installed": false
-    },
-    {
-      "APP_ID": 6,
-      "APP_DETAILS": "SAYS ABOUT THE MEDICATION DETAILS",
-      "VERSION": "1.0v",
-      "APPNAME": "My Medications",
-      "URL": "assets/newMedications.png",
-      "userTable": [],
-      "RATING": 3.5,
-      "ROUTESCREEN": 'admin/medication',
-      "installed": false
-
-    },
-    {
-      "APP_ID": 7,
       "APP_DETAILS": "SAYS ABOUT THE HEALTH DOCUMENT DETAILS",
       "VERSION": "1.0v",
       "APPNAME": "Health Documents",
@@ -96,29 +71,7 @@ export class LandingPageComponent implements OnInit {
       "installed": false
     },
     {
-      "APP_ID": 8,
-      "APP_DETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
-      "VERSION": "1.0v",
-      "APPNAME": "Health Connect",
-      "URL": "assets/newHealthconnect.png",
-      "userTable": [],
-      "RATING": 3,
-      "ROUTESCREEN": 'admin/healthconnect',
-      "installed": false
-    },
-    {
-      "APP_ID": 9,
-      "APP_DETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
-      "VERSION": "1.0v",
-      "APPNAME": "Insurance Central",
-      "URL": "assets/newhealthIns.png",
-      "userTable": [],
-      "RATING": 4,
-      "ROUTESCREEN": 'admin/insurance',
-      "installed": false
-    },
-    {
-      "APP_ID": 10,
+      "APP_ID": 6,
       "APP_DETAILS": "MAINTAINS ALL HEALTH RECORDS",
       "VERSION": "1.0v",
       "APPNAME": "Electronic Health Records",
@@ -129,7 +82,7 @@ export class LandingPageComponent implements OnInit {
       "installed": false
     },
     {
-      "APP_ID": 11,
+      "APP_ID": 7,
       "APP_DETAILS": "MAINTAINS ALL HEALTH RECORDS",
       "VERSION": "1.0v",
       "APPNAME": "Family View",
@@ -140,7 +93,18 @@ export class LandingPageComponent implements OnInit {
       "installed": false
     },
     {
-      "APP_ID": 12,
+      "APP_ID": 8,
+      "APP_DETAILS": "YOU CAN SEARCH FOR ARTICLES FROM ONLINE",
+      "VERSION": "1.0v",
+      "APPNAME": "Health Knowledge Base",
+      "URL": "assets/newhealth.png",
+      "userTable": [],
+      "RATING": 1.5,
+      "ROUTESCREEN": 'admin/healthKnowledgeBase/healthKnowledgeContent',
+      "installed": false
+    },
+    {
+      "APP_ID": 9,
       "APP_DETAILS": "MAINTAINS ALL HEALTH RECORDS",
       "VERSION": "1.0v",
       "APPNAME": "Medical Conditions",
@@ -150,8 +114,42 @@ export class LandingPageComponent implements OnInit {
       "ROUTESCREEN": 'admin/medicalCondition',
       "installed": false
     },
+    {
+      "APP_ID": 10,
+      "APP_DETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
+      "VERSION": "1.0v",
+      "APPNAME": "Insurance Central",
+      "URL": "assets/newhealthIns.png",
+      "userTable": [],
+      "RATING": 4,
+      "ROUTESCREEN": 'admin/insurance',
+      "installed": false
+    },
+    {
+      "APP_ID": 11,
+      "APP_DETAILS": "This is Android Fitbit tracker which is used to track your fitness details.",
+      "VERSION": "1.0v",
+      "APPNAME": "Fitness Tracker",
+      "URL": "assets/newfitbit.png",
+      "userTable": [],
+      "RATING": 2.5,
+      "ROUTESCREEN": 'admin/fitnessTracker/fitbit',
+      "installed": false
+    },
+    {
+      "APP_ID": 12,
+      "APP_DETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
+      "VERSION": "1.0v",
+      "APPNAME": "Health Connect",
+      "URL": "assets/newHealthconnect.png",
+      "userTable": [],
+      "RATING": 3,
+      "ROUTESCREEN": 'admin/healthconnect',
+      "installed": false
+    }
 
   ]
+
   userApps = [{
     "APP_ID": 0,
     "APP_DETAILS": "This is App Store Logo",

@@ -389,6 +389,16 @@ export class CalendarComponent {
         return iEvent;
       });
       this.refresh.next();
+      // this.existingEvents = this.existingEvents.filter(iEvent => {
+      //   if (iEvent === event) {
+      //     return {
+      //       ...event,
+      //       start: newStart,
+      //       end: newEnd
+      //     };
+      //   }
+      //   return iEvent;
+      // });
       this.modal.dismissAll()
     }, (err) => {
       console.log(err);
@@ -396,12 +406,14 @@ export class CalendarComponent {
     })
 
     this.refresh.next();
-    // this.handleEvent('Dropped or resized', event, null);
   }
 
   handleEvent(action: string, event: CalendarEvent, _index): void {
     console.log('handling event', event);
     this.modalData = { event, action };
+
+    // somehow allDay remains always true while drag and drop regardless of it's original value, so get it from meta data instead
+    event.allDay = event.meta.allDay;
     if (action == "Edit") {
       console.log(event.meta.endTime);
 
@@ -458,6 +470,7 @@ export class CalendarComponent {
       this.modal.open(this.editApponitment, { centered: true }).result.then((data) => {
         console.log(data, "after closing edit");
         if (data == 'Update') {
+
           if (this.endMeridian == 'PM') {
             this.endTime = parseInt(this.endTime) + 12;
           }
@@ -468,14 +481,15 @@ export class CalendarComponent {
 
           console.log(moment(this.endDateFormControl.value).format("YYYY-MM-DD") + "T" + this.endTime + ":" + this.endDuration + ":" + "00")
           console.log(moment(this.startDateFormControl.value).format("YYYY-MM-DD") + "T" + this.startTime + ":" + this.startDuration + ":" + "59")
+          console.log(this.allDay.value);
 
           let t = {
             "allDay": this.allDay.value,
-            "description": this.AppointmentDetails.value,
+            "description": this.editAppointmentDetails.value,
             "endTime": moment(this.endDateFormControl.value).format("YYYY-MM-DD") + "T" + this.endTime + ":" + this.endDuration + ":" + "00",
             "pid": parseInt(localStorage.getItem("patientId")),
             "startTime": moment(this.startDateFormControl.value).format("YYYY-MM-DD") + "T" + this.startTime + ":" + this.startDuration + ":" + "59",
-            "title": this.AppointmentName.value,
+            "title": this.editAppointmentName.value,
             "id": event.meta.id,
             "location": event.meta.location,
             "userId": parseInt(localStorage.getItem("userId"))
@@ -483,7 +497,13 @@ export class CalendarComponent {
 
           //API call to update
           this.calendarService.editAppoinments(t).subscribe((data) => {
+
             console.log(data);
+            event.meta = data;
+            event.meta['startHours'] = data['startTime'].split("T")[1].split('.')[0]
+            event.meta['endHours'] = data['endTime'].split("T")[1].split('.')[0]
+
+            console.log(event.meta);
 
             let newStart = new Date(this.startDateFormControl.value);
             let newEnd = new Date(this.endDateFormControl.value)
@@ -498,7 +518,17 @@ export class CalendarComponent {
               return iEvent;
             });
             this.refresh.next();
-            this.modal.dismissAll()
+            this.existingEvents = this.existingEvents.filter((iEvent) => {
+              if (iEvent === event) {
+                return {
+                  ...event,
+                  start: newStart,
+                  end: newEnd
+                };
+              }
+              return iEvent;
+            })
+            // this.modal.dismissAll()
           }, (err) => {
             console.log(err);
 
@@ -599,6 +629,10 @@ export class CalendarComponent {
 
         this.calendarService.createAppoinments(t).subscribe((data) => {
           console.log(data);
+
+          data['startHours'] = data['startTime'].split("T")[1].split('.')[0]
+          data['endHours'] = data['endTime'].split("T")[1].split('.')[0]
+
           this.events = [
             ...this.events,
             {
@@ -617,6 +651,21 @@ export class CalendarComponent {
             }
           ];
           this.refresh.next();
+          //to update current events in appointments list
+          this.existingEvents.push({
+            id: 'Appointment',
+            title: this.AppointmentDetails.value,
+            start: startOfDay(startDate),
+            end: endOfDay(startDate),
+            color: colors.red,
+            actions: this.actions,
+            draggable: true,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            },
+            meta: data
+          })
           console.log(this.events);
 
         }, (err) => {

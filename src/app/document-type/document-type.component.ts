@@ -15,6 +15,7 @@ export class DocumentTypeComponent implements OnInit {
   availableDocsForInsurance = [];
   availableDocsForFamily = [];
   availableDocsForTravel = [];
+  description = '';
   findType = new FormControl('');
   state;
 
@@ -94,8 +95,11 @@ export class DocumentTypeComponent implements OnInit {
           console.log(droppedFile.relativePath, file);
           const formData = new FormData()
           formData.append('file', file, droppedFile.relativePath)
-          this.docService.addDocuments(formData, type).subscribe((data) => {
+
+          // api call
+          this.docService.addDocuments(formData, type, this.description).subscribe((data) => {
             console.log(data);
+            this.description = '';
             data['file_name'] = data['fileName']
             switch (type) {
               case 'Insurance':

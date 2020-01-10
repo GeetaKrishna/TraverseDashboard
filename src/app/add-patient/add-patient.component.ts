@@ -21,7 +21,10 @@ export class AddPatientComponent implements OnInit {
   weightFormControl = new FormControl('', [
     Validators.required,
   ]);
-  selected: any;
+// 
+
+  selected: any = '';
+  selectedGender: any;
   addPatientButton: boolean;
   updatePatientButton: boolean;
   PatientData;
@@ -71,6 +74,7 @@ export class AddPatientComponent implements OnInit {
       "height": parseFloat(height.value),
       "patientName": patientName.value,
       "relation": this.selected,
+      "gender": this.selectedGender,
       "userId": localStorage.getItem("userId"),
       "weight": parseFloat(weight.value)
     }).subscribe((data) => {
@@ -83,18 +87,19 @@ export class AddPatientComponent implements OnInit {
     })
   }
 
-  updatepatientProfile(patientName, height, weight){
+  updatepatientProfile(patientName, height, weight) {
     // "height": 0,
-// "patientName": "string",
-// "pid": 0,
-// "relation": "string",
-// "userId": 0,
-// "weight": 0
+    // "patientName": "string",
+    // "pid": 0,
+    // "relation": "string",
+    // "userId": 0,
+    // "weight": 0
     this.userService.updatePatientProfile({
       "height": parseFloat(height.value),
       "patientName": patientName.value,
-      "pid":this.PatientData.pid,
+      "pid": this.PatientData.pid,
       "relation": this.selected,
+      "gender": this.selectedGender,
       "userId": localStorage.getItem("userId"),
       "weight": parseFloat(weight.value)
     }).subscribe((data) => {

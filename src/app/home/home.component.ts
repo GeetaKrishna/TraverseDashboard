@@ -17,17 +17,6 @@ export class HomeComponent implements OnInit {
   apps: any[] = [
     {
       "APP_ID": 1,
-      "APP_DETAILS": "This is Android Fitbit tracker which is used to track your fitness details.",
-      "VERSION": "1.0v",
-      "APPNAME": "Fitness Tracker",
-      "URL": "assets/newfitbit.png",
-      "userTable": [],
-      "RATING": 2.5,
-      "ROUTESCREEN": 'admin/fitnessTracker/fitbit',
-      "installed": false
-    },
-    {
-      "APP_ID": 2,
       "APP_DETAILS": "KEEPS TRACK OF WEIGHT, GLUCOSE LEVEL, ETC",
       "VERSION": "1.0v",
       "APPNAME": "Four Corners Of Health",
@@ -38,14 +27,26 @@ export class HomeComponent implements OnInit {
       "installed": false
     },
     {
-      "APP_ID": 3,
-      "APP_DETAILS": "YOU CAN SEARCH FOR ARTICLES FROM ONLINE",
+      "APP_ID": 2,
+      "APP_DETAILS": "SAYS ABOUT THE MEDICATION DETAILS",
       "VERSION": "1.0v",
-      "APPNAME": "Health Knowledge Base",
-      "URL": "assets/newhealth.png",
+      "APPNAME": "My Medications",
+      "URL": "assets/newMedications.png",
       "userTable": [],
-      "RATING": 1.5,
-      "ROUTESCREEN": 'admin/healthKnowledgeBase/healthKnowledgeContent',
+      "RATING": 3.5,
+      "ROUTESCREEN": 'admin/medication',
+      "installed": false
+
+    },
+    {
+      "APP_ID": 3,
+      "APP_DETAILS": "HELPS TO TRACK INSURANCE DETAILS AND CLAIMS",
+      "VERSION": "1.0v",
+      "APPNAME": "My Heart",
+      "URL": "assets/newHeart.png",
+      "userTable": [],
+      "RATING": 5,
+      "ROUTESCREEN": 'admin/myHeart',
       "installed": false
     },
     {
@@ -61,29 +62,6 @@ export class HomeComponent implements OnInit {
     },
     {
       "APP_ID": 5,
-      "APP_DETAILS": "HELPS TO TRACK INSURANCE DETAILS AND CLAIMS",
-      "VERSION": "1.0v",
-      "APPNAME": "My Heart",
-      "URL": "assets/newHeart.png",
-      "userTable": [],
-      "RATING": 5,
-      "ROUTESCREEN": 'admin/myHeart',
-      "installed": false
-    },
-    {
-      "APP_ID": 6,
-      "APP_DETAILS": "SAYS ABOUT THE MEDICATION DETAILS",
-      "VERSION": "1.0v",
-      "APPNAME": "My Medications",
-      "URL": "assets/newMedications.png",
-      "userTable": [],
-      "RATING": 3.5,
-      "ROUTESCREEN": 'admin/medication',
-      "installed": false
-
-    },
-    {
-      "APP_ID": 7,
       "APP_DETAILS": "SAYS ABOUT THE HEALTH DOCUMENT DETAILS",
       "VERSION": "1.0v",
       "APPNAME": "Health Documents",
@@ -94,29 +72,7 @@ export class HomeComponent implements OnInit {
       "installed": false
     },
     {
-      "APP_ID": 8,
-      "APP_DETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
-      "VERSION": "1.0v",
-      "APPNAME": "Health Connect",
-      "URL": "assets/newHealthconnect.png",
-      "userTable": [],
-      "RATING": 3,
-      "ROUTESCREEN": 'admin/healthconnect',
-      "installed": false
-    },
-    {
-      "APP_ID": 9,
-      "APP_DETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
-      "VERSION": "1.0v",
-      "APPNAME": "Insurance Central",
-      "URL": "assets/newhealthIns.png",
-      "userTable": [],
-      "RATING": 4,
-      "ROUTESCREEN": 'admin/insurance',
-      "installed": false
-    },
-    {
-      "APP_ID": 10,
+      "APP_ID": 6,
       "APP_DETAILS": "MAINTAINS ALL HEALTH RECORDS",
       "VERSION": "1.0v",
       "APPNAME": "Electronic Health Records",
@@ -127,7 +83,7 @@ export class HomeComponent implements OnInit {
       "installed": false
     },
     {
-      "APP_ID": 11,
+      "APP_ID": 7,
       "APP_DETAILS": "MAINTAINS ALL HEALTH RECORDS",
       "VERSION": "1.0v",
       "APPNAME": "Family View",
@@ -138,7 +94,18 @@ export class HomeComponent implements OnInit {
       "installed": false
     },
     {
-      "APP_ID": 12,
+      "APP_ID": 8,
+      "APP_DETAILS": "YOU CAN SEARCH FOR ARTICLES FROM ONLINE",
+      "VERSION": "1.0v",
+      "APPNAME": "Health Knowledge Base",
+      "URL": "assets/newhealth.png",
+      "userTable": [],
+      "RATING": 1.5,
+      "ROUTESCREEN": 'admin/healthKnowledgeBase/healthKnowledgeContent',
+      "installed": false
+    },
+    {
+      "APP_ID": 9,
       "APP_DETAILS": "MAINTAINS ALL HEALTH RECORDS",
       "VERSION": "1.0v",
       "APPNAME": "Medical Conditions",
@@ -148,6 +115,39 @@ export class HomeComponent implements OnInit {
       "ROUTESCREEN": 'admin/medicalCondition',
       "installed": false
     },
+    {
+      "APP_ID": 10,
+      "APP_DETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
+      "VERSION": "1.0v",
+      "APPNAME": "Insurance Central",
+      "URL": "assets/newhealthIns.png",
+      "userTable": [],
+      "RATING": 4,
+      "ROUTESCREEN": 'admin/insurance',
+      "installed": false
+    },
+    {
+      "APP_ID": 11,
+      "APP_DETAILS": "This is Android Fitbit tracker which is used to track your fitness details.",
+      "VERSION": "1.0v",
+      "APPNAME": "Fitness Tracker",
+      "URL": "assets/newfitbit.png",
+      "userTable": [],
+      "RATING": 2.5,
+      "ROUTESCREEN": 'admin/fitnessTracker/fitbit',
+      "installed": false
+    },
+    {
+      "APP_ID": 12,
+      "APP_DETAILS": "HELPS YOU FIND THE APPROPRIATE DOCTOR",
+      "VERSION": "1.0v",
+      "APPNAME": "Health Connect",
+      "URL": "assets/newHealthconnect.png",
+      "userTable": [],
+      "RATING": 3,
+      "ROUTESCREEN": 'admin/healthconnect',
+      "installed": false
+    }
 
   ]
 
@@ -236,17 +236,6 @@ export class HomeComponent implements OnInit {
   pApps: any[] = [
     {
       "APP_ID": 13,
-      "APP_DETAILS": "SAYS ABOUT THE LABORATORY DETAILS",
-      "VERSION": "1.0v",
-      "APPNAME": "Laboratory",
-      "URL": "assets/icons-home/Lab.png",
-      "userTable": [],
-      "RATING": 3.5,
-      "ROUTESCREEN": 'admin/labReports/Labs',
-      "installed": false
-    },
-    {
-      "APP_ID": 14,
       "APP_DETAILS": "SAYS ABOUT THE PATIENT DETAILS",
       "VERSION": "1.0v",
       "APPNAME": "Patients",
@@ -256,6 +245,18 @@ export class HomeComponent implements OnInit {
       "ROUTESCREEN": 'admin/patientView',
       "installed": false
     },
+    {
+      "APP_ID": 14,
+      "APP_DETAILS": "SAYS ABOUT THE LABORATORY DETAILS",
+      "VERSION": "1.0v",
+      "APPNAME": "Laboratory",
+      "URL": "assets/icons-home/Lab.png",
+      "userTable": [],
+      "RATING": 3.5,
+      "ROUTESCREEN": 'admin/labReports/Labs',
+      "installed": false
+    },
+    
     {
       "APP_ID": 15,
       "APP_DETAILS": "SAYS ABOUT THE BILLING DETAILS",
@@ -311,17 +312,17 @@ export class HomeComponent implements OnInit {
       "ROUTESCREEN": 'admin/emergency',
       "installed": false
     },
-    {
-      "APP_ID": 3,
-      "APP_DETAILS": "YOU CAN SEARCH FOR ARTICLES FROM ONLINE",
-      "VERSION": "1.0v",
-      "APPNAME": "Health Knowledge Base",
-      "URL": "assets/newhealth.png",
-      "userTable": [],
-      "RATING": 1.5,
-      "ROUTESCREEN": 'admin/healthKnowledgeBase/healthKnowledgeContent',
-      "installed": false
-    }
+    // {
+    //   "APP_ID": 3,
+    //   "APP_DETAILS": "YOU CAN SEARCH FOR ARTICLES FROM ONLINE",
+    //   "VERSION": "1.0v",
+    //   "APPNAME": "Health Knowledge Base",
+    //   "URL": "assets/newhealth.png",
+    //   "userTable": [],
+    //   "RATING": 1.5,
+    //   "ROUTESCREEN": 'admin/healthKnowledgeBase/healthKnowledgeContent',
+    //   "installed": false
+    // }
   ]
 
   constructor(private getApps: GetAppsService, private _bottomSheet: MatBottomSheet) { }

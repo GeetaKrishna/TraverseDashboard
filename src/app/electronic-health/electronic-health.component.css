@@ -145,6 +145,7 @@ td {
 
 :host {
     width: 80%;
+    /* height: 100%; */
 }
 
 /* .activeClass {

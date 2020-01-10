@@ -85,7 +85,7 @@ export class MedicationsComponent implements OnInit {
     'ch-1'];
 
   ngOnInit() {
-    
+
     this.medicationService.getPrescriptions().subscribe(
       (pres: []) => {
         this.medicationService.getMedications().subscribe(
@@ -97,7 +97,7 @@ export class MedicationsComponent implements OnInit {
               pres.map((press: any, index) => {
                 if (e['id'] === press['medicationId']) {
                   console.log(moment(new Date(press.startDate)).format('YYYY-MM-DD'));
-                  
+
                   press.startDate = moment(new Date(press.startDate)).format('YYYY-MM-DD');
                   press.endDate = moment(new Date(press.endDate)).format('YYYY-MM-DD');
                   let t = {};
@@ -153,8 +153,6 @@ export class MedicationsComponent implements OnInit {
 
       // this.apps['index'].id = medicationDetail.dosage,
       // this.apps['index'].dosage = medicationDetail.dosage,
-      // this.apps['index'].dosage = medicationDetail.dosage,
-      // this.apps['index'].dosage = medicationDetail.dosage,
     }, (err) => {
       console.log(err, 'error after updating');
     })
@@ -197,8 +195,9 @@ export class MedicationsComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddMedComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog was closed', result);
       this.medicationDescription = result;
+      this.medicationDetails.push(result);
     });
   }
 
@@ -282,7 +281,6 @@ export class MedicationsComponent implements OnInit {
     if (value >= 1000) {
       return Math.round(value / 1000) + 'k';
     }
-    // this.sliderValue = value;
     return value;
   }
 

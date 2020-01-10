@@ -17,9 +17,13 @@ export class DocumentService {
     return this.http.get(`${environment.apiUrl}/doc/records/p/${parseInt(localStorage.getItem("patientId"))}/${doc_type}`)
   }
 
-  addDocuments(body, DocumentType) {
-    console.log(body.files);
-    return this.http.post(`${environment.apiUrl}/doc/records/uploadFile/${parseInt(localStorage.getItem("patientId"))}/${DocumentType}`, body)
+  // /upload/{patientId}/{documentType}/{description}
+
+
+  addDocuments(body, DocumentType, description) {
+    console.log(body);
+    return this.http.post(`${environment.apiUrl}/doc/records/uploadFile/${parseInt(localStorage.getItem("patientId"))}/${DocumentType}/${description}`, body)
+    // return this.http.post(`${environment.apiUrl}/doc/records/uploadFile/${parseInt(localStorage.getItem("patientId"))}/${DocumentType}/${description}`, body)
   }
 
 }

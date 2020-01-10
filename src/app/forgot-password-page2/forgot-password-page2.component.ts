@@ -17,11 +17,12 @@ export class ForgotPasswordPage2Component implements OnInit {
   pinFormControl = new FormControl('', Validators.required);
 
   ngOnInit() {
-    console.log(this.router.getCurrentNavigation().extras, 'extras');
+    console.log(this.router.getCurrentNavigation(), 'extras');
     
     console.log(history.state, 'state');
     
-    this.mailId = this.route.snapshot.paramMap.get('data');
+    // this.mailId = this.route.snapshot.paramMap.get('data');
+    this.mailId = history.state.data;
     console.log(this.mailId)
   }
 
@@ -32,7 +33,7 @@ export class ForgotPasswordPage2Component implements OnInit {
       console.log(data);
       
       if (data == true) {
-        this.router.navigate(['passwordChangePage', {data: this.mailId, pin: this.pinFormControl.value}] )
+        this.router.navigate(['passwordChangePage'], {state:{data: this.mailId, pin: this.pinFormControl.value}})
       }
       else {
         //show an error, Invalid PIN

@@ -1,93 +1,100 @@
-<div class="card mt-3 mb-3" style="height: 600px;">
-    <div style="overflow-y: auto; overflow-x: hidden;">
-        <div class="card-header ch-1">
-            <div class="row ">
-                <div class="col justify-content-start">
-                    <p class="cardHead" style="font-size: 24px; margin-bottom: 0 !important;">
-                        Family View
-                    </p>
-                </div>
-                <div class="col justify-content-end">
-                    <img src="../../assets/family.png"
-                        style="height: 35px; width: 35px; float: right; mix-blend-mode: multiply" />
-                </div>
+<div class="card mt-3 mb-3" style="height: 90vh;">
+    <div class="card-header ch-1">
+        <div class="row ">
+            <div class="col justify-content-start">
+                <p class="cardHead" style="font-size: 24px; margin-bottom: 0 !important;">
+                    Family View
+                </p>
+            </div>
+            <div class="col justify-content-end">
+                <img src="../../assets/family.png" (click)="testPatient()"
+                    style="height: 35px; width: 35px; float: right; mix-blend-mode: multiply" />
             </div>
         </div>
-        <div class="card-body">
-            <div class="row" style="height: 600px;">
-                <div class="col-sm-2">
-                    <table class="table table-borderless">
-                        <tbody>
-                            <tr *ngFor="let p of persons; let i = index">
-                                <td [ngClass]="{'highlight': selectedIndex === i}">
-                                    <img src="{{p.image}}" (click)="testFamily(p, i)" alt="Image not available"
-                                        style="height: 100px; width: 100px;">
-                                    <br />
-                                    <p class="bgWhite" style="margin: 0 !important;">
-                                        {{p.name}}
-                                    </p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-sm-10" *ngIf="switchMember">
-                    <div>
-                        <p class="bgWhite">Health Summary for {{switchMember.name}}</p>
-                    </div>
-                    <div class="verLine"></div>
-
-                    <div class="mt-2">
-                        <div class="alert alert-primary text-center" role="alert">
-                            <i class="fa fa-2x fa-database" style="float: left;"></i>
-                            <span class="mr-5 ">
-                                Age: {{switchMember.age}}
-                            </span>
-                            <span class="mr-5">
-                                Height: {{switchMember.height}} cms
-                            </span>
-                            <span>
-                                Weight: {{switchMember.weight}} lbs
-                            </span>
-                        </div>
-                        <div class="alert alert-success text-center" role="alert">
-                            <i class="fa fa-2x fa-calendar " style="float: left;"></i>
-                            <span class="mr-5 ">
-                                Appointment with Dr.Stout on 06/23/19
-                            </span>
-                            <span style="float: right;">
-                                <i class="fa fa-map-marker mr-2"></i>
-                            </span>
-                            <span style="float: right;">
-                                <i class="fa fa-clock-o mr-2"></i>
-                            </span>
-                        </div>
-                        <div class="alert alert-orange text-center" role="alert">
-                            <i class="fa fa-2x fa-file" style="float: left;"></i>
-                            <span class="mr-5 ">
-                                Medical Record last updated on 02/03/19
-                            </span>
-                            <span style="float: right;">
-                                <i class="fa fa-cloud-download mr-2"></i>
-                            </span>
-                            <span style="float: right;">
-                                <i class="fa fa-eye mr-2"></i>
-                            </span>
-
-                        </div>
-                        <div class="alert alert-warning text-center" role="alert">
-                            <i class="fa fa-2x fa-plus" style="float: left;"></i>
-                            <span class="mr-5 ">
-                                Rx for Keflex on 01/12/19
-                            </span>
-                            <span style="float: right;">
-                                <i class="fa fa-question-circle mr-2"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
+    <div class="card-body">
+        <div class="row" style="height: 100%;">
+            <div class="col-sm-2">
+
+                <div class='row m-4' *ngFor="let p of persons; let i = index">
+                    <div [ngClass]="{'highlight': selectedIndex === i}" style=" text-align: center;">
+                        <img src="{{p.image}}" (click)="testFamily(p
+                        , i)" width="50%" height="50%" alt="Image not available">
+                        <br />
+                        <div class="bgWhite justify-content-center" style="text-align: center;">
+                            {{p.patientName}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-10" *ngIf="switchMember">
+                <div>
+                    <p class="bgWhite">Health Summary for {{switchMember.name}}</p>
+                </div>
+                <div class="verLine" style="height: auto !important;"></div>
+
+                <div class="mt-2">
+                    <div class="alert alert-primary text-center" role="alert">
+                        <i class="fa fa-2x fa-database" style="float: left;"></i>
+                        <span class="mr-5 ">
+                            Age: {{switchMember.age}}
+                        </span>
+                        <span class="mr-5">
+                            Height: {{switchMember.height}} cms
+                        </span>
+                        <span>
+                            Weight: {{switchMember.weight}} lbs
+                        </span>
+                    </div>
+                    <div class="alert alert-success text-center" role="alert">
+                        <i class="fa fa-2x fa-calendar " style="float: left;"></i>
+                        <span class="mr-5 ">
+                            {{switchMember.Appointment}}
+                        </span>
+                        <span style="float: right;">
+                            <i class="fa fa-map-marker mr-2"></i>
+                        </span>
+                        <span style="float: right;">
+                            <i class="fa fa-clock-o mr-2"></i>
+                        </span>
+                    </div>
+                    <div class="alert alert-orange text-center" role="alert">
+                        <i class="fa fa-2x fa-file" style="float: left;"></i>
+                        <span class="mr-5 ">
+                            Medical Record last updated on 02/03/19
+                        </span>
+                        <span style="float: right;">
+                            <i class="fa fa-cloud-download mr-2"></i>
+                        </span>
+                        <span style="float: right;">
+                            <i class="fa fa-eye mr-2"></i>
+                        </span>
+
+                    </div>
+                    <div class="alert alert-warning text-center" role="alert">
+                        <i class="fa fa-2x fa-plus" style="float: left;"></i>
+                        <span class="mr-5 ">
+                            Rx for Keflex on 01/12/19
+                        </span>
+                        <span style="float: right;">
+                            <i class="fa fa-question-circle mr-2"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<ng-template #addPatient>
+    <div>
+        test
+    </div>
+    <!-- <app-add-patient></app-add-patient> -->
+</ng-template>
+
+<ng-template #patientsList>
+
+</ng-template>

@@ -1,4 +1,6 @@
-<div style="height: 600px;">
+<!-- trying this dynamc height -->
+<!-- Drag and Drop Files here. -->
+<!-- <div style="max-height: dynamicHeight">
     <div class="input-group md-form form-sm form-2 pl-0">
         <mat-form-field style="width: 100%;">
             <input matInput type="text" placeholder="Find document by name, date, type, etc..."
@@ -14,7 +16,6 @@
                 <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
                     (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
                     <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                        <!-- Drag and Drop Files here. -->
                         <button type="button" class="btn bgWhite" (click)="openFileSelector()">Drag and Drop here Or
                             Choose</button>
                     </ng-template>
@@ -27,6 +28,51 @@
             </div>
             <mat-card-content (click)="addRecord(state)" class="btn cursor-pointer">
                 <p class="mt-2 bgWhite  btn btn-primary">
+                    Add Record
+                </p>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+</div> -->
+
+<div style=" width: 100% !important; height: auto !important;">
+    <div class="input-group md-form form-sm form-2 pl-0">
+
+        <mat-form-field style="width: 100%;">
+            <input matInput type="text" placeholder="Find document by name, date, type, etc..."
+                [formControl]="findType">
+            <button mat-button matSuffix mat-icon-button (click)="findSearch()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div style="display: flex;">
+        <mat-card class="example-card m-2">
+            <div class="dragDrop">
+                <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" accept="image/*"
+                    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" multiple="true">
+                    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                        <!-- Drag and Drop Files here. -->
+                        <button type="button" class="btn bgWhite" (click)="openFileSelector()">Drag and Drop here Or
+                            Choose</button>
+                    </ng-template>
+                </ngx-file-drop>
+                <div *ngFor="let item of files; let i=index" class="fileContent">
+                    <span>{{ item.relativePath }}
+                        <i (click)="deleteFile(item)" class="fa fa-trash cursor-pointer delete-file"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div [attr.contenteditable]='true' [textContent]="description" placeholder="Description"
+                style="border-bottom: 2px dotted #2b82d0; margin: 10%;"
+                (input)="description =$event.target.textContent">
+                {{description}}
+            </div>
+
+            <mat-card-content (click)="addRecord(state)" class="btn cursor-pointer">
+                <p class="mt-2 bgWhite btn btn-primary">
                     Add Record
                 </p>
             </mat-card-content>
@@ -56,6 +102,7 @@
                 </mat-card>
             </div>
         </div>
+
         <div *ngIf="state == 'Imaging'">
             <div style="display: flex;">
                 <mat-card class="example-card m-2"
@@ -131,3 +178,162 @@
         </div>
     </div>
 </div>
+
+
+<!-- <div class="row" style="height: 100%;">
+    <div class="input-group md-form form-sm form-2 pl-0">
+        <mat-form-field style="width: 100%;">
+            <input matInput type="text" placeholder="Find document by name, date, type, etc..."
+                [formControl]="findType">
+            <button mat-button matSuffix mat-icon-button (click)="findSearch()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <div class="column" style="display: flexbox;">
+        <mat-card class="example-card m-2">
+            <div class="dragDrop">
+                <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+                    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                        <button type="button" class="btn bgWhite" (click)="openFileSelector()">Drag and Drop
+                            here Or
+                            Choose</button>
+                    </ng-template>
+                </ngx-file-drop>
+                <div *ngFor="let item of files; let i=index" class="fileContent">
+                    <span>{{ item.relativePath }}
+                        <i (click)="deleteFile(item)" class="fa fa-trash cursor-pointer delete-file"></i>
+                    </span>
+                </div>
+            </div>
+            <div>
+                <div [attr.contenteditable]='true' [textContent]="description" placeholder="Description"
+                    style="border-bottom: 2px dotted #2b82d0; margin: 10%;"
+                    (input)="description =$event.target.textContent">
+                    {{description}}
+                </div>
+                <span>
+
+                </span>
+            </div>
+            <mat-card-content (click)="addRecord(state)" class="btn cursor-pointer">
+                <p class="mt-2 bgWhite  btn btn-primary">
+                    Add Record
+                </p>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+    <div class="column">
+
+        <div *ngIf="state == 'Visits'">
+            <div style="display: flex;">
+                <mat-card class="example-card m-2"
+                    *ngFor="let file of availableDocsForVisits | searchDocuments: searchText"
+                    style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
+                    <div class="CardImage">
+                        <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
+                    </div>
+                    <mat-card-content style="font-size: 14px; margin-top: 8px;">
+                        <p>
+                            {{file['fileName']}}
+                        </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <span class="mr-2">
+                            <i class="fa fa-comments text-muted cursor-pointer"></i>
+                        </span>
+                        <span>
+                            <i class="fa fa-share-alt text-muted cursor-pointer"></i>
+                        </span>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+
+        <div *ngIf="state == 'Imaging'">
+            <div style="display: flex;">
+                <mat-card class="example-card m-2"
+                    *ngFor="let file of availableDocsForImaging | searchDocuments: searchText"
+                    style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
+                    <div class="CardImage">
+                        <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
+                    </div>
+                    <mat-card-content style=" font-size: 14px; margin-top: 8px;">
+                        <p>
+                            {{file['fileName']}}
+                        </p>
+
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <span class="mr-2">
+                            <i class="fa fa-comments text-muted cursor-pointer"></i>
+                        </span>
+                        <span>
+                            <i class="fa fa-share-alt text-muted cursor-pointer"></i>
+                        </span>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+
+        <div *ngIf="state == 'Labs'">
+            <div style="display: flex;">
+                <mat-card class="example-card m-2"
+                    *ngFor="let file of availableDocsForLabs | searchDocuments: searchText"
+                    style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
+                    <div class="CardImage">
+                        <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
+                    </div>
+                    <mat-card-content style=" font-size: 14px; margin-top: 8px;">
+                        <p>
+                            {{file['fileName']}}
+                        </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <span class="mr-2">
+                            <i class="fa fa-comments text-muted cursor-pointer"></i>
+                        </span>
+                        <span>
+                            <i class="fa fa-share-alt text-muted cursor-pointer"></i>
+                        </span>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+
+        <div *ngIf="state == 'Records'">
+            <div style="display: flex;">
+                <mat-card class="example-card m-2"
+                    *ngFor="let file of availableDocsForRecords | searchDocuments: searchText"
+                    style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
+                    <div class="CardImage">
+                        <img mat-card-md-image src="../../assets/healthRecord/doc.png" alt="Image Not Available">
+                    </div>
+                    <mat-card-content style=" font-size: 14px; margin-top: 8px;">
+                        <p>
+                            {{file['fileName']}}
+                        </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <span class="mr-2">
+                            <i class="fa fa-comments text-muted cursor-pointer"></i>
+                        </span>
+                        <span>
+                            <i class="fa fa-share-alt text-muted cursor-pointer"></i>
+                        </span>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+
+    </div>
+</div> -->

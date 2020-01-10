@@ -1,20 +1,20 @@
-  <div class="card mt-3 mb-3" style="height: 600px;">
-    <div style="overflow-y: auto;">
-      <div class="card-header ch-1">
-        <div class="row">
-          <div class="col justify-content-start">
-            <p class="cardHead">
-              Four Corners of Health Store
-            </p>
-          </div>
-          <div class="col justify-content-end">
-            <img src="../../assets/newfourC.png" style="height: 35px; width: 35px; float: right;" />
-          </div>
+  <div class="card mt-3 mb-3 h100" style="height: 100%; width: 100%;">
+    <div class="card-header ch-1">
+      <div class="row" style="width: auto;">
+        <div class="col justify-content-start">
+          <p class="cardHead">
+            Four Corners of Health Store
+          </p>
+        </div>
+        <div class="col justify-content-end">
+          <img src="../../assets/newfourC.png" style="height: 35px; width: 35px; float: right;" />
         </div>
       </div>
-      <div class="card-body">
-        <div class="row justify-content-center">
-          <div class="card shadow-sm mr-3 cardWidth">
+    </div>
+    <div class="card-body">
+      <div class="row" style="width: 100%;">
+        <div class="col-md-6">
+          <div class="card shadow-sm mr-3 cardWidth" style="width: 100%;">
             <div class="card-header title ">
               Weight <span class="float-right"><span
                   class="fa {{colorClassForWeight}} {{weightpresentedInfo}} cursor-pointer"></span></span>
@@ -65,7 +65,11 @@
             </div>
           </div>
 
-          <div class="card shadow-sm cardWidth">
+        </div>
+
+        <div class="col-md-6">
+
+          <div class="card shadow-sm cardWidth h100">
             <div class="card-header title ">
               Blood Pressure <span class="float-right"><span
                   class="fa {{presentedInfo}} {{colorClassForBP}} cursor-pointer"></span></span>
@@ -113,7 +117,12 @@
           </div>
         </div>
 
-        <div class="row mt-3 justify-content-center">
+      </div>
+
+      <div class="row mt-3 justify-content-center">
+
+        <div class="col-md-6">
+
           <div class="card shadow-sm mr-3 cardWidth">
             <div class="card-header title ">
               Glucose Level <span class="float-right"><span
@@ -155,6 +164,10 @@
               </div>
             </div>
           </div>
+
+        </div>
+
+        <div class="col-md-6">
 
           <div class="card shadow-sm cardWidth">
             <div class="card-header title ">
@@ -199,5 +212,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
+  </div>

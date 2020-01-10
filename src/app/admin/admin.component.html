@@ -1,14 +1,16 @@
 <app-header></app-header>
-<div class="container-fluid">
+<div class="container-fluid" style="height: 100%; max-height: 100%;">
     <!-- <div> -->
     <!-- <button mat-icon-button style="float: right;">
                 <mat-icon (click)="sideBarToggle();">menu</mat-icon>
             </button> -->
     <!-- [hasBackdrop]="false"  rgb(48, 46, 46);-->
-    <mat-sidenav-container style="background: transparent; height: 700px;" autosize>
-        <div class="container">
+    <mat-sidenav-container style="background: transparent;" autosize>
+
+        <div class="container" style="max-width: 100%; max-height: 100%; height: 100%; width: 100%;">
             <router-outlet></router-outlet>
         </div>
+        
         <mat-sidenav #profileMenu mode="over" position="end" backdropClick="backdropClicked()"
             style="background:#C1C1C1;">
             <!-- style="background:#79a7ece6;"> -->

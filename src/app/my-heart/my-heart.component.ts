@@ -27,11 +27,12 @@ export class MyHeartComponent implements OnInit {
   timer: any;
   heartData: boolean = false;
   hrData: boolean = false;
-  currentHBP: any;
-  currentLBP: any;
+  currentHBP: any = 0;
+  currentLBP: any = 0;
   bpData: boolean = false;
   bpflag: boolean = false;
   medications: any = [];
+  imageDataName: any = '';
 
   constructor(private myHeartService: MyHeartService, private modal: NgbModal, private sanitizer: DomSanitizer,
     private prescriptionService: MedicationService, private calendarService: CalendarService, private dashboardService: DashboardService, ) { }
@@ -237,7 +238,7 @@ export class MyHeartComponent implements OnInit {
   }
 
   createEKG() {
-    this.modal.open(this.createEKGTemplate, { centered: true, size: 'lg', windowClass: "" })
+    this.modal.open(this.createEKGTemplate, { centered: true, size: 'sm', windowClass: "" })
   }
 
   createHR() {
@@ -275,6 +276,7 @@ export class MyHeartComponent implements OnInit {
     console.log(event.target.files);
     let file = event.target.files[0]
     this.imageData = file;
+    this.imageDataName = file.name;
     console.log(this.imageData);
   }
 
@@ -337,6 +339,7 @@ export class MyHeartComponent implements OnInit {
 
     this.myHeartService.addEkg(t).subscribe((data) => {
       console.log(data);
+      this.modal.dismissAll();
     }, (err) => {
       console.log(err);
     })

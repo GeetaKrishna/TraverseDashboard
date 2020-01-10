@@ -17,6 +17,10 @@ export class CalendarService {
     return this.http.get(`${environment.apiUrl}/calendar/appointments/${parseInt(localStorage.getItem("userId"))}/${parseInt(localStorage.getItem("patientId"))}`)
   }
 
+  getAppointmentsByPatientId(pId) {
+    return this.http.get(`${environment.apiUrl}/calendar/appointments/${parseInt(localStorage.getItem("userId"))}/${pId}`)
+  }
+
   editAppoinments(appointment) {
     return this.http.put(`${environment.apiUrl}/calendar/appointments/`, appointment)
   }

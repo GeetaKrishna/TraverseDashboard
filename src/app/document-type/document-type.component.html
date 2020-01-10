@@ -1,9 +1,8 @@
-  <div style="height: 600px; width: 100% !important;">
+  <div style=" width: 100% !important; height: auto !important;">
       <div class="input-group md-form form-sm form-2 pl-0">
 
           <mat-form-field style="width: 100%;">
-              <input matInput type="text" placeholder="Find document by name, date, type, etc..."
-                  [formControl]="findType">
+              <input matInput type="text" placeholder="Find document by name, type" [formControl]="findType">
               <button mat-button matSuffix mat-icon-button (click)="findSearch()">
                   <mat-icon>search</mat-icon>
               </button>
@@ -14,7 +13,6 @@
               <div class="dragDrop">
                   <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" accept="image/*"
                       (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" multiple="true">
-              
                       <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
                           <!-- Drag and Drop Files here. -->
                           <button type="button" class="btn bgWhite" (click)="openFileSelector()">Drag and Drop here Or
@@ -27,6 +25,13 @@
                       </span>
                   </div>
               </div>
+
+              <div [attr.contenteditable]='true' [textContent]="description" placeholder="Description"
+                  style="border-bottom: 2px dotted #2b82d0; margin: 10%;"
+                  (input)="description =$event.target.textContent">
+                  {{description}}
+              </div>
+
               <mat-card-content (click)="addRecord(state)" class="btn cursor-pointer">
                   <p class="mt-2 bgWhite btn btn-primary">
                       Add Record

@@ -1,8 +1,8 @@
-<div class="container">
-    <div class="row" style="display: flex; margin: auto;">
+<div class="">
+    <div class="row justify-content-center" style="display: flex; margin: auto; height: auto; width: auto;">
         <div class="text-center">
             <div>
-                <div style="margin-top:20px;font-size: 22px; color: white;">
+                <div style="margin-top:20px;font-size: 22px;">
                     <h4>Patient Profile</h4>
                 </div>
                 <!-- <span style="float: right; cursor: pointer;" (click)="onNoClick()">
@@ -17,14 +17,32 @@
                             </mat-error>
                         </mat-form-field>
                         <br>
+                        <mat-form-field>
+                            <mat-label>Select an option</mat-label>
+                            <mat-select [(value)]="selected">
+                              <mat-option>None</mat-option>
+                              <mat-option value="option1">Option 1</mat-option>
+                              <mat-option value="option2">Option 2</mat-option>
+                              <mat-option value="option3">Option 3</mat-option>
+                            </mat-select>
+                          </mat-form-field>
                         <mat-form-field class="example-full-width">
                             <mat-label>Relation</mat-label>
-                            <mat-select [(value)]="selected" (selectionChange)="changeRelation($event.value)">
+                            <mat-select [(value)]="selected" (change)="changeRelation($event.value)">
                                 <mat-option value="Father">Father</mat-option>
                                 <mat-option value="Mother">Mother</mat-option>
                                 <mat-option value="Daughter">Daughter</mat-option>
                                 <mat-option value="Son">Son</mat-option>
                                 <mat-option value="Other">Other</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Gender</mat-label>
+                            <mat-select [(value)]="selectedGender" (change)="changeGender($event.value)">
+                                <mat-option value="female">Female</mat-option>
+                                <mat-option value="male">Male</mat-option>
+                                <mat-option value="other">Other</mat-option>
                             </mat-select>
                         </mat-form-field>
                         <br>
@@ -52,7 +70,7 @@
                                 Patient Profile</button>
                             <!-- [disabled]="!(patientNameFormControl.valid)" -->
                             &nbsp;
-                            <button mat-raised-button class="btn-info" (click)="cancelEdit()">Cancel</button>
+                            <button mat-raised-button class="btn-info" (click)="cancelEdit()" ngbAutoFocus>Cancel</button>
                         </div>
                     </form>
                 </div>
