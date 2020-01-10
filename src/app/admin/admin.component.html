@@ -5,7 +5,7 @@
                 <mat-icon (click)="sideBarToggle();">menu</mat-icon>
             </button> -->
     <!-- [hasBackdrop]="false" (keydown.escape)="backdropClicked()"  rgb(48, 46, 46);-->
-    <mat-sidenav-container style="background: transparent; height: 700px;" autosize (backdropClick)="backdropClicked()">
+    <mat-sidenav-container style="background: transparent;" autosize (backdropClick)="backdropClicked()">
         <div class="container">
             <router-outlet></router-outlet>
         </div>

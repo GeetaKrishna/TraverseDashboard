@@ -74,6 +74,9 @@ a {
 
 .highlight {
     background-color: #bcc3c734;
+    text-align: center;
+    align-items: center;
+    align-content: center;
 }
 
 .card {
