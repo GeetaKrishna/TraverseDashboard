@@ -34,16 +34,16 @@ export class SettingMenuComponent implements OnInit {
     var t = this.elementRef;
     if (img == 'pink') {
       this.imgUrl = '../assets/newBG.png';
-      // t.nativeElement.ownerDocument.body.style.backgroundImage =
-      // } else if (img == 'blue') {
-      //   this.imgUrl = '../assets/newBG2.jpg';
-
+      // this.authentication.changeMainBGImage(this.imgUrl)
+      t.nativeElement.ownerDocument.body.style.backgroundImage = 'url(' + this.imgUrl + ')'
+      // console.log( t.nativeElement.ownerDocument.body.style.backgroundImage, 'imgUrl');
     } else if (img == 'rainbow') {
       this.imgUrl = '../assets/wall2.jpg';
+      // this.authentication.changeMainBGImage(this.imgUrl)
+      t.nativeElement.ownerDocument.body.style.backgroundImage = 'url(' + this.imgUrl + ')'
     }
 
-    t.nativeElement.ownerDocument.body.style.backgroundImage = 'url(' + this.imgUrl + ')'
-
+    // t.nativeElement.ownerDocument.body.style.backgroundImage = 'url(' + this.imgUrl + ')'
     // reader.onload = function (e) {
     //   t.nativeElement.ownerDocument.body.style.backgroundImage = 'url(' + reader.result + ')'
     // }
@@ -56,7 +56,6 @@ export class SettingMenuComponent implements OnInit {
 
   patientList() {
     this.authentication.callPatientList('invokePatientListApi')
-
     this.authentication.testHTML("PatientList");
   }
 

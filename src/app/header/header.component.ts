@@ -66,11 +66,11 @@ export class HeaderComponent implements OnInit {
     console.log(localStorage)
   }
   mouseEnter(str) {
-    console.log(str);
+    // console.log(str);
     this.closeAllToggles()
   }
   mouseLeave(str) {
-    console.log(str);
+    // console.log(str);
     this.authentication.toggleEmit('close');
   }
   closeAllToggles() {
