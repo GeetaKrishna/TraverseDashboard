@@ -42,7 +42,7 @@
     "ngx-file-drop": "^8.0.8",
     "ngx-rating": "0.0.9",
     "ngx-toastr": "^11.1.2",
-    "rrule": "^2.6.4",
+    "rrule": "^2.7.1",
     "rxjs": "^6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
